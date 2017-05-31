@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="borderP" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainWindowController">
+    <stylesheets>
+        <URL value="@Cssfile.css" />
+    </stylesheets>
+
+    <top>
+      <VBox prefHeight="100.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <Pane nodeOrientation="RIGHT_TO_LEFT" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #74AFAD;">
+               <children>
+                  <Button fx:id="profBtn" alignment="TOP_RIGHT" layoutX="20.0" layoutY="21.0" mnemonicParsing="false" style="-fx-background-color: #D9853B;" text="Hi!" textFill="WHITE">
+                      <graphic>
+                          <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                  <Image url="@icons/account.png" />
+                          </ImageView>
+                      </graphic>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Pane>
+         </children>
+      </VBox>
+   </top>
+
+   <left>
+       <VBox id="navigation" prefHeight="100.0" prefWidth="200.0" spacing="10" style="-fx-border-color: #74AFAD; border-width: 2px;" stylesheets="@Cssfile.css" BorderPane.alignment="CENTER">
+           <padding><Insets left="25" right="25" /></padding>
+
+           <Text id="menuTxt" fx:id="menuTxt" style="-fx-font-size: 32px; -fx-effect: inner shadow(three-pass-box,rgba(0,0,0,0.7),6,0.0,0,2); -fx-fill: gray" text="Menu" />
+         <Separator prefWidth="200.0" />
+
+           <Button fx:id="regBtn" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#RegCustomerClick" prefWidth="120" style="-fx-background-color: #558C89;" text="Register Customer" textFill="WHITE">
+               <graphic>
+                   <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@icons/add_account.png" />
+                       </image>
+                   </ImageView>
+               </graphic>
+           </Button>
+
+           <Button fx:id="view_customerBtn" contentDisplay="TOP" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" onAction="#viewCustomerClick" prefWidth="120" style="-fx-background-color: #74AFAD;" text="Loans &amp; Customers" textFill="WHITE">
+               <graphic>
+                   <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@icons/view_account.png" />
+                       </image>
+                   </ImageView>
+               </graphic>
+           </Button>
+
+           <Button contentDisplay="TOP" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" prefWidth="120" style="-fx-background-color: #554640;" text="View Repayments" textFill="WHITE" onAction="#viewRepayments">
+               <graphic>
+                   <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@icons/cash-multiple.png" />
+                       </image>
+                   </ImageView>
+               </graphic>
+           </Button>
+
+           <Button contentDisplay="TOP" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" prefWidth="120" style="-fx-background-color: #D9853B;" text="View Report" textFill="WHITE">
+               <graphic>
+                   <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@icons/view_repot.png" />
+                       </image>
+                   </ImageView>
+               </graphic>
+           </Button>
+       </VBox>
+   </left>
+
+   <center>
+        <StackPane id="maincenter" prefHeight="450.0" prefWidth="847.0">
+         <BorderPane.margin>
+            <Insets right="12.0" />
+         </BorderPane.margin></StackPane>
+   </center>
+
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="700.0" style="-fx-border-color: #74AFAD; -fx-border-width: 2px;" BorderPane.alignment="CENTER">
+          <Text text="Copyright 2017 © MikopoApp" />
+      </HBox>
+   </bottom>
+
+</BorderPane>
+

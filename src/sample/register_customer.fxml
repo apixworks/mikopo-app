@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane style="-fx-border-color: #74AFAD; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterCustomerController">
+   <children>
+      <TabPane prefHeight="600.0" prefWidth="1100.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Register Loan">
+                <content>
+                    <Pane style="-fx-background-color: #ffffff;">
+                        <children>
+                            <Text fill="#554640" layoutX="256.0" layoutY="34.0" text="Register Loan" textAlignment="CENTER" wrappingWidth="359.13671875">
+                                <font>
+                                    <Font size="23.0" />
+                                </font></Text>
+                            <Pane layoutX="120.0" layoutY="40.0" prefHeight="531.0" prefWidth="929.0" style="-fx-background-color: #CFD8DC; -fx-background-radius: 15px;">
+                                <Label id="formtext" layoutX="29.0" layoutY="25.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@Cssfile.css" text="Loan Details" textFill="#554640" />
+                                <Label layoutX="40.0" layoutY="49.0" text="BORROWER" />
+                                <TextField fx:id="borrower" layoutX="40.0" layoutY="73.0" prefHeight="25.0" prefWidth="171.0" promptText="Borrower Number" />
+                                <TextField fx:id="amountTxtField" layoutX="277.0" layoutY="73.0" prefHeight="25.0" prefWidth="179.0" />
+                                <TextField fx:id="durationTxtField" layoutX="531.0" layoutY="73.0" promptText="In months" />
+                                <Label layoutX="40.0" layoutY="118.0" text="DATE OF LOAN" />
+                                <DatePicker fx:id="loanDate" layoutX="40.0" layoutY="143.0" promptText="DD/MM/YYYY" />
+                                <Label layoutX="43.0" layoutY="183.0" text="DHAMANA" />
+                                <TextField fx:id="perMonthTxtField" layoutX="275.0" layoutY="143.0" prefHeight="25.0" prefWidth="193.0" />
+                                <Label layoutX="277.0" layoutY="116.0" text="AMOUNT PER MONTH" />
+                                <Button fx:id="checkBtn" layoutX="535.0" layoutY="143.0" mnemonicParsing="false" onAction="#checkAmount" text="Check" />
+                                <Label id="formtext" layoutX="36.0" layoutY="269.0" stylesheets="@Cssfile.css" text="Dhamana Details" />
+                                <Label layoutX="47.0" layoutY="295.0" text="MEMBER ID" />
+                                <TextField fx:id="memberId" layoutX="43.0" layoutY="320.0" prefHeight="25.0" prefWidth="180.0" />
+                                <Label layoutX="281.0" layoutY="295.0" text="PROPERTY ID" />
+                                <TextField fx:id="propertyId" layoutX="277.0" layoutY="320.0" prefHeight="25.0" prefWidth="188.0" />
+                                <Label layoutX="531.0" layoutY="295.0" text="PROPERTY NAME" />
+                                <TextField fx:id="propertyName" layoutX="533.0" layoutY="319.0" prefHeight="25.0" prefWidth="221.0" />
+                                <Label layoutX="45.0" layoutY="391.0" text="DESCRIPTION:" />
+                                <TextArea fx:id="desc" layoutX="168.0" layoutY="369.0" prefHeight="73.0" prefWidth="588.0" />
+                                <Label layoutX="47.0" layoutY="449.0" text="LOAN FILES&#10;(doc, pdf, image)" />
+                                <Button layoutX="170.0" layoutY="455.0" mnemonicParsing="false" onAction="#chooseLoanFiles" prefHeight="25.0" prefWidth="84.0" text="Choose Files" />
+                                <Button fx:id="next2Btn" layoutX="396.0" layoutY="492.0" mnemonicParsing="false" onAction="#registerLoan" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #558C89;" text="Done" textFill="WHITE" />
+                                <Text Fill="RED" layoutX="110.0" layoutY="63.0" text="*">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Text>
+                                <Text Fill="RED" layoutX="598.0" layoutY="62.0" text="*">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Text>
+                                <Text Fill="RED" layoutX="126.0" layoutY="131.0" text="*">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Text>
+                                <Text Fill="RED" layoutX="371.0" layoutY="61.0" text="*">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Text>
+                                <Text Fill="RED" layoutX="108.0" layoutY="197.0" text="*">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Text>
+                           <ChoiceBox fx:id="dhamanachoice" layoutX="39.0" layoutY="208.0" prefHeight="25.0" prefWidth="175.0" />
+                           <Button layoutX="229.0" layoutY="208.0" mnemonicParsing="false" text="Ok" onAction="#setDhamanaField"/>
+                           <Label layoutX="278.0" layoutY="47.0" text="LOAN AMOUNT" />
+                           <Label layoutX="530.0" layoutY="48.0" text="DURATION" />
+                           <Text fx:id="actionTxt" layoutX="265.0" layoutY="472.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                            </Pane>
+                        </children></Pane>
+                </content>
+            </Tab>
+          <Tab text="Register Customer">
+            <content>
+                <Pane style="-fx-background-color: #ffffff;">
+                     <children>
+                         <Text fill="#554640" layoutX="256.0" layoutY="34.0" text="Customer Registration" textAlignment="CENTER" wrappingWidth="359.13671875">
+                           <font>
+                              <Font size="23.0" />
+                           </font></Text>
+                        <Pane layoutX="120.0" layoutY="40.0" prefHeight="531.0" prefWidth="929.0" style="-fx-background-color: #CFD8DC; -fx-background-radius: 15px;">
+                            <Label id="formtext" layoutX="29.0" layoutY="25.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@Cssfile.css" text="Personal Information" textFill="#554640" />
+                            <Label layoutX="40.0" layoutY="49.0" text="NAME" />
+                           <TextField fx:id="fname" layoutX="40.0" layoutY="73.0" promptText="First Name" />
+                           <TextField fx:id="mname" layoutX="222.0" layoutY="73.0" promptText="Middle Name" />
+                           <TextField fx:id="lname" layoutX="415.0" layoutY="73.0" promptText="Last Name" />
+                           <Label layoutX="40.0" layoutY="119.0" text="GENDER" />
+                           <Label layoutX="229.0" layoutY="119.0" text="DATE OF BIRTH" />
+                           <DatePicker fx:id="dob" layoutX="224.0" layoutY="143.0" promptText="DD/MM/YYYY" />
+                           <RadioButton fx:id="male" layoutX="41.0" layoutY="147.0" mnemonicParsing="false" text="Male" />
+                           <RadioButton fx:id="female" layoutX="108.0" layoutY="147.0" mnemonicParsing="false" text="Female" />
+                           <Label layoutX="43.0" layoutY="183.0" text="PHONE NUMBER" />
+                           <TextField fx:id="phone" layoutX="40.0" layoutY="208.0" promptText="eg. 255655876549" />
+                           <Label layoutX="236.0" layoutY="183.0" text="EMAIL" />
+                           <TextField fx:id="email" layoutX="229.0" layoutY="208.0" prefHeight="25.0" prefWidth="210.0" />
+                           <Label layoutX="474.0" layoutY="183.0" text="POSTAL ADDRESS" />
+                           <TextField fx:id="postal" layoutX="465.0" layoutY="208.0" prefHeight="25.0" prefWidth="198.0" />
+                           <Label layoutX="439.0" layoutY="119.0" text="BORROWER PHOTO" />
+                           <Button layoutX="439.0" layoutY="143.0" mnemonicParsing="false" onAction="#chooseImg" text="Choose Photo" />
+                           <Text fx:id="photoBtnTxt" layoutX="540.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                           <Label id="formtext" layoutX="36.0" layoutY="269.0" stylesheets="@Cssfile.css" text="Bank Information" />
+                           <Label layoutX="47.0" layoutY="295.0" text="BANK" />
+                           <TextField fx:id="bank" layoutX="43.0" layoutY="320.0" prefHeight="25.0" prefWidth="180.0" />
+                           <Label layoutX="281.0" layoutY="295.0" text="ACCOUNT NUMBER" />
+                           <TextField fx:id="account_no" layoutX="277.0" layoutY="320.0" prefHeight="25.0" prefWidth="188.0" />
+                           <Label id="formtext" layoutX="37.0" layoutY="375.0" stylesheets="@Cssfile.css" text="Working Details" />
+                           <Label layoutX="50.0" layoutY="401.0" text="COMPANY NAME" />
+                           <TextField fx:id="company_name" layoutX="45.0" layoutY="426.0" prefHeight="25.0" prefWidth="201.0" />
+                           <Label layoutX="320.0" layoutY="401.0" text="COMPANY LOCATION" />
+                           <TextField fx:id="company_loc" layoutX="311.0" layoutY="426.0" />
+                           <Label layoutX="508.0" layoutY="401.0" text="COMPANY PHONE" />
+                           <TextField fx:id="company_phone" layoutX="502.0" layoutY="426.0" promptText="eg. 255678439326"/>
+                           <Label layoutX="710.0" layoutY="401.0" text="CHECK NUMBER" />
+                           <TextField fx:id="checksum" layoutX="703.0" layoutY="426.0" />
+                           <Button fx:id="submitBtn" layoutX="396.0" layoutY="492.0" mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #558C89;" text="Submit" textFill="WHITE" />
+                           <Text Fill="RED" layoutX="76.0" layoutY="63.0" text="*">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Text>
+                           <Text Fill="RED" layoutX="89.0" layoutY="133.0" text="*">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Text>
+                           <Text Fill="RED" layoutX="320.0" layoutY="132.0" text="*">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Text>
+                           <Text Fill="RED" layoutX="552.0" layoutY="132.0" text="*">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Text>
+                           <Text Fill="RED" layoutX="141.0" layoutY="196.0" text="*">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Text>
+                        </Pane>
+                     </children>
+                </Pane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</StackPane>

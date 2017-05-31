@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+
+<StackPane  prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewRepaymentsController">
+   <children>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Due">
+                <content>
+                    <TableView fx:id="due_table" prefHeight="200.0" prefWidth="200.0">
+                        <columns>
+                            <TableColumn fx:id="due_l_no" prefWidth="75.0" text="Loan#" />
+                            <TableColumn fx:id="due_borrower" prefWidth="75.0" text="Name" />
+                            <TableColumn fx:id="due_date" prefWidth="75.0" text="Released" />
+                            <TableColumn fx:id="due_interest" prefWidth="75.0" text="Interest%" />
+                            <TableColumn fx:id="due_amount" prefWidth="130.0" text="Amount" />
+                            <TableColumn fx:id="due_duration" prefWidth="20.0" text="Duration" />
+                            <TableColumn fx:id="due_total_pay" prefWidth="20.0" text="Total_Payment" />
+                            <TableColumn fx:id="due_per_month" prefWidth="20.0" text="Per_Month" />
+                            <TableColumn fx:id="due_due" prefWidth="75.0" text="Due" />
+                            <TableColumn fx:id="due_last_paymonth" prefWidth="75.0" text="LastPay_Date" />
+                            <TableColumn fx:id="due_amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
+                            <TableColumn fx:id="due_last_pay" prefWidth="75.0" text="Last_Payment" />
+                            <TableColumn fx:id="due_amount_rem" prefWidth="75.0" text="Amount_Remaining" />
+                            <TableColumn fx:id="due_status" prefWidth="75.0" text="Status" />
+                            <TableColumn fx:id="due_action" prefWidth="75.0" text="Action" />
+                        </columns>
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                    </TableView>
+                </content>
+            </Tab>
+          <Tab text="1 Month Late">
+            <content>
+                <TableView fx:id="one_month_table" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                        <TableColumn fx:id="one_l_no" prefWidth="75.0" text="Loan#" />
+                        <TableColumn fx:id="one_borrower" prefWidth="75.0" text="Name" />
+                        <TableColumn fx:id="one_date" prefWidth="75.0" text="Released" />
+                        <TableColumn fx:id="one_interest" prefWidth="75.0" text="Interest%" />
+                        <TableColumn fx:id="one_amount" prefWidth="130.0" text="Amount" />
+                        <TableColumn fx:id="one_duration" prefWidth="20.0" text="Duration" />
+                        <TableColumn fx:id="one_total_pay" prefWidth="20.0" text="Total_Payment" />
+                        <TableColumn fx:id="one_per_month" prefWidth="20.0" text="Per_Month" />
+                        <TableColumn fx:id="one_due" prefWidth="75.0" text="Due" />
+                        <TableColumn fx:id="one_last_paymonth" prefWidth="75.0" text="LastPay_Date" />
+                        <TableColumn fx:id="one_amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
+                        <TableColumn fx:id="one_last_pay" prefWidth="75.0" text="Last_Payment" />
+                        <TableColumn fx:id="one_amount_rem" prefWidth="75.0" text="Amount_Remaining" />
+                        <TableColumn fx:id="one_status" prefWidth="75.0" text="Status" />
+                        <TableColumn fx:id="one_action" prefWidth="75.0" text="Action" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+            </content>
+          </Tab>
+          <Tab text="2 Month Late">
+            <content>
+                <TableView fx:id="two_month_table" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                        <TableColumn fx:id="two_l_no" prefWidth="75.0" text="Loan#" />
+                        <TableColumn fx:id="two_borrower" prefWidth="75.0" text="Name" />
+                        <TableColumn fx:id="two_date" prefWidth="75.0" text="Released" />
+                        <TableColumn fx:id="two_interest" prefWidth="75.0" text="Interest%" />
+                        <TableColumn fx:id="two_amount" prefWidth="130.0" text="Amount" />
+                        <TableColumn fx:id="two_duration" prefWidth="20.0" text="Duration" />
+                        <TableColumn fx:id="two_total_pay" prefWidth="20.0" text="Total_Payment" />
+                        <TableColumn fx:id="two_per_month" prefWidth="20.0" text="Per_Month" />
+                        <TableColumn fx:id="two_due" prefWidth="75.0" text="Due" />
+                        <TableColumn fx:id="two_last_paymonth" prefWidth="75.0" text="LastPay_Date" />
+                        <TableColumn fx:id="two_amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
+                        <TableColumn fx:id="two_last_pay" prefWidth="75.0" text="Last_Payment" />
+                        <TableColumn fx:id="two_amount_rem" prefWidth="75.0" text="Amount_Remaining" />
+                        <TableColumn fx:id="two_status" prefWidth="75.0" text="Status" />
+                        <TableColumn fx:id="two_action" prefWidth="75.0" text="Action" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</StackPane>

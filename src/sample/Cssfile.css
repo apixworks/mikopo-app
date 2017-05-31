@@ -1,0 +1,58 @@
+.root{
+    -fx-background-color: white;
+}
+
+.label{
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #818181;
+    -fx-effect: drop shadow(gaussian,rgba(255,255,255,0.5) , 0, 0, 0, 1);
+}
+/*33333*/
+#formtext{
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #74AFAD;
+    -fx-effect: drop shadow(gaussian,rgba(255,255,255,0.5) , 0, 0, 0, 1);
+}
+
+#welcometext {
+    -fx-font-size: 32px;
+    -fx-font-family: Arial Black;
+    -fx-fill: #FFFFFF;
+    -fx-effect: inner shadow(three-pass-box,rgba(0,0,0,0.7),6,0.0,0,2);
+}
+
+#actiontarget {
+    -fx-fill: FIREBRICK;
+    -fx-font-weight: bold;
+    -fx-effect: drop shadow(gaussian,rgba(255,255,255,0.5) , 0, 0, 0, 1);
+}
+
+#maincenter{
+    -fx-fill: red;
+}
+
+/*#stackpanelogin{
+    -fx-effect: dropshadow(three-pass-box, grey, 10 , 0 , 5.0 , 5.0 );
+}*/
+
+#menutext {
+    -fx-font-size: 32px;
+    -fx-font-family: Arial Black;
+    -fx-fill: gray;
+    -fx-effect: inner shadow(three-pass-box,rgba(0,0,0,0.7),6,0.0,0,2);
+}
+
+.navigation{
+    -fx-border-color: red;
+    -fx-border-style: solid;
+}
+
+.table-view .table-cell{
+    -fx-font-weight:bold;
+    -fx-alignment: center;
+    /* -fx-font-size:15px; */
+    /* -fx-text-fill:orange; */
+
+}
