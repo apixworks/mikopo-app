@@ -32,7 +32,7 @@ public class RepaymentFormController {
         DatabaseHandler db = new DatabaseHandler();
         db.loanPayment(Integer.parseInt(repay_loanId.getText().substring(5)),date.getValue().toString(),Double.parseDouble(amount.getText()));
         try {
-            Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: "+userObject.get("id")+" received payment for Loan: MJ/L/"+repay_loanId.getText());
+            Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: "+userObject.get("id")+" received payment for Loan: "+repay_loanId.getText());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

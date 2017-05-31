@@ -393,7 +393,7 @@ public class DatabaseHandler {
 
     public ObservableList<Loan> searchLoan(int loan_id){
         ObservableList<Loan> loans = FXCollections.observableArrayList();
-        String loansSql = "SELECT * FROM LOANS WHERE LOAN_ID LIKE='%"+loan_id+"%'";
+        String loansSql = "SELECT * FROM LOANS WHERE LOAN_ID LIKE '%"+loan_id+"%'";
         int borrower_id;
         String borrower_name="";
         String borrower_phone="";
@@ -435,7 +435,7 @@ public class DatabaseHandler {
 
     public ObservableList<Customer> searchCustomers(int id){
         ObservableList<Customer> customers = FXCollections.observableArrayList();
-        String customersSql = "SELECT * FROM CUSTOMERS WHERE ID="+id;
+        String customersSql = "SELECT * FROM CUSTOMERS WHERE ID LIKE '%"+id+"%'";
 
         try{
             PreparedStatement ps = createConn().prepareStatement(customersSql);
