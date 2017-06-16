@@ -14,75 +14,89 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <StackPane prefHeight="600.0" prefWidth="1100.0" stylesheets="@Cssfile.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewCustomersLoansController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0">
-         <children>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="30.0" spacing="5">
-                      <padding><Insets right="10" /></padding>
-                      <TextField fx:id="searchTxt" />
-                      <ChoiceBox fx:id="searchChoice" />
-                      <Button fx:id="searchBtn" onAction="#search" text="search" />
-                      <Button mnemonicParsing="false" onAction="#refresh" style="-fx-background-color: #554640;">
-                          <graphic>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                  <Image url="@icons/refreshy.png" />
-                              </ImageView>
-                          </graphic>
-                      </Button>
-                  </HBox>
-             <TabPane prefHeight="600.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+             <JFXTabPane  prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
                  <tabs>
-                     <Tab text="View Loans">
+                     <Tab text="View Loans" >
                          <content>
-                             <TableView fx:id="loan_table" prefHeight="200.0" prefWidth="200.0">
-                                 <columns>
-                                     <TableColumn fx:id="l_no" prefWidth="75.0" text="Loan#" />
-                                     <TableColumn fx:id="l_borrower" prefWidth="75.0" text="Name" />
-                                     <TableColumn fx:id="l_date" prefWidth="75.0" text="Released" />
-                                     <TableColumn fx:id="interest" prefWidth="75.0" text="Interest%" />
-                                     <TableColumn fx:id="amount" prefWidth="130.0" text="Amount" />
-                                     <TableColumn fx:id="duration" prefWidth="20.0" text="Duration" />
-                                     <TableColumn fx:id="total_pay" prefWidth="20.0" text="Total_Payment" />
-                                     <TableColumn fx:id="per_month" prefWidth="20.0" text="Per_Month" />
-                                     <TableColumn fx:id="due" prefWidth="75.0" text="Due" />
-                                     <TableColumn fx:id="last_paymonth" prefWidth="75.0" text="LastPay_Date" />
-                                     <TableColumn fx:id="amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
-                                     <TableColumn fx:id="last_pay" prefWidth="75.0" text="Last_Payment" />
-                                     <TableColumn fx:id="amount_rem" prefWidth="75.0" text="Amount_Remaining" />
-                                     <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
-                                     <TableColumn fx:id="l_action" prefWidth="75.0" text="Action" />
-                                 </columns>
-                                 <columnResizePolicy>
-                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                             </TableView>
+                             <VBox >
+                                 <HBox alignment="CENTER_RIGHT" prefHeight="35.0" spacing="10">
+                                     <padding><Insets right="10" /></padding>
+                                     <TextField fx:id="searchLoanTxt" />
+                                     <JFXButton buttonType="RAISED" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" onAction="#searchLoan" text="search" textFill="#FFFFFF"/>
+                                     <JFXButton buttonType="RAISED" ripplerFill="aliceblue" mnemonicParsing="false" onAction="#refreshLoans" style="-fx-background-color: #554640;">
+                                         <graphic>
+                                             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                 <Image url="@icons/refreshy.png" />
+                                             </ImageView>
+                                         </graphic>
+                                     </JFXButton>
+                                 </HBox>
+                                 <TableView fx:id="loan_table" VBox.vgrow="ALWAYS">
+                                     <columns>
+                                         <TableColumn fx:id="l_no" prefWidth="75.0" text="Loan#" />
+                                         <TableColumn fx:id="l_borrower" prefWidth="75.0" text="Name" />
+                                         <TableColumn fx:id="l_date" prefWidth="75.0" text="Released" />
+                                         <TableColumn fx:id="interest" prefWidth="75.0" text="Interest%" />
+                                         <TableColumn fx:id="amount" prefWidth="130.0" text="Amount" />
+                                         <TableColumn fx:id="duration" prefWidth="20.0" text="Duration" />
+                                         <TableColumn fx:id="total_pay" prefWidth="20.0" text="Total_Payment" />
+                                         <TableColumn fx:id="per_month" prefWidth="20.0" text="Per_Month" />
+                                         <TableColumn fx:id="due" prefWidth="75.0" text="Due" />
+                                         <TableColumn fx:id="last_paymonth" prefWidth="75.0" text="LastPay_Date" />
+                                         <TableColumn fx:id="amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
+                                         <TableColumn fx:id="last_pay" prefWidth="75.0" text="Last_Payment" />
+                                         <TableColumn fx:id="amount_rem" prefWidth="75.0" text="Amount_Remaining" />
+                                         <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
+                                         <TableColumn fx:id="l_action" prefWidth="75.0" text="Action" />
+                                     </columns>
+                                     <columnResizePolicy>
+                                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                     </columnResizePolicy>
+                                 </TableView>
+                             </VBox>
+
                          </content>
                      </Tab>
                      <Tab text="View Customers">
                          <content>
-                             <TableView fx:id="customer_table" prefHeight="200.0" prefWidth="200.0">
-                                 <columns>
-                                     <TableColumn fx:id="c_no" prefWidth="75.0" text="S/N" />
-                                     <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
-                                     <TableColumn fx:id="phone" prefWidth="75.0" text="Phone" />
-                                     <TableColumn fx:id="email" prefWidth="75.0" text="Email" />
-                                     <TableColumn fx:id="bank" prefWidth="75.0" text="Bank" />
-                                     <TableColumn fx:id="account_no" prefWidth="130.0" text="Account No" />
-                                     <TableColumn fx:id="company_name" prefWidth="20.0" text="Company_Name" />
-                                     <TableColumn fx:id="company_phone" minWidth="0.0" prefWidth="129.0" text="Company_Phone" />
-                                     <TableColumn fx:id="checksum" prefWidth="75.0" text="Check Number" />
-                                     <TableColumn fx:id="action" prefWidth="75.0" text="Action" />
-                                 </columns>
-                                 <columnResizePolicy>
-                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                             </TableView>
+                             <VBox>
+                                 <HBox alignment="CENTER_RIGHT" prefHeight="35.0" spacing="10">
+                                     <padding><Insets right="10" /></padding>
+                                     <TextField fx:id="searchCustomerTxt" />
+                                     <JFXButton buttonType="RAISED" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" onAction="#searchCustomer" text="search" textFill="#FFFFFF"/>
+                                     <JFXButton buttonType="RAISED" ripplerFill="aliceblue" mnemonicParsing="false" onAction="#refreshCustomers" style="-fx-background-color: #554640;">
+                                         <graphic>
+                                             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                 <Image url="@icons/refreshy.png" />
+                                             </ImageView>
+                                         </graphic>
+                                     </JFXButton>
+                                 </HBox>
+                                 <TableView fx:id="customer_table"  prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                     <columns>
+                                         <TableColumn fx:id="c_no" prefWidth="75.0" text="S/N" />
+                                         <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
+                                         <TableColumn fx:id="phone" prefWidth="75.0" text="Phone" />
+                                         <TableColumn fx:id="email" prefWidth="75.0" text="Email" />
+                                         <TableColumn fx:id="bank" prefWidth="75.0" text="Bank" />
+                                         <TableColumn fx:id="account_no" prefWidth="130.0" text="Account No" />
+                                         <TableColumn fx:id="company_name" prefWidth="20.0" text="Company_Name" />
+                                         <TableColumn fx:id="company_phone" minWidth="0.0" prefWidth="129.0" text="Company_Phone" />
+                                         <TableColumn fx:id="checksum" prefWidth="75.0" text="Check Number" />
+                                         <TableColumn fx:id="action" prefWidth="75.0" text="Action" />
+                                     </columns>
+                                     <columnResizePolicy>
+                                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                     </columnResizePolicy>
+                                 </TableView>
+                             </VBox>
                          </content>
                      </Tab>
                  </tabs>
-             </TabPane>
-         </children>
-      </VBox>
+             </JFXTabPane>
    </children>
 </StackPane>

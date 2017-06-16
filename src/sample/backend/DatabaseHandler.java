@@ -2,14 +2,9 @@ package sample.backend;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import sample.Customer;
-import sample.EditCustomer;
-import sample.Loan;
-import sample.Result;
-
+import sample.*;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -95,10 +90,10 @@ public class DatabaseHandler {
 
     public Result registerCustomer(String fname, String lname, String mname, String gender, LocalDate dob, String phone, String email,
                                    String postal, String prof_photo, String bank, String account_no, String company_name,
-                                   String company_phone, String company_location, String checksum){
+                                   String company_phone, String company_location, String checksum,LocalDate reg_date){
         String regCustomerSql = "INSERT INTO CUSTOMERS (f_name,l_name,m_name,gender,dob,phone,email,postal," +
-                "prof_photo,bank,account_no,company_name,company_phone,company_location,checksum)"
-                +"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "prof_photo,bank,account_no,company_name,company_phone,company_location,checksum,reg_date)"
+                +"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         String lastCustomerSql = "SELECT * FROM CUSTOMERS";
 
         Result result = new Result();
@@ -120,6 +115,7 @@ public class DatabaseHandler {
             ps.setString(13,company_phone);
             ps.setString(14,company_location);
             ps.setString(15,checksum);
+            ps.setDate(16,java.sql.Date.valueOf(reg_date));
 
             ps.execute();
             result.setSuccess(true);
@@ -128,7 +124,6 @@ public class DatabaseHandler {
             ResultSet rs = pb.executeQuery();
             while (rs.next()){
                 if(rs.isLast()){
-                    //System.out.println("DB:"+rs.getInt("id"));
                     result.setId(rs.getInt("id"));
                 }
             }
@@ -266,6 +261,12 @@ public class DatabaseHandler {
         int borrower_id;
         String borrower_name="";
         String borrower_phone="";
+        Double amount_paid;
+        String amount_paidString;
+        Double last_pay;
+        String last_payString;
+        Double amount_rem;
+        String amount_remString;
 
         try {
             PreparedStatement ps = createConn().prepareStatement(loansSql);
@@ -287,9 +288,27 @@ public class DatabaseHandler {
 
                 }
 
+                amount_paid = rs.getDouble("amount_paid");
+                if(amount_paid==0){
+                    amount_paidString = String.format("%,.1f", rs.getDouble("amount_paid"));
+                }else
+                    amount_paidString = String.format("%,.0f", rs.getDouble("amount_paid"));
+
+                last_pay = rs.getDouble("last_payment");
+                if (last_pay==0)
+                    last_payString = String.format("%,.1f",last_pay);
+                else
+                    last_payString = String.format("%,.0f", last_pay);
+
+                amount_rem = rs.getDouble("total_payment")-rs.getDouble("amount_paid");
+                if(amount_rem==0)
+                    amount_remString = String.format("%,.1f", amount_rem);
+                else
+                    amount_remString = String.format("%,.0f", amount_rem);
+
                 loans.add(new Loan("MJ/L/"+rs.getInt("loan_id"),borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
-                        rs.getDouble("amount_borrowed"),rs.getInt("duration"),rs.getDouble("total_payment"),rs.getDouble("amount_per_month"),
-                        rs.getString("due"),rs.getString("lastpay_date"),rs.getDouble("amount_paid"),rs.getDouble("last_payment"),(rs.getDouble("total_payment")-rs.getDouble("amount_paid")),rs.getString("status"),borrower_phone));
+                        String.format("%,.0f", rs.getDouble("amount_borrowed")) ,rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -311,6 +330,12 @@ public class DatabaseHandler {
         int borrower_id;
         String borrower_name="";
         String borrower_phone="";
+        Double amount_paid;
+        String amount_paidString;
+        Double last_pay;
+        String last_payString;
+        Double amount_rem;
+        String amount_remString;
 
         try {
             PreparedStatement ps = createConn().prepareStatement(loansSql);
@@ -330,9 +355,27 @@ public class DatabaseHandler {
                     borrower_phone = rb.getString("phone");
                 }
 
+                amount_paid = rs.getDouble("amount_paid");
+                if(amount_paid==0){
+                    amount_paidString = String.format("%,.1f", rs.getDouble("amount_paid"));
+                }else
+                    amount_paidString = String.format("%,.0f", rs.getDouble("amount_paid"));
+
+                last_pay = rs.getDouble("last_payment");
+                if (last_pay==0)
+                    last_payString = String.format("%,.1f",last_pay);
+                else
+                    last_payString = String.format("%,.0f", last_pay);
+
+                amount_rem = rs.getDouble("total_payment")-rs.getDouble("amount_paid");
+                if(amount_rem==0)
+                    amount_remString = String.format("%,.1f", amount_rem);
+                else
+                    amount_remString = String.format("%,.0f", amount_rem);
+
                 oneLateloans.add(new Loan("MJ/L/"+rs.getInt("loan_id"),borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
-                        rs.getDouble("amount_borrowed"),rs.getInt("duration"),rs.getDouble("total_payment"),rs.getDouble("amount_per_month"),
-                        rs.getString("due"),rs.getString("lastpay_date"),rs.getDouble("amount_paid"),rs.getDouble("last_payment"),(rs.getDouble("total_payment")-rs.getDouble("amount_paid")),rs.getString("status"),borrower_phone));
+                        String.format("%,.0f", rs.getDouble("amount_borrowed")),rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -354,6 +397,13 @@ public class DatabaseHandler {
         int borrower_id;
         String borrower_name="";
         String borrower_phone="";
+        Double amount_paid;
+        String amount_paidString;
+        Double last_pay;
+        String last_payString;
+        Double amount_rem;
+        String amount_remString;
+
         System.out.println(LocalDate.now().minusMonths(6).withDayOfMonth(1).minusDays(1).toString());
         System.out.println(LocalDate.now().minusMonths(0).withDayOfMonth(1).minusDays(1).toString());
 
@@ -375,9 +425,27 @@ public class DatabaseHandler {
                     borrower_phone = rb.getString("phone");
                 }
 
+                amount_paid = rs.getDouble("amount_paid");
+                if(amount_paid==0){
+                    amount_paidString = String.format("%,.1f", rs.getDouble("amount_paid"));
+                }else
+                    amount_paidString = String.format("%,.0f", rs.getDouble("amount_paid"));
+
+                last_pay = rs.getDouble("last_payment");
+                if (last_pay==0)
+                    last_payString = String.format("%,.1f",last_pay);
+                else
+                    last_payString = String.format("%,.0f", last_pay);
+
+                amount_rem = rs.getDouble("total_payment")-rs.getDouble("amount_paid");
+                if(amount_rem==0)
+                    amount_remString = String.format("%,.1f", amount_rem);
+                else
+                    amount_remString = String.format("%,.0f", amount_rem);
+
                 twoLateloans.add(new Loan("MJ/L/"+rs.getInt("loan_id"),borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
-                        rs.getDouble("amount_borrowed"),rs.getInt("duration"),rs.getDouble("total_payment"),rs.getDouble("amount_per_month"),
-                        rs.getString("due"),rs.getString("lastpay_date"),rs.getDouble("amount_paid"),rs.getDouble("last_payment"),(rs.getDouble("total_payment")-rs.getDouble("amount_paid")),rs.getString("status"),borrower_phone));
+                        String.format("%,.0f", rs.getDouble("amount_borrowed")),rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -397,6 +465,13 @@ public class DatabaseHandler {
         int borrower_id;
         String borrower_name="";
         String borrower_phone="";
+        Double amount_paid;
+        String amount_paidString;
+        Double last_pay;
+        String last_payString;
+        double amount_rem;
+        String amount_remString;
+
         try {
             PreparedStatement ps = createConn().prepareStatement(loansSql);
             ResultSet rs = ps.executeQuery();
@@ -417,9 +492,27 @@ public class DatabaseHandler {
 
                 }
 
+                amount_paid = rs.getDouble("amount_paid");
+                if(amount_paid==0){
+                    amount_paidString = String.format("%,.1f", rs.getDouble("amount_paid"));
+                }else
+                    amount_paidString = String.format("%,.0f", rs.getDouble("amount_paid"));
+
+                last_pay = rs.getDouble("last_payment");
+                if (last_pay==0)
+                    last_payString = String.format("%,.1f",last_pay);
+                else
+                    last_payString = String.format("%,.0f", last_pay);
+
+                amount_rem = rs.getDouble("total_payment")-rs.getDouble("amount_paid");
+                if(amount_rem==0)
+                    amount_remString = String.format("%,.1f", amount_rem);
+                else
+                    amount_remString = String.format("%,.0f", amount_rem);
+
                 loans.add(new Loan("MJ/L/"+rs.getInt("loan_id"),borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
-                        rs.getDouble("amount_borrowed"),rs.getInt("duration"),rs.getDouble("total_payment"),rs.getDouble("amount_per_month"),
-                        rs.getString("due"),rs.getString("lastpay_date"),rs.getDouble("amount_paid"),rs.getDouble("last_payment"),(rs.getDouble("total_payment")-rs.getDouble("amount_paid")),rs.getString("status"),borrower_phone));
+                        String.format("%,.0f", rs.getDouble("amount_borrowed")),rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone));
                 }
         }catch (SQLException e){
             e.printStackTrace();
@@ -433,12 +526,19 @@ public class DatabaseHandler {
         return loans;
     }
 
-    public ObservableList<Customer> searchCustomers(int id){
+    public ObservableList<Customer> searchCustomers(String id){
         ObservableList<Customer> customers = FXCollections.observableArrayList();
-        String customersSql = "SELECT * FROM CUSTOMERS WHERE ID LIKE '%"+id+"%'";
+        String customersIdSql = "SELECT * FROM CUSTOMERS WHERE ID LIKE '%"+id+"%'";
+        String customersNameSql = "SELECT * FROM CUSTOMERS WHERE F_NAME LIKE '%"+id+"%' OR L_NAME LIKE '%"+id+"%'";
+        PreparedStatement ps;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(customersSql);
+            if(Checker.isStringInt(id)){
+                ps = createConn().prepareStatement(customersIdSql);
+            }else {
+                ps= createConn().prepareStatement(customersNameSql);
+            }
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 customers.add(new Customer("MJ/C/"+rs.getInt("id"),rs.getString("f_name")+" "+rs.getString("l_name"),
@@ -531,6 +631,12 @@ public class DatabaseHandler {
         int borrower_id;
         String borrower_name="";
         String borrower_phone="";
+        double amount_paid;
+        String amount_paidString;
+        double last_pay;
+        String last_payString;
+        double amount_rem;
+        String amount_remString;
 
         try {
             PreparedStatement ps = createConn().prepareStatement(loansSql);
@@ -552,10 +658,28 @@ public class DatabaseHandler {
 
                 }
 
+                amount_paid = rs.getDouble("amount_paid");
+                if(amount_paid==0){
+                    amount_paidString = String.format("%,.1f", rs.getDouble("amount_paid"));
+                }else
+                    amount_paidString = String.format("%,.0f", rs.getDouble("amount_paid"));
+
+                last_pay = rs.getDouble("last_payment");
+                if (last_pay==0)
+                    last_payString = String.format("%,.1f",last_pay);
+                else
+                    last_payString = String.format("%,.0f", last_pay);
+
+                amount_rem = rs.getDouble("total_payment")-rs.getDouble("amount_paid");
+                if(amount_rem==0)
+                    amount_remString = String.format("%,.1f", amount_rem);
+                else
+                    amount_remString = String.format("%,.0f", amount_rem);
+
                 loans.add(new Loan("MJ/L/"+rs.getInt("loan_id"),borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
-                        rs.getDouble("amount_borrowed"),rs.getInt("duration"),rs.getDouble("total_payment"),rs.getDouble("amount_per_month"),
-                        rs.getString("due"),rs.getString("lastpay_date"),rs.getDouble("amount_paid"),rs.getDouble("last_payment"),
-                        (rs.getDouble("total_payment")-rs.getDouble("amount_paid")),rs.getString("status"),borrower_phone));
+                        String.format("%,.0f", rs.getDouble("amount_borrowed")),rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,
+                        amount_remString,rs.getString("status"),borrower_phone));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -568,4 +692,55 @@ public class DatabaseHandler {
         }
         return loans;
     }
+
+    public ObservableList<Transaction> getUserTransactions(int id){
+        ObservableList<Transaction> transactions = FXCollections.observableArrayList();
+        String sql = "SELECT customers.id,payments.loan_id,customers.f_name,customers.l_name ,payments.amount,payments.date " +
+                "FROM customers,loans,payments WHERE customers.id=loans.borrower_id AND loans.loan_id=payments.loan_id AND payments.loan_id="+id;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                String fullname=rs.getString("customers.f_name")+"  "+rs.getString("customers.l_name");
+                transactions.add(new Transaction("MJ/C/"+rs.getString("customers.id"),"MJ/L/"+rs.getString("payments.loan_id")
+                        ,fullname,rs.getDouble("payments.amount"),rs.getString("payments.date")));
+            }
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return transactions;
+    }
+
+    public BorrowerIDAndName getBorrowerNameAndId(int id){
+        String sql = "SELECT * FROM CUSTOMERS WHERE ID="+id;
+        BorrowerIDAndName borrowerIDAndName = null;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(sql);
+            ResultSet rs =ps.executeQuery();
+
+            if(rs.first()){
+                borrowerIDAndName = new BorrowerIDAndName("MJ/C/"+rs.getInt("id"),rs.getString("f_name")+" "+rs.getString("l_name"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return borrowerIDAndName;
+    }
+
 }

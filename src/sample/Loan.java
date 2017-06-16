@@ -11,45 +11,45 @@ public class Loan {
     public final StringProperty l_borrower_phone;
     public final StringProperty l_date;
     public final DoubleProperty interest;
-    public final DoubleProperty amount;
+    public final StringProperty amount;
     public final IntegerProperty duration;
-    public final DoubleProperty total_pay;
-    public final DoubleProperty per_month;
+    public final StringProperty total_pay;
+    public final StringProperty per_month;
     public final StringProperty due;
     public final StringProperty last_paymonth;
-    public final DoubleProperty amount_paid;
-    public final DoubleProperty last_pay;
-    public final DoubleProperty amount_rem;
+    public final StringProperty amount_paid;
+    public final StringProperty last_pay;
+    public final StringProperty amount_rem;
     public final StringProperty status;
 
-    public double getAmount_rem() {
+    public String getAmount_rem() {
         return amount_rem.get();
     }
 
-    public DoubleProperty amount_remProperty() {
+    public StringProperty amount_remProperty() {
         return amount_rem;
     }
 
-    public void setAmount_rem(double amount_rem) {
+    public void setAmount_rem(String amount_rem) {
         this.amount_rem.set(amount_rem);
     }
 
-    public Loan(String l_no, String l_borrower, String l_date, double interest, double amount, int duration, double total_pay,
-                double per_month, String due, String last_paymonth, double amount_paid, double last_pay,double amount_rem, String status, String l_borrower_phone) {
+    public Loan(String l_no, String l_borrower, String l_date, double interest, String amount, int duration, String total_pay,
+                String per_month, String due, String last_paymonth, String amount_paid, String last_pay,String amount_rem, String status, String l_borrower_phone) {
         this.l_no = new SimpleStringProperty(l_no);
         this.l_borrower = new SimpleStringProperty(l_borrower);
         this.l_borrower_phone = new SimpleStringProperty(l_borrower_phone);
         this.l_date = new SimpleStringProperty(l_date);
         this.interest = new SimpleDoubleProperty(interest);
-        this.amount = new SimpleDoubleProperty(amount);
+        this.amount = new SimpleStringProperty(amount);
         this.duration = new SimpleIntegerProperty(duration);
-        this.total_pay = new SimpleDoubleProperty(total_pay);
-        this.per_month = new SimpleDoubleProperty(per_month);
+        this.total_pay = new SimpleStringProperty(total_pay);
+        this.per_month = new SimpleStringProperty(per_month);
         this.due = new SimpleStringProperty(due);
         this.last_paymonth = new SimpleStringProperty(last_paymonth);
-        this.amount_paid = new SimpleDoubleProperty(amount_paid);
-        this.last_pay = new SimpleDoubleProperty(last_pay);
-        this.amount_rem = new SimpleDoubleProperty(amount_rem);
+        this.amount_paid = new SimpleStringProperty(amount_paid);
+        this.last_pay = new SimpleStringProperty(last_pay);
+        this.amount_rem = new SimpleStringProperty(amount_rem);
         this.status = new SimpleStringProperty(status);
     }
 
@@ -113,15 +113,15 @@ public class Loan {
         this.interest.set(interest);
     }
 
-    public double getAmount() {
+    public String getAmount() {
         return amount.get();
     }
 
-    public DoubleProperty amountProperty() {
+    public StringProperty amountProperty() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(String amount) {
         this.amount.set(amount);
     }
 
@@ -137,27 +137,27 @@ public class Loan {
         this.duration.set(duration);
     }
 
-    public double getTotal_pay() {
+    public String getTotal_pay() {
         return total_pay.get();
     }
 
-    public DoubleProperty total_payProperty() {
+    public StringProperty total_payProperty() {
         return total_pay;
     }
 
-    public void setTotal_pay(double total_pay) {
+    public void setTotal_pay(String total_pay) {
         this.total_pay.set(total_pay);
     }
 
-    public double getPer_month() {
+    public String getPer_month() {
         return per_month.get();
     }
 
-    public DoubleProperty per_monthProperty() {
+    public StringProperty per_monthProperty() {
         return per_month;
     }
 
-    public void setPer_month(double per_month) {
+    public void setPer_month(String per_month) {
         this.per_month.set(per_month);
     }
 
@@ -173,15 +173,15 @@ public class Loan {
         this.due.set(due);
     }
 
-    public double getAmount_paid() {
+    public String getAmount_paid() {
         return amount_paid.get();
     }
 
-    public DoubleProperty amount_paidProperty() {
+    public StringProperty amount_paidProperty() {
         return amount_paid;
     }
 
-    public void setAmount_paid(double amount_paid) {
+    public void setAmount_paid(String amount_paid) {
         this.amount_paid.set(amount_paid);
     }
 
@@ -197,15 +197,15 @@ public class Loan {
         this.status.set(status);
     }
 
-    public double getLast_pay() {
+    public String getLast_pay() {
         return last_pay.get();
     }
 
-    public DoubleProperty last_payProperty() {
+    public StringProperty last_payProperty() {
         return last_pay;
     }
 
-    public void setLast_pay(double last_pay) {
+    public void setLast_pay(String last_pay) {
         this.last_pay.set(last_pay);
     }
 

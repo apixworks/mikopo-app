@@ -1,15 +1,19 @@
 package sample;
 
-import javafx.event.ActionEvent;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
+import javafx.scene.Scene;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,12 +23,27 @@ import java.util.ResourceBundle;
  */
 public class MainWindowController implements Initializable {
     @FXML public BorderPane borderP;
-    @FXML public Button profBtn;
+    @FXML public MenuButton profBtn;
 
     JSONObject userObject;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        MenuItem menuItem = new MenuItem("Log out");
+        profBtn.getItems().add(menuItem);
+        menuItem.setOnAction(event -> {
+            try {
+                Stage stage = (Stage) profBtn.getScene().getWindow();
+                Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+                stage.setTitle("MikopoApp");
+                stage.setMaximized(false);
+                Scene loginScene = new Scene(root,450,350);
+                stage.setScene(loginScene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         try{
             Parent Mainroot = FXMLLoader.load(getClass().getResource("view_customers_loans.fxml"));
             borderP.setCenter(Mainroot);
@@ -34,38 +53,60 @@ public class MainWindowController implements Initializable {
     }
 
     public  void RegCustomerClick(){
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register_customer.fxml"));
-            borderP.setCenter(fxmlLoader.load());
-            RegisterCustomerController registerCustomerController = fxmlLoader.<RegisterCustomerController>getController();
-            registerCustomerController.getUserDetails(userObject);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), ev -> {
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register_customer.fxml"));
+                borderP.setCenter(fxmlLoader.load());
+                RegisterCustomerController registerCustomerController = fxmlLoader.<RegisterCustomerController>getController();
+                registerCustomerController.getUserDetails(userObject);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }));
+        timeline.play();
     }
 
     @FXML
     public  void viewCustomerClick(){
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view_customers_loans.fxml"));
-            borderP.setCenter(fxmlLoader.load());
-            ViewCustomersLoansController viewCustomersLoansController = fxmlLoader.<ViewCustomersLoansController>getController();
-            viewCustomersLoansController.getUserDetails(userObject);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),ev ->{
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view_customers_loans.fxml"));
+                borderP.setCenter(fxmlLoader.load());
+                ViewCustomersLoansController viewCustomersLoansController = fxmlLoader.<ViewCustomersLoansController>getController();
+                viewCustomersLoansController.getUserDetails(userObject);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }));
+        timeline.play();
     }
 
     @FXML
     public  void viewRepayments(){
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view_repayments.fxml"));
-            borderP.setCenter(fxmlLoader.load());
-            ViewRepaymentsController viewRepaymentsController = fxmlLoader.<ViewRepaymentsController>getController();
-            viewRepaymentsController.getUserDetails(userObject);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),ev ->{
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view_repayments.fxml"));
+                borderP.setCenter(fxmlLoader.load());
+                ViewRepaymentsController viewRepaymentsController = fxmlLoader.<ViewRepaymentsController>getController();
+                viewRepaymentsController.getUserDetails(userObject);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }));
+        timeline.play();
+    }
+
+    @FXML
+    public void viewReport(){
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),ev ->{
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view_report.fxml"));
+                borderP.setCenter(fxmlLoader.load());
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }));
+        timeline.play();
     }
 
     public void getUserDetails(JSONObject jsonObject){

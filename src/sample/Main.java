@@ -14,7 +14,6 @@ public class Main extends Application {
         primaryStage.setTitle("MikopoApp");
         Scene loginScene = new Scene(root,450,350);
         primaryStage.setScene(loginScene);
-        //loginScene.getStylesheets().add(Main.class.getResource("Cssfile.css").toExternalForm());
         primaryStage.show();
     }
 

@@ -6,13 +6,34 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 
-<StackPane  prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewRepaymentsController">
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<StackPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewRepaymentsController">
    <children>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <JFXTabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
             <Tab text="Due">
                 <content>
-                    <TableView fx:id="due_table" prefHeight="200.0" prefWidth="200.0">
+                    <VBox >
+                    <HBox alignment="CENTER_RIGHT" prefHeight="35.0" spacing="10">
+                        <padding><Insets right="10" /></padding>
+                        <TextField fx:id="searchLoanTxt" />
+                        <JFXButton buttonType="RAISED" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" onAction="#searchLoan" text="search" textFill="#FFFFFF"/>
+                        <JFXButton buttonType="RAISED" ripplerFill="aliceblue" mnemonicParsing="false" onAction="#refreshDue" style="-fx-background-color: #554640;">
+                            <graphic>
+                                <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@icons/refreshy.png" />
+                                </ImageView>
+                            </graphic>
+                        </JFXButton>
+                    </HBox>
+                    <TableView fx:id="due_table" VBox.vgrow="ALWAYS">
                         <columns>
                             <TableColumn fx:id="due_l_no" prefWidth="75.0" text="Loan#" />
                             <TableColumn fx:id="due_borrower" prefWidth="75.0" text="Name" />
@@ -34,6 +55,7 @@
                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                         </columnResizePolicy>
                     </TableView>
+                    </VBox>
                 </content>
             </Tab>
           <Tab text="1 Month Late">
@@ -89,6 +111,6 @@
             </content>
           </Tab>
         </tabs>
-      </TabPane>
+      </JFXTabPane>
    </children>
 </StackPane>

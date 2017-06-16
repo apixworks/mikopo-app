@@ -1,16 +1,20 @@
 package sample;
 
+import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTextField;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -38,9 +42,17 @@ public class RegisterCustomerController implements Initializable {
     @FXML public TextField propertyName;
     @FXML public TextArea desc;
     @FXML public Text actionTxt;
+    @FXML public JFXDialogLayout borrowerDialog;
+    @FXML public GridPane gridPane;
+    @FXML public Label name;
+    @FXML public Label id;
+    @FXML public JFXDialogLayout mdhaminiDialog;
+    @FXML public GridPane mdhamini_gridPane;
+    @FXML public Label mdhamini_name;
+    @FXML public Label mdhamini_id;
 
     @FXML public Button submitBtn;
-    @FXML public TextField fname;
+    @FXML public JFXTextField fname;
     @FXML public TextField lname;
     @FXML public TextField mname;
     @FXML public RadioButton male;
@@ -62,8 +74,11 @@ public class RegisterCustomerController implements Initializable {
     int perMont;
     double total = 0;
     int totalInt;
+    int l_memberId;
     ToggleGroup genderChoice = new ToggleGroup();
     JSONObject userObject;
+    BorrowerIDAndName borrowerIDAndName;
+    DatabaseHandler db;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -72,9 +87,78 @@ public class RegisterCustomerController implements Initializable {
         dhamanachoice.setItems(options);
         male.setToggleGroup(genderChoice);
         female.setToggleGroup(genderChoice);
+
+       borrower.focusedProperty().addListener(new ChangeListener<Boolean>()
+       {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue)
+                {
+                    borrowerDialog.setVisible(true);
+                }
+                else
+                {
+                   borrowerDialog.setVisible(false);
+                }
+            }
+        });
+
+        borrower.textProperty().addListener((observable, oldValue, newValue) -> {
+            db = new DatabaseHandler();
+            if(Checker.isStringInt(newValue)) {
+                borrowerIDAndName = db.getBorrowerNameAndId(Integer.parseInt(newValue));
+                if(borrowerIDAndName==null){
+                    name.setText(null);
+                    id.setText(null);
+                }else{
+                    name.setText(borrowerIDAndName.name);
+                    id.setText(borrowerIDAndName.id);
+                }
+            }else {
+                name.setText(null);
+                id.setText(null);
+            }
+
+            //System.out.println("textfield changed from " + oldValue + " to " + newValue);
+        });
+
+        memberId.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue)
+                {
+                    mdhaminiDialog.setVisible(true);
+                }
+                else
+                {
+                    mdhaminiDialog.setVisible(false);
+                }
+            }
+        });
+
+        memberId.textProperty().addListener((observable, oldValue, newValue) -> {
+            db = new DatabaseHandler();
+            if(Checker.isStringInt(newValue)) {
+                borrowerIDAndName = db.getBorrowerNameAndId(Integer.parseInt(newValue));
+                if(borrowerIDAndName==null){
+                    mdhamini_name.setText(null);
+                    mdhamini_id.setText(null);
+                }else{
+                    mdhamini_name.setText(borrowerIDAndName.name);
+                    mdhamini_id.setText(borrowerIDAndName.id);
+                }
+            }else {
+                mdhamini_name.setText(null);
+                mdhamini_id.setText(null);
+            }
+        });
+
     }
 
-    public void register(){
+    public void registerCustomer(){
         String c_fname = fname.getText();
         String c_lname = lname.getText();
         String c_mname = mname.getText();
@@ -90,12 +174,13 @@ public class RegisterCustomerController implements Initializable {
         String c_company_phone = company_phone.getText();
         String c_company_loc = company_loc.getText();
         String c_checksum = checksum.getText();
+        LocalDate c_reg_date = LocalDate.now();
 
         DatabaseHandler db = new DatabaseHandler();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Registration Status");
         alert.setHeaderText(null);
-        Result result = db.registerCustomer(c_fname,c_lname,c_mname,gender,c_dob,c_phone,c_email,c_postal,"",c_bank,c_account_no,c_company_name,c_company_phone,c_company_loc,c_checksum);
+        Result result = db.registerCustomer(c_fname,c_lname,c_mname,gender,c_dob,c_phone,c_email,c_postal,"",c_bank,c_account_no,c_company_name,c_company_phone,c_company_loc,c_checksum,c_reg_date);
         if(result.isSuccess()){
             int mpya = result.getId();
             fname.setText("");
@@ -158,7 +243,11 @@ public class RegisterCustomerController implements Initializable {
         int l_duration = Integer.parseInt(durationTxtField.getText());
         String l_date = loanDate.getValue().toString();
         String l_dhamanaType = dhamanachoice.getValue().toString();
-        int l_memberId = Integer.parseInt(memberId.getText());
+        try{
+            l_memberId = Integer.parseInt(memberId.getText());
+        }catch (Exception e){
+            l_memberId = 0;
+        }
         String l_propertyId = propertyId.getText();
         String l_propertyName = propertyName.getText();
         String l_desc = desc.getText();

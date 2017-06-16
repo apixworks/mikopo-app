@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,7 +17,6 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,8 +26,8 @@ import java.util.ResourceBundle;
  */
 public class ViewCustomersLoansController implements Initializable {
 
-    @FXML public ChoiceBox searchChoice;
-    @FXML public TextField searchTxt;
+    @FXML public TextField searchLoanTxt;
+    @FXML public TextField searchCustomerTxt;
 
     @FXML public TableView<Customer> customer_table;
     @FXML public TableColumn<Customer,String> c_no;
@@ -49,15 +46,15 @@ public class ViewCustomersLoansController implements Initializable {
     @FXML public TableColumn<Loan,String> l_borrower;
     @FXML public TableColumn<Loan,String> l_date;
     @FXML public TableColumn<Loan,Double> interest;
-    @FXML public TableColumn<Loan,Double> amount;
+    @FXML public TableColumn<Loan,String> amount;
     @FXML public TableColumn<Loan,Integer> duration;
-    @FXML public TableColumn<Loan,Double> total_pay;
-    @FXML public TableColumn<Loan,Double> per_month;
+    @FXML public TableColumn<Loan,String> total_pay;
+    @FXML public TableColumn<Loan,String> per_month;
     @FXML public TableColumn<Loan,String> due;
     @FXML public TableColumn<Loan,String> last_paymonth;
-    @FXML public TableColumn<Loan,Double> amount_paid;
-    @FXML public TableColumn<Loan,Double> last_pay;
-    @FXML public TableColumn<Loan,Double> amount_rem;
+    @FXML public TableColumn<Loan,String> amount_paid;
+    @FXML public TableColumn<Loan,String> last_pay;
+    @FXML public TableColumn<Loan,String> amount_rem;
     @FXML public TableColumn<Loan,String> status;
     @FXML public TableColumn<Loan,String> l_action;
 
@@ -65,10 +62,6 @@ public class ViewCustomersLoansController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> searchOptions = FXCollections.observableArrayList("Search For:","Search Loans","Search Customers");
-        searchChoice.setValue("Search For:");
-        searchChoice.setItems(searchOptions);
-
         initializeViewCustomers();
         initializeViewLoans();
     }
@@ -131,7 +124,6 @@ public class ViewCustomersLoansController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void editCustomerForm(int id){
@@ -151,29 +143,27 @@ public class ViewCustomersLoansController implements Initializable {
 
     }
 
-    public void search(){
-        int id = Integer.parseInt(searchTxt.getText());
-        if(searchChoice.getValue().toString().equals("Search Loans")){
-            setUpLoan();
-            DatabaseHandler db = new DatabaseHandler();
-            loan_table.setItems(null);
-            loan_table.setItems(db.searchLoan(id));
-        }else if (searchChoice.getValue().toString().equals("Search Customers")){
-            setUpCustomer();
-            DatabaseHandler db = new DatabaseHandler();
-            customer_table.setItems(null);
-            customer_table.setItems(db.searchCustomers(id));
-        }else if(searchChoice.getValue().toString().equals("Search For:")){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Please choice what to search for:");
-            alert.showAndWait();
-        }
+    public void searchLoan(){
+        int loan_id = Integer.parseInt(searchLoanTxt.getText());
+        setUpLoan();
+        DatabaseHandler db = new DatabaseHandler();
+        loan_table.setItems(null);
+        loan_table.setItems(db.searchLoan(loan_id));
     }
 
-    public void refresh(){
+    public void searchCustomer(){
+        //int customer_id = Integer.parseInt(searchCustomerTxt.getText());
+        setUpCustomer();
+        DatabaseHandler db = new DatabaseHandler();
+        customer_table.setItems(null);
+        customer_table.setItems(db.searchCustomers(searchCustomerTxt.getText()));
+    }
+
+    public void refreshLoans(){
         initializeViewLoans();
+    }
+
+    public void refreshCustomers(){
         initializeViewCustomers();
     }
 

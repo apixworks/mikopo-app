@@ -16,7 +16,6 @@ import javafx.util.Callback;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,15 +29,15 @@ public class ViewRepaymentsController implements Initializable{
     @FXML public TableColumn<Loan,String> one_borrower;
     @FXML public TableColumn<Loan,String> one_date;
     @FXML public TableColumn<Loan,Double> one_interest;
-    @FXML public TableColumn<Loan,Double> one_amount;
+    @FXML public TableColumn<Loan,String> one_amount;
     @FXML public TableColumn<Loan,Integer> one_duration;
-    @FXML public TableColumn<Loan,Double> one_total_pay;
-    @FXML public TableColumn<Loan,Double> one_per_month;
+    @FXML public TableColumn<Loan,String> one_total_pay;
+    @FXML public TableColumn<Loan,String> one_per_month;
     @FXML public TableColumn<Loan,String> one_due;
     @FXML public TableColumn<Loan,String> one_last_paymonth;
-    @FXML public TableColumn<Loan,Double> one_amount_paid;
-    @FXML public TableColumn<Loan,Double> one_last_pay;
-    @FXML public TableColumn<Loan,Double> one_amount_rem;
+    @FXML public TableColumn<Loan,String> one_amount_paid;
+    @FXML public TableColumn<Loan,String> one_last_pay;
+    @FXML public TableColumn<Loan,String> one_amount_rem;
     @FXML public TableColumn<Loan,String> one_status;
     @FXML public TableColumn<Loan,String> one_action;
 
@@ -47,15 +46,15 @@ public class ViewRepaymentsController implements Initializable{
     @FXML public TableColumn<Loan,String> two_borrower;
     @FXML public TableColumn<Loan,String> two_date;
     @FXML public TableColumn<Loan,Double> two_interest;
-    @FXML public TableColumn<Loan,Double> two_amount;
+    @FXML public TableColumn<Loan,String> two_amount;
     @FXML public TableColumn<Loan,Integer> two_duration;
-    @FXML public TableColumn<Loan,Double> two_total_pay;
-    @FXML public TableColumn<Loan,Double> two_per_month;
+    @FXML public TableColumn<Loan,String> two_total_pay;
+    @FXML public TableColumn<Loan,String> two_per_month;
     @FXML public TableColumn<Loan,String> two_due;
     @FXML public TableColumn<Loan,String> two_last_paymonth;
-    @FXML public TableColumn<Loan,Double> two_amount_paid;
-    @FXML public TableColumn<Loan,Double> two_last_pay;
-    @FXML public TableColumn<Loan,Double> two_amount_rem;
+    @FXML public TableColumn<Loan,String> two_amount_paid;
+    @FXML public TableColumn<Loan,String> two_last_pay;
+    @FXML public TableColumn<Loan,String> two_amount_rem;
     @FXML public TableColumn<Loan,String> two_status;
     @FXML public TableColumn<Loan,String> two_action;
 
@@ -64,17 +63,18 @@ public class ViewRepaymentsController implements Initializable{
     @FXML public TableColumn<Loan,String> due_borrower;
     @FXML public TableColumn<Loan,String> due_date;
     @FXML public TableColumn<Loan,Double> due_interest;
-    @FXML public TableColumn<Loan,Double> due_amount;
+    @FXML public TableColumn<Loan,String> due_amount;
     @FXML public TableColumn<Loan,Integer> due_duration;
-    @FXML public TableColumn<Loan,Double> due_total_pay;
-    @FXML public TableColumn<Loan,Double> due_per_month;
+    @FXML public TableColumn<Loan,String> due_total_pay;
+    @FXML public TableColumn<Loan,String> due_per_month;
     @FXML public TableColumn<Loan,String> due_due;
     @FXML public TableColumn<Loan,String> due_last_paymonth;
-    @FXML public TableColumn<Loan,Double> due_amount_paid;
-    @FXML public TableColumn<Loan,Double> due_last_pay;
-    @FXML public TableColumn<Loan,Double> due_amount_rem;
+    @FXML public TableColumn<Loan,String> due_amount_paid;
+    @FXML public TableColumn<Loan,String> due_last_pay;
+    @FXML public TableColumn<Loan,String> due_amount_rem;
     @FXML public TableColumn<Loan,String> due_status;
     @FXML public TableColumn<Loan,String> due_action;
+    @FXML public TextField searchLoanTxt;
 
     JSONObject userObject;
 
@@ -150,6 +150,32 @@ public class ViewRepaymentsController implements Initializable{
         due_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         due_action.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
 
+        setUpDue();
+
+        DatabaseHandler db = new DatabaseHandler();
+        due_table.setItems(null);
+        due_table.setItems(db.loadDueLoans());
+    }
+
+    public void repaymentForm(String loanId,String name){
+        try {
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("repayment_form.fxml"));
+            stage.setTitle("MikopoApp");
+            Scene repaymentScene = new Scene(fxmlLoader.load(),600,350);
+            stage.setScene(repaymentScene);
+            RepaymentFormController repaymentFormController = fxmlLoader.<RepaymentFormController>getController();
+            repaymentFormController.getLoanDetails(loanId,name);
+            repaymentFormController.getUserDetails(userObject);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void setUpDue(){
         Callback<TableColumn<Loan,String>, TableCell<Loan,String>> cellFactory =
                 new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
                     @Override
@@ -247,28 +273,6 @@ public class ViewRepaymentsController implements Initializable{
                 };
             }
         });
-
-        DatabaseHandler db = new DatabaseHandler();
-        due_table.setItems(null);
-        due_table.setItems(db.loadDueLoans());
-    }
-
-    public void repaymentForm(String loanId,String name){
-        try {
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("repayment_form.fxml"));
-            stage.setTitle("MikopoApp");
-            Scene repaymentScene = new Scene(fxmlLoader.load(),600,350);
-            stage.setScene(repaymentScene);
-            RepaymentFormController repaymentFormController = fxmlLoader.<RepaymentFormController>getController();
-            repaymentFormController.getLoanDetails(loanId,name);
-            repaymentFormController.getUserDetails(userObject);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void setUpOneMonthLate(){
@@ -526,4 +530,17 @@ public class ViewRepaymentsController implements Initializable{
     public void getUserDetails(JSONObject jsonObject){
         userObject = jsonObject;
     }
+
+    public void searchLoan(){
+        int loan_id = Integer.parseInt(searchLoanTxt.getText());
+        setUpDue();
+        DatabaseHandler db = new DatabaseHandler();
+        due_table.setItems(null);
+        due_table.setItems(db.searchLoan(loan_id));
+    }
+
+    public void refreshDue(){
+        initializeDue();
+    }
+
 }
