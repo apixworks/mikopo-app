@@ -2,6 +2,7 @@ package sample;
 
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -12,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
@@ -24,6 +26,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -159,72 +162,93 @@ public class RegisterCustomerController implements Initializable {
     }
 
     public void registerCustomer(){
-        String c_fname = fname.getText();
-        String c_lname = lname.getText();
-        String c_mname = mname.getText();
-        RadioButton selectedRadioButton = (RadioButton) genderChoice.getSelectedToggle();
-        String gender = selectedRadioButton.getText();
-        LocalDate c_dob = dob.getValue();
-        String c_phone = phone.getText();
-        String c_email = email.getText();
-        String c_postal = postal.getText();
-        String c_bank = bank.getText();
-        String c_account_no = account_no.getText();
-        String c_company_name = company_name.getText();
-        String c_company_phone = company_phone.getText();
-        String c_company_loc = company_loc.getText();
-        String c_checksum = checksum.getText();
-        LocalDate c_reg_date = LocalDate.now();
-
-        DatabaseHandler db = new DatabaseHandler();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Registration Status");
-        alert.setHeaderText(null);
-        Result result = db.registerCustomer(c_fname,c_lname,c_mname,gender,c_dob,c_phone,c_email,c_postal,"",c_bank,c_account_no,c_company_name,c_company_phone,c_company_loc,c_checksum,c_reg_date);
-        if(result.isSuccess()){
-            int mpya = result.getId();
-            fname.setText("");
-            lname.setText("");
-            mname.setText("");
-            genderChoice.selectToggle(null);
-            dob.setValue(null);
-            photoBtnTxt.setText("");
-            phone.setText("");
-            email.setText("");
-            postal.setText("");
-            bank.setText("");
-            account_no.setText("");
-            company_name.setText("");
-            company_phone.setText("");
-            company_loc.setText("");
-            checksum.setText("");
-
-            try {
-                Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: "+userObject.get("id")+" registered Customer: MJ/C/"+mpya);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            File newFile = new File("E:/MikopoPics",savedImage.getName());
-            if(savedImage.getName().endsWith("pg")) {
-                File dbFile1 = new File("E:/MikopoPics", "MJ.C."+mpya+".jpg");
-                newFile.renameTo(dbFile1);
-                db.updateProfPhoto(dbFile1.getName(),result.getId());
-            }
-            else{
-                File dbFile2 = new File("E:/MikopoPics","MJ.C."+mpya+".png");
-                newFile.renameTo(dbFile2);
-                db.updateProfPhoto(dbFile2.getName(),result.getId());
-            }
-
-            alert.setContentText("Successful Registered!");
+        if(savedImage == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Registration Status");
+            alert.setHeaderText(null);
+            alert.setContentText("Customer Image must be added!");
             alert.showAndWait();
-        }else{
-            alert.setContentText("Registration UnSuccessful!");
-            alert.showAndWait();
+        }else {
+            String c_fname = fname.getText();
+            String c_lname = lname.getText();
+            String c_mname = mname.getText();
+            RadioButton selectedRadioButton = (RadioButton) genderChoice.getSelectedToggle();
+            String gender = selectedRadioButton.getText();
+            LocalDate c_dob = dob.getValue();
+            String c_phone = phone.getText();
+            String c_email = email.getText();
+            String c_postal = postal.getText();
+            String c_bank = bank.getText();
+            String c_account_no = account_no.getText();
+            String c_company_name = company_name.getText();
+            String c_company_phone = company_phone.getText();
+            String c_company_loc = company_loc.getText();
+            String c_checksum = checksum.getText();
+            LocalDate c_reg_date = LocalDate.now();
+
+            if(c_fname.equals("")||c_lname.equals("")||c_mname.equals("")||gender.equals("")||c_dob==null||c_phone.equals("")||c_bank.equals("")||c_account_no.equals("")){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Empty Field");
+                alert.setHeaderText(null);
+                alert.setContentText("Please fill all fields!");
+                alert.showAndWait();
+            }else {
+                DatabaseHandler db = new DatabaseHandler();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Registration Status");
+                alert.setHeaderText(null);
+                Result result = db.registerCustomer(c_fname,c_lname,c_mname,gender,c_dob,c_phone,c_email,c_postal,"",c_bank,c_account_no,c_company_name,c_company_phone,c_company_loc,c_checksum,c_reg_date);
+                if(result.isSuccess()){
+                    int mpya = result.getId();
+                    fname.setText("");
+                    lname.setText("");
+                    mname.setText("");
+                    genderChoice.selectToggle(null);
+                    dob.setValue(null);
+                    photoBtnTxt.setText("");
+                    phone.setText("");
+                    email.setText("");
+                    postal.setText("");
+                    bank.setText("");
+                    account_no.setText("");
+                    company_name.setText("");
+                    company_phone.setText("");
+                    company_loc.setText("");
+                    checksum.setText("");
+
+                    try {
+                        Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: "+userObject.get("id")+" registered Customer: MJ/C/"+mpya);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    /**
+                     * Needs Editing.
+                     */
+                    File newFile = new File("E:/MikopoPics",savedImage.getName());
+                    if(savedImage.getName().endsWith("pg")) {
+                        File dbFile1 = new File("E:/MikopoPics", "MJ.C."+mpya+".jpg");
+                        newFile.renameTo(dbFile1);
+                        db.updateProfPhoto(dbFile1.getName(),result.getId());
+                    }
+                    else{
+                        File dbFile2 = new File("E:/MikopoPics","MJ.C."+mpya+".png");
+                        newFile.renameTo(dbFile2);
+                        db.updateProfPhoto(dbFile2.getName(),result.getId());
+                    }
+
+                    alert.setContentText("Successful Registered!");
+                    alert.showAndWait();
+                }else{
+                    alert.setContentText("Registration UnSuccessful!");
+                    alert.showAndWait();
+                }
+            }
+
         }
+
     }
 
     /**
@@ -269,6 +293,11 @@ public class RegisterCustomerController implements Initializable {
                 e.printStackTrace();
             }
 
+            File newFile = new File("E:/MikopoFiles/mpya");
+            File dbFile1 = new File("E:/MikopoFiles/MJ.L."+result.getId());
+            newFile.renameTo(dbFile1);
+            db.updateLoanFile(dbFile1.getName(),result.getId());
+
             alert.setContentText("Successful Registered!");
             alert.showAndWait();
 
@@ -279,6 +308,8 @@ public class RegisterCustomerController implements Initializable {
             propertyId.setText("");
             propertyName.setText("");
             desc.setText("");
+            perMonthTxtField.setText("");
+            actionTxt.setText("");
 
         }else {
             alert.setContentText("Registration UnSuccessful!");
@@ -298,14 +329,14 @@ public class RegisterCustomerController implements Initializable {
 
             for (j = 1; j <= duration; j++) {
                 repay = (p1 / duration) + (amount * i);
-                System.out.println(j + "  : " + repay);
+                //System.out.println(j + "  : " + repay);
                 total = total + repay;
                 amount = amount - amount / duration;
             }
             totalInt = (int)Math.round(total);
             perMont = (int)Math.round(total/duration);
-            System.out.println("total is :" + total);
-            System.out.println("Amount per month :" +perMont);
+//            System.out.println("total is :" + total);
+//            System.out.println("Amount per month :" +perMont);
             perMonthTxtField.setText(""+perMont);
         } catch (Exception e) {
             System.out.println("Error");
@@ -339,23 +370,35 @@ public class RegisterCustomerController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Loan Files");
         fileChooser.setInitialFileName("");
-        File savedFile = fileChooser.showSaveDialog(submitBtn.getScene().getWindow());
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Files", "*.jpg", "*.png", "*.pdf", ".*doc");
+        fileChooser.getExtensionFilters().addAll(extFilter);
+        List<File> selectedFiles = fileChooser.showOpenMultipleDialog(submitBtn.getScene().getWindow());
 
-        if (savedFile != null) {
+        if (selectedFiles != null) {
             try {
-                //saveFileRoutine(savedFile);
-                Path target = Paths.get("E:/MikopoFiles",savedFile.getName());
-                Files.copy(savedFile.toPath(),target, StandardCopyOption.REPLACE_EXISTING);
+                File dir = new File("E:/MikopoFiles/mpya");
+                dir.mkdir();
+                for (File srcFile: selectedFiles) {
+                    if (!srcFile.isDirectory()) {
+                        FileUtils.copyFileToDirectory(srcFile,dir);
+                    }else{
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Alert");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Please choose files not a folder!");
+                        alert.showAndWait();
+                    }
+                }
             }
             catch(Exception e) {
                 e.printStackTrace();
-                actionTxt.setText("An ERROR occurred while saving the file!");
+                actionTxt.setText("An ERROR occurred while saving the files!");
                 return;
             }
-            actionTxt.setText("File saved: " + savedFile.toString());
+            actionTxt.setText("Files saved: " + selectedFiles.toString());
         }
         else {
-            actionTxt.setText("File save cancelled.");
+            actionTxt.setText("Files save cancelled.");
         }
     }
 

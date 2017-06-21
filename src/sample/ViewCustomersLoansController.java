@@ -143,6 +143,42 @@ public class ViewCustomersLoansController implements Initializable {
 
     }
 
+    public void editLoanForm(int id){
+        try {
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edit_loan.fxml"));
+            stage.setTitle("MikopoApp");
+            Scene editCustomerScene = new Scene(fxmlLoader.load(),1100,600);
+            stage.setScene(editCustomerScene);
+            EditLoanController editLoanController = fxmlLoader.<EditLoanController>getController();
+            editLoanController.getId(id);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void viewCustomer(int id){
+        try {
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view_Customer.fxml"));
+            stage.setTitle("MikopoApp");
+            Scene viewCustomerScene = new Scene(fxmlLoader.load(),500,650);
+            stage.setScene(viewCustomerScene);
+            stage.setMaxHeight(650);
+            stage.setMaxWidth(500);
+            ViewCustomerController viewCustomerController = fxmlLoader.<ViewCustomerController>getController();
+            viewCustomerController.getId(id);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void searchLoan(){
         int loan_id = Integer.parseInt(searchLoanTxt.getText());
         setUpLoan();
@@ -179,16 +215,23 @@ public class ViewCustomersLoansController implements Initializable {
                             protected void updateItem(String item, boolean empty) {
                                 super.updateItem(item, empty);
                                 if(empty){
-                                    //URL url = @icons/view_account.png;
                                     setGraphic(null);
                                     setText(null);
                                 }else{
+                                    Loan loan = getTableView().getItems().get(getIndex());
+                                    if(loan.getStatus().equals("done")){
+                                        payBtn.setVisible(false);
+                                    }
                                     payBtn.setOnAction(new EventHandler<ActionEvent>() {
                                         @Override
                                         public void handle(ActionEvent event) {
-                                            Loan loan = getTableView().getItems().get(getIndex());
-                                            // System.out.println(loan.getL_borrower_phone());
                                             repaymentForm(loan.getL_no(),loan.getL_borrower());
+                                        }
+                                    });
+                                    editBtn.setOnAction(new EventHandler<ActionEvent>() {
+                                        @Override
+                                        public void handle(ActionEvent event) {
+                                            editLoanForm(Integer.parseInt(loan.getL_no().substring(5)));
                                         }
                                     });
                                     HBox hBox = new HBox();
@@ -274,8 +317,8 @@ public class ViewCustomersLoansController implements Initializable {
                     @Override
                     public TableCell<Customer, String> call(TableColumn<Customer, String> param) {
                         final TableCell<Customer,String> cell = new TableCell<Customer,String>(){
-                            final Button editBtn = new Button();
-                            final Button deleteBtn = new Button();
+                            final Button editBtn = new Button("Edit");
+                            final Button viewBtn = new Button("View");
                             @Override
                             protected void updateItem(String item, boolean empty) {
                                 super.updateItem(item, empty);
@@ -283,8 +326,8 @@ public class ViewCustomersLoansController implements Initializable {
                                     setGraphic(null);
                                     setText(null);
                                 }else{
-                                    Image accEdit = new Image(getClass().getResourceAsStream("icons/account-edit.png"),18, 18, false, false);
-                                    editBtn.setGraphic(new ImageView(accEdit));
+                                    //Image accEdit = new Image(getClass().getResourceAsStream("icons/account-edit.png"),18, 18, false, false);
+                                    //editBtn.setGraphic(new ImageView(accEdit));
                                     editBtn.setOnAction(new EventHandler<ActionEvent>() {
                                         @Override
                                         public void handle(ActionEvent event) {
@@ -293,21 +336,22 @@ public class ViewCustomersLoansController implements Initializable {
                                         }
                                     });
 
-                                    Image accDelete = new Image(getClass().getResourceAsStream("icons/account-view.png"),18, 18, false, false);
-                                    deleteBtn.setGraphic(new ImageView(accDelete));
-                                    deleteBtn.setOnAction(new EventHandler<ActionEvent>() {
+                                    //Image accView = new Image(getClass().getResourceAsStream("icons/account-view.png"),18, 18, false, false);
+                                    //viewBtn.setGraphic(new ImageView(accView));
+                                    viewBtn.setOnAction(new EventHandler<ActionEvent>() {
                                         @Override
                                         public void handle(ActionEvent event) {
                                             Customer customer = getTableView().getItems().get(getIndex());
-                                            System.out.println(customer.getName());
+                                            viewCustomer(Integer.parseInt(customer.getC_no().substring(5)));
                                         }
                                     });
 
                                     HBox hBox = new HBox();
-                                    hBox.getChildren().addAll(editBtn,deleteBtn);
+                                    hBox.getChildren().addAll(editBtn, viewBtn);
                                     hBox.setAlignment(Pos.CENTER);
                                     hBox.setSpacing(5);
                                     setGraphic(hBox);
+                                    this.setStyle("-fx-font-weight: normal");
                                     setText(null);
                                 }
                             }

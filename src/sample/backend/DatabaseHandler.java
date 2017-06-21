@@ -392,7 +392,7 @@ public class DatabaseHandler {
     public ObservableList<Loan> loadTwoMonthLateLoans(){
         ObservableList<Loan> twoLateloans = FXCollections.observableArrayList();
         String lastmonthDate = "'"+LocalDate.now().minusMonths(0).withDayOfMonth(1).minusDays(1).toString()+"'";
-        String compareDate = "'"+LocalDate.now().minusMonths(6).withDayOfMonth(1).minusDays(1).toString()+"'";
+        String compareDate = "'"+LocalDate.now().minusMonths(2).withDayOfMonth(1).minusDays(1).toString()+"'";
         String loansSql = "SELECT * FROM LOANS WHERE DUE > "+compareDate+" AND DUE < "+lastmonthDate;
         int borrower_id;
         String borrower_name="";
@@ -403,9 +403,6 @@ public class DatabaseHandler {
         String last_payString;
         Double amount_rem;
         String amount_remString;
-
-        System.out.println(LocalDate.now().minusMonths(6).withDayOfMonth(1).minusDays(1).toString());
-        System.out.println(LocalDate.now().minusMonths(0).withDayOfMonth(1).minusDays(1).toString());
 
         try {
             PreparedStatement ps = createConn().prepareStatement(loansSql);
@@ -457,6 +454,73 @@ public class DatabaseHandler {
             }
         }
         return twoLateloans;
+    }
+
+    public ObservableList<Loan> loadPenaltyLateLoans(){
+        ObservableList<Loan> penaltyloans = FXCollections.observableArrayList();
+        String lastmonthDate = "'"+LocalDate.now().minusMonths(1).withDayOfMonth(1).minusDays(1).toString()+"'";
+        String compareDate = "'"+LocalDate.now().minusMonths(120).withDayOfMonth(1).minusDays(1).toString()+"'";
+        String loansSql = "SELECT * FROM LOANS WHERE DUE > "+compareDate+" AND DUE < "+lastmonthDate;
+        int borrower_id;
+        String borrower_name="";
+        String borrower_phone="";
+        Double amount_paid;
+        String amount_paidString;
+        Double last_pay;
+        String last_payString;
+        Double amount_rem;
+        String amount_remString;
+
+        try {
+            PreparedStatement ps = createConn().prepareStatement(loansSql);
+            ResultSet rs = ps.executeQuery();
+
+            String getBorrowerSql;
+            PreparedStatement pb;
+            ResultSet rb;
+
+            while(rs.next()){
+                borrower_id = rs.getInt("borrower_id");
+                getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
+                pb = createConn().prepareStatement(getBorrowerSql);
+                rb = pb.executeQuery();
+                if (rb.first()){
+                    borrower_name = rb.getString("f_name")+" "+rb.getString("l_name");
+                    borrower_phone = rb.getString("phone");
+                }
+
+                amount_paid = rs.getDouble("amount_paid");
+                if(amount_paid==0){
+                    amount_paidString = String.format("%,.1f", rs.getDouble("amount_paid"));
+                }else
+                    amount_paidString = String.format("%,.0f", rs.getDouble("amount_paid"));
+
+                last_pay = rs.getDouble("last_payment");
+                if (last_pay==0)
+                    last_payString = String.format("%,.1f",last_pay);
+                else
+                    last_payString = String.format("%,.0f", last_pay);
+
+                amount_rem = rs.getDouble("total_payment")-rs.getDouble("amount_paid");
+                if(amount_rem==0)
+                    amount_remString = String.format("%,.1f", amount_rem);
+                else
+                    amount_remString = String.format("%,.0f", amount_rem);
+
+                penaltyloans.add(new Loan("MJ/L/"+rs.getInt("loan_id"),borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
+                        String.format("%,.0f", rs.getDouble("amount_borrowed")),rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return penaltyloans;
     }
 
     public ObservableList<Loan> searchLoan(int loan_id){
@@ -574,18 +638,47 @@ public class DatabaseHandler {
         }
     }
 
-    public EditCustomer editCustomer(int id){
+     public void updateLoanFile(String FileName,int id){
+        String loanFileSql = "UPDATE LOANS SET loan_file='"+FileName+"' WHERE Loan_id="+id;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(loanFileSql);
+            ps.execute();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public EditCustomer viewCustomer(int id){
         String editCustomerSql = "SELECT * FROM CUSTOMERS WHERE ID="+id;
         EditCustomer customer = null;
+
+        String getBorrowerSql;
+        PreparedStatement pb;
+        ResultSet rb;
+        int num_loans = 0;
 
         try{
             PreparedStatement ps = createConn().prepareStatement(editCustomerSql);
             ResultSet rs = ps.executeQuery();
             if (rs.first()){
+                getBorrowerSql = "SELECT * FROM LOANS WHERE borrower_id="+id;
+                pb = createConn().prepareStatement(getBorrowerSql);
+                rb = pb.executeQuery();
+                while (rb.next()){
+                    num_loans++;
+                }
+
                 customer = new EditCustomer(rs.getString("f_name"),rs.getString("m_name"),rs.getString("l_name"),rs.getString("gender"),
                         rs.getDate("dob"),rs.getString("phone"),rs.getString("email"),rs.getString("postal"),rs.getString("prof_photo"),
                         rs.getString("bank"),rs.getString("account_no"),rs.getString("company_name"),rs.getString("company_phone"),
-                        rs.getString("company_location"),rs.getString("checksum"));
+                        rs.getString("company_location"),rs.getString("checksum"),num_loans);
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -741,6 +834,78 @@ public class DatabaseHandler {
             }
         }
         return borrowerIDAndName;
+    }
+
+    public boolean editCustomerDetails(int id,String phone,String email,String postal,String bank,String account,String company_name,
+                                    String company_loc,String company_phone,String checknumber){
+        String sql = "UPDATE CUSTOMERS SET phone='"+phone+"',email='"+email+"',postal='"+postal+"',bank='"+bank+"'," +
+                "account_no='"+account+"',company_name='"+company_name+"',company_phone='"+company_phone+"',company_location='"+company_loc+"'," +
+                "checksum='"+checknumber+"' WHERE ID="+id;
+        boolean success;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(sql);
+            ps.execute();
+            success=true;
+        }catch (SQLException e){
+            success=false;
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return success;
+    }
+
+    public EditLoan viewLoan(int id){
+        String sql = "SELECT borrower_id,amount_borrowed,duration,date_of_loan,amount_per_month,member_id,property_id," +
+                "property_name,description FROM LOANS WHERE LOAN_ID="+id;
+        EditLoan editLoan = null;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.first()){
+                editLoan = new EditLoan(rs.getInt("borrower_id"),rs.getDouble("amount_borrowed"),rs.getInt("duration"),rs.getDate("date_of_loan").toLocalDate(),
+                        rs.getDouble("amount_per_month"),rs.getInt("member_id"),rs.getString("property_id"),rs.getString("property_name"),
+                        rs.getString("description"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return editLoan;
+    }
+
+    public boolean editLoanDetails(int id,String property_id,String property_name,String desc){
+        String sql = "UPDATE LOANS SET property_id='"+property_id+"',property_name='"+property_name+"',description='"+desc+"' " +
+                "WHERE LOAN_ID="+id;
+        boolean success;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(sql);
+            ps.execute();
+            success=true;
+        }catch (SQLException e){
+            success=false;
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return success;
     }
 
 }

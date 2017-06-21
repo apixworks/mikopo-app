@@ -21,10 +21,11 @@ public class EditCustomer {
     String company_phone;
     String company_loc;
     String checknumber;
+    int num_loans;
 
     public EditCustomer(String fname, String mname, String lname, String gender, Date dob, String phone, String email,
                         String postal, String profPhoto, String bank, String acc_no, String company_name, String company_phone,
-                        String company_loc, String checknumber) {
+                        String company_loc, String checknumber,int num_loans) {
         this.fname = fname;
         this.mname = mname;
         this.lname = lname;
@@ -40,5 +41,6 @@ public class EditCustomer {
         this.company_phone = company_phone;
         this.company_loc = company_loc;
         this.checknumber = checknumber;
+        this.num_loans = num_loans;
     }
 }

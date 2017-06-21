@@ -58,6 +58,23 @@ public class ViewRepaymentsController implements Initializable{
     @FXML public TableColumn<Loan,String> two_status;
     @FXML public TableColumn<Loan,String> two_action;
 
+    @FXML public TableView<Loan> penalty_table;
+    @FXML public TableColumn<Loan,String> penalty_l_no;
+    @FXML public TableColumn<Loan,String> penalty_borrower;
+    @FXML public TableColumn<Loan,String> penalty_date;
+    @FXML public TableColumn<Loan,Double> penalty_interest;
+    @FXML public TableColumn<Loan,String> penalty_amount;
+    @FXML public TableColumn<Loan,Integer> penalty_duration;
+    @FXML public TableColumn<Loan,String> penalty_total_pay;
+    @FXML public TableColumn<Loan,String> penalty_per_month;
+    @FXML public TableColumn<Loan,String> penalty_due;
+    @FXML public TableColumn<Loan,String> penalty_last_paymonth;
+    @FXML public TableColumn<Loan,String> penalty_amount_paid;
+    @FXML public TableColumn<Loan,String> penalty_last_pay;
+    @FXML public TableColumn<Loan,String> penalty_amount_rem;
+    @FXML public TableColumn<Loan,String> penalty_status;
+    @FXML public TableColumn<Loan,String> penalty_action;
+
     @FXML public TableView<Loan> due_table;
     @FXML public TableColumn<Loan,String> due_l_no;
     @FXML public TableColumn<Loan,String> due_borrower;
@@ -83,6 +100,7 @@ public class ViewRepaymentsController implements Initializable{
         initializeDue();
         initializeOneMonthLate();
         initializeTwoMonthLate();
+        initializePenaltyLate();
     }
 
     public void initializeOneMonthLate(){
@@ -131,6 +149,30 @@ public class ViewRepaymentsController implements Initializable{
         DatabaseHandler db = new DatabaseHandler();
         two_month_table.setItems(null);
         two_month_table.setItems(db.loadTwoMonthLateLoans());
+    }
+
+    public void initializePenaltyLate(){
+        penalty_l_no.setCellValueFactory(new PropertyValueFactory<>("l_no"));
+        penalty_borrower.setCellValueFactory(new PropertyValueFactory<>("l_borrower"));
+        penalty_date.setCellValueFactory(new PropertyValueFactory<>("l_date"));
+        penalty_interest.setCellValueFactory(new PropertyValueFactory<>("interest"));
+        penalty_amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        penalty_duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        penalty_total_pay.setCellValueFactory(new PropertyValueFactory<>("total_pay"));
+        penalty_per_month.setCellValueFactory(new PropertyValueFactory<>("per_month"));
+        penalty_due.setCellValueFactory(new PropertyValueFactory<>("due"));
+        penalty_last_paymonth.setCellValueFactory(new PropertyValueFactory<>("last_paymonth"));
+        penalty_amount_paid.setCellValueFactory(new PropertyValueFactory<>("amount_paid"));
+        penalty_last_pay.setCellValueFactory(new PropertyValueFactory<>("last_pay"));
+        penalty_amount_rem.setCellValueFactory(new PropertyValueFactory<>("amount_rem"));
+        penalty_status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        penalty_action.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+
+        setUpPenaltyLate();
+
+        DatabaseHandler db = new DatabaseHandler();
+        penalty_table.setItems(null);
+        penalty_table.setItems(db.loadPenaltyLateLoans());
     }
 
     public void initializeDue(){
@@ -510,6 +552,132 @@ public class ViewRepaymentsController implements Initializable{
         });
 
         two_borrower.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            this.setStyle("-fx-alignment: center-left");
+                            setText(item);
+                        }
+                    }
+                };
+            }
+        });
+    }
+
+    public void setUpPenaltyLate(){
+        Callback<TableColumn<Loan,String>, TableCell<Loan,String>> cellFactory =
+                new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+                    @Override
+                    public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                        final TableCell<Loan,String> cell = new TableCell<Loan,String>(){
+                            final Button smsBtn = new Button("SMS");
+                            final Button payBtn = new Button("Pay");
+                            @Override
+                            protected void updateItem(String item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if(empty){
+                                    //URL url = @icons/view_account.png;
+                                    setGraphic(null);
+                                    setText(null);
+                                }else{
+                                    smsBtn.setOnAction(new EventHandler<ActionEvent>() {
+                                        @Override
+                                        public void handle(ActionEvent event) {
+                                            Loan loan = getTableView().getItems().get(getIndex());
+                                            System.out.println(loan.getL_borrower());
+                                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                            alert.setTitle("Message Status");
+                                            alert.setHeaderText(null);
+                                            if(new SendSMS().sendSms(loan.getL_borrower_phone())){
+                                                alert.setContentText("Message has successful been sent");
+                                                try {
+                                                    Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+
+                                                            "id: "+ userObject.get("id")+" sent a message to "+loan.getL_borrower()+" of Loan: "+loan.getL_no());
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }else {
+                                                alert.setContentText("Message not sent");
+                                            }
+                                            alert.showAndWait();
+                                        }
+                                    });
+                                    payBtn.setOnAction(new EventHandler<ActionEvent>() {
+                                        @Override
+                                        public void handle(ActionEvent event) {
+                                            Loan loan = getTableView().getItems().get(getIndex());
+                                            // System.out.println(loan.getL_borrower_phone());
+                                            repaymentForm(loan.getL_no(),loan.getL_borrower());
+                                        }
+                                    });
+                                    HBox hBox = new HBox();
+                                    hBox.getChildren().addAll(smsBtn,payBtn);
+                                    hBox.setAlignment(Pos.CENTER);
+                                    hBox.setSpacing(5);
+                                    setGraphic(hBox);
+                                    this.setStyle("-fx-font-weight: normal");
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+        penalty_action.setCellFactory(cellFactory);
+
+        penalty_l_no.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            this.setStyle("-fx-alignment: center-left");
+                            setText(item);
+                        }
+                    }
+                };
+            }
+        });
+
+        penalty_status.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> p) {
+
+
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            this.setAlignment(Pos.CENTER);
+                            if(item.equals("done")) {
+                                this.setStyle("-fx-background-color: #D9853B;-fx-border-color: #FFFFFF;" +
+                                        "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight: normal");
+                            }
+                            else {
+                                this.setStyle("-fx-background-color:  #74AFAD;-fx-border-color: #EEEEEE;" +
+                                        "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight:normal;");
+                            }
+                            setText(item);
+                        }
+                    }
+                };
+            }
+        });
+
+        penalty_borrower.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
             @Override
             public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
                 return new TableCell<Loan, String>() {

@@ -45,7 +45,7 @@
                 <TextField fx:id="company_phone" layoutX="502.0" layoutY="426.0" />
                 <Label layoutX="710.0" layoutY="401.0" text="CHECK NUMBER" />
                 <TextField fx:id="checksum" layoutX="703.0" layoutY="426.0" />
-                <Button fx:id="editBtn" layoutX="396.0" layoutY="492.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #558C89;" text="Edit" textFill="WHITE" />
+                <Button fx:id="editBtn" onAction="#editCustomerDetails" layoutX="396.0" layoutY="492.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #558C89;" text="Edit" textFill="WHITE" />
                 <Text Fill="RED" layoutX="76.0" layoutY="63.0" text="*">
                     <font>
                         <Font size="15.0" />

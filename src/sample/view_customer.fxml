@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewCustomerController">
+   <children>
+      <ImageView fx:id="customer_image" fitHeight="113.0" fitWidth="132.0" layoutX="169.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+       <Pane layoutX="48.0" layoutY="178.0" prefHeight="407.0" prefWidth="411.0" style="-fx-background-color: #CFD8DC; -fx-background-radius: 15px;">
+           <GridPane hgap="15" layoutX="22.0" layoutY="16.0" prefHeight="349.0" prefWidth="382.0" vgap="10">
+
+               <Label text="Full Name:" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font></Label>
+               <Label fx:id="name" text="Frederick Richard Apina" GridPane.columnIndex="1" GridPane.rowIndex="0">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+               <Label text="Gender:" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font></Label>
+               <Label fx:id="gender" text="Male" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+               <Label text="Date Of Birth:" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font></Label>
+               <Label fx:id="dob" text="26/02/1995" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+               <Label text="Phone Number:" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font></Label>
+               <Label fx:id="phone" text="0654486200" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+               <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font></Label>
+               <Label fx:id="email" text="fred.apina@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+               <Label text="Postal Address:" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font></Label>
+               <Label fx:id="postal" text="P.o box 5159" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+               <Label text="Bank:" GridPane.columnIndex="0" GridPane.rowIndex="6">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font></Label>
+               <Label fx:id="bank" text="CRDB" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+               <Label text="Account Number:" GridPane.columnIndex="0" GridPane.rowIndex="7">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font></Label>
+               <Label fx:id="account_num" text="0152386827000" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+               <Label text="Company Name:" GridPane.columnIndex="0" GridPane.rowIndex="8">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font></Label>
+               <Label fx:id="company_name" text="Apix Industries" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+               <Label text="Company Location:" GridPane.columnIndex="0" GridPane.rowIndex="9">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font></Label>
+               <Label fx:id="company_loc" text="Dodoma" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+               <Label text="Company Phone:" GridPane.columnIndex="0" GridPane.rowIndex="10">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font></Label>
+               <Label fx:id="company_phone" text="25576554493" GridPane.columnIndex="1" GridPane.rowIndex="10">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+               <Label text="Check Number:" GridPane.columnIndex="0" GridPane.rowIndex="11">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font></Label>
+               <Label fx:id="check_num" text="tca/12/34" GridPane.columnIndex="1" GridPane.rowIndex="11">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+               <Label text="Number Of Loans" GridPane.columnIndex="0" GridPane.rowIndex="12">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+               <Label fx:id="num_loans" text="3" GridPane.columnIndex="1" GridPane.rowIndex="12">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+           </GridPane>
+       </Pane>
+
+      <Label layoutX="165.0" layoutY="24.0" text="Customer Details" textAlignment="CENTER" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+   </children>
+</Pane>

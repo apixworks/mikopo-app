@@ -60,7 +60,13 @@
             </Tab>
           <Tab text="1 Month Late">
             <content>
-                <TableView fx:id="one_month_table" prefHeight="200.0" prefWidth="200.0">
+                <VBox >
+                <HBox alignment="CENTER_RIGHT" prefHeight="40.0" spacing="10">
+                    <padding><Insets right="10" /></padding>
+                    <JFXButton buttonType="RAISED" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="SMS All" textFill="#FFFFFF"/>
+                    <JFXButton buttonType="RAISED" ripplerFill="aliceblue" text="Edit SMS" style="-fx-background-color: #554640;" textFill="#FFFFFF"/>
+                </HBox>
+                <TableView fx:id="one_month_table" VBox.vgrow="ALWAYS">
                     <columns>
                         <TableColumn fx:id="one_l_no" prefWidth="75.0" text="Loan#" />
                         <TableColumn fx:id="one_borrower" prefWidth="75.0" text="Name" />
@@ -82,11 +88,18 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                 </TableView>
+                </VBox>
             </content>
           </Tab>
           <Tab text="2 Month Late">
             <content>
-                <TableView fx:id="two_month_table" prefHeight="200.0" prefWidth="200.0">
+                <VBox >
+                <HBox alignment="CENTER_RIGHT" prefHeight="40.0" spacing="10">
+                    <padding><Insets right="10" /></padding>
+                    <JFXButton buttonType="RAISED" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="SMS All" textFill="#FFFFFF"/>
+                    <JFXButton buttonType="RAISED" ripplerFill="aliceblue" text="Edit SMS" style="-fx-background-color: #554640;" textFill="#FFFFFF"/>
+                </HBox>
+                <TableView fx:id="two_month_table" VBox.vgrow="ALWAYS">
                     <columns>
                         <TableColumn fx:id="two_l_no" prefWidth="75.0" text="Loan#" />
                         <TableColumn fx:id="two_borrower" prefWidth="75.0" text="Name" />
@@ -108,8 +121,42 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                 </TableView>
+                </VBox >
             </content>
           </Tab>
+            <Tab text="Penalty Late">
+                <content>
+                    <VBox >
+                    <HBox alignment="CENTER_RIGHT" prefHeight="40.0" spacing="10">
+                        <padding><Insets right="10" /></padding>
+                        <JFXButton buttonType="RAISED" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="SMS All" textFill="#FFFFFF"/>
+                        <JFXButton buttonType="RAISED" ripplerFill="aliceblue" text="Edit SMS" style="-fx-background-color: #554640;" textFill="#FFFFFF"/>
+                    </HBox>
+                    <TableView fx:id="penalty_table" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="penalty_l_no" prefWidth="75.0" text="Loan#" />
+                            <TableColumn fx:id="penalty_borrower" prefWidth="75.0" text="Name" />
+                            <TableColumn fx:id="penalty_date" prefWidth="75.0" text="Released" />
+                            <TableColumn fx:id="penalty_interest" prefWidth="75.0" text="Interest%" />
+                            <TableColumn fx:id="penalty_amount" prefWidth="130.0" text="Amount" />
+                            <TableColumn fx:id="penalty_duration" prefWidth="20.0" text="Duration" />
+                            <TableColumn fx:id="penalty_total_pay" prefWidth="20.0" text="Total_Payment" />
+                            <TableColumn fx:id="penalty_per_month" prefWidth="20.0" text="Per_Month" />
+                            <TableColumn fx:id="penalty_due" prefWidth="75.0" text="Due" />
+                            <TableColumn fx:id="penalty_last_paymonth" prefWidth="75.0" text="LastPay_Date" />
+                            <TableColumn fx:id="penalty_amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
+                            <TableColumn fx:id="penalty_last_pay" prefWidth="75.0" text="Last_Payment" />
+                            <TableColumn fx:id="penalty_amount_rem" prefWidth="75.0" text="Amount_Remaining" />
+                            <TableColumn fx:id="penalty_status" prefWidth="75.0" text="Status" />
+                            <TableColumn fx:id="penalty_action" prefWidth="75.0" text="Action" />
+                        </columns>
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                    </TableView>
+                    </VBox >
+                </content>
+            </Tab>
         </tabs>
       </JFXTabPane>
    </children>

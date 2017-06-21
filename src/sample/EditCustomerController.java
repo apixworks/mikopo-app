@@ -2,20 +2,16 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 import sample.backend.DatabaseHandler;
 
 import java.io.File;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 /**
@@ -51,7 +47,7 @@ public class EditCustomerController implements Initializable{
     public void getId(int id){
 
         DatabaseHandler db = new DatabaseHandler();
-        EditCustomer customer = db.editCustomer(id);
+        EditCustomer customer = db.viewCustomer(id);
         //Path target = Paths.get("E:/MikopoPics",savedImage.getName());
 
         fname.setText(customer.fname);
@@ -65,15 +61,40 @@ public class EditCustomerController implements Initializable{
         bank.setText(customer.bank);
         account_no.setText(customer.acc_no);
         company_name.setText(customer.company_name);
-        company_phone.setText(customer.phone);
+        company_phone.setText(customer.company_phone);
         company_loc.setText(customer.company_loc);
         checksum.setText(customer.checknumber);
-
+        this.id=id;
+        System.out.println(this.id);
         File file = new File("E:/MikopoPics","MJ.C."+id+".jpg");
         System.out.println(file.getName());
         Image image = new Image(file.toURI().toString());
         imageView.setImage(image);
 
         company_name.requestFocus();
+    }
+
+    public void editCustomerDetails(){
+        String phoneString = phone.getText();
+        String emailString = email.getText();
+        String postalString = postal.getText();
+        String bankString = bank.getText();
+        String accountString = account_no.getText();
+        String companyString = company_name.getText();
+        String company_phoneString = company_phone.getText();
+        String company_locString = company_loc.getText();
+        String checksumString = checksum.getText();
+
+        DatabaseHandler db = new DatabaseHandler();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        if(db.editCustomerDetails(id,phoneString,emailString,postalString,bankString,accountString,companyString,company_locString,
+                company_phoneString,checksumString)){
+            alert.setContentText("Successful Edited!");
+        }else {
+            alert.setContentText("UnSuccessful try Again!");
+        }
+        alert.showAndWait();
     }
 }
