@@ -136,6 +136,7 @@ public class ViewCustomersLoansController implements Initializable {
             stage.setScene(editCustomerScene);
             EditCustomerController editCustomerController = fxmlLoader.<EditCustomerController>getController();
             editCustomerController.getId(id);
+            editCustomerController.getUserDetails(userObject);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -153,6 +154,7 @@ public class ViewCustomersLoansController implements Initializable {
             stage.setScene(editCustomerScene);
             EditLoanController editLoanController = fxmlLoader.<EditLoanController>getController();
             editLoanController.getId(id);
+            editLoanController.getUserDetails(userObject);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

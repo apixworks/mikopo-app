@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.json.JSONException;
+import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,6 +23,7 @@ public class LoginController {
     @FXML public Text actiontarget;
 
     DatabaseHandler db;
+    JSONObject userObject;
 
     @FXML protected void handleLoginButtonAction(){
         String username = usernameTxtField.getText();
@@ -43,7 +46,13 @@ public class LoginController {
                             stage.setScene(MainScene);
                             stage.setMaximized(true);
                             MainWindowController mainWindowController = fxmlLoader.<MainWindowController>getController();
-                            mainWindowController.getUserDetails(db.getUserDetails(db.getId()));
+                            userObject = db.getUserDetails(db.getId());
+                            mainWindowController.getUserDetails(userObject);
+                            try {
+                                Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: "+userObject.get("id")+" logged in");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             stage.show();
                         }catch (IOException e){
                             e.printStackTrace();

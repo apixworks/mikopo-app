@@ -69,7 +69,7 @@
            <Text id="menuTxt" fx:id="menuTxt" style="-fx-font-size: 32px; -fx-effect: inner shadow(three-pass-box,rgba(0,0,0,0.7),6,0.0,0,2); -fx-fill: gray" text="Menu" />
          <Separator prefWidth="200.0" />
 
-           <JFXButton  buttonType="RAISED" ripplerFill="aliceblue" fx:id="regBtn" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#RegCustomerClick" prefWidth="150" prefHeight="75" style="-fx-background-color: #558C89;" text="Register Customer" textFill="WHITE">
+           <JFXButton  buttonType="RAISED" ripplerFill="aliceblue" fx:id="regBtn" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#RegCustomerClick" prefWidth="150" prefHeight="75" style="-fx-background-color: #558C89;" text="Registration" textFill="WHITE">
                <graphic>
                    <ImageView fitHeight="53.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                        <image>
@@ -104,6 +104,16 @@
                    <ImageView fitHeight="53.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                        <image>
                            <Image url="@icons/view_repot.png" />
+                       </image>
+                   </ImageView>
+               </graphic>
+           </JFXButton>
+
+           <JFXButton visible="false"  buttonType="RAISED" ripplerFill="aliceblue" contentDisplay="TOP" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" prefWidth="150" prefHeight="75" style="-fx-background-color: #424242;" text="Administration Panel" textFill="WHITE" onAction="#viewAdmin" fx:id="btnAdmin">
+               <graphic>
+                   <ImageView fitHeight="53.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@icons/account-admin.png" />
                        </image>
                    </ImageView>
                </graphic>

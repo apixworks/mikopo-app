@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1122.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdminController">
+   <children>
+      <Pane layoutX="19.0" layoutY="36.0" prefHeight="278.0" prefWidth="399.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
+          <Label id="form_header_text" layoutX="73.0" layoutY="22.0" prefHeight="25.0" prefWidth="142.0" stylesheets="@Cssfile.css" text="User Registration" textFill="#554640" />
+          <JFXTextField fx:id="fname" focusColor="#d9853b" layoutX="40.0" layoutY="65.0" prefHeight="25.0" prefWidth="201.0" promptText="First Name" unFocusColor="#74afad" />
+          <JFXTextField fx:id="lname" focusColor="#d9853b" layoutX="36.0" layoutY="104.0" prefHeight="25.0" prefWidth="205.0" promptText="Last Name" unFocusColor="#74afad" />
+          <JFXTextField fx:id="uname" focusColor="#d9853b" layoutX="38.0" layoutY="143.0" prefHeight="25.0" prefWidth="201.0" promptText="Username" unFocusColor="#74afad" />
+         <ChoiceBox fx:id="choiceBox" layoutX="36.0" layoutY="191.0" prefWidth="150.0" />
+         <JFXButton fx:id="submitBtn" buttonType="RAISED" layoutX="119.0" layoutY="232.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="25.0" prefWidth="95.0" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="Submit" textFill="WHITE" />
+      </Pane>
+      <TableView fx:id="user_table" layoutX="514.0" layoutY="36.0" prefHeight="278.0" prefWidth="585.0">
+        <columns>
+          <TableColumn fx:id="user_no" prefWidth="85.0" text="User#" />
+          <TableColumn fx:id="name" prefWidth="142.0" text="Name" />
+          <TableColumn fx:id="role" prefWidth="110.0" text="Role" />
+          <TableColumn fx:id="status" prefWidth="110.0" text="Status" />
+            <TableColumn fx:id="action" prefWidth="135.0" text="Action" />
+        </columns>
+      </TableView>
+   </children>
+</Pane>

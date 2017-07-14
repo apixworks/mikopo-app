@@ -63,8 +63,8 @@
                 <VBox >
                 <HBox alignment="CENTER_RIGHT" prefHeight="40.0" spacing="10">
                     <padding><Insets right="10" /></padding>
-                    <JFXButton buttonType="RAISED" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="SMS All" textFill="#FFFFFF"/>
-                    <JFXButton buttonType="RAISED" ripplerFill="aliceblue" text="Edit SMS" style="-fx-background-color: #554640;" textFill="#FFFFFF"/>
+                    <JFXButton fx:id="one_sms_all" buttonType="RAISED" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="SMS All" textFill="#FFFFFF"/>
+                    <JFXButton fx:id="one_edit_sms" buttonType="RAISED" ripplerFill="aliceblue" text="Edit SMS" style="-fx-background-color: #554640;" textFill="#FFFFFF"/>
                 </HBox>
                 <TableView fx:id="one_month_table" VBox.vgrow="ALWAYS">
                     <columns>
@@ -96,8 +96,8 @@
                 <VBox >
                 <HBox alignment="CENTER_RIGHT" prefHeight="40.0" spacing="10">
                     <padding><Insets right="10" /></padding>
-                    <JFXButton buttonType="RAISED" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="SMS All" textFill="#FFFFFF"/>
-                    <JFXButton buttonType="RAISED" ripplerFill="aliceblue" text="Edit SMS" style="-fx-background-color: #554640;" textFill="#FFFFFF"/>
+                    <JFXButton fx:id="two_sms_all" buttonType="RAISED" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="SMS All" textFill="#FFFFFF"/>
+                    <JFXButton fx:id="two_edit_sms" buttonType="RAISED" ripplerFill="aliceblue" text="Edit SMS" style="-fx-background-color: #554640;" textFill="#FFFFFF"/>
                 </HBox>
                 <TableView fx:id="two_month_table" VBox.vgrow="ALWAYS">
                     <columns>
@@ -129,8 +129,8 @@
                     <VBox >
                     <HBox alignment="CENTER_RIGHT" prefHeight="40.0" spacing="10">
                         <padding><Insets right="10" /></padding>
-                        <JFXButton buttonType="RAISED" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="SMS All" textFill="#FFFFFF"/>
-                        <JFXButton buttonType="RAISED" ripplerFill="aliceblue" text="Edit SMS" style="-fx-background-color: #554640;" textFill="#FFFFFF"/>
+                        <JFXButton fx:id="penalty_sms_all" buttonType="RAISED" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="SMS All" textFill="#FFFFFF"/>
+                        <JFXButton fx:id="penalty_edit_sms" buttonType="RAISED" ripplerFill="aliceblue" text="Edit SMS" style="-fx-background-color: #554640;" textFill="#FFFFFF"/>
                     </HBox>
                     <TableView fx:id="penalty_table" VBox.vgrow="ALWAYS">
                         <columns>

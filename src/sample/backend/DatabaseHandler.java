@@ -77,6 +77,7 @@ public class DatabaseHandler {
                 jsonObject.put("fname",rs.getString("fname"));
                 jsonObject.put("lname",rs.getString("lname"));
                 jsonObject.put("username",rs.getString("username"));
+                jsonObject.put("role",rs.getString("role"));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -906,6 +907,228 @@ public class DatabaseHandler {
             }
         }
         return success;
+    }
+
+    public String viewSms(int id){
+        String sql = "SELECT SMS FROM MESSAGES WHERE SMS_ID="+id;
+        String sms = null;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.first()){
+                sms = rs.getString("sms");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return sms;
+    }
+
+    public boolean editSms(int id,String sms){
+        String sql = "UPDATE MESSAGES SET sms='"+sms+"' WHERE SMS_ID="+id;
+        boolean success;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(sql);
+            ps.execute();
+            success=true;
+        }catch (SQLException e){
+            success=false;
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return success;
+    }
+
+    public ObservableList<User> getUsers(){
+        ObservableList<User> users = FXCollections.observableArrayList();
+        String usersSql = "SELECT * FROM USERS";
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(usersSql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                users.add(new User("MJ/U/"+rs.getInt("id"),rs.getString("fname")+" "+rs.getString("lname"),rs.getString("status"),rs.getString("role")));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return users;
+    }
+
+    public Boolean addUser(String fname,String lname,String uname,String password,String role,String status){
+        String userSql = "INSERT INTO USERS (fname,lname,username,password,role,status) VALUES(?,?,?,?,?,?)";
+        Boolean success = false;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(userSql);
+            ps.setString(1,fname);
+            ps.setString(2,lname);
+            ps.setString(3,uname);
+            ps.setString(4,password);
+            ps.setString(5,role);
+            ps.setString(6,status);
+
+            ps.execute();
+            success = true;
+
+        }catch (SQLException e){
+            success = false;
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return success;
+    }
+
+    public void updateUserStatus(String action,int id){
+        String status;
+        if (action.equals("activate")){
+            status = "active";
+        }else {
+            status = "deactive";
+        }
+
+        String statusSql = "UPDATE USERS SET status='"+status+"' WHERE ID="+id;
+
+        try {
+            PreparedStatement ps = createConn().prepareStatement(statusSql);
+            ps.execute();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void fineHandler(){
+        if(LocalDate.now().getDayOfMonth()>7) {
+            String state = "not yet";
+            int fine_id = 0;
+            int loan_id = 0;
+            Double amount = 0.0;
+            Double perMonth = 0.0;
+            Date lastDue;
+            String monthEnd = null;
+            String controllerSql = "SELECT * FROM CONTROLLER";
+            String fineSql = "SELECT * FROM FINES";
+            String fineUpdateSql = "UPDATE FINES SET AMOUNT="+amount+" WHERE FINE_ID=" + fine_id;
+            String loanSql = "SELECT * FROM LOANS";
+            String updateLoanSql = "UPDATE LOANS SET DUE='"+monthEnd+"' WHERE LOAN_ID="+loan_id;
+            String addFineSql = "INSERT INTO FINES (month,year,amount,loan_id) VALUES(?,?,?,?)";
+            String stateSql = "UPDATE CONTROLLER SET STATE='"+state+"' WHERE ID=1";
+
+            try {
+                PreparedStatement ps = createConn().prepareStatement(controllerSql);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.first()) {
+                    state = rs.getString("state");
+                }
+
+
+                if (state.equals("not yet")) {
+
+                    PreparedStatement pb = createConn().prepareStatement(fineSql);
+                    ResultSet rb = pb.executeQuery();
+
+                    while (rb.next()) {
+
+                        // Incrementing fine
+                            fine_id = rb.getInt("fine_id");
+                            amount = rb.getDouble("amount");
+                            amount = amount + amount*0.15;
+
+                            PreparedStatement pc = createConn().prepareStatement(fineUpdateSql);
+                            pc.execute();
+
+                    }
+
+                    PreparedStatement pf = createConn().prepareStatement(loanSql);
+                    ResultSet rf = pf.executeQuery();
+
+                    while(rf.next()){
+
+                        // Adding a fine
+                            lastDue = rf.getDate("due");
+                            if(lastDue==java.sql.Date.valueOf(LocalDate.now().minusMonths(1).withDayOfMonth(1).minusDays(1))){
+                                loan_id = rf.getInt("loan_id");
+                                perMonth = rf.getDouble("amount_per_month");
+                                perMonth = perMonth + perMonth*0.15;
+                                monthEnd = lastDue.toLocalDate().plusMonths(2).withDayOfMonth(1).minusDays(1).toString();
+
+                                PreparedStatement ph = createConn().prepareStatement(updateLoanSql);
+                                ph.execute();
+
+                                PreparedStatement pk = createConn().prepareStatement(addFineSql);
+                                pk.setString(1,lastDue.toLocalDate().getMonth().name());
+                                pk.setInt(2,lastDue.toLocalDate().getYear());
+                                pk.setDouble(3,perMonth);
+                                pk.setInt(4,loan_id);
+                                pk.execute();
+                            }
+                    }
+
+                    state = "done";
+                    PreparedStatement pz = createConn().prepareStatement(stateSql);
+                    pz.execute();
+
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void stateChanger(){
+        String stateSql ="UPDATE CONTROLLER SET STATE='not yet'";
+        try{
+            PreparedStatement ps = createConn().prepareStatement(stateSql);
+            ps.execute();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

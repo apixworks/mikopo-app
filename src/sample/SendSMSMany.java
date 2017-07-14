@@ -1,23 +1,25 @@
 package sample;
+
 import sample.backend.DatabaseHandler;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 /**
- * Created by Apix on 13/05/2017.
+ * Created by Apix on 21/06/2017.
  */
-public class SendSMS {
+public class SendSMSMany {
     static boolean success = false;
-    public static boolean sendSms(String phone,int id) {
+    public static boolean sendSms(List<String> phones, int id) {
         try {
             // Construct data
             String user = "username=" + "hewlettpin@hotmail.com"; //youremail@address.com
             String hash = "&hash=" + "f99aba0694ce5c14770010f52cf22a5aa03ec510694d416d7dddc1b54a087ac2"; //Your API hash
             String sender = "&sender=" + "MJ Limited";
-            String numbers = "&numbers=" + phone;
+            String numbers = "&numbers=" + phones;
 
             DatabaseHandler db = new DatabaseHandler();
             String message = "&message=" + db.viewSms(id);

@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.javafx.charts.Legend;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -98,6 +101,7 @@ public class ViewReportController implements Initializable{
         BorrowStatistics();
         AmountRepaymentStatistics();
         LoansRegisteredStatisticsReport();
+        CustomerStatisticsReport();
     }
     //database connection
     private Connection connectDb(){
@@ -121,12 +125,53 @@ public class ViewReportController implements Initializable{
             cate_Aix.setLabel("Month");
             num_Axis.setLabel("Number Of Customer");
             XYChart.Series series2=new XYChart.Series();
+            //series2.setName("Customer registered Per Month");
+            customerChart.setStyle("");
             conn=connectDb();
-            String select="";
+            String select="select count(id) AS usid,MONTHName(reg_date) AS monthna,YEAR(reg_date) AS yearna from customers Group by Month(reg_date) ORDER BY YEAR(reg_date) asc";
             st=conn.createStatement();
             ResultSet rs=st.executeQuery(select);
-            if(rs.next()){
+            while(rs.next()){
+                int useid=rs.getInt("usid");
+                String month=rs.getString("monthna");
+                String year=rs.getString("yearna");
+                String fulld=month+"/"+year;
+                series2.getData().add(new XYChart.Data(fulld, useid));
+            }
+            customerChart.getData().addAll(series2);
+            CustomerStatistics.setContent(customerChart);
 
+            //now you can get the nodes.
+            for(Node n:customerChart.lookupAll(".default-color0.chart-bar")) {
+                n.setStyle("-fx-bar-fill: #558C89;");
+            }
+
+
+            Legend legend=(Legend) customerChart.lookup(".chart-legend");
+//            legend.setDisable(true);
+//            legend.setVisible(false);
+//            legend.setStyle("-fx-legend-visible: false");
+            Legend.LegendItem li1=new Legend.LegendItem("Customer registered Per Month", new Rectangle(10,4, Color.valueOf("#558C89")));
+            legend.getItems().addAll(li1);
+
+            customerChart.setOnMouseClicked(EventHandler->{
+                try {
+                    stage=(Stage)customer_Stackpane.getScene().getWindow();
+                    PrintWork sp=new PrintWork();
+                    sp.printImage(customerChart);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+                }
+            });
+            //
+            for (XYChart.Series<String,Number> serie: customerChart.getData()){
+                for (XYChart.Data<String, Number> item: serie.getData()){
+                    item.getNode().setOnMousePressed((EMouseEvent) -> {
+                        //System.out.println("you clicked "+item.toString()+serie.toString());
+                        JOptionPane.showMessageDialog(null,item.toString());
+                    });
+                }
             }
 
         }catch (Exception e){
@@ -138,7 +183,6 @@ public class ViewReportController implements Initializable{
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
     }
 

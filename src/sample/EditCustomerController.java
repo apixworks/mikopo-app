@@ -8,9 +8,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.json.JSONException;
+import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,6 +39,7 @@ public class EditCustomerController implements Initializable{
     @FXML public TextField checksum;
 
     int id;
+    JSONObject userObject;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -92,9 +96,20 @@ public class EditCustomerController implements Initializable{
         if(db.editCustomerDetails(id,phoneString,emailString,postalString,bankString,accountString,companyString,company_locString,
                 company_phoneString,checksumString)){
             alert.setContentText("Successful Edited!");
+            try {
+                Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: "+userObject.get("id")+" edited Customer: MJ/C/"+id);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }else {
             alert.setContentText("UnSuccessful try Again!");
         }
         alert.showAndWait();
+    }
+
+    public void getUserDetails(JSONObject jsonObject){
+            userObject = jsonObject;
     }
 }

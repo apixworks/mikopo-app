@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 public class MainWindowController implements Initializable {
     @FXML public BorderPane borderP;
     @FXML public MenuButton profBtn;
+    @FXML public Button btnAdmin;
 
     JSONObject userObject;
 
@@ -109,10 +111,28 @@ public class MainWindowController implements Initializable {
         timeline.play();
     }
 
+    @FXML
+    public void viewAdmin(){
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),ev ->{
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("admin_panel.fxml"));
+                borderP.setCenter(fxmlLoader.load());
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }));
+        timeline.play();
+    }
+
     public void getUserDetails(JSONObject jsonObject){
         try {
             userObject = jsonObject;
             profBtn.setText("Hi! "+jsonObject.get("fname"));
+            if(jsonObject.get("role").equals("admin")){
+                btnAdmin.setVisible(true);
+            }else {
+                btnAdmin.setVisible(false);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

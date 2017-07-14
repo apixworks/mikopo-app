@@ -9,9 +9,12 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -42,6 +45,7 @@ public class EditLoanController implements Initializable{
     DatabaseHandler db;
     BorrowerIDAndName borrowerIDAndName;
     int loan_id;
+    JSONObject userObject;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -152,9 +156,20 @@ public class EditLoanController implements Initializable{
         alert.setHeaderText(null);
         if(db.editLoanDetails(loan_id,propertyId.getText(),propertyName.getText(),desc.getText())){
             alert.setContentText("Successful Edited!");
+            try {
+                Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: "+userObject.get("id")+" edited Loan: MJ/L/"+id);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }else {
             alert.setContentText("UnSuccessful try Again!");
         }
         alert.showAndWait();
+    }
+
+    public void getUserDetails(JSONObject jsonObject){
+        userObject = jsonObject;
     }
 }

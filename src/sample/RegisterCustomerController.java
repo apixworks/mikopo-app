@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.util.Callback;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,10 +26,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by Apix on 21/04/2017.
@@ -85,14 +83,45 @@ public class RegisterCustomerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setUpLoanView();
+        setUpCustomerView();
+    }
+
+    private void setUpCustomerView(){
+
+        final Callback<DatePicker, DateCell> dayCellFactory =
+                new Callback<DatePicker, DateCell>() {
+                    @Override
+                    public DateCell call(final DatePicker datePicker) {
+                        return new DateCell() {
+                            @Override
+                            public void updateItem(LocalDate item, boolean empty) {
+                                super.updateItem(item, empty);
+
+                                if (item.isAfter(LocalDate.now())) {
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
+                            }
+                        };
+                    }
+                };
+        dob.setDayCellFactory(dayCellFactory);
+    }
+
+    private void setUpLoanView(){
         ObservableList<String> options = FXCollections.observableArrayList("Chagua Dhamana","Person","Property","Person&Property");
         dhamanachoice.setValue("Chagua Dhamana");
         dhamanachoice.setItems(options);
         male.setToggleGroup(genderChoice);
         female.setToggleGroup(genderChoice);
 
-       borrower.focusedProperty().addListener(new ChangeListener<Boolean>()
-       {
+        dhamanachoice.valueProperty().addListener((observable1, oldValue1, newValue1) -> {
+            setDhamanaField();
+        });
+
+        borrower.focusedProperty().addListener(new ChangeListener<Boolean>()
+        {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
             {
@@ -102,7 +131,7 @@ public class RegisterCustomerController implements Initializable {
                 }
                 else
                 {
-                   borrowerDialog.setVisible(false);
+                    borrowerDialog.setVisible(false);
                 }
             }
         });
@@ -122,8 +151,6 @@ public class RegisterCustomerController implements Initializable {
                 name.setText(null);
                 id.setText(null);
             }
-
-            //System.out.println("textfield changed from " + oldValue + " to " + newValue);
         });
 
         memberId.focusedProperty().addListener(new ChangeListener<Boolean>()
@@ -159,6 +186,32 @@ public class RegisterCustomerController implements Initializable {
             }
         });
 
+        durationTxtField.textProperty().addListener((observable,oldValue,newValue) -> {
+            checkAmount();
+        });
+
+        amountTxtField.textProperty().addListener((observable,oldValue,newValue) -> {
+            checkAmount();
+        });
+
+        final Callback<DatePicker, DateCell> dayCellFactory =
+                new Callback<DatePicker, DateCell>() {
+                    @Override
+                    public DateCell call(final DatePicker datePicker) {
+                        return new DateCell() {
+                            @Override
+                            public void updateItem(LocalDate item, boolean empty) {
+                                super.updateItem(item, empty);
+
+                                if (item.isAfter(LocalDate.now())) {
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                                }
+                            }
+                        };
+                    }
+                };
+        loanDate.setDayCellFactory(dayCellFactory);
     }
 
     public void registerCustomer(){
@@ -251,16 +304,14 @@ public class RegisterCustomerController implements Initializable {
 
     }
 
-    /**
-     * Needs Editing.
-     */
     public void registerLoan(){
-        Calendar calendar = Calendar.getInstance(Locale.getDefault());
+        //Calendar calendar = Calendar.getInstance(Locale.getDefault());
+        LocalDate localDate = loanDate.getValue();
         String monthEnd;
-        if(calendar.get(Calendar.DAY_OF_MONTH)<18){
-            monthEnd = LocalDate.now().plusMonths(1).withDayOfMonth(1).minusDays(1).toString();
+        if(localDate.getDayOfMonth()<18){
+            monthEnd = localDate.plusMonths(1).withDayOfMonth(1).minusDays(1).toString();
         }else{
-            monthEnd = LocalDate.now().plusMonths(2).withDayOfMonth(1).minusDays(1).toString();
+            monthEnd = localDate.plusMonths(2).withDayOfMonth(1).minusDays(1).toString();
         }
         int l_borrower = Integer.parseInt(borrower.getText());
         int l_amount = Integer.parseInt(amountTxtField.getText());
@@ -318,8 +369,9 @@ public class RegisterCustomerController implements Initializable {
 
     }
 
-    public void checkAmount() {
+    private void checkAmount() {
         try {
+            total = 0;
             double amount = Double.parseDouble(amountTxtField.getText());
             int duration = Integer.parseInt(durationTxtField.getText());
             double p1 = amount;
@@ -343,7 +395,7 @@ public class RegisterCustomerController implements Initializable {
         }
     }
 
-    public void setDhamanaField(){
+    private void setDhamanaField(){
         String dhamana = dhamanachoice.getValue().toString();
         if (dhamana.equals("Person")){
             memberId.setDisable(false);

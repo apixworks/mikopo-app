@@ -18,12 +18,14 @@ import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
  * Created by Apix on 11/05/2017.
  */
-public class ViewRepaymentsController implements Initializable{
+public class ViewRepaymentsController implements Initializable,EventHandler<ActionEvent>{
     @FXML public TableView<Loan> one_month_table;
     @FXML public TableColumn<Loan,String> one_l_no;
     @FXML public TableColumn<Loan,String> one_borrower;
@@ -40,6 +42,8 @@ public class ViewRepaymentsController implements Initializable{
     @FXML public TableColumn<Loan,String> one_amount_rem;
     @FXML public TableColumn<Loan,String> one_status;
     @FXML public TableColumn<Loan,String> one_action;
+    @FXML public Button one_sms_all;
+    @FXML public Button one_edit_sms;
 
     @FXML public TableView<Loan> two_month_table;
     @FXML public TableColumn<Loan,String> two_l_no;
@@ -57,6 +61,8 @@ public class ViewRepaymentsController implements Initializable{
     @FXML public TableColumn<Loan,String> two_amount_rem;
     @FXML public TableColumn<Loan,String> two_status;
     @FXML public TableColumn<Loan,String> two_action;
+    @FXML public Button two_sms_all;
+    @FXML public Button two_edit_sms;
 
     @FXML public TableView<Loan> penalty_table;
     @FXML public TableColumn<Loan,String> penalty_l_no;
@@ -74,6 +80,8 @@ public class ViewRepaymentsController implements Initializable{
     @FXML public TableColumn<Loan,String> penalty_amount_rem;
     @FXML public TableColumn<Loan,String> penalty_status;
     @FXML public TableColumn<Loan,String> penalty_action;
+    @FXML public Button penalty_sms_all;
+    @FXML public Button penalty_edit_sms;
 
     @FXML public TableView<Loan> due_table;
     @FXML public TableColumn<Loan,String> due_l_no;
@@ -101,6 +109,12 @@ public class ViewRepaymentsController implements Initializable{
         initializeOneMonthLate();
         initializeTwoMonthLate();
         initializePenaltyLate();
+        one_sms_all.setOnAction(this);
+        one_edit_sms.setOnAction(this);
+        two_sms_all.setOnAction(this);
+        two_edit_sms.setOnAction(this);
+        penalty_sms_all.setOnAction(this);
+        penalty_edit_sms.setOnAction(this);
     }
 
     public void initializeOneMonthLate(){
@@ -341,7 +355,7 @@ public class ViewRepaymentsController implements Initializable{
                                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                             alert.setTitle("Message Status");
                                             alert.setHeaderText(null);
-                                            if(new SendSMS().sendSms(loan.getL_borrower_phone())){
+                                            if(SendSMS.sendSms(loan.getL_borrower_phone(),1)){
                                                 alert.setContentText("Message has successful been sent");
                                                 try {
                                                     Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+
@@ -467,7 +481,7 @@ public class ViewRepaymentsController implements Initializable{
                                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                             alert.setTitle("Message Status");
                                             alert.setHeaderText(null);
-                                            if(new SendSMS().sendSms(loan.getL_borrower_phone())){
+                                            if(SendSMS.sendSms(loan.getL_borrower_phone(),2)){
                                                 alert.setContentText("Message has successful been sent");
                                                 try {
                                                     Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+
@@ -593,7 +607,7 @@ public class ViewRepaymentsController implements Initializable{
                                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                             alert.setTitle("Message Status");
                                             alert.setHeaderText(null);
-                                            if(new SendSMS().sendSms(loan.getL_borrower_phone())){
+                                            if(SendSMS.sendSms(loan.getL_borrower_phone(),3)){
                                                 alert.setContentText("Message has successful been sent");
                                                 try {
                                                     Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+
@@ -711,4 +725,50 @@ public class ViewRepaymentsController implements Initializable{
         initializeDue();
     }
 
+    @Override
+      public void handle(ActionEvent event) {
+        if(event.getSource()==one_edit_sms){
+            editSms(1);
+        }else if(event.getSource()==one_sms_all){
+            List<String> phone_numbers = new ArrayList<>();
+            for (Loan loan : one_month_table.getItems()) {
+                phone_numbers.add(loan.getL_borrower_phone());
+            }
+            SendSMSMany.sendSms(phone_numbers,1);
+        }else if(event.getSource()==two_edit_sms){
+            editSms(2);
+        }else if(event.getSource()==two_sms_all){
+            List<String> phone_numbers = new ArrayList<>();
+            for (Loan loan : two_month_table.getItems()) {
+                phone_numbers.add(loan.getL_borrower_phone());
+            }
+            SendSMSMany.sendSms(phone_numbers,2);
+        }else if(event.getSource()==penalty_edit_sms){
+            editSms(3);
+        }else if(event.getSource()==penalty_sms_all){
+            List<String> phone_numbers = new ArrayList<>();
+            for (Loan loan : penalty_table.getItems()) {
+                phone_numbers.add(loan.getL_borrower_phone());
+            }
+            SendSMSMany.sendSms(phone_numbers,3);
+        }
+    }
+
+    public void editSms(int id){
+        try {
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sms_edit.fxml"));
+            stage.setTitle("MikopoApp");
+            Scene repaymentScene = new Scene(fxmlLoader.load(),430,285);
+            stage.setScene(repaymentScene);
+            SmsEditController smsEditController = fxmlLoader.<SmsEditController>getController();
+            smsEditController.getId(id);
+            smsEditController.getUserDetails(userObject);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

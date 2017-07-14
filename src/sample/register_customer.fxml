@@ -42,7 +42,6 @@
                                 <Label layoutX="43.0" layoutY="183.0" text="DHAMANA" />
                                 <JFXTextField fx:id="perMonthTxtField" editable="false" focusColor="#d9853b" layoutX="275.0" layoutY="138.0" prefHeight="25.0" prefWidth="193.0" unFocusColor="#74afad" />
                                 <Label layoutX="277.0" layoutY="116.0" text="AMOUNT PER MONTH" />
-                                <Button fx:id="checkBtn" layoutX="535.0" layoutY="143.0" mnemonicParsing="false" onAction="#checkAmount" text="Check" />
                                 <Label id="form_header_text" layoutX="36.0" layoutY="269.0" stylesheets="@Cssfile.css" text="Dhamana Details" />
                                 <Label layoutX="47.0" layoutY="295.0" text="MEMBER ID" />
                                 <JFXTextField fx:id="memberId" focusColor="#d9853b" layoutX="43.0" layoutY="313.0" prefHeight="25.0" prefWidth="180.0" unFocusColor="#74afad" />
@@ -81,7 +80,6 @@
                                     </font>
                                 </Text>
                            <ChoiceBox fx:id="dhamanachoice" layoutX="39.0" layoutY="208.0" prefHeight="25.0" prefWidth="175.0" />
-                           <Button layoutX="229.0" layoutY="208.0" mnemonicParsing="false" onAction="#setDhamanaField" text="Ok" />
                            <Label layoutX="278.0" layoutY="47.0" text="LOAN AMOUNT" />
                            <Label layoutX="530.0" layoutY="48.0" text="DURATION" />
                            <Text fx:id="actionTxt" layoutX="265.0" layoutY="472.0" strokeType="OUTSIDE" strokeWidth="0.0" />
