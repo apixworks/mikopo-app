@@ -2,30 +2,111 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1122.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdminController">
-   <children>
-      <Pane layoutX="19.0" layoutY="36.0" prefHeight="278.0" prefWidth="399.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
-          <Label id="form_header_text" layoutX="73.0" layoutY="22.0" prefHeight="25.0" prefWidth="142.0" stylesheets="@Cssfile.css" text="User Registration" textFill="#554640" />
-          <JFXTextField fx:id="fname" focusColor="#d9853b" layoutX="40.0" layoutY="65.0" prefHeight="25.0" prefWidth="201.0" promptText="First Name" unFocusColor="#74afad" />
-          <JFXTextField fx:id="lname" focusColor="#d9853b" layoutX="36.0" layoutY="104.0" prefHeight="25.0" prefWidth="205.0" promptText="Last Name" unFocusColor="#74afad" />
-          <JFXTextField fx:id="uname" focusColor="#d9853b" layoutX="38.0" layoutY="143.0" prefHeight="25.0" prefWidth="201.0" promptText="Username" unFocusColor="#74afad" />
-         <ChoiceBox fx:id="choiceBox" layoutX="36.0" layoutY="191.0" prefWidth="150.0" />
-         <JFXButton fx:id="submitBtn" buttonType="RAISED" layoutX="119.0" layoutY="232.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="25.0" prefWidth="95.0" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="Submit" textFill="WHITE" />
-      </Pane>
-      <TableView fx:id="user_table" layoutX="514.0" layoutY="36.0" prefHeight="278.0" prefWidth="585.0">
-        <columns>
-          <TableColumn fx:id="user_no" prefWidth="85.0" text="User#" />
-          <TableColumn fx:id="name" prefWidth="142.0" text="Name" />
-          <TableColumn fx:id="role" prefWidth="110.0" text="Role" />
-          <TableColumn fx:id="status" prefWidth="110.0" text="Status" />
-            <TableColumn fx:id="action" prefWidth="135.0" text="Action" />
-        </columns>
-      </TableView>
-   </children>
-</Pane>
+<StackPane fx:id="customer_Stackpane" prefHeight="600.0" prefWidth="1100.0" stylesheets="@Cssfile.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdminController">
+    <children>
+        <TabPane prefHeight="200.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Administrator Tools ">
+                    <content>
+                        <Pane prefHeight="599.0" prefWidth="1100.0" style="-fx-background-color: #ffffff;">
+                            <children>
+                                <Pane layoutX="39.0" layoutY="36.0" prefHeight="278.0" prefWidth="399.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
+                                    <Label id="form_header_text" layoutX="73.0" layoutY="22.0" prefHeight="25.0" prefWidth="142.0" stylesheets="@Cssfile.css" text="User Registration" textFill="#554640" />
+                                    <JFXTextField fx:id="fname" focusColor="#d9853b" layoutX="40.0" layoutY="65.0" prefHeight="25.0" prefWidth="201.0" promptText="First Name" unFocusColor="#74afad" />
+                                    <JFXTextField fx:id="lname" focusColor="#d9853b" layoutX="36.0" layoutY="104.0" prefHeight="25.0" prefWidth="205.0" promptText="Last Name" unFocusColor="#74afad" />
+                                    <JFXTextField fx:id="uname" focusColor="#d9853b" layoutX="38.0" layoutY="143.0" prefHeight="25.0" prefWidth="201.0" promptText="Username" unFocusColor="#74afad" />
+                                    <ChoiceBox fx:id="choiceBox" layoutX="36.0" layoutY="191.0" prefWidth="150.0" />
+                                    <JFXButton fx:id="submitBtn" buttonType="RAISED" layoutX="119.0" layoutY="232.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="25.0" prefWidth="95.0" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="Submit" textFill="WHITE" />
+                                </Pane>
+                                <Pane layoutX="111.0" layoutY="372.0" prefHeight="188.0" prefWidth="270.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
+                                    <Label id="form_header_text" layoutX="73.0" layoutY="22.0" prefHeight="25.0" prefWidth="142.0" stylesheets="@Cssfile.css" text="Rate Value" textFill="#554640" />
+                                    <JFXTextField fx:id="rate" focusColor="#d9853b" layoutX="40.0" layoutY="65.0" prefHeight="25.0" prefWidth="201.0" promptText="interest rate" unFocusColor="#74afad" />
+                                    <JFXButton fx:id="rateBtn" buttonType="RAISED" layoutX="89.0" layoutY="128.0" mnemonicParsing="false" onAction="#changeInterest" prefHeight="25.0" prefWidth="95.0" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="Change" textFill="WHITE" />
+                                </Pane>
+                                <Pane layoutX="541.0" layoutY="372.0" prefHeight="218.0" prefWidth="387.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
+                                    <Label id="form_header_text" layoutX="103.0" layoutY="22.0" prefHeight="25.0" prefWidth="142.0" stylesheets="@Cssfile.css" text="SMS Center" textFill="#554640" />
+                                    <JFXTextField fx:id="smsTxt" focusColor="#d9853b" layoutX="40.0" layoutY="55.0" prefHeight="95.0" prefWidth="312.0" promptText="Message to send.." unFocusColor="#74afad" />
+                                    <JFXButton fx:id="smsBtn" buttonType="RAISED" layoutX="147.0" layoutY="168.0" mnemonicParsing="false" onAction="#sendSMS" prefHeight="25.0" prefWidth="95.0" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="Send" textFill="WHITE" />
+                                </Pane>
+                                <TableView fx:id="user_table" layoutX="534.0" layoutY="36.0" prefHeight="278.0" prefWidth="585.0">
+                                    <columns>
+                                        <TableColumn fx:id="user_no" prefWidth="85.0" text="User#" />
+                                        <TableColumn fx:id="name" prefWidth="142.0" text="Name" />
+                                        <TableColumn fx:id="role" prefWidth="110.0" text="Role" />
+                                        <TableColumn fx:id="status" prefWidth="110.0" text="Status" />
+                                        <TableColumn fx:id="action" prefWidth="135.0" text="Action" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </Pane>
+                    </content>
+                </Tab>
+                <Tab fx:id="Loan_Release" style="-fx-alignment: center" text="Loan Released-Month ">
+                    <content>
+                        <VBox prefHeight="-Infinity">
+                            <children>
+                                <HBox alignment="CENTER_RIGHT" prefHeight="30.0" spacing="5">
+                                    <padding><Insets right="10" /></padding>
+                                    <Label text="Enter Month :" />
+                                    <TextField fx:id="searchmonth" />
+                                    <!--ChoiceBox fx:id="searchChoice"/-->
+                                    <Button fx:id="searcBtn" onAction="#Search_Month" text="search" />
+                                    <Button fx:id="refreshBtn" onAction="#Search_refresh" text="Refresh" />
+                                    <Button fx:id="ViewBtn" onAction="#ViewReport_of_loanRelease_Summary" style="-fx-background-color:  #74AFAD; -fx-alignment: center-right;" text="Report Monthly- Statistics" textFill="White" />
+                                    <!--<ChoiceBox fx:id="PrintChoice"/>-->
+                                    <!--<Button fx:id="ViewBtn" onAction="#ViewReport_Summary" text="Report Monthy- Summary" textFill="White" style="-fx-background-color:  #74AFAD; -fx-alignment: center-right;" />-->
+                                    <Button fx:id="printsDetails" onAction="#PrintDetailsLoans" style="-fx-background-color:  #D9853B; -fx-alignment: center-right;" text="Print" textFill="White" />
+                                </HBox>
+                                <TableView fx:id="loanTable" prefHeight="1000" prefWidth="200.0" style="-fx-text-alignment: center" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="S_No" prefWidth="120.99998474121094" text="S/no" />
+                                        <TableColumn fx:id="ldate" prefWidth="120.99998474121094" text="Date" />
+                                        <TableColumn fx:id="lamount" prefWidth="204.0" text="Amount" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab fx:id="RepaymentStatistics" text="Repayment Collected-Month">
+                    <content>
+                        <VBox prefHeight="-Infinity">
+                            <children>
+                                <HBox alignment="CENTER_RIGHT" prefHeight="30.0" spacing="5">
+                                    <padding><Insets right="10" /></padding>
+                                    <Label text="Enter Month :" />
+                                    <TextField fx:id="monthrepaysearch" />
+                                    <Button fx:id="searchmonthBtn" onAction="#SearchRepayment_Month" text="search" />
+                                    <Button fx:id="refreshBt" onAction="#Searchrepayment_refresh" text="Refresh" />
+                                    <Button fx:id="ViewstatBtn" onAction="#ViewReport_Repayment" style="-fx-background-color:  #74AFAD; -fx-alignment: center-right;" text="Report Monthly- Statistics" textFill="White" />
+                                    <Button fx:id="printReDetails" onAction="#PrintDetailsRepayment" style="-fx-background-color:  #D9853B; -fx-alignment: center-right;" text="Print" textFill="White" />
+                                </HBox>
+                                <TableView fx:id="repayment_table" prefHeight="1000" prefWidth="200.0" style="-fx-text-alignment: center" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="R_No" prefWidth="120.99998474121094" text="S/no" />
+                                        <TableColumn fx:id="Rdate" prefWidth="175.0" text="Date" />
+                                        <TableColumn fx:id="Ramount" prefWidth="161.0" text="Amount" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</StackPane>

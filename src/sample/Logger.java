@@ -8,7 +8,8 @@ import java.text.*;
 import java.util.*;
 
 public class Logger {
-    protected static String defaultLogFile = "E:\\MJsyslog.txt";
+    //protected static String defaultLogFile = "E:\\MJsyslog.txt";
+    protected static String defaultLogFile = "C:\\mikopo\\MJsyslog.txt";
 
     public static void write(String s) throws IOException {
         write(defaultLogFile, s);

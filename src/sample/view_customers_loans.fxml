@@ -47,8 +47,9 @@
                                          <TableColumn fx:id="per_month" prefWidth="20.0" text="Per_Month" />
                                          <TableColumn fx:id="due" prefWidth="75.0" text="Due" />
                                          <TableColumn fx:id="last_paymonth" prefWidth="75.0" text="LastPay_Date" />
-                                         <TableColumn fx:id="amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
                                          <TableColumn fx:id="last_pay" prefWidth="75.0" text="Last_Payment" />
+                                         <TableColumn fx:id="amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
+                                         <TableColumn fx:id="fine" prefWidth="75.0" text="Fine_Payment" />
                                          <TableColumn fx:id="amount_rem" prefWidth="75.0" text="Amount_Remaining" />
                                          <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
                                          <TableColumn fx:id="l_action" prefWidth="75.0" text="Action" />

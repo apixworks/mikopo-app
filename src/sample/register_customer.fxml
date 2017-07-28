@@ -27,61 +27,57 @@
                 <content>
                     <Pane style="-fx-background-color: #ffffff;">
                         <children>
-                            <Text fill="#554640" layoutX="256.0" layoutY="34.0" text="Register Loan" textAlignment="CENTER" wrappingWidth="359.13671875">
-                                <font>
-                                    <Font size="23.0" />
-                                </font></Text>
-                            <Pane layoutX="120.0" layoutY="40.0" prefHeight="531.0" prefWidth="929.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
-                                <Label id="form_header_text" layoutX="29.0" layoutY="25.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@Cssfile.css" text="Loan Details" textFill="#554640" />
-                                <Label layoutX="40.0" layoutY="49.0" text="BORROWER" />
-                                <JFXTextField fx:id="borrower" focusColor="#d9853b" layoutX="40.0" layoutY="66.0" prefHeight="25.0" prefWidth="171.0" promptText="Borrower Number" unFocusColor="#74afad" />
-                                <JFXTextField fx:id="amountTxtField" focusColor="#d9853b" layoutX="274.0" layoutY="66.0" prefHeight="25.0" prefWidth="179.0" unFocusColor="#74afad" />
-                                <JFXTextField fx:id="durationTxtField" focusColor="#d9853b" layoutX="531.0" layoutY="66.0" promptText="In months" unFocusColor="#74afad" />
-                                <Label layoutX="40.0" layoutY="118.0" text="DATE OF LOAN" />
-                                <JFXDatePicker fx:id="loanDate" layoutX="40.0" layoutY="136.0" promptText="DD/MM/YYYY" />
-                                <Label layoutX="43.0" layoutY="183.0" text="DHAMANA" />
-                                <JFXTextField fx:id="perMonthTxtField" editable="false" focusColor="#d9853b" layoutX="275.0" layoutY="138.0" prefHeight="25.0" prefWidth="193.0" unFocusColor="#74afad" />
-                                <Label layoutX="277.0" layoutY="116.0" text="AMOUNT PER MONTH" />
-                                <Label id="form_header_text" layoutX="36.0" layoutY="269.0" stylesheets="@Cssfile.css" text="Dhamana Details" />
-                                <Label layoutX="47.0" layoutY="295.0" text="MEMBER ID" />
-                                <JFXTextField fx:id="memberId" focusColor="#d9853b" layoutX="43.0" layoutY="313.0" prefHeight="25.0" prefWidth="180.0" unFocusColor="#74afad" />
-                                <Label layoutX="281.0" layoutY="295.0" text="PROPERTY ID" />
-                                <JFXTextField fx:id="propertyId" focusColor="#d9853b" layoutX="278.0" layoutY="313.0" prefHeight="25.0" prefWidth="188.0" unFocusColor="#74afad" />
-                                <Label layoutX="531.0" layoutY="295.0" text="PROPERTY NAME" />
-                                <JFXTextField fx:id="propertyName" focusColor="#d9853b" layoutX="531.0" layoutY="313.0" prefHeight="25.0" prefWidth="221.0" unFocusColor="#74afad" />
-                                <Label layoutX="45.0" layoutY="391.0" text="DESCRIPTION:" />
-                                <JFXTextArea fx:id="desc" focusColor="#d9853b" layoutX="168.0" layoutY="369.0" prefHeight="67.0" prefWidth="588.0" unFocusColor="#74afad" />
-                                <Label layoutX="47.0" layoutY="449.0" text="LOAN FILES&#10;(doc, pdf, image)" />
-                                <Button layoutX="170.0" layoutY="455.0" mnemonicParsing="false" onAction="#chooseLoanFiles" prefHeight="25.0" prefWidth="84.0" text="Choose Files" />
-                                <JFXButton fx:id="next2Btn" buttonType="RAISED" layoutX="396.0" layoutY="492.0" mnemonicParsing="false" onAction="#registerLoan" prefHeight="25.0" prefWidth="107.0" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="Done" textFill="WHITE" />
-                                <Text Fill="RED" layoutX="110.0" layoutY="63.0" text="*">
+                            <Pane layoutX="120.0" layoutY="10.0" prefHeight="531.0" prefWidth="929.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
+                                <Label id="form_header_text" layoutX="29.0" layoutY="23.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@Cssfile.css" text="Loan Details" textFill="#554640" />
+                                <Label layoutX="40.0" layoutY="47.0" text="BORROWER" />
+                                <JFXTextField fx:id="borrower" focusColor="#d9853b" layoutX="40.0" layoutY="64.0" prefHeight="25.0" prefWidth="171.0" promptText="Borrower Number" unFocusColor="#74afad" />
+                                <JFXTextField fx:id="amountTxtField" focusColor="#d9853b" layoutX="274.0" layoutY="64.0" prefHeight="25.0" prefWidth="179.0" unFocusColor="#74afad" />
+                                <JFXTextField fx:id="durationTxtField" focusColor="#d9853b" layoutX="531.0" layoutY="64.0" promptText="In months" unFocusColor="#74afad" />
+                                <Label layoutX="40.0" layoutY="116.0" text="DATE OF LOAN" />
+                                <JFXDatePicker fx:id="loanDate" layoutX="40.0" layoutY="134.0" promptText="DD/MM/YYYY" />
+                                <Label layoutX="43.0" layoutY="181.0" text="DHAMANA" />
+                                <JFXTextField fx:id="perMonthTxtField" editable="false" focusColor="#d9853b" layoutX="275.0" layoutY="136.0" prefHeight="25.0" prefWidth="193.0" unFocusColor="#74afad" />
+                                <Label layoutX="277.0" layoutY="114.0" text="AMOUNT PER MONTH" />
+                                <Label id="form_header_text" layoutX="36.0" layoutY="267.0" stylesheets="@Cssfile.css" text="Dhamana Details" />
+                                <Label layoutX="47.0" layoutY="293.0" text="MEMBER ID" />
+                                <JFXTextField fx:id="memberId" focusColor="#d9853b" layoutX="43.0" layoutY="311.0" prefHeight="25.0" prefWidth="180.0" unFocusColor="#74afad" />
+                                <Label layoutX="281.0" layoutY="293.0" text="PROPERTY ID" />
+                                <JFXTextField fx:id="propertyId" focusColor="#d9853b" layoutX="278.0" layoutY="311.0" prefHeight="25.0" prefWidth="188.0" unFocusColor="#74afad" />
+                                <Label layoutX="531.0" layoutY="293.0" text="PROPERTY NAME" />
+                                <JFXTextField fx:id="propertyName" focusColor="#d9853b" layoutX="531.0" layoutY="311.0" prefHeight="25.0" prefWidth="221.0" unFocusColor="#74afad" />
+                                <Label layoutX="45.0" layoutY="386.0" text="DESCRIPTION:" />
+                                <JFXTextArea fx:id="desc" focusColor="#d9853b" layoutX="168.0" layoutY="364.0" prefHeight="67.0" prefWidth="588.0" unFocusColor="#74afad" />
+                                <Label layoutX="47.0" layoutY="445.0" text="LOAN FILES&#10;(doc, pdf, image)" />
+                                <Button layoutX="170.0" layoutY="451.0" mnemonicParsing="false" onAction="#chooseLoanFiles" prefHeight="25.0" prefWidth="84.0" text="Choose Files" />
+                                <JFXButton fx:id="next2Btn" buttonType="RAISED" layoutX="396.0" layoutY="486.0" mnemonicParsing="false" onAction="#registerLoan" prefHeight="25.0" prefWidth="107.0" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="Done" textFill="WHITE" />
+                                <Text Fill="RED" layoutX="110.0" layoutY="61.0" text="*">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
                                 </Text>
-                                <Text Fill="RED" layoutX="598.0" layoutY="62.0" text="*">
+                                <Text Fill="RED" layoutX="598.0" layoutY="60.0" text="*">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
                                 </Text>
-                                <Text Fill="RED" layoutX="126.0" layoutY="131.0" text="*">
+                                <Text Fill="RED" layoutX="126.0" layoutY="129.0" text="*">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
                                 </Text>
-                                <Text Fill="RED" layoutX="371.0" layoutY="61.0" text="*">
+                                <Text Fill="RED" layoutX="371.0" layoutY="59.0" text="*">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
                                 </Text>
-                                <Text Fill="RED" layoutX="108.0" layoutY="197.0" text="*">
+                                <Text Fill="RED" layoutX="108.0" layoutY="195.0" text="*">
                                     <font>
                                         <Font size="15.0" />
                                     </font>
                                 </Text>
-                           <ChoiceBox fx:id="dhamanachoice" layoutX="39.0" layoutY="208.0" prefHeight="25.0" prefWidth="175.0" />
-                           <Label layoutX="278.0" layoutY="47.0" text="LOAN AMOUNT" />
-                           <Label layoutX="530.0" layoutY="48.0" text="DURATION" />
+                           <ChoiceBox fx:id="dhamanachoice" layoutX="39.0" layoutY="206.0" prefHeight="25.0" prefWidth="175.0" />
+                           <Label layoutX="278.0" layoutY="45.0" text="LOAN AMOUNT" />
+                           <Label layoutX="530.0" layoutY="46.0" text="DURATION" />
                            <Text fx:id="actionTxt" layoutX="265.0" layoutY="472.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                            <JFXDialogLayout fx:id="borrowerDialog" layoutX="37.0" layoutY="98.0" prefHeight="82.0" prefWidth="418.0" style="-fx-background-color: #FFFFFF;" visible="false">
                               <children>
@@ -137,66 +133,62 @@
             <content>
                 <Pane style="-fx-background-color: #ffffff;">
                      <children>
-                         <Text fill="#554640" layoutX="256.0" layoutY="34.0" text="Customer Registration" textAlignment="CENTER" wrappingWidth="359.13671875">
-                           <font>
-                              <Font size="23.0" />
-                           </font></Text>
-                        <Pane layoutX="120.0" layoutY="40.0" prefHeight="531.0" prefWidth="978.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
-                            <Label id="form_header_text" layoutX="29.0" layoutY="25.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@Cssfile.css" text="Personal Information" textFill="#554640" />
-                            <Label layoutX="40.0" layoutY="49.0" text="NAME" />
-                           <JFXTextField fx:id="fname" focusColor="#d9853b" layoutX="40.0" layoutY="65.0" promptText="First Name" unFocusColor="#74afad" />
-                           <JFXTextField fx:id="mname" focusColor="#d9853b" layoutX="294.0" layoutY="65.0" prefHeight="25.0" prefWidth="205.0" promptText="Middle Name" unFocusColor="#74afad" />
-                           <JFXTextField fx:id="lname" focusColor="#d9853b" layoutX="566.0" layoutY="65.0" prefHeight="25.0" prefWidth="201.0" promptText="Last Name" unFocusColor="#74afad" />
-                           <Label layoutX="40.0" layoutY="119.0" text="GENDER" />
-                           <Label layoutX="294.0" layoutY="119.0" text="DATE OF BIRTH" />
-                           <JFXDatePicker fx:id="dob" defaultColor="#558c89" layoutX="294.0" layoutY="139.0" promptText="DD/MM/YYYY" />
-                           <JFXRadioButton fx:id="male" layoutX="41.0" layoutY="147.0" mnemonicParsing="false" selectedColor="#558C89" text="Male" />
-                           <JFXRadioButton fx:id="female" layoutX="108.0" layoutY="147.0" mnemonicParsing="false" selectedColor="#558C89" text="Female" />
-                           <Label layoutX="44.0" layoutY="192.0" text="PHONE NUMBER" />
-                           <JFXTextField fx:id="phone" focusColor="#d9853b" layoutX="40.0" layoutY="208.0" promptText="eg. 255655876549" unFocusColor="#74afad" />
-                           <Label layoutX="295.0" layoutY="191.0" text="EMAIL" />
-                           <JFXTextField fx:id="email" focusColor="#d9853b" layoutX="295.0" layoutY="208.0" prefHeight="25.0" prefWidth="210.0" unFocusColor="#74afad" />
-                           <Label layoutX="566.0" layoutY="192.0" text="POSTAL ADDRESS" />
-                           <JFXTextField fx:id="postal" focusColor="#d9853b" layoutX="567.0" layoutY="208.0" prefHeight="25.0" prefWidth="198.0" unFocusColor="#74afad" />
-                           <Label layoutX="565.0" layoutY="119.0" text="BORROWER PHOTO" />
-                           <Button layoutX="565.0" layoutY="143.0" mnemonicParsing="false" onAction="#chooseImg" text="Choose Photo" />
+                        <Pane layoutX="120.0" layoutY="10.0" prefHeight="531.0" prefWidth="978.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
+                            <Label id="form_header_text" layoutX="29.0" layoutY="22.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@Cssfile.css" text="Personal Information" textFill="#554640" />
+                            <Label layoutX="40.0" layoutY="46.0" text="NAME" />
+                           <JFXTextField fx:id="fname" focusColor="#d9853b" layoutX="40.0" layoutY="62.0" promptText="First Name" unFocusColor="#74afad" />
+                           <JFXTextField fx:id="mname" focusColor="#d9853b" layoutX="294.0" layoutY="62.0" prefHeight="25.0" prefWidth="205.0" promptText="Middle Name" unFocusColor="#74afad" />
+                           <JFXTextField fx:id="lname" focusColor="#d9853b" layoutX="566.0" layoutY="62.0" prefHeight="25.0" prefWidth="201.0" promptText="Last Name" unFocusColor="#74afad" />
+                           <Label layoutX="40.0" layoutY="116.0" text="GENDER" />
+                           <Label layoutX="294.0" layoutY="116.0" text="DATE OF BIRTH" />
+                           <JFXDatePicker fx:id="dob" defaultColor="#558c89" layoutX="294.0" layoutY="136.0" promptText="DD/MM/YYYY" />
+                           <JFXRadioButton fx:id="male" layoutX="41.0" layoutY="144.0" mnemonicParsing="false" selectedColor="#558C89" text="Male" />
+                           <JFXRadioButton fx:id="female" layoutX="108.0" layoutY="144.0" mnemonicParsing="false" selectedColor="#558C89" text="Female" />
+                           <Label layoutX="44.0" layoutY="189.0" text="PHONE NUMBER" />
+                           <JFXTextField fx:id="phone" focusColor="#d9853b" layoutX="40.0" layoutY="205.0" promptText="eg. 255655876549" text="255-" unFocusColor="#74afad" />
+                           <Label layoutX="295.0" layoutY="188.0" text="EMAIL" />
+                           <JFXTextField fx:id="email" focusColor="#d9853b" layoutX="295.0" layoutY="205.0" prefHeight="25.0" prefWidth="210.0" unFocusColor="#74afad" />
+                           <Label layoutX="566.0" layoutY="189.0" text="POSTAL ADDRESS" />
+                           <JFXTextField fx:id="postal" focusColor="#d9853b" layoutX="567.0" layoutY="205.0" prefHeight="25.0" prefWidth="198.0" unFocusColor="#74afad" />
+                           <Label layoutX="565.0" layoutY="116.0" text="BORROWER PHOTO" />
+                           <Button layoutX="565.0" layoutY="140.0" mnemonicParsing="false" onAction="#chooseImg" text="Choose Photo" />
                            <Text fx:id="photoBtnTxt" layoutX="666.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                           <Label id="form_header_text" layoutX="36.0" layoutY="269.0" stylesheets="@Cssfile.css" text="Bank Information" />
-                           <Label layoutX="47.0" layoutY="295.0" text="BANK" />
-                           <JFXTextField fx:id="bank" focusColor="#d9853b" layoutX="43.0" layoutY="312.0" prefHeight="25.0" prefWidth="180.0" unFocusColor="#74afad" />
-                           <Label layoutX="295.0" layoutY="295.0" text="ACCOUNT NUMBER" />
-                           <JFXTextField fx:id="account_no" focusColor="#d9853b" layoutX="296.0" layoutY="312.0" prefHeight="25.0" prefWidth="227.0" unFocusColor="#74afad" />
-                           <Label id="form_header_text" layoutX="37.0" layoutY="375.0" stylesheets="@Cssfile.css" text="Working Details" />
-                           <Label layoutX="50.0" layoutY="406.0" text="COMPANY NAME" />
-                           <JFXTextField fx:id="company_name" focusColor="#d9853b" layoutX="45.0" layoutY="426.0" prefHeight="25.0" prefWidth="201.0" unFocusColor="#74afad" />
-                           <Label layoutX="320.0" layoutY="406.0" text="COMPANY LOCATION" />
-                           <JFXTextField fx:id="company_loc" focusColor="#d9853b" layoutX="322.0" layoutY="426.0" unFocusColor="#74afad" />
-                           <Label layoutX="509.0" layoutY="406.0" text="COMPANY PHONE" />
-                           <JFXTextField fx:id="company_phone" focusColor="#d9853b" layoutX="509.0" layoutY="426.0" promptText="eg. 255678439326" unFocusColor="#74afad" />
-                           <Label layoutX="712.0" layoutY="406.0" text="CHECK NUMBER" />
-                           <JFXTextField fx:id="checksum" focusColor="#d9853b" layoutX="712.0" layoutY="426.0" unFocusColor="#74afad" />
-                           <JFXButton fx:id="submitBtn" buttonType="RAISED" layoutX="396.0" layoutY="492.0" mnemonicParsing="false" onAction="#registerCustomer" prefHeight="25.0" prefWidth="107.0" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="Submit" textFill="WHITE" />
-                           <Text Fill="RED" layoutX="76.0" layoutY="63.0" text="*">
+                           <Label id="form_header_text" layoutX="36.0" layoutY="266.0" stylesheets="@Cssfile.css" text="Bank Information" />
+                           <Label layoutX="47.0" layoutY="292.0" text="BANK" />
+                           <JFXTextField fx:id="bank" focusColor="#d9853b" layoutX="43.0" layoutY="309.0" prefHeight="25.0" prefWidth="180.0" unFocusColor="#74afad" />
+                           <Label layoutX="295.0" layoutY="292.0" text="ACCOUNT NUMBER" />
+                           <JFXTextField fx:id="account_no" focusColor="#d9853b" layoutX="296.0" layoutY="309.0" prefHeight="25.0" prefWidth="227.0" unFocusColor="#74afad" />
+                           <Label id="form_header_text" layoutX="37.0" layoutY="372.0" stylesheets="@Cssfile.css" text="Working Details" />
+                           <Label layoutX="50.0" layoutY="403.0" text="COMPANY NAME" />
+                           <JFXTextField fx:id="company_name" focusColor="#d9853b" layoutX="45.0" layoutY="423.0" prefHeight="25.0" prefWidth="201.0" unFocusColor="#74afad" />
+                           <Label layoutX="320.0" layoutY="403.0" text="COMPANY LOCATION" />
+                           <JFXTextField fx:id="company_loc" focusColor="#d9853b" layoutX="322.0" layoutY="423.0" unFocusColor="#74afad" />
+                           <Label layoutX="509.0" layoutY="403.0" text="COMPANY PHONE" />
+                           <JFXTextField fx:id="company_phone" focusColor="#d9853b" layoutX="509.0" layoutY="423.0" promptText="eg. 255678439326" unFocusColor="#74afad" />
+                           <Label layoutX="712.0" layoutY="403.0" text="CHECK NUMBER" />
+                           <JFXTextField fx:id="checksum" focusColor="#d9853b" layoutX="712.0" layoutY="423.0" unFocusColor="#74afad" />
+                           <JFXButton fx:id="submitBtn" buttonType="RAISED" layoutX="396.0" layoutY="486.0" mnemonicParsing="false" onAction="#registerCustomer" prefHeight="25.0" prefWidth="107.0" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="Submit" textFill="WHITE" />
+                           <Text Fill="RED" layoutX="76.0" layoutY="60.0" text="*">
                               <font>
                                  <Font size="15.0" />
                               </font>
                            </Text>
-                           <Text Fill="RED" layoutX="89.0" layoutY="133.0" text="*">
+                           <Text Fill="RED" layoutX="89.0" layoutY="130.0" text="*">
                               <font>
                                  <Font size="15.0" />
                               </font>
                            </Text>
-                           <Text Fill="RED" layoutX="385.0" layoutY="132.0" text="*">
+                           <Text Fill="RED" layoutX="385.0" layoutY="129.0" text="*">
                               <font>
                                  <Font size="15.0" />
                               </font>
                            </Text>
-                           <Text Fill="RED" layoutX="678.0" layoutY="132.0" text="*">
+                           <Text Fill="RED" layoutX="678.0" layoutY="129.0" text="*">
                               <font>
                                  <Font size="15.0" />
                               </font>
                            </Text>
-                           <Text Fill="RED" layoutX="141.0" layoutY="205.0" text="*">
+                           <Text Fill="RED" layoutX="141.0" layoutY="202.0" text="*">
                               <font>
                                  <Font size="15.0" />
                               </font>

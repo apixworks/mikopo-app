@@ -18,6 +18,8 @@ import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -39,6 +41,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
     @FXML public TableColumn<Loan,String> one_last_paymonth;
     @FXML public TableColumn<Loan,String> one_amount_paid;
     @FXML public TableColumn<Loan,String> one_last_pay;
+    @FXML public TableColumn<Loan,String> one_fine;
     @FXML public TableColumn<Loan,String> one_amount_rem;
     @FXML public TableColumn<Loan,String> one_status;
     @FXML public TableColumn<Loan,String> one_action;
@@ -58,6 +61,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
     @FXML public TableColumn<Loan,String> two_last_paymonth;
     @FXML public TableColumn<Loan,String> two_amount_paid;
     @FXML public TableColumn<Loan,String> two_last_pay;
+    @FXML public TableColumn<Loan,String> two_fine;
     @FXML public TableColumn<Loan,String> two_amount_rem;
     @FXML public TableColumn<Loan,String> two_status;
     @FXML public TableColumn<Loan,String> two_action;
@@ -77,6 +81,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
     @FXML public TableColumn<Loan,String> penalty_last_paymonth;
     @FXML public TableColumn<Loan,String> penalty_amount_paid;
     @FXML public TableColumn<Loan,String> penalty_last_pay;
+    @FXML public TableColumn<Loan,String> penalty_fine;
     @FXML public TableColumn<Loan,String> penalty_amount_rem;
     @FXML public TableColumn<Loan,String> penalty_status;
     @FXML public TableColumn<Loan,String> penalty_action;
@@ -96,6 +101,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
     @FXML public TableColumn<Loan,String> due_last_paymonth;
     @FXML public TableColumn<Loan,String> due_amount_paid;
     @FXML public TableColumn<Loan,String> due_last_pay;
+    @FXML public TableColumn<Loan,String> due_fine;
     @FXML public TableColumn<Loan,String> due_amount_rem;
     @FXML public TableColumn<Loan,String> due_status;
     @FXML public TableColumn<Loan,String> due_action;
@@ -130,6 +136,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
         one_last_paymonth.setCellValueFactory(new PropertyValueFactory<>("last_paymonth"));
         one_amount_paid.setCellValueFactory(new PropertyValueFactory<>("amount_paid"));
         one_last_pay.setCellValueFactory(new PropertyValueFactory<>("last_pay"));
+        one_fine.setCellValueFactory(new PropertyValueFactory<>("fine"));
         one_amount_rem.setCellValueFactory(new PropertyValueFactory<>("amount_rem"));
         one_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         one_action.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
@@ -154,6 +161,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
         two_last_paymonth.setCellValueFactory(new PropertyValueFactory<>("last_paymonth"));
         two_amount_paid.setCellValueFactory(new PropertyValueFactory<>("amount_paid"));
         two_last_pay.setCellValueFactory(new PropertyValueFactory<>("last_pay"));
+        two_fine.setCellValueFactory(new PropertyValueFactory<>("fine"));
         two_amount_rem.setCellValueFactory(new PropertyValueFactory<>("amount_rem"));
         two_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         two_action.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
@@ -178,6 +186,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
         penalty_last_paymonth.setCellValueFactory(new PropertyValueFactory<>("last_paymonth"));
         penalty_amount_paid.setCellValueFactory(new PropertyValueFactory<>("amount_paid"));
         penalty_last_pay.setCellValueFactory(new PropertyValueFactory<>("last_pay"));
+        penalty_fine.setCellValueFactory(new PropertyValueFactory<>("fine"));
         penalty_amount_rem.setCellValueFactory(new PropertyValueFactory<>("amount_rem"));
         penalty_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         penalty_action.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
@@ -202,6 +211,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
         due_last_paymonth.setCellValueFactory(new PropertyValueFactory<>("last_paymonth"));
         due_amount_paid.setCellValueFactory(new PropertyValueFactory<>("amount_paid"));
         due_last_pay.setCellValueFactory(new PropertyValueFactory<>("last_pay"));
+        due_fine.setCellValueFactory(new PropertyValueFactory<>("fine"));
         due_amount_rem.setCellValueFactory(new PropertyValueFactory<>("amount_rem"));
         due_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         due_action.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
@@ -213,16 +223,21 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
         due_table.setItems(db.loadDueLoans());
     }
 
-    public void repaymentForm(String loanId,String name){
+    public void repaymentForm(String loanId,String name,String amount,String month,String perMonth){
+        String[] amont = amount.split(",");
+        String amounter = "";
+        for(int i=0;i<amont.length;i++){
+            amounter = amounter + amont[i];
+        }
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("repayment_form.fxml"));
             stage.setTitle("MikopoApp");
-            Scene repaymentScene = new Scene(fxmlLoader.load(),600,350);
+            Scene repaymentScene = new Scene(fxmlLoader.load(),600,400);
             stage.setScene(repaymentScene);
             RepaymentFormController repaymentFormController = fxmlLoader.<RepaymentFormController>getController();
-            repaymentFormController.getLoanDetails(loanId,name);
+            repaymentFormController.getLoanDetails(loanId,name,perMonth,Integer.parseInt(amounter),month);
             repaymentFormController.getUserDetails(userObject);
             stage.show();
         } catch (IOException e) {
@@ -250,7 +265,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                                         public void handle(ActionEvent event) {
                                             Loan loan = getTableView().getItems().get(getIndex());
                                             // System.out.println(loan.getL_borrower_phone());
-                                            repaymentForm(loan.getL_no(),loan.getL_borrower());
+                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(), LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month());
                                         }
                                     });
                                     HBox hBox = new HBox();
@@ -329,6 +344,45 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                 };
             }
         });
+
+        due_fine.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            if(!item.equals("0.0"))
+                                this.setStyle("-fx-text-fill: red;");
+                            setText(item);
+                        }
+                    }
+                };
+            }
+        });
+
+        due_due.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            Loan loan = getTableView().getItems().get(getIndex());
+                            if(loan.getStatus().equals("done")){
+                                setText("done");
+                            }else{
+                                setText(item);
+                            }
+                        }
+                    }
+                };
+            }
+        });
     }
 
     public void setUpOneMonthLate(){
@@ -376,7 +430,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                                         public void handle(ActionEvent event) {
                                             Loan loan = getTableView().getItems().get(getIndex());
                                             // System.out.println(loan.getL_borrower_phone());
-                                            repaymentForm(loan.getL_no(),loan.getL_borrower());
+                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month());
                                         }
                                     });
                                     HBox hBox = new HBox();
@@ -455,6 +509,45 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                 };
             }
         });
+
+        one_fine.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            if(!item.equals("0.0"))
+                                this.setStyle("-fx-text-fill: red;");
+                            setText(item);
+                        }
+                    }
+                };
+            }
+        });
+
+        one_due.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            Loan loan = getTableView().getItems().get(getIndex());
+                            if(loan.getStatus().equals("done")){
+                                setText("done");
+                            }else{
+                                setText(item);
+                            }
+                        }
+                    }
+                };
+            }
+        });
     }
 
     public void setUpTwoMonthLate(){
@@ -502,7 +595,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                                         public void handle(ActionEvent event) {
                                             Loan loan = getTableView().getItems().get(getIndex());
                                             // System.out.println(loan.getL_borrower_phone());
-                                            repaymentForm(loan.getL_no(),loan.getL_borrower());
+                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month());
                                         }
                                     });
                                     HBox hBox = new HBox();
@@ -581,6 +674,45 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                 };
             }
         });
+
+        two_fine.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            if(!item.equals("0.0"))
+                                this.setStyle("-fx-text-fill: red;");
+                            setText(item);
+                        }
+                    }
+                };
+            }
+        });
+
+        two_due.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            Loan loan = getTableView().getItems().get(getIndex());
+                            if(loan.getStatus().equals("done")){
+                                setText("done");
+                            }else{
+                                setText(item);
+                            }
+                        }
+                    }
+                };
+            }
+        });
     }
 
     public void setUpPenaltyLate(){
@@ -628,7 +760,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                                         public void handle(ActionEvent event) {
                                             Loan loan = getTableView().getItems().get(getIndex());
                                             // System.out.println(loan.getL_borrower_phone());
-                                            repaymentForm(loan.getL_no(),loan.getL_borrower());
+                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month());
                                         }
                                     });
                                     HBox hBox = new HBox();
@@ -707,6 +839,45 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                 };
             }
         });
+
+        penalty_fine.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            if(!item.equals("0.0"))
+                                this.setStyle("-fx-text-fill: red;");
+                            setText(item);
+                        }
+                    }
+                };
+            }
+        });
+
+        penalty_due.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            Loan loan = getTableView().getItems().get(getIndex());
+                            if(loan.getStatus().equals("done")){
+                                setText("done");
+                            }else{
+                                setText(item);
+                            }
+                        }
+                    }
+                };
+            }
+        });
     }
 
     public void getUserDetails(JSONObject jsonObject){
@@ -734,7 +905,15 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
             for (Loan loan : one_month_table.getItems()) {
                 phone_numbers.add(loan.getL_borrower_phone());
             }
-            SendSMSMany.sendSms(phone_numbers,1);
+            if(phone_numbers.size()>0){
+                SendSMSMany.sendSms(phone_numbers,1,null);
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("There are no late customers!");
+                alert.showAndWait();
+            }
         }else if(event.getSource()==two_edit_sms){
             editSms(2);
         }else if(event.getSource()==two_sms_all){
@@ -742,7 +921,15 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
             for (Loan loan : two_month_table.getItems()) {
                 phone_numbers.add(loan.getL_borrower_phone());
             }
-            SendSMSMany.sendSms(phone_numbers,2);
+            if(phone_numbers.size()>0){
+                SendSMSMany.sendSms(phone_numbers,2,null);
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("There are no late customers!");
+                alert.showAndWait();
+            }
         }else if(event.getSource()==penalty_edit_sms){
             editSms(3);
         }else if(event.getSource()==penalty_sms_all){
@@ -750,7 +937,15 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
             for (Loan loan : penalty_table.getItems()) {
                 phone_numbers.add(loan.getL_borrower_phone());
             }
-            SendSMSMany.sendSms(phone_numbers,3);
+            if(phone_numbers.size()>0){
+                SendSMSMany.sendSms(phone_numbers,3,null);
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("There are no late customers!");
+                alert.showAndWait();
+            }
         }
     }
 
@@ -771,4 +966,6 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
         }
 
     }
+
+
 }

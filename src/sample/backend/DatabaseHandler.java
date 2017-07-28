@@ -7,6 +7,8 @@ import org.json.JSONObject;
 import sample.*;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Apix on 25/04/2017.
@@ -76,7 +78,9 @@ public class DatabaseHandler {
                 jsonObject.put("id",rs.getInt("id"));
                 jsonObject.put("fname",rs.getString("fname"));
                 jsonObject.put("lname",rs.getString("lname"));
+                jsonObject.put("password",rs.getString("password"));
                 jsonObject.put("username",rs.getString("username"));
+                jsonObject.put("status",rs.getString("status"));
                 jsonObject.put("role",rs.getString("role"));
             }
         }catch (SQLException e){
@@ -141,10 +145,10 @@ public class DatabaseHandler {
         return result;
     }
 
-    public Result registerLoan(int borrower,int amount,int duration,String date,int perMonth,int totalPayment,String due,String dhamanaType,int memberId,
-                                String propertyId,String propertyName,String desc){
+    public Result registerLoan(int borrower,double amount,int duration,String date,double perMonth,double totalPayment,String due,String dhamanaType,int memberId,
+                                String propertyId,String propertyName,String desc,Double interest){
         String regLoanSql = "INSERT INTO LOANS(borrower_id,amount_borrowed,duration,date_of_loan,amount_per_month,total_payment,dhamana_type," +
-                "member_id,property_id,property_name,description,due) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+                "member_id,property_id,property_name,description,due,interest,tolerance) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         String lastLoanSql = "SELECT * FROM LOANS";
 
         Result result = new Result();
@@ -153,10 +157,10 @@ public class DatabaseHandler {
         try{
             PreparedStatement ps = createConn().prepareStatement(regLoanSql);
             ps.setInt(1,borrower);
-            ps.setInt(2,amount);
+            ps.setDouble(2,amount);
             ps.setInt(3,duration);
             ps.setString(4,date);
-            ps.setInt(5,perMonth);
+            ps.setDouble(5,perMonth);
             ps.setDouble(6,totalPayment);
             ps.setString(7,dhamanaType);
             ps.setInt(8,memberId);
@@ -164,6 +168,8 @@ public class DatabaseHandler {
             ps.setString(10,propertyName);
             ps.setString(11,desc);
             ps.setString(12,due);
+            ps.setDouble(13,interest);
+            ps.setString(14,"no");
 
             ps.execute();
             result.setSuccess(true);
@@ -188,19 +194,20 @@ public class DatabaseHandler {
         return result;
     }
 
-    public boolean loanPayment(int loan_id,String date,double amount){
-        String paymentSql = "INSERT INTO PAYMENTS(loan_id,date,amount) VALUES(?,?,?)";
+    public boolean loanPayment(int loan_id,LocalDate date,double amount,String month,int year){
+        String paymentSql = "INSERT INTO PAYMENTS(loan_id,date,amount,month,year) VALUES(?,?,?,?,?)";
         boolean success = false;
 
         try{
             PreparedStatement ps = createConn().prepareStatement(paymentSql);
             ps.setInt(1,loan_id);
-            ps.setString(2,date);
+            ps.setDate(2,java.sql.Date.valueOf(date));
             ps.setDouble(3,amount);
+            ps.setString(4,month);
+            ps.setInt(5,year);
 
-            if(ps.execute()){
-                success = true;
-            }
+            ps.execute();
+            success = true;
             updateLoanTable(loan_id,date,amount);
         }catch (SQLException e){
             e.printStackTrace();
@@ -208,7 +215,7 @@ public class DatabaseHandler {
         return success;
     }
 
-    public void updateLoanTable(int loan_id,String date,double amount){
+    public void updateLoanTable(int loan_id,LocalDate date,double amount){
         String readAmountPaid = "SELECT AMOUNT_PAID,DUE FROM LOANS WHERE LOAN_ID="+loan_id;
 
         try{
@@ -222,6 +229,50 @@ public class DatabaseHandler {
 
                 amountRead = amountRead + amount;
                 String updateLoan = "UPDATE LOANS SET last_payment="+amount+",lastpay_date='"+date+"',amount_paid="+amountRead+",due='"+newDue+"' WHERE LOAN_ID="+loan_id;
+
+                PreparedStatement pb = createConn().prepareStatement(updateLoan);
+                pb.execute();
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public boolean loanPaymentFine(int loan_id,LocalDate date,double amount,String month,int year){
+        String paymentSql = "INSERT INTO PAYMENTS(loan_id,date,amount,month,year) VALUES(?,?,?,?,?)";
+        boolean success = false;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(paymentSql);
+            ps.setInt(1,loan_id);
+            ps.setDate(2,java.sql.Date.valueOf(date));
+            ps.setDouble(3,amount);
+            ps.setString(4,month);
+            ps.setInt(5,year);
+
+            ps.execute();
+            success = true;
+            updateLoanTableFine(loan_id,date,amount);
+        }catch (SQLException e){
+            success = false;
+            e.printStackTrace();
+        }
+        return success;
+    }
+
+    public void updateLoanTableFine(int loan_id,LocalDate date,double amount){
+        String readAmountPaid = "SELECT AMOUNT_PAID FROM LOANS WHERE LOAN_ID="+loan_id;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(readAmountPaid);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.first()){
+                Double amountRead = rs.getDouble("amount_paid");
+
+                amountRead = amountRead + amount;
+                String updateLoan = "UPDATE LOANS SET last_payment="+amount+",lastpay_date='"+date+"',amount_paid="+amountRead+" WHERE LOAN_ID="+loan_id;
 
                 PreparedStatement pb = createConn().prepareStatement(updateLoan);
                 pb.execute();
@@ -260,13 +311,16 @@ public class DatabaseHandler {
         ObservableList<Loan> loans = FXCollections.observableArrayList();
         String loansSql = "SELECT * FROM LOANS";
         int borrower_id;
+        int loan_id;
         String borrower_name="";
         String borrower_phone="";
-        Double amount_paid;
+        double borrower_fine = 0;
+        String fine_String="0.0";
+        double amount_paid;
         String amount_paidString;
-        Double last_pay;
+        double last_pay;
         String last_payString;
-        Double amount_rem;
+        double amount_rem;
         String amount_remString;
 
         try {
@@ -277,9 +331,13 @@ public class DatabaseHandler {
             PreparedStatement pb;
             ResultSet rb;
 
+            String getFineSql;
+            PreparedStatement pk;
+            ResultSet rk;
 
             while(rs.next()){
                 borrower_id = rs.getInt("borrower_id");
+                loan_id = rs.getInt("loan_id");
                 getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
                 pb = createConn().prepareStatement(getBorrowerSql);
                 rb = pb.executeQuery();
@@ -288,6 +346,105 @@ public class DatabaseHandler {
                     borrower_phone = rb.getString("phone");
 
                 }
+
+                getFineSql = "SELECT * FROM FINES WHERE LOAN_ID="+loan_id;
+                pk = createConn().prepareStatement(getFineSql);
+                rk = pk.executeQuery();
+                borrower_fine = 0.0;
+                while(rk.next()){
+                    //borrower_fine = borrower_fine + (rk.getDouble("amount")-rs.getDouble("amount_per_month"));
+                    borrower_fine = borrower_fine + rk.getDouble("amount");
+                }
+                if(borrower_fine==0){
+                    fine_String = String.format("%,.1f", borrower_fine);
+                }else
+                    fine_String = String.format("%,.0f", borrower_fine);
+
+                amount_paid = rs.getDouble("amount_paid");
+                if(amount_paid==0){
+                    amount_paidString = String.format("%,.1f", amount_paid);
+                }else
+                    amount_paidString = String.format("%,.0f", amount_paid);
+
+                last_pay = rs.getDouble("last_payment");
+                if (last_pay==0)
+                    last_payString = String.format("%,.1f",last_pay);
+                else
+                    last_payString = String.format("%,.0f", last_pay);
+
+                amount_rem = (rs.getDouble("total_payment")-rs.getDouble("amount_paid"))+borrower_fine;
+                if(amount_rem==0)
+                    amount_remString = String.format("%,.1f", amount_rem);
+                else
+                    amount_remString = String.format("%,.0f", amount_rem);
+
+                loans.add(new Loan("MJ/L/"+loan_id,borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
+                        String.format("%,.0f", rs.getDouble("amount_borrowed")) ,rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone,fine_String));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return loans;
+    }
+
+    public ObservableList<Loan> loadDueLoans(){
+        ObservableList<Loan> loans = FXCollections.observableArrayList();
+        String loansSql = "SELECT * FROM LOANS WHERE STATUS='active'";
+        int borrower_id;
+        int loan_id;
+        String borrower_name="";
+        String borrower_phone="";
+        double borrower_fine;
+        String fine_String="0.0";
+        double amount_paid;
+        String amount_paidString;
+        double last_pay;
+        String last_payString;
+        double amount_rem;
+        String amount_remString;
+
+        try {
+            PreparedStatement ps = createConn().prepareStatement(loansSql);
+            ResultSet rs = ps.executeQuery();
+
+            String getBorrowerSql;
+            PreparedStatement pb;
+            ResultSet rb;
+
+            String getFineSql;
+            PreparedStatement pk;
+            ResultSet rk;
+
+            while(rs.next()){
+                borrower_id = rs.getInt("borrower_id");
+                loan_id = rs.getInt("loan_id");
+                getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
+                pb = createConn().prepareStatement(getBorrowerSql);
+                rb = pb.executeQuery();
+                if (rb.first()){
+                    borrower_name = rb.getString("f_name")+" "+rb.getString("l_name");
+                    borrower_phone = rb.getString("phone");
+
+                }
+
+                getFineSql = "SELECT * FROM FINES WHERE LOAN_ID="+loan_id;
+                pk = createConn().prepareStatement(getFineSql);
+                rk = pk.executeQuery();
+                borrower_fine = 0.0;
+                while(rk.next()){
+                    borrower_fine = borrower_fine + rk.getDouble("amount");
+                }
+                if(borrower_fine==0){
+                    fine_String = String.format("%,.1f", borrower_fine);
+                }else
+                    fine_String = String.format("%,.0f", borrower_fine);
 
                 amount_paid = rs.getDouble("amount_paid");
                 if(amount_paid==0){
@@ -301,15 +458,16 @@ public class DatabaseHandler {
                 else
                     last_payString = String.format("%,.0f", last_pay);
 
-                amount_rem = rs.getDouble("total_payment")-rs.getDouble("amount_paid");
+                amount_rem = (rs.getDouble("total_payment")-rs.getDouble("amount_paid"))+borrower_fine;
                 if(amount_rem==0)
                     amount_remString = String.format("%,.1f", amount_rem);
                 else
                     amount_remString = String.format("%,.0f", amount_rem);
 
-                loans.add(new Loan("MJ/L/"+rs.getInt("loan_id"),borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
-                        String.format("%,.0f", rs.getDouble("amount_borrowed")) ,rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
-                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone));
+                loans.add(new Loan("MJ/L/"+loan_id,borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
+                        String.format("%,.0f", rs.getDouble("amount_borrowed")),rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,
+                        amount_remString,rs.getString("status"),borrower_phone,fine_String));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -327,16 +485,19 @@ public class DatabaseHandler {
         ObservableList<Loan> oneLateloans = FXCollections.observableArrayList();
         String todayDate = "'"+LocalDate.now().toString()+"'";
         String compareDate = "'"+LocalDate.now().minusMonths(1).withDayOfMonth(1).minusDays(1).toString()+"'";
-        String loansSql = "SELECT * FROM LOANS WHERE DUE > "+compareDate+" AND DUE < "+todayDate;
+        String loansSql = "SELECT * FROM LOANS WHERE DUE > "+compareDate+" AND DUE < "+todayDate+" AND STATUS='active'";
         int borrower_id;
+        int loan_id;
         String borrower_name="";
         String borrower_phone="";
-        Double amount_paid;
+        double amount_paid;
         String amount_paidString;
-        Double last_pay;
+        double last_pay;
         String last_payString;
-        Double amount_rem;
+        double amount_rem;
         String amount_remString;
+        double borrower_fine = 0;
+        String fine_String="0.0";
 
         try {
             PreparedStatement ps = createConn().prepareStatement(loansSql);
@@ -346,8 +507,13 @@ public class DatabaseHandler {
             PreparedStatement pb;
             ResultSet rb;
 
+            String getFineSql;
+            PreparedStatement pk;
+            ResultSet rk;
+
             while(rs.next()){
                 borrower_id = rs.getInt("borrower_id");
+                loan_id = rs.getInt("loan_id");
                 getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
                 pb = createConn().prepareStatement(getBorrowerSql);
                 rb = pb.executeQuery();
@@ -355,6 +521,19 @@ public class DatabaseHandler {
                     borrower_name = rb.getString("f_name")+" "+rb.getString("l_name");
                     borrower_phone = rb.getString("phone");
                 }
+
+
+                getFineSql = "SELECT * FROM FINES WHERE LOAN_ID="+loan_id;
+                pk = createConn().prepareStatement(getFineSql);
+                rk = pk.executeQuery();
+                borrower_fine = 0.0;
+                while(rk.next()){
+                    borrower_fine = borrower_fine + rk.getDouble("amount");
+                }
+                if(borrower_fine==0){
+                    fine_String = String.format("%,.1f", borrower_fine);
+                }else
+                    fine_String = String.format("%,.0f", borrower_fine);
 
                 amount_paid = rs.getDouble("amount_paid");
                 if(amount_paid==0){
@@ -368,15 +547,15 @@ public class DatabaseHandler {
                 else
                     last_payString = String.format("%,.0f", last_pay);
 
-                amount_rem = rs.getDouble("total_payment")-rs.getDouble("amount_paid");
+                amount_rem = (rs.getDouble("total_payment")-rs.getDouble("amount_paid"))+borrower_fine;
                 if(amount_rem==0)
                     amount_remString = String.format("%,.1f", amount_rem);
                 else
                     amount_remString = String.format("%,.0f", amount_rem);
 
-                oneLateloans.add(new Loan("MJ/L/"+rs.getInt("loan_id"),borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
+                oneLateloans.add(new Loan("MJ/L/"+loan_id,borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
                         String.format("%,.0f", rs.getDouble("amount_borrowed")),rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
-                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone));
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone,fine_String));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -394,16 +573,19 @@ public class DatabaseHandler {
         ObservableList<Loan> twoLateloans = FXCollections.observableArrayList();
         String lastmonthDate = "'"+LocalDate.now().minusMonths(0).withDayOfMonth(1).minusDays(1).toString()+"'";
         String compareDate = "'"+LocalDate.now().minusMonths(2).withDayOfMonth(1).minusDays(1).toString()+"'";
-        String loansSql = "SELECT * FROM LOANS WHERE DUE > "+compareDate+" AND DUE < "+lastmonthDate;
+        String loansSql = "SELECT * FROM LOANS WHERE DUE > "+compareDate+" AND DUE < "+lastmonthDate+" AND STATUS='active'";
         int borrower_id;
+        int loan_id;
         String borrower_name="";
         String borrower_phone="";
-        Double amount_paid;
+        double amount_paid;
         String amount_paidString;
-        Double last_pay;
+        double last_pay;
         String last_payString;
-        Double amount_rem;
+        double amount_rem;
         String amount_remString;
+        double borrower_fine = 0;
+        String fine_String="0.0";
 
         try {
             PreparedStatement ps = createConn().prepareStatement(loansSql);
@@ -413,8 +595,13 @@ public class DatabaseHandler {
             PreparedStatement pb;
             ResultSet rb;
 
+            String getFineSql;
+            PreparedStatement pk;
+            ResultSet rk;
+
             while(rs.next()){
                 borrower_id = rs.getInt("borrower_id");
+                loan_id = rs.getInt("loan_id");
                 getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
                 pb = createConn().prepareStatement(getBorrowerSql);
                 rb = pb.executeQuery();
@@ -422,6 +609,19 @@ public class DatabaseHandler {
                     borrower_name = rb.getString("f_name")+" "+rb.getString("l_name");
                     borrower_phone = rb.getString("phone");
                 }
+
+
+                getFineSql = "SELECT * FROM FINES WHERE LOAN_ID="+loan_id;
+                pk = createConn().prepareStatement(getFineSql);
+                rk = pk.executeQuery();
+                borrower_fine = 0.0;
+                while(rk.next()){
+                    borrower_fine = borrower_fine + rk.getDouble("amount");
+                }
+                if(borrower_fine==0){
+                    fine_String = String.format("%,.1f", borrower_fine);
+                }else
+                    fine_String = String.format("%,.0f", borrower_fine);
 
                 amount_paid = rs.getDouble("amount_paid");
                 if(amount_paid==0){
@@ -435,15 +635,15 @@ public class DatabaseHandler {
                 else
                     last_payString = String.format("%,.0f", last_pay);
 
-                amount_rem = rs.getDouble("total_payment")-rs.getDouble("amount_paid");
+                amount_rem = (rs.getDouble("total_payment")-rs.getDouble("amount_paid"))+borrower_fine;
                 if(amount_rem==0)
                     amount_remString = String.format("%,.1f", amount_rem);
                 else
                     amount_remString = String.format("%,.0f", amount_rem);
 
-                twoLateloans.add(new Loan("MJ/L/"+rs.getInt("loan_id"),borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
+                twoLateloans.add(new Loan("MJ/L/"+loan_id,borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
                         String.format("%,.0f", rs.getDouble("amount_borrowed")),rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
-                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone));
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone,fine_String));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -461,16 +661,19 @@ public class DatabaseHandler {
         ObservableList<Loan> penaltyloans = FXCollections.observableArrayList();
         String lastmonthDate = "'"+LocalDate.now().minusMonths(1).withDayOfMonth(1).minusDays(1).toString()+"'";
         String compareDate = "'"+LocalDate.now().minusMonths(120).withDayOfMonth(1).minusDays(1).toString()+"'";
-        String loansSql = "SELECT * FROM LOANS WHERE DUE > "+compareDate+" AND DUE < "+lastmonthDate;
+        String loansSql = "SELECT * FROM LOANS WHERE DUE > "+compareDate+" AND DUE < "+lastmonthDate+" AND STATUS='active'";
         int borrower_id;
+        int loan_id;
         String borrower_name="";
         String borrower_phone="";
-        Double amount_paid;
+        double amount_paid;
         String amount_paidString;
-        Double last_pay;
+        double last_pay;
         String last_payString;
-        Double amount_rem;
+        double amount_rem;
         String amount_remString;
+        double borrower_fine = 0;
+        String fine_String="0.0";
 
         try {
             PreparedStatement ps = createConn().prepareStatement(loansSql);
@@ -480,8 +683,13 @@ public class DatabaseHandler {
             PreparedStatement pb;
             ResultSet rb;
 
+            String getFineSql;
+            PreparedStatement pk;
+            ResultSet rk;
+
             while(rs.next()){
                 borrower_id = rs.getInt("borrower_id");
+                loan_id = rs.getInt("loan_id");
                 getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
                 pb = createConn().prepareStatement(getBorrowerSql);
                 rb = pb.executeQuery();
@@ -489,6 +697,18 @@ public class DatabaseHandler {
                     borrower_name = rb.getString("f_name")+" "+rb.getString("l_name");
                     borrower_phone = rb.getString("phone");
                 }
+
+                getFineSql = "SELECT * FROM FINES WHERE LOAN_ID="+loan_id;
+                pk = createConn().prepareStatement(getFineSql);
+                rk = pk.executeQuery();
+                borrower_fine = 0.0;
+                while(rk.next()){
+                    borrower_fine = borrower_fine + rk.getDouble("amount");
+                }
+                if(borrower_fine==0){
+                    fine_String = String.format("%,.1f", borrower_fine);
+                }else
+                    fine_String = String.format("%,.0f", borrower_fine);
 
                 amount_paid = rs.getDouble("amount_paid");
                 if(amount_paid==0){
@@ -502,15 +722,15 @@ public class DatabaseHandler {
                 else
                     last_payString = String.format("%,.0f", last_pay);
 
-                amount_rem = rs.getDouble("total_payment")-rs.getDouble("amount_paid");
+                amount_rem = (rs.getDouble("total_payment")-rs.getDouble("amount_paid"))+borrower_fine;
                 if(amount_rem==0)
                     amount_remString = String.format("%,.1f", amount_rem);
                 else
                     amount_remString = String.format("%,.0f", amount_rem);
 
-                penaltyloans.add(new Loan("MJ/L/"+rs.getInt("loan_id"),borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
+                penaltyloans.add(new Loan("MJ/L/"+loan_id,borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
                         String.format("%,.0f", rs.getDouble("amount_borrowed")),rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
-                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone));
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone,fine_String));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -524,18 +744,21 @@ public class DatabaseHandler {
         return penaltyloans;
     }
 
-    public ObservableList<Loan> searchLoan(int loan_id){
+    public ObservableList<Loan> searchLoan(int loany_id){
         ObservableList<Loan> loans = FXCollections.observableArrayList();
-        String loansSql = "SELECT * FROM LOANS WHERE LOAN_ID LIKE '%"+loan_id+"%'";
+        String loansSql = "SELECT * FROM LOANS WHERE LOAN_ID LIKE '%"+loany_id+"%'";
         int borrower_id;
+        int loan_id;
         String borrower_name="";
         String borrower_phone="";
-        Double amount_paid;
+        double amount_paid;
         String amount_paidString;
-        Double last_pay;
+        double last_pay;
         String last_payString;
         double amount_rem;
         String amount_remString;
+        double borrower_fine = 0;
+        String fine_String="0.0";
 
         try {
             PreparedStatement ps = createConn().prepareStatement(loansSql);
@@ -545,9 +768,13 @@ public class DatabaseHandler {
             PreparedStatement pb;
             ResultSet rb;
 
+            String getFineSql;
+            PreparedStatement pk;
+            ResultSet rk;
 
             while(rs.next()){
                 borrower_id = rs.getInt("borrower_id");
+                loan_id = rs.getInt("loan_id");
                 getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
                 pb = createConn().prepareStatement(getBorrowerSql);
                 rb = pb.executeQuery();
@@ -556,6 +783,19 @@ public class DatabaseHandler {
                     borrower_phone = rb.getString("phone");
 
                 }
+
+
+                getFineSql = "SELECT * FROM FINES WHERE LOAN_ID="+loan_id;
+                pk = createConn().prepareStatement(getFineSql);
+                rk = pk.executeQuery();
+                borrower_fine = 0.0;
+                while(rk.next()){
+                    borrower_fine = borrower_fine + rk.getDouble("amount");
+                }
+                if(borrower_fine==0){
+                    fine_String = String.format("%,.1f", borrower_fine);
+                }else
+                    fine_String = String.format("%,.0f", borrower_fine);
 
                 amount_paid = rs.getDouble("amount_paid");
                 if(amount_paid==0){
@@ -569,15 +809,15 @@ public class DatabaseHandler {
                 else
                     last_payString = String.format("%,.0f", last_pay);
 
-                amount_rem = rs.getDouble("total_payment")-rs.getDouble("amount_paid");
+                amount_rem = (rs.getDouble("total_payment")-rs.getDouble("amount_paid"))+borrower_fine;
                 if(amount_rem==0)
                     amount_remString = String.format("%,.1f", amount_rem);
                 else
                     amount_remString = String.format("%,.0f", amount_rem);
 
-                loans.add(new Loan("MJ/L/"+rs.getInt("loan_id"),borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
+                loans.add(new Loan("MJ/L/"+loan_id,borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
                         String.format("%,.0f", rs.getDouble("amount_borrowed")),rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
-                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone));
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone,fine_String));
                 }
         }catch (SQLException e){
             e.printStackTrace();
@@ -660,26 +900,38 @@ public class DatabaseHandler {
         String editCustomerSql = "SELECT * FROM CUSTOMERS WHERE ID="+id;
         EditCustomer customer = null;
 
-        String getBorrowerSql;
+        String getActiveLoansSql;
         PreparedStatement pb;
         ResultSet rb;
         int num_loans = 0;
+
+        String getDoneLoansSql;
+        PreparedStatement pc;
+        ResultSet rk;
+        int num_done_loans = 0;
 
         try{
             PreparedStatement ps = createConn().prepareStatement(editCustomerSql);
             ResultSet rs = ps.executeQuery();
             if (rs.first()){
-                getBorrowerSql = "SELECT * FROM LOANS WHERE borrower_id="+id;
-                pb = createConn().prepareStatement(getBorrowerSql);
+                getActiveLoansSql = "SELECT * FROM LOANS WHERE status='active' AND borrower_id="+id;
+                pb = createConn().prepareStatement(getActiveLoansSql);
                 rb = pb.executeQuery();
                 while (rb.next()){
                     num_loans++;
                 }
 
+                getDoneLoansSql = "SELECT * FROM LOANS WHERE status='done' AND borrower_id="+id;
+                pc = createConn().prepareStatement(getDoneLoansSql);
+                rk = pc.executeQuery();
+                while (rk.next()){
+                    num_done_loans++;
+                }
+
                 customer = new EditCustomer(rs.getString("f_name"),rs.getString("m_name"),rs.getString("l_name"),rs.getString("gender"),
                         rs.getDate("dob"),rs.getString("phone"),rs.getString("email"),rs.getString("postal"),rs.getString("prof_photo"),
                         rs.getString("bank"),rs.getString("account_no"),rs.getString("company_name"),rs.getString("company_phone"),
-                        rs.getString("company_location"),rs.getString("checksum"),num_loans);
+                        rs.getString("company_location"),rs.getString("checksum"),num_loans,num_done_loans);
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -695,7 +947,7 @@ public class DatabaseHandler {
 
     public void checkIfLoanDone(int id){
         String checkLoanSql = "SELECT DISTINCT TOTAL_PAYMENT,AMOUNT_PAID FROM LOANS WHERE LOAN_ID="+id;
-        String updateStatusSql = "UPDATE LOANS SET status='done' WHERE LOAN_ID="+id;
+        String updateStatusSql = "UPDATE LOANS SET status='done',due='0000-00-00' WHERE LOAN_ID="+id;
 
         try{
             PreparedStatement ps = createConn().prepareStatement(checkLoanSql);
@@ -717,74 +969,6 @@ public class DatabaseHandler {
                 e.printStackTrace();
             }
         }
-    }
-
-    public ObservableList<Loan> loadDueLoans(){
-        ObservableList<Loan> loans = FXCollections.observableArrayList();
-        String loansSql = "SELECT * FROM LOANS WHERE STATUS='active'";
-        int borrower_id;
-        String borrower_name="";
-        String borrower_phone="";
-        double amount_paid;
-        String amount_paidString;
-        double last_pay;
-        String last_payString;
-        double amount_rem;
-        String amount_remString;
-
-        try {
-            PreparedStatement ps = createConn().prepareStatement(loansSql);
-            ResultSet rs = ps.executeQuery();
-
-            String getBorrowerSql;
-            PreparedStatement pb;
-            ResultSet rb;
-
-
-            while(rs.next()){
-                borrower_id = rs.getInt("borrower_id");
-                getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
-                pb = createConn().prepareStatement(getBorrowerSql);
-                rb = pb.executeQuery();
-                if (rb.first()){
-                    borrower_name = rb.getString("f_name")+" "+rb.getString("l_name");
-                    borrower_phone = rb.getString("phone");
-
-                }
-
-                amount_paid = rs.getDouble("amount_paid");
-                if(amount_paid==0){
-                    amount_paidString = String.format("%,.1f", rs.getDouble("amount_paid"));
-                }else
-                    amount_paidString = String.format("%,.0f", rs.getDouble("amount_paid"));
-
-                last_pay = rs.getDouble("last_payment");
-                if (last_pay==0)
-                    last_payString = String.format("%,.1f",last_pay);
-                else
-                    last_payString = String.format("%,.0f", last_pay);
-
-                amount_rem = rs.getDouble("total_payment")-rs.getDouble("amount_paid");
-                if(amount_rem==0)
-                    amount_remString = String.format("%,.1f", amount_rem);
-                else
-                    amount_remString = String.format("%,.0f", amount_rem);
-
-                loans.add(new Loan("MJ/L/"+rs.getInt("loan_id"),borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
-                        String.format("%,.0f", rs.getDouble("amount_borrowed")),rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
-                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,
-                        amount_remString,rs.getString("status"),borrower_phone));
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return loans;
     }
 
     public ObservableList<Transaction> getUserTransactions(int id){
@@ -863,7 +1047,7 @@ public class DatabaseHandler {
 
     public EditLoan viewLoan(int id){
         String sql = "SELECT borrower_id,amount_borrowed,duration,date_of_loan,amount_per_month,member_id,property_id," +
-                "property_name,description FROM LOANS WHERE LOAN_ID="+id;
+                "property_name,description,total_payment,tolerance FROM LOANS WHERE LOAN_ID="+id;
         EditLoan editLoan = null;
 
         try{
@@ -871,8 +1055,8 @@ public class DatabaseHandler {
             ResultSet rs = ps.executeQuery();
             if(rs.first()){
                 editLoan = new EditLoan(rs.getInt("borrower_id"),rs.getDouble("amount_borrowed"),rs.getInt("duration"),rs.getDate("date_of_loan").toLocalDate(),
-                        rs.getDouble("amount_per_month"),rs.getInt("member_id"),rs.getString("property_id"),rs.getString("property_name"),
-                        rs.getString("description"));
+                        rs.getDouble("amount_per_month"),rs.getDouble("total_payment"),rs.getInt("member_id"),rs.getString("property_id"),rs.getString("property_name"),
+                        rs.getString("description"),rs.getString("tolerance"));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -887,8 +1071,13 @@ public class DatabaseHandler {
         return editLoan;
     }
 
-    public boolean editLoanDetails(int id,String property_id,String property_name,String desc){
-        String sql = "UPDATE LOANS SET property_id='"+property_id+"',property_name='"+property_name+"',description='"+desc+"' " +
+    public boolean editLoanDetails(int id,int borrower_id,double loan_amount,int duration,LocalDate date_loan,double perMonth,
+            double total_payment,int mdhamini_id,String property_id,String property_name,String desc,String tolerance){
+
+        Date loan_date = java.sql.Date.valueOf(date_loan);
+
+        String sql = "UPDATE LOANS SET borrower_id='"+borrower_id+"',amount_borrowed='"+loan_amount+"',duration='"+duration+"',date_of_loan='"+loan_date+"'," +
+                "amount_per_month='"+perMonth+"',total_payment='"+total_payment+"',member_id='"+mdhamini_id+"',property_id='"+property_id+"',property_name='"+property_name+"',description='"+desc+"',tolerance='"+tolerance+"' " +
                 "WHERE LOAN_ID="+id;
         boolean success;
 
@@ -952,9 +1141,14 @@ public class DatabaseHandler {
         return success;
     }
 
-    public ObservableList<User> getUsers(){
+    public ObservableList<User> getUsers(String level){
         ObservableList<User> users = FXCollections.observableArrayList();
-        String usersSql = "SELECT * FROM USERS";
+        String usersSql;
+
+        if(level.equals("main admin"))
+            usersSql = "SELECT * FROM USERS";
+        else
+            usersSql = "SELECT * FROM USERS WHERE role='worker' ";
 
         try{
             PreparedStatement ps = createConn().prepareStatement(usersSql);
@@ -975,9 +1169,12 @@ public class DatabaseHandler {
         return users;
     }
 
-    public Boolean addUser(String fname,String lname,String uname,String password,String role,String status){
+    public Result addUser(String fname,String lname,String uname,String password,String role,String status){
         String userSql = "INSERT INTO USERS (fname,lname,username,password,role,status) VALUES(?,?,?,?,?,?)";
-        Boolean success = false;
+        String lastUserSql = "SELECT * FROM USERS";
+
+        Result result = new Result();
+        result.setSuccess(false);
 
         try{
             PreparedStatement ps = createConn().prepareStatement(userSql);
@@ -989,10 +1186,19 @@ public class DatabaseHandler {
             ps.setString(6,status);
 
             ps.execute();
-            success = true;
+            result.setSuccess(true);
+
+            PreparedStatement pb = createConn().prepareStatement(lastUserSql);
+            ResultSet rs = pb.executeQuery();
+
+            while (rs.next()){
+                if(rs.isLast()){
+                    result.setId(rs.getInt("id"));
+                }
+            }
 
         }catch (SQLException e){
-            success = false;
+            result.setSuccess(false);
             e.printStackTrace();
         }finally {
             try {
@@ -1001,7 +1207,7 @@ public class DatabaseHandler {
                 e.printStackTrace();
             }
         }
-        return success;
+        return result;
     }
 
     public void updateUserStatus(String action,int id){
@@ -1030,61 +1236,102 @@ public class DatabaseHandler {
     }
 
     public void fineHandler(){
-        if(LocalDate.now().getDayOfMonth()>7) {
-            String state = "not yet";
+
+        String state = "";
             int fine_id = 0;
             int loan_id = 0;
-            Double amount = 0.0;
-            Double perMonth = 0.0;
+            double amount = 0;
+            double perMonth = 0;
+            double paidAmount = 0;
             Date lastDue;
+            String month;
+            int year;
+            String tolerance;
             String monthEnd = null;
             String controllerSql = "SELECT * FROM CONTROLLER";
             String fineSql = "SELECT * FROM FINES";
-            String fineUpdateSql = "UPDATE FINES SET AMOUNT="+amount+" WHERE FINE_ID=" + fine_id;
             String loanSql = "SELECT * FROM LOANS";
-            String updateLoanSql = "UPDATE LOANS SET DUE='"+monthEnd+"' WHERE LOAN_ID="+loan_id;
-            String addFineSql = "INSERT INTO FINES (month,year,amount,loan_id) VALUES(?,?,?,?)";
-            String stateSql = "UPDATE CONTROLLER SET STATE='"+state+"' WHERE ID=1";
+            String addFineSql = "INSERT INTO FINES (month,year,amount,loan_id,tolerance) VALUES(?,?,?,?,?)";
 
             try {
                 PreparedStatement ps = createConn().prepareStatement(controllerSql);
                 ResultSet rs = ps.executeQuery();
 
-                if (rs.first()) {
+                while (rs.next()) {
+                    System.out.println("Imefika");
                     state = rs.getString("state");
+                    System.out.println(rs.getString("state"));
                 }
 
 
                 if (state.equals("not yet")) {
+                    System.out.println("1");
 
                     PreparedStatement pb = createConn().prepareStatement(fineSql);
                     ResultSet rb = pb.executeQuery();
+
+                    PreparedStatement pf = createConn().prepareStatement(loanSql);
+                    ResultSet rf = pf.executeQuery();
+
+                    PreparedStatement pd = createConn().prepareStatement(loanSql);
+                    ResultSet rd = pd.executeQuery();
 
                     while (rb.next()) {
 
                         // Incrementing fine
                             fine_id = rb.getInt("fine_id");
                             amount = rb.getDouble("amount");
-                            amount = amount + amount*0.15;
+                            loan_id = rb.getInt("loan_id");
+                            month = rb.getString("month");
+                            year = rb.getInt("year");
+                            tolerance = rb.getString("tolerance");
 
-                            PreparedStatement pc = createConn().prepareStatement(fineUpdateSql);
-                            pc.execute();
+                            if(tolerance.equals("no")){
+                                while(rf.next()){
+                                    if(rf.getInt("loan_id")==loan_id && rf.getString("status").equals("active")){
 
+                                        String paymentsSql = "SELECT * FROM PAYMENTS WHERE LOAN_ID="+loan_id+" AND MONTH='"+month+"' AND YEAR="+year;
+                                        PreparedStatement ph = createConn().prepareStatement(paymentsSql);
+                                        ResultSet rh = ph.executeQuery();
+
+                                        while(rh.next()){
+                                            paidAmount = paidAmount + rh.getDouble("amount");
+                                        }
+
+                                        if(amount>0){
+                                            amount = ( ((rf.getDouble("amount_per_month")-paidAmount)  + amount)*0.15) + amount;
+                                        }
+                                    }
+                                }
+                                //amount = amount + amount*0.15;
+
+                                if(amount>0){
+                                    String fineUpdateSql = "UPDATE FINES SET AMOUNT="+amount+" WHERE FINE_ID=" + fine_id;
+                                    PreparedStatement pc = createConn().prepareStatement(fineUpdateSql);
+                                    pc.execute();
+                                }
+                            }
+
+                        System.out.println("2");
                     }
 
-                    PreparedStatement pf = createConn().prepareStatement(loanSql);
-                    ResultSet rf = pf.executeQuery();
+                    while(rd.next()){
 
-                    while(rf.next()){
+                        System.out.println("3");
 
                         // Adding a fine
-                            lastDue = rf.getDate("due");
-                            if(lastDue==java.sql.Date.valueOf(LocalDate.now().minusMonths(1).withDayOfMonth(1).minusDays(1))){
-                                loan_id = rf.getInt("loan_id");
-                                perMonth = rf.getDouble("amount_per_month");
-                                perMonth = perMonth + perMonth*0.15;
+                            lastDue = rd.getDate("due");
+                            System.out.println(lastDue);
+                            System.out.println(LocalDate.now().minusMonths(2).withDayOfMonth(1).minusDays(1));
+                            if(lastDue.equals(java.sql.Date.valueOf(LocalDate.now().minusMonths(1).withDayOfMonth(1).minusDays(1))) && rd.getString("status").equals("active") && rd.getString("tolerance").equals("no")){
+                                loan_id = rd.getInt("loan_id");
+                                perMonth = rd.getDouble("amount_per_month");
+                                //perMonth = perMonth + perMonth*0.15;
+                                perMonth = perMonth*0.15;
+                                perMonth = (double)Math.round(perMonth);
                                 monthEnd = lastDue.toLocalDate().plusMonths(2).withDayOfMonth(1).minusDays(1).toString();
 
+                                String updateLoanSql = "UPDATE LOANS SET DUE='"+monthEnd+"' WHERE LOAN_ID="+loan_id;
                                 PreparedStatement ph = createConn().prepareStatement(updateLoanSql);
                                 ph.execute();
 
@@ -1093,13 +1340,24 @@ public class DatabaseHandler {
                                 pk.setInt(2,lastDue.toLocalDate().getYear());
                                 pk.setDouble(3,perMonth);
                                 pk.setInt(4,loan_id);
+                                pk.setString(5,"no");
                                 pk.execute();
+
+                                System.out.println("4");
+
                             }
+
+                        System.out.println("5");
+
                     }
 
                     state = "done";
+                    String stateSql = "UPDATE CONTROLLER SET STATE='"+state+"'";
                     PreparedStatement pz = createConn().prepareStatement(stateSql);
                     pz.execute();
+
+                    System.out.println("6");
+
 
                 }
 
@@ -1112,7 +1370,7 @@ public class DatabaseHandler {
                     e.printStackTrace();
                 }
             }
-        }
+
     }
 
     public void stateChanger(){
@@ -1129,6 +1387,262 @@ public class DatabaseHandler {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean updatePassword(String password,int id){
+        String passSql = "UPDATE USERS SET PASSWORD='"+password+"' WHERE ID="+id;
+        boolean success = false;
+        try{
+            PreparedStatement ps = createConn().prepareStatement(passSql);
+            ps.execute();
+            success = true;
+        }catch (SQLException e){
+            success = false;
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return success;
+    }
+
+    public boolean deleteUser(int id){
+        String userSql = "DELETE FROM USERS WHERE ID="+id;
+
+        boolean success = false;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(userSql);
+            ps.execute();
+            success = true;
+        }catch (SQLException e){
+            success = false;
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return success;
+    }
+
+    public double getInterest(){
+        String rateSql = "SELECT * FROM INTEREST";
+        double rate = 0;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(rateSql);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.first()){
+               rate = rs.getDouble("interest_value");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return rate;
+    }
+
+    public boolean setInterest(double rate){
+        String rateSql = "UPDATE INTEREST SET INTEREST_VALUE ="+rate;
+        boolean success = false;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(rateSql);
+            ps.execute();
+            success = true;
+        }catch (SQLException e){
+            success = false;
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return success;
+    }
+
+    public ObservableList<Fine> getFines(int id){
+        ObservableList<Fine> fines = FXCollections.observableArrayList();
+        double perMonth = 0;
+        int loan_id;
+        String month;
+        int year;
+        double paidAmount=0;
+
+        try{
+            String fineSql = "SELECT * FROM FINES WHERE LOAN_ID="+id;
+            PreparedStatement ps = createConn().prepareStatement(fineSql);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                loan_id = rs.getInt("loan_id");
+                month = rs.getString("month");
+                year = rs.getInt("year");
+
+                String finePerMonthSql = "SELECT AMOUNT_PER_MONTH FROM LOANS WHERE LOAN_ID="+loan_id;
+                PreparedStatement pk = createConn().prepareStatement(finePerMonthSql);
+                ResultSet rk = pk.executeQuery();
+
+                if(rk.first()){
+
+                    String paymentsSql = "SELECT * FROM PAYMENTS WHERE LOAN_ID="+loan_id+" AND MONTH='"+month+"' AND YEAR="+year;
+                    PreparedStatement ph = createConn().prepareStatement(paymentsSql);
+                    ResultSet rh = ph.executeQuery();
+
+                    paidAmount = 0;
+
+                    while(rh.next()){
+                        paidAmount = paidAmount + rh.getDouble("amount");
+                    }
+
+                    perMonth = rk.getDouble("amount_per_month")-paidAmount;
+                }
+                if(perMonth>0){
+                    fines.add(new Fine(rs.getInt("fine_id"),rs.getString("month"),rs.getInt("year"),rs.getDouble("amount"),perMonth));
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return fines;
+    }
+
+    public List<String> getPhoneNumbers(){
+        String phoneSql = "SELECT PHONE FROM CUSTOMERS";
+        List<String> phoneNums = new ArrayList();
+        try{
+            PreparedStatement ps = createConn().prepareStatement(phoneSql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                phoneNums.add(rs.getString("phone"));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return phoneNums;
+    }
+
+    public boolean payFine(int loan_id,LocalDate date,double amount,String month,int year){
+        String paySql = "INSERT INTO FINE_PAYMENTS (loan_id,date,amount,month,year) VALUES (?,?,?,?,?)";
+        boolean success = false;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(paySql);
+            ps.setInt(1,loan_id);
+            ps.setDate(2,java.sql.Date.valueOf(date));
+            ps.setDouble(3,amount);
+            ps.setString(4,month);
+            ps.setInt(5,year);
+
+            ps.execute();
+            success = true;
+
+        }catch (SQLException e){
+            success = false;
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return success;
+    }
+
+    public boolean reduceFine(int fine_id,double amount){
+        String fineSql = "SELECT * FROM FINES WHERE FINE_ID="+fine_id;
+        boolean success = false;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(fineSql);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.first()){
+                double fine_amount = rs.getDouble("amount");
+
+                fine_amount = fine_amount - amount;
+
+                String reduceSql = "UPDATE FINES SET AMOUNT="+fine_amount+" WHERE FINE_ID="+fine_id;
+                PreparedStatement pk = createConn().prepareStatement(reduceSql);
+                pk.execute();
+
+                System.out.println(rs.getDouble("amount"));
+
+                String checkSql = "SELECT AMOUNT FROM FINES WHERE FINE_ID="+fine_id;
+                PreparedStatement pd = createConn().prepareStatement(checkSql);
+                ResultSet rd = pd.executeQuery();
+
+                if(rd.first()){
+                    if (rd.getDouble("amount")<1){
+                        String zeroSql = "UPDATE FINES SET AMOUNT=0 WHERE FINE_ID="+fine_id;
+                        PreparedStatement ph = createConn().prepareStatement(zeroSql);
+                        ph.execute();
+                    }
+                }
+
+                success = true;
+            }
+        }catch (SQLException e){
+            success = false;
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return success;
+    }
+
+    public boolean updateFinetolerance(int loan_id,String tolerance){
+        String toleranceSql = "UPDATE FINES SET TOLERANCE='"+tolerance+"' WHERE LOAN_ID="+loan_id;
+        boolean success = false;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(toleranceSql);
+            ps.execute();
+            success = true;
+
+        }catch (SQLException e){
+            success = false;
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return success;
     }
 
 }

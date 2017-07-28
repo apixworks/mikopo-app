@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.json.JSONException;
@@ -31,10 +32,31 @@ public class MainWindowController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        MenuItem menuItem = new MenuItem("Log out");
-        profBtn.getItems().add(menuItem);
-        menuItem.setOnAction(event -> {
+        MenuItem menuItem1 = new MenuItem("Change Password");
+        MenuItem menuItem2 = new MenuItem("Log out");
+        profBtn.getItems().addAll(menuItem1,menuItem2);
+        menuItem1.setOnAction(event -> {
             try {
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("change_password.fxml"));
+                stage.setTitle("MikopoApp");
+                Scene changePasswordScene = new Scene(fxmlLoader.load(),475,315);
+                stage.setScene(changePasswordScene);
+                ChangePasswordController changePasswordController = fxmlLoader.<ChangePasswordController>getController();
+                changePasswordController.getUserDetails(userObject);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        menuItem2.setOnAction(event -> {
+            try {
+                try {
+                    Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: MJ/U/"+userObject.get("id")+" logged out");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Stage stage = (Stage) profBtn.getScene().getWindow();
                 Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
                 stage.setTitle("MikopoApp");
@@ -46,12 +68,14 @@ public class MainWindowController implements Initializable {
                 e.printStackTrace();
             }
         });
-        try{
-            Parent Mainroot = FXMLLoader.load(getClass().getResource("view_customers_loans.fxml"));
-            borderP.setCenter(Mainroot);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+//        try{
+//            Parent Mainroot = FXMLLoader.load(getClass().getResource("view_customers_loans.fxml"));
+//            borderP.setCenter(Mainroot);
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
+
+
     }
 
     public  void RegCustomerClick(){
@@ -117,6 +141,8 @@ public class MainWindowController implements Initializable {
             try{
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("admin_panel.fxml"));
                 borderP.setCenter(fxmlLoader.load());
+                AdminController adminController = fxmlLoader.<AdminController>getController();
+                adminController.getUserDetails(userObject);
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -128,12 +154,20 @@ public class MainWindowController implements Initializable {
         try {
             userObject = jsonObject;
             profBtn.setText("Hi! "+jsonObject.get("fname"));
-            if(jsonObject.get("role").equals("admin")){
+            if(jsonObject.get("role").equals("admin") || jsonObject.get("role").equals("main admin")){
                 btnAdmin.setVisible(true);
             }else {
                 btnAdmin.setVisible(false);
             }
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view_customers_loans.fxml"));
+            borderP.setCenter(fxmlLoader.load());
+            ViewCustomersLoansController viewCustomersLoansController = fxmlLoader.<ViewCustomersLoansController>getController();
+            viewCustomersLoansController.getUserDetails(userObject);
+
         } catch (JSONException e) {
+            e.printStackTrace();
+        }catch (IOException e){
             e.printStackTrace();
         }
     }

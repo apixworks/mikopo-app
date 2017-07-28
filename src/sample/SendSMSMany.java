@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class SendSMSMany {
     static boolean success = false;
-    public static boolean sendSms(List<String> phones, int id) {
+    public static boolean sendSms(List<String> phones, int id,String msg) {
         try {
             // Construct data
             String user = "username=" + "hewlettpin@hotmail.com"; //youremail@address.com
@@ -21,8 +21,13 @@ public class SendSMSMany {
             String sender = "&sender=" + "MJ Limited";
             String numbers = "&numbers=" + phones;
 
-            DatabaseHandler db = new DatabaseHandler();
-            String message = "&message=" + db.viewSms(id);
+            String message;
+            if(id!=0){
+                DatabaseHandler db = new DatabaseHandler();
+                message = "&message=" + db.viewSms(id);
+            }else{
+                message = "&message=" + msg;
+            }
 
             // Send data
             HttpURLConnection conn = (HttpURLConnection) new URL("http://api.txtlocal.com/send/?").openConnection();

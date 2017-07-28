@@ -39,24 +39,32 @@ public class LoginController {
                     db = new DatabaseHandler();
                     if (db.login(username,password)){
                         try{
-                            Stage stage = (Stage) actionBtn.getScene().getWindow();
-                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main_window.fxml"));
-                            Scene MainScene = new Scene(fxmlLoader.load(),1100,800);
-                            stage.setTitle("MikopoApp");
-                            stage.setScene(MainScene);
-                            stage.setMaximized(true);
-                            MainWindowController mainWindowController = fxmlLoader.<MainWindowController>getController();
                             userObject = db.getUserDetails(db.getId());
-                            mainWindowController.getUserDetails(userObject);
-                            try {
-                                Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: "+userObject.get("id")+" logged in");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                            if(userObject.get("status").equals("active")){
+                                Stage stage = (Stage) actionBtn.getScene().getWindow();
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main_window.fxml"));
+                                Scene MainScene = new Scene(fxmlLoader.load(),1100,800);
+                                stage.setTitle("MikopoApp");
+                                stage.setScene(MainScene);
+                                stage.setMaximized(true);
+                                MainWindowController mainWindowController = fxmlLoader.<MainWindowController>getController();
+                                mainWindowController.getUserDetails(userObject);
+                                try {
+                                    Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: MJ/U/"+userObject.get("id")+" logged in");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                stage.show();
+                            }else{
+                                actiontarget.setText("You have no access!");
+                                passwordTxtField.setText("");
                             }
-                            stage.show();
+
                         }catch (IOException e){
                             e.printStackTrace();
                         } catch (SQLException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }else {

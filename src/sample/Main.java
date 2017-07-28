@@ -5,8 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.backend.DatabaseHandler;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class Main extends Application {
 
@@ -21,6 +23,16 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
+        if(LocalDate.now().getDayOfMonth()>7) {
+            DatabaseHandler db = new DatabaseHandler();
+            db.fineHandler();
+        }else {
+            DatabaseHandler db = new DatabaseHandler();
+            db.stateChanger();
+        }
+
+        System.out.println(LocalDate.now().minusMonths(1).withDayOfMonth(1).minusDays(1));
+
         try {
             if(CheckInternetConnection.check()==0){
                 // SMTP info
@@ -30,13 +42,14 @@ public class Main extends Application {
                 String password = "mikopoapp123";
 
                 // message info
-                String mailTo = "hewlettpin777@gmail.com";
+                String mailTo = "mikopoapp1@gmail.com";
                 String subject = "Log Update";
                 String message = "Mpya.";
 
                 // attachments
                 String[] attachFiles = new String[1];
-                attachFiles[0] = "E:\\MJsyslog.txt";
+                //attachFiles[0] = "E:\\MJsyslog.txt";
+                attachFiles[0] = "C:\\mikopo\\MJsyslog.txt";
                 //attachFiles[1] = "e:/Test/Music.mp3";
                 //attachFiles[2] = "e:/Test/Video.mp4";
 

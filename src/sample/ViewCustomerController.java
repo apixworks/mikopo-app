@@ -26,6 +26,7 @@ public class ViewCustomerController {
     @FXML public Label company_phone;
     @FXML public Label check_num;
     @FXML public Label num_loans;
+    @FXML public Label num_done_loans;
 
     public void getId(int id){
 
@@ -46,8 +47,9 @@ public class ViewCustomerController {
         company_loc.setText(customer.company_loc);
         check_num.setText(customer.checknumber);
         num_loans.setText(String.valueOf(customer.num_loans));
+        num_done_loans.setText(String.valueOf(customer.num_done_loans));
 
-        File file = new File("E:/MikopoPics","MJ.C."+id+".jpg");
+        File file = new File("C:/mikopo/MikopoPics","MJ.C."+id+".jpg");
         Image image = new Image(file.toURI().toString());
         customer_image.setImage(image);
     }

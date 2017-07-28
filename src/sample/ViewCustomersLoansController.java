@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,10 +17,13 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.json.JSONException;
 import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 /**
@@ -54,6 +59,7 @@ public class ViewCustomersLoansController implements Initializable {
     @FXML public TableColumn<Loan,String> last_paymonth;
     @FXML public TableColumn<Loan,String> amount_paid;
     @FXML public TableColumn<Loan,String> last_pay;
+    @FXML public TableColumn<Loan,String> fine;
     @FXML public TableColumn<Loan,String> amount_rem;
     @FXML public TableColumn<Loan,String> status;
     @FXML public TableColumn<Loan,String> l_action;
@@ -98,6 +104,7 @@ public class ViewCustomersLoansController implements Initializable {
         last_paymonth.setCellValueFactory(new PropertyValueFactory<>("last_paymonth"));
         amount_paid.setCellValueFactory(new PropertyValueFactory<>("amount_paid"));
         last_pay.setCellValueFactory(new PropertyValueFactory<>("last_pay"));
+        fine.setCellValueFactory(new PropertyValueFactory<>("fine"));
         amount_rem.setCellValueFactory(new PropertyValueFactory<>("amount_rem"));
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
         l_action.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
@@ -109,16 +116,21 @@ public class ViewCustomersLoansController implements Initializable {
         loan_table.setItems(db.loadLoans());
     }
 
-    public void repaymentForm(String loanId,String name){
+    public void repaymentForm(String loanId,String name,String amount,String month,String perMonth){
+        String[] amont = amount.split(",");
+        String amounter = "";
+        for(int i=0;i<amont.length;i++){
+            amounter = amounter + amont[i];
+        }
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("repayment_form.fxml"));
             stage.setTitle("MikopoApp");
-            Scene repaymentScene = new Scene(fxmlLoader.load(),600,350);
+            Scene repaymentScene = new Scene(fxmlLoader.load(),600,400);
             stage.setScene(repaymentScene);
             RepaymentFormController repaymentFormController = fxmlLoader.<RepaymentFormController>getController();
-            repaymentFormController.getLoanDetails(loanId,name);
+            repaymentFormController.getLoanDetails(loanId,name,perMonth,Integer.parseInt(amounter),month);
             repaymentFormController.getUserDetails(userObject);
             stage.show();
         } catch (IOException e) {
@@ -136,7 +148,11 @@ public class ViewCustomersLoansController implements Initializable {
             stage.setScene(editCustomerScene);
             EditCustomerController editCustomerController = fxmlLoader.<EditCustomerController>getController();
             editCustomerController.getId(id);
-            editCustomerController.getUserDetails(userObject);
+            try {
+                editCustomerController.getUserDetails(userObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -158,6 +174,8 @@ public class ViewCustomersLoansController implements Initializable {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
     }
@@ -170,7 +188,7 @@ public class ViewCustomersLoansController implements Initializable {
             stage.setTitle("MikopoApp");
             Scene viewCustomerScene = new Scene(fxmlLoader.load(),500,650);
             stage.setScene(viewCustomerScene);
-            stage.setMaxHeight(650);
+            stage.setMaxHeight(680);
             stage.setMaxWidth(500);
             ViewCustomerController viewCustomerController = fxmlLoader.<ViewCustomerController>getController();
             viewCustomerController.getId(id);
@@ -182,11 +200,24 @@ public class ViewCustomersLoansController implements Initializable {
     }
 
     public void searchLoan(){
-        int loan_id = Integer.parseInt(searchLoanTxt.getText());
-        setUpLoan();
+        ObservableList<Loan> loans = FXCollections.observableArrayList();
         DatabaseHandler db = new DatabaseHandler();
-        loan_table.setItems(null);
-        loan_table.setItems(db.searchLoan(loan_id));
+        if(Checker.isStringInt(searchLoanTxt.getText())){
+            int loan_id = Integer.parseInt(searchLoanTxt.getText());
+            setUpLoan();
+            loan_table.setItems(null);
+            loan_table.setItems(db.searchLoan(loan_id));
+        }else{
+            for(Loan loan : db.loadLoans()){
+                if(loan.getL_borrower().toLowerCase().contains(searchLoanTxt.getText())){
+                    loans.add(loan);
+                }
+            }
+            setUpLoan();
+            loan_table.setItems(null);
+            loan_table.setItems(loans);
+        }
+
     }
 
     public void searchCustomer(){
@@ -227,7 +258,7 @@ public class ViewCustomersLoansController implements Initializable {
                                     payBtn.setOnAction(new EventHandler<ActionEvent>() {
                                         @Override
                                         public void handle(ActionEvent event) {
-                                            repaymentForm(loan.getL_no(),loan.getL_borrower());
+                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month());
                                         }
                                     });
                                     editBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -306,6 +337,45 @@ public class ViewCustomersLoansController implements Initializable {
                         if (!isEmpty()) {
                             this.setStyle("-fx-alignment: center-left");
                             setText(item);
+                        }
+                    }
+                };
+            }
+        });
+
+        fine.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            if(!item.equals("0.0"))
+                            this.setStyle("-fx-text-fill: red;");
+                            setText(item);
+                        }
+                    }
+                };
+            }
+        });
+
+        due.setCellFactory(new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
+            @Override
+            public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
+                return new TableCell<Loan, String>() {
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            Loan loan = getTableView().getItems().get(getIndex());
+                            if(loan.getStatus().equals("done")){
+                                setText("done");
+                            }else{
+                                setText(item);
+                            }
                         }
                     }
                 };

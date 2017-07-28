@@ -72,9 +72,9 @@ public class RegisterCustomerController implements Initializable {
 
     File savedImage;
 
-    int perMont;
+    double perMont;
     double total = 0;
-    int totalInt;
+    double totalInt;
     int l_memberId;
     ToggleGroup genderChoice = new ToggleGroup();
     JSONObject userObject;
@@ -215,31 +215,138 @@ public class RegisterCustomerController implements Initializable {
     }
 
     public void registerCustomer(){
-        if(savedImage == null){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Registration Status");
-            alert.setHeaderText(null);
-            alert.setContentText("Customer Image must be added!");
-            alert.showAndWait();
-        }else {
-            String c_fname = fname.getText();
-            String c_lname = lname.getText();
-            String c_mname = mname.getText();
-            RadioButton selectedRadioButton = (RadioButton) genderChoice.getSelectedToggle();
-            String gender = selectedRadioButton.getText();
-            LocalDate c_dob = dob.getValue();
-            String c_phone = phone.getText();
-            String c_email = email.getText();
-            String c_postal = postal.getText();
-            String c_bank = bank.getText();
-            String c_account_no = account_no.getText();
-            String c_company_name = company_name.getText();
-            String c_company_phone = company_phone.getText();
-            String c_company_loc = company_loc.getText();
-            String c_checksum = checksum.getText();
-            LocalDate c_reg_date = LocalDate.now();
+//        if(savedImage == null){
+//            Alert alert = new Alert(Alert.AlertType.WARNING);
+//            alert.setTitle("Registration Status");
+//            alert.setHeaderText(null);
+//            alert.setContentText("Customer Image must be added!");
+//            alert.showAndWait();
+//        }else {
+//            String c_fname = fname.getText();
+//            String c_lname = lname.getText();
+//            String c_mname = mname.getText();
+//            RadioButton selectedRadioButton = (RadioButton) genderChoice.getSelectedToggle();
+//            String gender = selectedRadioButton.getText();
+//            LocalDate c_dob = dob.getValue();
+//            String c_phone = phone.getText();
+//            String c_email = email.getText();
+//            String c_postal = postal.getText();
+//            String c_bank = bank.getText();
+//            String c_account_no = account_no.getText();
+//            String c_company_name = company_name.getText();
+//            String c_company_phone = company_phone.getText();
+//            String c_company_loc = company_loc.getText();
+//            String c_checksum = checksum.getText();
+//            LocalDate c_reg_date = LocalDate.now();
+//
+//            if(c_fname.equals("")||c_lname.equals("")||c_mname.equals("")||gender.equals("")||c_dob==null||c_phone.equals("")||c_bank.equals("")||c_account_no.equals("")){
+//                Alert alert = new Alert(Alert.AlertType.WARNING);
+//                alert.setTitle("Empty Field");
+//                alert.setHeaderText(null);
+//                alert.setContentText("Please fill all fields!");
+//                alert.showAndWait();
+//            }else {
+//                DatabaseHandler db = new DatabaseHandler();
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                alert.setTitle("Registration Status");
+//                alert.setHeaderText(null);
+//                Result result = db.registerCustomer(c_fname,c_lname,c_mname,gender,c_dob,c_phone,c_email,c_postal,"",c_bank,c_account_no,c_company_name,c_company_phone,c_company_loc,c_checksum,c_reg_date);
+//                if(result.isSuccess()){
+//                    int mpya = result.getId();
+//                    fname.setText("");
+//                    lname.setText("");
+//                    mname.setText("");
+//                    genderChoice.selectToggle(null);
+//                    dob.setValue(null);
+//                    photoBtnTxt.setText("");
+//                    phone.setText("");
+//                    email.setText("");
+//                    postal.setText("");
+//                    bank.setText("");
+//                    account_no.setText("");
+//                    company_name.setText("");
+//                    company_phone.setText("");
+//                    company_loc.setText("");
+//                    checksum.setText("");
+//
+//                    try {
+//                        Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: MJ/U/"+userObject.get("id")+" registered Customer: MJ/C/"+mpya);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                    /**
+//                     * Needs Editing.
+//                     */
+//                    File newFile = new File("E:/MikopoPics",savedImage.getName());
+//                    if(savedImage.getName().endsWith("pg")) {
+//                        File dbFile1 = new File("E:/MikopoPics", "MJ.C."+mpya+".jpg");
+//                        newFile.renameTo(dbFile1);
+//                        db.updateProfPhoto(dbFile1.getName(),result.getId());
+//                    }
+//                    else{
+//                        File dbFile2 = new File("E:/MikopoPics","MJ.C."+mpya+".png");
+//                        newFile.renameTo(dbFile2);
+//                        db.updateProfPhoto(dbFile2.getName(),result.getId());
+//                    }
+//
+//                    alert.setContentText("Successful Registered!");
+//                    alert.showAndWait();
+//                }else{
+//                    alert.setContentText("Registration UnSuccessful!");
+//                    alert.showAndWait();
+//                }
+//            }
+//
+//        }
+        String c_fname = "";
+        String c_lname = "";
+        String c_mname = "";
+        String gender = "";
+        LocalDate c_dob = null;
+        String c_phone = "";
+        String c_email = "";
+        String c_postal = "";
+        String c_bank = "";
+        String c_account_no = "";
+        String c_company_name = "";
+        String c_company_phone = "";
+        String c_company_loc = "";
+        String c_checksum = "";
+        LocalDate c_reg_date = LocalDate.now();
 
-            if(c_fname.equals("")||c_lname.equals("")||c_mname.equals("")||gender.equals("")||c_dob==null||c_phone.equals("")||c_bank.equals("")||c_account_no.equals("")){
+            try{
+                c_fname = fname.getText();
+                c_lname = lname.getText();
+                c_mname = mname.getText();
+                RadioButton selectedRadioButton = (RadioButton) genderChoice.getSelectedToggle();
+                gender = selectedRadioButton.getText();
+                c_dob = dob.getValue();
+                String phone_string[] = phone.getText().split("-");
+                for(int i=0;i<phone_string.length;i++){
+                    c_phone = c_phone + phone_string[i];
+                }
+                c_email = email.getText();
+                c_postal = postal.getText();
+                c_bank = bank.getText();
+                c_account_no = account_no.getText();
+                c_company_name = company_name.getText();
+                c_company_phone = company_phone.getText();
+                c_company_loc = company_loc.getText();
+                c_checksum = checksum.getText();
+            }catch(Exception e){
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Empty Field");
+                alert.setHeaderText(null);
+                alert.setContentText("Please choose gender!");
+                alert.showAndWait();
+            }
+
+
+            if(c_fname.equals("")||c_lname.equals("")||c_mname.equals("")||gender.equals("")||c_dob==null||c_phone.equals("")||c_bank.equals("")||c_account_no.equals("")||savedImage==null){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Empty Field");
                 alert.setHeaderText(null);
@@ -270,7 +377,7 @@ public class RegisterCustomerController implements Initializable {
                     checksum.setText("");
 
                     try {
-                        Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: "+userObject.get("id")+" registered Customer: MJ/C/"+mpya);
+                        Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: MJ/U/"+userObject.get("id")+" registered Customer: MJ/C/"+mpya);
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (JSONException e) {
@@ -280,19 +387,22 @@ public class RegisterCustomerController implements Initializable {
                     /**
                      * Needs Editing.
                      */
-                    File newFile = new File("E:/MikopoPics",savedImage.getName());
+                    //File newFile = new File("E:/MikopoPics",savedImage.getName());
+                    File newFile = new File("C:/mikopo/MikopoPics",savedImage.getName());
                     if(savedImage.getName().endsWith("pg")) {
-                        File dbFile1 = new File("E:/MikopoPics", "MJ.C."+mpya+".jpg");
+                        //File dbFile1 = new File("E:/MikopoPics", "MJ.C."+mpya+".jpg");
+                        File dbFile1 = new File("C:/mikopo/MikopoPics", "MJ.C."+mpya+".jpg");
                         newFile.renameTo(dbFile1);
                         db.updateProfPhoto(dbFile1.getName(),result.getId());
                     }
                     else{
-                        File dbFile2 = new File("E:/MikopoPics","MJ.C."+mpya+".png");
+                        //File dbFile2 = new File("E:/MikopoPics","MJ.C."+mpya+".png");
+                        File dbFile2 = new File("C:/mikopo/MikopoPics","MJ.C."+mpya+".png");
                         newFile.renameTo(dbFile2);
                         db.updateProfPhoto(dbFile2.getName(),result.getId());
                     }
 
-                    alert.setContentText("Successful Registered!");
+                    alert.setContentText("Successful Registered!\nThe registered customer ID is: MJ/C/"+mpya);
                     alert.showAndWait();
                 }else{
                     alert.setContentText("Registration UnSuccessful!");
@@ -300,98 +410,133 @@ public class RegisterCustomerController implements Initializable {
                 }
             }
 
-        }
-
     }
 
     public void registerLoan(){
-        //Calendar calendar = Calendar.getInstance(Locale.getDefault());
-        LocalDate localDate = loanDate.getValue();
-        String monthEnd;
-        if(localDate.getDayOfMonth()<18){
-            monthEnd = localDate.plusMonths(1).withDayOfMonth(1).minusDays(1).toString();
-        }else{
-            monthEnd = localDate.plusMonths(2).withDayOfMonth(1).minusDays(1).toString();
+
+        String[] amountString = amountTxtField.getText().split(",");
+        String amounter = "";
+        for(int i=0;i<amountString.length;i++){
+            amounter = amounter + amountString[i];
         }
-        int l_borrower = Integer.parseInt(borrower.getText());
-        int l_amount = Integer.parseInt(amountTxtField.getText());
-        int l_duration = Integer.parseInt(durationTxtField.getText());
-        String l_date = loanDate.getValue().toString();
-        String l_dhamanaType = dhamanachoice.getValue().toString();
+
+        LocalDate localDate = null;
+        String monthEnd = "";
+        int l_borrower = 0;
+        double l_amount = 0;
+        int l_duration = 0;
+        String l_date = "";
+        String l_dhamanaType = "";
+        String l_propertyId = "";
+        String l_propertyName = "";
+        String l_desc = "";
+
         try{
-            l_memberId = Integer.parseInt(memberId.getText());
-        }catch (Exception e){
-            l_memberId = 0;
-        }
-        String l_propertyId = propertyId.getText();
-        String l_propertyName = propertyName.getText();
-        String l_desc = desc.getText();
-
-        DatabaseHandler db = new DatabaseHandler();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Registration Status");
-        alert.setHeaderText(null);
-
-        Result result = db.registerLoan(l_borrower,l_amount,l_duration,l_date,perMont,totalInt,monthEnd,l_dhamanaType,l_memberId,l_propertyId,l_propertyName,l_desc);
-        if(result.isSuccess()){
-            int mpya = result.getId();
-
-            try {
-                Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: "+userObject.get("id")+" registered Loan: MJ/L/"+mpya);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
+            localDate = loanDate.getValue();
+            if(localDate.getDayOfMonth()<18){
+                monthEnd = localDate.plusMonths(1).withDayOfMonth(1).minusDays(1).toString();
+            }else{
+                monthEnd = localDate.plusMonths(2).withDayOfMonth(1).minusDays(1).toString();
             }
+            l_borrower = Integer.parseInt(borrower.getText());
+            l_amount = Double.parseDouble(amounter);
+            l_duration = Integer.parseInt(durationTxtField.getText());
+            l_date = loanDate.getValue().toString();
+            l_dhamanaType = dhamanachoice.getValue().toString();
+            try{
+                l_memberId = Integer.parseInt(memberId.getText());
+            }catch (Exception e){
+                l_memberId = 0;
+            }
+            l_propertyId = propertyId.getText();
+            l_propertyName = propertyName.getText();
+            l_desc = desc.getText();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-            File newFile = new File("E:/MikopoFiles/mpya");
-            File dbFile1 = new File("E:/MikopoFiles/MJ.L."+result.getId());
-            newFile.renameTo(dbFile1);
-            db.updateLoanFile(dbFile1.getName(),result.getId());
-
-            alert.setContentText("Successful Registered!");
+        if(loanDate.getValue()==null||l_borrower==0||l_amount==0||l_duration==0||l_dhamanaType.toLowerCase().equals("chagua dhamana")){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Empty Field");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill all fields!");
             alert.showAndWait();
+        }else{
+            DatabaseHandler db = new DatabaseHandler();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Registration Status");
+            alert.setHeaderText(null);
 
-            borrower.setText("");
-            amountTxtField.setText("");
-            durationTxtField.setText("");
-            memberId.setText("");
-            propertyId.setText("");
-            propertyName.setText("");
-            desc.setText("");
-            perMonthTxtField.setText("");
-            actionTxt.setText("");
+            Result result = db.registerLoan(l_borrower,l_amount,l_duration,l_date,perMont,totalInt,monthEnd,l_dhamanaType,l_memberId,l_propertyId,l_propertyName,l_desc,db.getInterest());
+            if(result.isSuccess()){
+                int mpya = result.getId();
 
-        }else {
-            alert.setContentText("Registration UnSuccessful!");
-            alert.showAndWait();
+                try {
+                    Logger.write(userObject.get("fname")+" "+userObject.get("lname")+" "+"id: MJ/U/"+userObject.get("id")+" registered Loan: MJ/L/"+mpya);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+//                File newFile = new File("E:/MikopoFiles/mpya");
+//                File dbFile1 = new File("E:/MikopoFiles/MJ.L."+result.getId());
+                File newFile = new File("C:/mikopo/MikopoFiles/mpya");
+                File dbFile1 = new File("C:/mikopo/MikopoFiles/MJ.L."+result.getId());
+                newFile.renameTo(dbFile1);
+                db.updateLoanFile(dbFile1.getName(),result.getId());
+
+                alert.setContentText("Successful Registered!");
+                alert.showAndWait();
+
+                borrower.setText("");
+                amountTxtField.setText("");
+                durationTxtField.setText("");
+                memberId.setText("");
+                propertyId.setText("");
+                propertyName.setText("");
+                desc.setText("");
+                perMonthTxtField.setText("");
+                actionTxt.setText("");
+                dhamanachoice.setValue("Chagua Dhamana");
+                loanDate.setValue(null);
+
+            }else {
+                alert.setContentText("Registration UnSuccessful!");
+                alert.showAndWait();
+            }
         }
 
     }
 
     private void checkAmount() {
+        String[] amountString = amountTxtField.getText().split(",");
+        String amounter = "";
+        for(int i=0;i<amountString.length;i++){
+            amounter = amounter + amountString[i];
+        }
         try {
             total = 0;
-            double amount = Double.parseDouble(amountTxtField.getText());
+            double amount = Double.parseDouble(amounter);
             int duration = Integer.parseInt(durationTxtField.getText());
             double p1 = amount;
-            double i = 0.15;
+            db = new DatabaseHandler();
+            double i = db.getInterest()/100;
             int j;
             double repay;
 
             for (j = 1; j <= duration; j++) {
                 repay = (p1 / duration) + (amount * i);
-                //System.out.println(j + "  : " + repay);
+                System.out.println(j + "  : " + repay);
                 total = total + repay;
-                amount = amount - amount / duration;
+                amount = amount - p1 / duration;
             }
             totalInt = (int)Math.round(total);
             perMont = (int)Math.round(total/duration);
-//            System.out.println("total is :" + total);
-//            System.out.println("Amount per month :" +perMont);
-            perMonthTxtField.setText(""+perMont);
+            perMonthTxtField.setText(String.format("%,.0f", perMont));
         } catch (Exception e) {
-            System.out.println("Error");
+            e.printStackTrace();
+            perMonthTxtField.setText("");
         }
     }
 
@@ -406,11 +551,9 @@ public class RegisterCustomerController implements Initializable {
             propertyName.setDisable(false);
             memberId.setDisable(true);
         }else if(dhamana.equals("Chagua Dhamana")){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Please choice among the options");
-            alert.showAndWait();
+            memberId.setDisable(true);
+            propertyId.setDisable(true);
+            propertyName.setDisable(true);
         }else {
             memberId.setDisable(false);
             propertyId.setDisable(false);
@@ -428,7 +571,8 @@ public class RegisterCustomerController implements Initializable {
 
         if (selectedFiles != null) {
             try {
-                File dir = new File("E:/MikopoFiles/mpya");
+                //File dir = new File("E:/MikopoFiles/mpya");
+                File dir = new File("C:/mikopo/MikopoFiles/mpya");
                 dir.mkdir();
                 for (File srcFile: selectedFiles) {
                     if (!srcFile.isDirectory()) {
@@ -466,7 +610,8 @@ public class RegisterCustomerController implements Initializable {
 
         if (savedImage != null) {
             try {
-                Path target = Paths.get("E:/MikopoPics",savedImage.getName());
+                //Path target = Paths.get("E:/MikopoPics",savedImage.getName());
+                Path target = Paths.get("C:/mikopo/MikopoPics",savedImage.getName());
                 Files.copy(savedImage.toPath(),target, StandardCopyOption.REPLACE_EXISTING);
 
             }

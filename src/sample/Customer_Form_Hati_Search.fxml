@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="700.0" stylesheets="@Cssfile.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Custome_Form2Controller">
+    <children>
+        <VBox prefHeight="748.0" prefWidth="700.0">
+            <VBox prefHeight="-Infinity">
+                <children>
+                    <HBox alignment="CENTER_RIGHT" prefHeight="95.0" prefWidth="700.0" spacing="5" style="-fx-background-color: #424242;">
+                        <padding><Insets right="10" /></padding>
+                        <!--ChoiceBox fx:id="searchChoice"/-->
+                       <Label style="-fx-font: bold; -fx-font-size: 14px; -fx-font-family: sans-serif " text="Enter Loan Id :" textFill="White" />
+                       <TextField fx:id="searchTxt" />
+                       <Button fx:id="Search_Customer" onAction="#Search_Customer" style="-fx-background-color: #af4920" text="Fill Form" textFill="white" />
+                        <Button fx:id="PrintForm" onAction="#PrintForm" style="-fx-background-color: #D9853B" text="Print" textFill="white" />
+                    </HBox>
+                </children>
+            </VBox>
+            <StackPane fx:id="customer_Stack" alignment="CENTER" prefHeight="729.0" prefWidth="700.0">
+           <!--<Label alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="781.0" style="-fx-font-size: 18px" text="HATI YA MIKOPO" textAlignment="CENTER" />-->
+            <Pane fx:id="CustomerPane" prefHeight="696.0" prefWidth="680.0" StackPane.alignment="CENTER">
+         <Label contentDisplay="CENTER" layoutX="19.0" layoutY="119.0" lineSpacing="2.0" prefHeight="27.0" prefWidth="90.0" text="Mimi" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+            <Label layoutX="317.0" layoutY="150.0" lineSpacing="2.0" prefHeight="27.0" prefWidth="67.0" text="Check No" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+            <Label layoutX="19.0" layoutY="186.0" lineSpacing="2.0" prefHeight="17.0" prefWidth="54.0" text="Simu No" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+            <Label layoutX="241.0" layoutY="186.0" lineSpacing="2.0" prefHeight="17.0" prefWidth="90.0" text="Mahali Pa Kazi" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+            <Label layoutX="22.0" layoutY="216.0" lineSpacing="2.0" prefHeight="17.0" prefWidth="54.0" text="Kata Ya" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+            <Label layoutX="258.0" layoutY="215.0" lineSpacing="2.0" prefHeight="20.0" prefWidth="67.0" text="Wilaya Ya" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+            <Label layoutX="14.0" layoutY="255.0" lineSpacing="2.0" prefHeight="33.0" prefWidth="158.0" text="Ninaomba mkopo wa TSH" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+            <Label layoutX="13.0" layoutY="284.0" lineSpacing="2.0" prefHeight="33.0" prefWidth="144.0" text="Nitakazo lipa Kwa miezi" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+            <Label layoutX="252.0" layoutY="284.0" lineSpacing="2.0" prefHeight="33.0" prefWidth="134.0" text="Ambazo zitalipwa Tsh. " textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+            <Label layoutX="485.0" layoutY="289.0" lineSpacing="2.0" prefHeight="33.0" prefWidth="90.0" text="Kwa Kila mwezi" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+               <Label layoutX="19.0" layoutY="390.0" lineSpacing="2.0" prefHeight="33.0" prefWidth="872.0" text="lote lililobaki na endapo sitakuwa nimelipa kwa muda tuliokubaliana na mwezi kupita, hilo deni" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial" size="12.0" />
+                  </font>
+               </Label>
+               <Label layoutX="14.0" layoutY="407.0" lineSpacing="2.0" prefHeight="33.0" prefWidth="618.0" text=" nilipe kwa faini ya asilimia (50%). Ninakubaliana na sheria zote zinazohusu mkopo na makato yake." textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial" size="12.0" />
+                  </font></Label>
+               <Label layoutX="16.0" layoutY="651.0" lineSpacing="2.0" prefHeight="20.0" prefWidth="54.0" text="1. JINA " textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+               <Label layoutX="14.0" layoutY="669.0" lineSpacing="2.0" prefHeight="27.0" prefWidth="216.0" text="2. JINA " textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+               <Label layoutX="58.0" layoutY="653.0" prefHeight="17.0" prefWidth="207.0" text=".............................................................................................." />
+               <Label layoutX="54.0" layoutY="669.0" prefHeight="27.0" prefWidth="207.0" text=".............................................................................................." />
+               <Label layoutX="264.0" layoutY="651.0" lineSpacing="2.0" prefHeight="20.0" prefWidth="41.0" text="SAINI" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+               <Label layoutX="300.0" layoutY="652.0" prefHeight="20.0" prefWidth="101.0" text="......................................" />
+               <Label layoutX="259.0" layoutY="673.0" lineSpacing="2.0" prefHeight="20.0" prefWidth="38.0" text="SAINI" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font></Label>
+               <Label layoutX="300.0" layoutY="673.0" prefHeight="20.0" prefWidth="101.0" text="...................................." />
+               <Label alignment="CENTER" layoutX="135.0" layoutY="14.0" prefHeight="27.0" prefWidth="341.0" text="MONIJOH AND J FIVE (MFC) LTD">
+                  <font>
+                     <Font name="System Bold" size="13.0" />
+                  </font></Label>
+               <Label alignment="CENTER" layoutX="207.0" layoutY="41.0" prefHeight="20.0" prefWidth="216.0" text="P.O.BOX129,BUNDA-MARA" />
+               <Label alignment="CENTER" layoutX="185.0" layoutY="61.0" prefHeight="20.0" prefWidth="262.0" text="FOMU YA MAOMBI YA MKOPO" textAlignment="RIGHT" underline="true">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font></Label>
+               <Label fx:id="fullname" alignment="CENTER" layoutX="78.0" layoutY="115.0" prefHeight="25.0" prefWidth="193.0" />
+               <Label fx:id="amountBorrowed" alignment="CENTER" layoutX="179.0" layoutY="255.0" prefHeight="25.0" prefWidth="172.0" />
+               <Label fx:id="checkNo" alignment="CENTER" layoutX="372.0" layoutY="148.0" prefHeight="25.0" prefWidth="182.0" />
+               <Label fx:id="companyName" alignment="CENTER" layoutX="338.0" layoutY="174.0" prefHeight="25.0" prefWidth="271.0" />
+               <Label alignment="CENTER" layoutX="301.0" layoutY="122.0" prefHeight="20.0" prefWidth="77.0" text="Tarehe" textAlignment="RIGHT" underline="true">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label fx:id="dt_of_loan" layoutX="378.0" layoutY="120.0" prefHeight="25.0" prefWidth="77.0" underline="true" />
+               <Label alignment="CENTER" layoutX="78.0" layoutY="212.0" prefHeight="25.0" prefWidth="172.0" text="................................................................." />
+               <Label alignment="CENTER" layoutX="317.0" layoutY="214.0" prefHeight="25.0" prefWidth="124.0" text="............................................" />
+               <Label layoutX="444.0" layoutY="216.0" lineSpacing="2.0" prefHeight="17.0" prefWidth="38.0" text="Mkoa" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label alignment="CENTER" layoutX="479.0" layoutY="214.0" prefHeight="25.0" prefWidth="101.0" text="................................................................." />
+               <Label fx:id="phone" alignment="CENTER" layoutX="74.0" layoutY="177.0" prefHeight="25.0" prefWidth="152.0" />
+               <Label fx:id="duration" alignment="CENTER" layoutX="154.0" layoutY="288.0" prefHeight="25.0" prefWidth="101.0" />
+               <Label fx:id="perMonth" alignment="CENTER" layoutX="388.0" layoutY="288.0" prefHeight="25.0" prefWidth="90.0" />
+               <Separator layoutX="74.0" layoutY="137.0" prefWidth="200.0" />
+               <Separator layoutX="71.0" layoutY="200.0" prefHeight="3.0" prefWidth="158.0" />
+               <Separator layoutX="373.0" layoutY="172.0" prefHeight="3.0" prefWidth="182.0" />
+               <Separator layoutX="338.0" layoutY="199.0" prefHeight="3.0" prefWidth="236.0" />
+               <Separator layoutX="173.0" layoutY="275.0" prefHeight="10.0" prefWidth="182.0" />
+               <Separator layoutX="150.0" layoutY="308.0" prefHeight="3.0" prefWidth="101.0" />
+               <Separator layoutX="382.0" layoutY="305.0" prefHeight="10.0" prefWidth="101.0" />
+               <Label contentDisplay="CENTER" layoutX="19.0" layoutY="147.0" lineSpacing="2.0" prefHeight="27.0" prefWidth="172.0" text="Namba  ya Kitambulisho" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label fx:id="customerId" alignment="CENTER" layoutX="169.0" layoutY="142.0" prefHeight="27.0" prefWidth="144.0" />
+               <Separator layoutX="169.0" layoutY="167.0" prefHeight="3.0" prefWidth="144.0" />
+               <Label layoutX="13.0" layoutY="71.0" prefHeight="27.0" prefWidth="193.0" text="*Kabla hujajaza fomu isome vizuri*">
+                  <font>
+                     <Font name="System Italic" size="12.0" />
+                  </font>
+               </Label>
+               <Label layoutX="13.0" layoutY="101.0" prefHeight="20.0" prefWidth="200.0" text="(1) MAELEZO BINAFSI">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Label>
+               <Label layoutX="14.0" layoutY="231.0" prefHeight="25.0" prefWidth="341.0" text="(2) MAOMBI YA MKOPO">
+                   <font>
+                       <Font name="System Bold" size="14.0" />
+                   </font>
+               </Label>
+               <Label layoutX="15.0" layoutY="317.0" prefHeight="25.0" prefWidth="236.0" text="(3) DHAMANA YA MKOPO ">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Label>
+               <Label layoutX="17.0" layoutY="345.0" prefHeight="17.0" prefWidth="158.0" text="Dhamana ya mkopo huu ni " />
+               <Label fx:id="dhamana_ya_mkopo" layoutX="180.0" layoutY="343.0" prefHeight="17.0" prefWidth="200.0" />
+               <Separator layoutX="177.0" layoutY="354.0" prefHeight="10.0" prefWidth="200.0" />
+               <Label layoutX="18.0" layoutY="364.0" prefHeight="17.0" prefWidth="566.0" text="Kwa akili zangu timamu na bila kushinikizwa na mtu ninathibitisha kuwa maelezo niliyotoa hapo juu ni ya" />
+               <Label layoutX="19.0" layoutY="381.0" prefHeight="17.0" prefWidth="594.0" text="kweli na hivyo basi iwapo nitatakiwa kuhama Wilaya/Mkoa au kuhamishwa/kuacha kazi; nitalazimika kulipa deni " />
+               <Label layoutX="22.0" layoutY="432.0" prefHeight="25.0" prefWidth="29.0" text="Jina ">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Separator layoutX="49.0" layoutY="449.0" prefHeight="10.0" prefWidth="182.0" />
+               <Label fx:id="fullname1" layoutX="51.0" layoutY="435.0" prefHeight="17.0" prefWidth="182.0" />
+               <Label layoutX="277.0" layoutY="441.0" prefHeight="20.0" prefWidth="90.0" text="......................................" />
+               <Label layoutX="235.0" layoutY="439.0" lineSpacing="2.0" prefHeight="20.0" prefWidth="41.0" text="SAINI" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label layoutX="371.0" layoutY="441.0" prefHeight="17.0" prefWidth="54.0" text="Tarehe">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label layoutX="413.0" layoutY="443.0" prefHeight="17.0" prefWidth="124.0" text="..........................................." />
+               <Label layoutX="15.0" layoutY="459.0" prefHeight="25.0" prefWidth="236.0" text="(4) MDHAMINI">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Label>
+               <Label layoutX="14.0" layoutY="619.0" prefHeight="25.0" prefWidth="410.0" text="(5) KWA MATUMIZI YA OFISI TU. (WALIOPITISHA MKOPO)">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Label>
+               <Label layoutX="16.0" layoutY="484.0" prefHeight="17.0" prefWidth="101.0" text="Jina La Mdhamini">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label fx:id="mdhamini_Name" layoutX="126.0" layoutY="483.0" prefHeight="17.0" prefWidth="193.0" />
+               <Separator layoutX="120.0" layoutY="500.0" prefHeight="3.0" prefWidth="193.0" />
+               <Label layoutX="324.0" layoutY="485.0" prefHeight="17.0" prefWidth="29.0" text="Kazi">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font></Label>
+               <Separator layoutX="281.0" layoutY="530.0" prefHeight="3.0" prefWidth="193.0" />
+               <Label fx:id="mdhamini_company" layoutX="287.0" layoutY="512.0" prefHeight="17.0" prefWidth="183.0" />
+               <Label layoutX="18.0" layoutY="512.0" lineSpacing="2.0" prefHeight="27.0" prefWidth="67.0" text="Check No" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label fx:id="mdhamini_checkNo" layoutX="85.0" layoutY="515.0" prefHeight="17.0" prefWidth="101.0" />
+               <Separator layoutX="80.0" layoutY="531.0" prefHeight="3.0" prefWidth="111.0" />
+               <Label layoutX="194.0" layoutY="516.0" lineSpacing="2.0" prefHeight="17.0" prefWidth="90.0" text="Mahali Pa Kazi" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label layoutX="353.0" layoutY="486.0" prefHeight="20.0" prefWidth="193.0" text="........................................................................." />
+               <Label layoutX="478.0" layoutY="517.0" lineSpacing="2.0" prefHeight="17.0" prefWidth="54.0" text="Makazi" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label layoutX="520.0" layoutY="516.0" prefHeight="20.0" prefWidth="101.0" text="......................................" />
+               <Label layoutX="14.0" layoutY="539.0" prefHeight="17.0" prefWidth="207.0" text="Ninamdhamini mkopaji kiasi cha Tsh" />
+               <Label fx:id="amountBorrowed1" alignment="CENTER" layoutX="213.0" layoutY="533.0" prefHeight="25.0" prefWidth="90.0" />
+               <Separator layoutX="207.0" layoutY="546.0" prefHeight="17.0" prefWidth="101.0" />
+               <Label layoutX="311.0" layoutY="539.0" prefHeight="17.0" prefWidth="207.0" text="hivyo nitawajibika kuulipa mkopo huu  " />
+               <Label layoutX="14.0" layoutY="558.0" prefHeight="17.0" prefWidth="605.0" text="kupitia mshahara wangu au kwa njia ya dhamana nyingine endapo mkopaji atashindwa au atakataa kuulipa " />
+               <Label layoutX="16.0" layoutY="574.0" prefHeight="17.0" prefWidth="450.0" text="mkopo. Dhamana yangu ni Mshahara/ Mali zangu." />
+               <Label layoutX="22.0" layoutY="591.0" lineSpacing="2.0" prefHeight="20.0" prefWidth="41.0" text="SAINI" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Label layoutX="63.0" layoutY="591.0" prefHeight="20.0" prefWidth="172.0" text="............................................................." />
+               <Label layoutX="227.0" layoutY="593.0" prefHeight="17.0" prefWidth="41.0" text="Tarehe" />
+               <Label layoutX="272.0" layoutY="593.0" text="......................................." />
+               <Label layoutX="401.0" layoutY="653.0" text="Tarehe" />
+               <Label layoutX="401.0" layoutY="674.0" text="Tarehe" />
+               <Label layoutX="448.0" layoutY="654.0" prefHeight="17.0" prefWidth="90.0" text=".................................." />
+               <Label layoutX="448.0" layoutY="674.0" prefHeight="17.0" prefWidth="90.0" text=".................................." />
+               <Label layoutX="360.0" layoutY="257.0" lineSpacing="2.0" prefHeight="33.0" prefWidth="158.0" text="Ambao nitarejesha TSH" textAlignment="CENTER">
+                  <font>
+                     <Font name="Arial Bold" size="12.0" />
+                  </font>
+               </Label>
+               <Separator layoutX="500.0" layoutY="275.0" prefHeight="10.0" prefWidth="144.0" />
+               <Label fx:id="amount_return" alignment="CENTER" layoutX="500.0" layoutY="255.0" prefHeight="25.0" prefWidth="144.0" />
+               <StackPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </StackPane.margin>
+            </Pane>
+            </StackPane>
+        </VBox>
+    </children>
+</StackPane>

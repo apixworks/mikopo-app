@@ -45,8 +45,9 @@
                             <TableColumn fx:id="due_per_month" prefWidth="20.0" text="Per_Month" />
                             <TableColumn fx:id="due_due" prefWidth="75.0" text="Due" />
                             <TableColumn fx:id="due_last_paymonth" prefWidth="75.0" text="LastPay_Date" />
-                            <TableColumn fx:id="due_amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
                             <TableColumn fx:id="due_last_pay" prefWidth="75.0" text="Last_Payment" />
+                            <TableColumn fx:id="due_amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
+                            <TableColumn fx:id="due_fine" prefWidth="75.0" text="Fine_Payment" />
                             <TableColumn fx:id="due_amount_rem" prefWidth="75.0" text="Amount_Remaining" />
                             <TableColumn fx:id="due_status" prefWidth="75.0" text="Status" />
                             <TableColumn fx:id="due_action" prefWidth="75.0" text="Action" />
@@ -78,8 +79,9 @@
                         <TableColumn fx:id="one_per_month" prefWidth="20.0" text="Per_Month" />
                         <TableColumn fx:id="one_due" prefWidth="75.0" text="Due" />
                         <TableColumn fx:id="one_last_paymonth" prefWidth="75.0" text="LastPay_Date" />
-                        <TableColumn fx:id="one_amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
                         <TableColumn fx:id="one_last_pay" prefWidth="75.0" text="Last_Payment" />
+                        <TableColumn fx:id="one_amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
+                        <TableColumn fx:id="one_fine" prefWidth="75.0" text="Fine_Payment" />
                         <TableColumn fx:id="one_amount_rem" prefWidth="75.0" text="Amount_Remaining" />
                         <TableColumn fx:id="one_status" prefWidth="75.0" text="Status" />
                         <TableColumn fx:id="one_action" prefWidth="75.0" text="Action" />
@@ -111,8 +113,9 @@
                         <TableColumn fx:id="two_per_month" prefWidth="20.0" text="Per_Month" />
                         <TableColumn fx:id="two_due" prefWidth="75.0" text="Due" />
                         <TableColumn fx:id="two_last_paymonth" prefWidth="75.0" text="LastPay_Date" />
-                        <TableColumn fx:id="two_amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
                         <TableColumn fx:id="two_last_pay" prefWidth="75.0" text="Last_Payment" />
+                        <TableColumn fx:id="two_amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
+                        <TableColumn fx:id="two_fine" prefWidth="75.0" text="Fine_Payment" />
                         <TableColumn fx:id="two_amount_rem" prefWidth="75.0" text="Amount_Remaining" />
                         <TableColumn fx:id="two_status" prefWidth="75.0" text="Status" />
                         <TableColumn fx:id="two_action" prefWidth="75.0" text="Action" />
@@ -144,8 +147,9 @@
                             <TableColumn fx:id="penalty_per_month" prefWidth="20.0" text="Per_Month" />
                             <TableColumn fx:id="penalty_due" prefWidth="75.0" text="Due" />
                             <TableColumn fx:id="penalty_last_paymonth" prefWidth="75.0" text="LastPay_Date" />
-                            <TableColumn fx:id="penalty_amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
                             <TableColumn fx:id="penalty_last_pay" prefWidth="75.0" text="Last_Payment" />
+                            <TableColumn fx:id="penalty_amount_paid" minWidth="0.0" prefWidth="129.0" text="Amount_Paid" />
+                            <TableColumn fx:id="penalty_fine" prefWidth="75.0" text="Fine_Payment" />
                             <TableColumn fx:id="penalty_amount_rem" prefWidth="75.0" text="Amount_Remaining" />
                             <TableColumn fx:id="penalty_status" prefWidth="75.0" text="Status" />
                             <TableColumn fx:id="penalty_action" prefWidth="75.0" text="Action" />

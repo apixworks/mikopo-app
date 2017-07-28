@@ -19,23 +19,12 @@ public class Loan {
     public final StringProperty last_paymonth;
     public final StringProperty amount_paid;
     public final StringProperty last_pay;
+    public final StringProperty fine;
     public final StringProperty amount_rem;
     public final StringProperty status;
 
-    public String getAmount_rem() {
-        return amount_rem.get();
-    }
-
-    public StringProperty amount_remProperty() {
-        return amount_rem;
-    }
-
-    public void setAmount_rem(String amount_rem) {
-        this.amount_rem.set(amount_rem);
-    }
-
     public Loan(String l_no, String l_borrower, String l_date, double interest, String amount, int duration, String total_pay,
-                String per_month, String due, String last_paymonth, String amount_paid, String last_pay,String amount_rem, String status, String l_borrower_phone) {
+                String per_month, String due, String last_paymonth, String amount_paid, String last_pay, String amount_rem, String status, String l_borrower_phone, String fine) {
         this.l_no = new SimpleStringProperty(l_no);
         this.l_borrower = new SimpleStringProperty(l_borrower);
         this.l_borrower_phone = new SimpleStringProperty(l_borrower_phone);
@@ -49,6 +38,8 @@ public class Loan {
         this.last_paymonth = new SimpleStringProperty(last_paymonth);
         this.amount_paid = new SimpleStringProperty(amount_paid);
         this.last_pay = new SimpleStringProperty(last_pay);
+
+        this.fine = new SimpleStringProperty(fine);
         this.amount_rem = new SimpleStringProperty(amount_rem);
         this.status = new SimpleStringProperty(status);
     }
@@ -219,5 +210,29 @@ public class Loan {
 
     public void setLast_paymonth(String last_paymonth) {
         this.last_paymonth.set(last_paymonth);
+    }
+
+    public String getAmount_rem() {
+        return amount_rem.get();
+    }
+
+    public StringProperty amount_remProperty() {
+        return amount_rem;
+    }
+
+    public void setAmount_rem(String amount_rem) {
+        this.amount_rem.set(amount_rem);
+    }
+
+    public String getFine() {
+        return fine.get();
+    }
+
+    public StringProperty fineProperty() {
+        return fine;
+    }
+
+    public void setFine(String fine) {
+        this.fine.set(fine);
     }
 }

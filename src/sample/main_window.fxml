@@ -18,6 +18,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.Label?>
 <BorderPane fx:id="borderP" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainWindowController">
     <stylesheets>
         <URL value="@Cssfile.css" />
@@ -26,28 +27,14 @@
     <top>
       <VBox prefHeight="100.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
+             <HBox alignment="CENTER_RIGHT" prefHeight="200.0" spacing="365" style="-fx-background-color: #74AFAD; -fx-font-size: 18px">
+                 <padding><Insets right="10" /></padding>
+
+                 <Label style="-fx-text-fill: WHITE; -fx-end-margin: 90px; -fx-font-size: 30px; " text="MONIJOH &amp; J FIVE MFC LIMITED" />
+
             <Pane nodeOrientation="RIGHT_TO_LEFT" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #74AFAD;">
                <children>
-                  <MenuButton fx:id="profBtn" alignment="TOP_RIGHT" layoutX="20.0" layoutY="21.0" mnemonicParsing="false" style="-fx-background-color: #D9853B;" text="Hi!" textFill="WHITE">
+                  <MenuButton fx:id="profBtn" alignment="TOP_RIGHT" layoutX="20.0" layoutY="41.0" mnemonicParsing="false" style="-fx-background-color: #D9853B;" text="Hi!" textFill="WHITE">
                       <graphic>
                           <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                   <Image url="@icons/account.png" />
@@ -57,7 +44,9 @@
                </children>
                <VBox.margin>
                   <Insets />
-               </VBox.margin></Pane>
+               </VBox.margin>
+            </Pane>
+             </HBox>
          </children>
       </VBox>
    </top>
