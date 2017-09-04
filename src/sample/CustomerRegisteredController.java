@@ -129,7 +129,7 @@ public class CustomerRegisteredController implements Initializable {
             //series2.setName("Customer registered Per Month");
             //customerChart.setStyle("");
             conn=connectDb();
-            String select="select count(id) AS usid,MONTHName(reg_date) AS monthna,YEAR(reg_date) AS yearna from customers WHERE YEAR(reg_date)='"+yr+"'  Group by Month(reg_date),YEAR(re_date) ORDER BY YEAR(reg_date) asc,MONTH (reg_date) ASC ";
+            String select="select count(id) AS usid,MONTHName(reg_date) AS monthna,YEAR(reg_date) AS yearna from customers WHERE YEAR(reg_date)='"+yr+"'  Group by Month(reg_date),YEAR(reg_date) ORDER BY YEAR(reg_date) asc,MONTH (reg_date) ASC ";
             st=conn.createStatement();
             ResultSet rs=st.executeQuery(select);
             while(rs.next()){

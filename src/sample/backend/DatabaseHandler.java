@@ -947,7 +947,7 @@ public class DatabaseHandler {
 
     public void checkIfLoanDone(int id){
         String checkLoanSql = "SELECT DISTINCT TOTAL_PAYMENT,AMOUNT_PAID FROM LOANS WHERE LOAN_ID="+id;
-        String updateStatusSql = "UPDATE LOANS SET status='done',due='0000-00-00' WHERE LOAN_ID="+id;
+        String updateStatusSql = "UPDATE LOANS SET status='done' WHERE LOAN_ID="+id;
 
         try{
             PreparedStatement ps = createConn().prepareStatement(checkLoanSql);

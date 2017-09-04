@@ -11,8 +11,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,7 +20,6 @@ import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
