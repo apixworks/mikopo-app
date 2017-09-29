@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="700.0" stylesheets="@Cssfile.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Custome_Form2Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="700.0" stylesheets="@../Cssfile.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Custome_Form2Controller">
     <children>
         <VBox prefHeight="748.0" prefWidth="700.0">
             <VBox prefHeight="-Infinity">

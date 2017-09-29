@@ -1,11 +1,11 @@
-package sample;
+package sample.models;
 
 /**
  * Created by Apix on 21/05/2017.
  */
 public class Result {
-    int id;
-    boolean success;
+    public int id;
+    public boolean success;
 
     public int getId() {
         return id;

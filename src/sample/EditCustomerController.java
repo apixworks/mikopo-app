@@ -12,7 +12,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sample.Logger;
 import sample.backend.DatabaseHandler;
+import sample.models.EditCustomer;
 
 import java.io.File;
 import java.io.IOException;

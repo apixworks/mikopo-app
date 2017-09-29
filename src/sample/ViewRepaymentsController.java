@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,9 +18,10 @@ import javafx.util.Callback;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
+import sample.models.Loan;
+
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -232,7 +235,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("repayment_form.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/repayment_form.fxml"));
             stage.setTitle("MikopoApp");
             Scene repaymentScene = new Scene(fxmlLoader.load(),600,400);
             stage.setScene(repaymentScene);
@@ -885,11 +888,23 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
     }
 
     public void searchLoan(){
-        int loan_id = Integer.parseInt(searchLoanTxt.getText());
-        setUpDue();
+        ObservableList<Loan> loans = FXCollections.observableArrayList();
         DatabaseHandler db = new DatabaseHandler();
-        due_table.setItems(null);
-        due_table.setItems(db.searchLoan(loan_id));
+        if(Checker.isStringInt(searchLoanTxt.getText())){
+            int loan_id = Integer.parseInt(searchLoanTxt.getText());
+            setUpDue();
+            due_table.setItems(null);
+            due_table.setItems(db.searchLoan(loan_id));
+        }else{
+            for(Loan loan : db.loadLoans()){
+                if(loan.getL_borrower().toLowerCase().contains(searchLoanTxt.getText())){
+                    loans.add(loan);
+                }
+            }
+            setUpDue();
+            due_table.setItems(null);
+            due_table.setItems(loans);
+        }
     }
 
     public void refreshDue(){
@@ -953,7 +968,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sms_edit.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/sms_edit.fxml"));
             stage.setTitle("MikopoApp");
             Scene repaymentScene = new Scene(fxmlLoader.load(),430,285);
             stage.setScene(repaymentScene);

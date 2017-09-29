@@ -2,7 +2,6 @@ package sample;
 
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -17,6 +16,10 @@ import javafx.util.Callback;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sample.models.BorrowerIDAndName;
+import sample.Checker;
+import sample.Logger;
+import sample.models.Result;
 import sample.backend.DatabaseHandler;
 import java.io.File;
 import java.io.IOException;

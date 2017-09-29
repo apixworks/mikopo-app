@@ -21,7 +21,7 @@
 <?import javafx.scene.control.Label?>
 <BorderPane fx:id="borderP" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainWindowController">
     <stylesheets>
-        <URL value="@Cssfile.css" />
+        <URL value="@../Cssfile.css" />
     </stylesheets>
 
     <top>
@@ -37,7 +37,7 @@
                   <MenuButton fx:id="profBtn" alignment="TOP_RIGHT" layoutX="20.0" layoutY="41.0" mnemonicParsing="false" style="-fx-background-color: #D9853B;" text="Hi!" textFill="WHITE">
                       <graphic>
                           <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                  <Image url="@icons/account.png" />
+                                  <Image url="@../icons/account.png" />
                           </ImageView>
                       </graphic>
                   </MenuButton>
@@ -52,7 +52,7 @@
    </top>
 
    <left>
-       <VBox id="navigation" prefHeight="100.0" prefWidth="200.0" spacing="20" style="-fx-border-color: #74AFAD; border-width: 2px;" stylesheets="@Cssfile.css" BorderPane.alignment="CENTER">
+       <VBox id="navigation" prefHeight="100.0" prefWidth="200.0" spacing="20" style="-fx-border-color: #74AFAD; border-width: 2px;" stylesheets="@../Cssfile.css" BorderPane.alignment="CENTER">
            <padding><Insets left="25" right="25" /></padding>
 
            <Text id="menuTxt" fx:id="menuTxt" style="-fx-font-size: 32px; -fx-effect: inner shadow(three-pass-box,rgba(0,0,0,0.7),6,0.0,0,2); -fx-fill: gray" text="Menu" />
@@ -62,7 +62,7 @@
                <graphic>
                    <ImageView fitHeight="53.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                        <image>
-                           <Image url="@icons/add_account.png" />
+                           <Image url="@../icons/add_account.png" />
                        </image>
                    </ImageView>
                </graphic>
@@ -72,7 +72,7 @@
                <graphic>
                    <ImageView fitHeight="53.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                        <image>
-                           <Image url="@icons/view_account.png" />
+                           <Image url="@../icons/view_account.png" />
                        </image>
                    </ImageView>
                </graphic>
@@ -82,7 +82,7 @@
                <graphic>
                    <ImageView fitHeight="53.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                        <image>
-                           <Image url="@icons/cash-multiple.png" />
+                           <Image url="@../icons/cash-multiple.png" />
                        </image>
                    </ImageView>
                </graphic>
@@ -92,7 +92,7 @@
                <graphic>
                    <ImageView fitHeight="53.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                        <image>
-                           <Image url="@icons/view_repot.png" />
+                           <Image url="@../icons/view_repot.png" />
                        </image>
                    </ImageView>
                </graphic>
@@ -102,7 +102,7 @@
                <graphic>
                    <ImageView fitHeight="53.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                        <image>
-                           <Image url="@icons/account-admin.png" />
+                           <Image url="@../icons/account-admin.png" />
                        </image>
                    </ImageView>
                </graphic>

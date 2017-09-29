@@ -22,7 +22,12 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sample.*;
 import sample.backend.DatabaseHandler;
+import sample.models.LoanRelease;
+import sample.models.Repayment_Collected;
+import sample.models.Result;
+import sample.models.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -240,7 +245,7 @@ public class AdminController implements Initializable {
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewReportTables.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/ViewReportTables.fxml"));
             stage.setTitle("MikopoApp");
             //stage.setResizable(false);
             stage.isFullScreen();
@@ -306,7 +311,7 @@ public class AdminController implements Initializable {
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoanRelease.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/LoanRelease.fxml"));
             stage.setTitle("MikopoApp");
             //stage.setResizable(false);
             stage.isFullScreen();

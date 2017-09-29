@@ -1,4 +1,4 @@
-package sample;
+package sample.models;
 
 import java.sql.Date;
 
@@ -6,23 +6,23 @@ import java.sql.Date;
  * Created by Apix on 26/05/2017.
  */
 public class EditCustomer {
-    String fname;
-    String mname;
-    String lname;
-    String gender;
-    Date dob;
-    String phone;
-    String email;
-    String postal;
-    String profPhoto;
-    String bank;
-    String acc_no;
-    String company_name;
-    String company_phone;
-    String company_loc;
-    String checknumber;
-    int num_loans;
-    int num_done_loans;
+    public String fname;
+    public String mname;
+    public String lname;
+    public String gender;
+    public Date dob;
+    public String phone;
+    public String email;
+    public String postal;
+    public String profPhoto;
+    public String bank;
+    public String acc_no;
+    public String company_name;
+    public String company_phone;
+    public String company_loc;
+    public String checknumber;
+    public int num_loans;
+    public int num_done_loans;
 
     public EditCustomer(String fname, String mname, String lname, String gender, Date dob, String phone, String email,
                         String postal, String profPhoto, String bank, String acc_no, String company_name, String company_phone,

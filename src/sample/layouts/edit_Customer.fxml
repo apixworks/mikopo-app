@@ -16,7 +16,7 @@
                     <Font size="23.0" />
                 </font></Text>
             <Pane layoutX="82.0" layoutY="40.0" prefHeight="531.0" prefWidth="929.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
-                <Label id="formtext" layoutX="29.0" layoutY="25.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@Cssfile.css" text="Personal Information" textFill="#554640" />
+                <Label id="formtext" layoutX="29.0" layoutY="25.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@../Cssfile.css" text="Personal Information" textFill="#554640" />
                 <Label layoutX="40.0" layoutY="49.0" text="NAME" />
                 <TextField fx:id="fname" editable="false" layoutX="40.0" layoutY="73.0" promptText="First Name" />
                 <TextField fx:id="mname" editable="false" layoutX="222.0" layoutY="73.0" promptText="Middle Name" />
@@ -31,12 +31,12 @@
                 <Label layoutX="474.0" layoutY="183.0" text="POSTAL ADDRESS" />
                 <TextField fx:id="postal" layoutX="465.0" layoutY="208.0" prefHeight="25.0" prefWidth="198.0" />
                 <Label layoutX="737.0" layoutY="27.0" text="BORROWER PHOTO" />
-                <Label id="formtext" layoutX="36.0" layoutY="269.0" stylesheets="@Cssfile.css" text="Bank Information" />
+                <Label id="formtext" layoutX="36.0" layoutY="269.0" stylesheets="@../Cssfile.css" text="Bank Information" />
                 <Label layoutX="47.0" layoutY="295.0" text="BANK" />
                 <TextField fx:id="bank" layoutX="43.0" layoutY="320.0" prefHeight="25.0" prefWidth="180.0" />
                 <Label layoutX="281.0" layoutY="295.0" text="ACCOUNT NUMBER" />
                 <TextField fx:id="account_no" layoutX="277.0" layoutY="320.0" prefHeight="25.0" prefWidth="188.0" />
-                <Label id="formtext" layoutX="37.0" layoutY="375.0" stylesheets="@Cssfile.css" text="Working Details" />
+                <Label id="formtext" layoutX="37.0" layoutY="375.0" stylesheets="@../Cssfile.css" text="Working Details" />
                 <Label layoutX="50.0" layoutY="401.0" text="COMPANY NAME" />
                 <TextField fx:id="company_name" layoutX="45.0" layoutY="426.0" prefHeight="25.0" prefWidth="201.0" />
                 <Label layoutX="320.0" layoutY="401.0" text="COMPANY LOCATION" />

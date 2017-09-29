@@ -13,7 +13,11 @@ import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sample.models.BorrowerIDAndName;
+import sample.Checker;
+import sample.Logger;
 import sample.backend.DatabaseHandler;
+import sample.models.EditLoan;
 
 import java.io.File;
 import java.io.IOException;

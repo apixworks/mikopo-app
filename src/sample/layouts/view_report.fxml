@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="customer_Stackpane" prefHeight="600.0" prefWidth="1100.0" stylesheets="@Cssfile.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewReportController">
+<StackPane fx:id="customer_Stackpane" prefHeight="600.0" prefWidth="1100.0" stylesheets="@../Cssfile.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewReportController">
    <children>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>

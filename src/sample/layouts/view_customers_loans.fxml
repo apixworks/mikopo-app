@@ -16,7 +16,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
-<StackPane prefHeight="600.0" prefWidth="1100.0" stylesheets="@Cssfile.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewCustomersLoansController">
+<StackPane prefHeight="600.0" prefWidth="1100.0" stylesheets="@../Cssfile.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewCustomersLoansController">
    <children>
              <JFXTabPane  prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
                  <tabs>
@@ -30,7 +30,7 @@
                                      <JFXButton buttonType="RAISED" ripplerFill="aliceblue" mnemonicParsing="false" onAction="#refreshLoans" style="-fx-background-color: #554640;">
                                          <graphic>
                                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                                 <Image url="@icons/refreshy.png" />
+                                                 <Image url="@../icons/refreshy.png" />
                                              </ImageView>
                                          </graphic>
                                      </JFXButton>
@@ -72,7 +72,7 @@
                                      <JFXButton buttonType="RAISED" ripplerFill="aliceblue" mnemonicParsing="false" onAction="#refreshCustomers" style="-fx-background-color: #554640;">
                                          <graphic>
                                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                                 <Image url="@icons/refreshy.png" />
+                                                 <Image url="@../icons/refreshy.png" />
                                              </ImageView>
                                          </graphic>
                                      </JFXButton>

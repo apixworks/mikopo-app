@@ -1,7 +1,5 @@
 package sample;
 
-import com.sun.javafx.charts.Legend;
-import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,24 +10,18 @@ import javafx.print.PageLayout;
 import javafx.print.PageOrientation;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Scale;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sample.PrintWork;
-import sample.Transaction_View;
-import javax.swing.*;
+import sample.models.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -311,7 +303,7 @@ public class ViewReportController implements Initializable{
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ViewReportTables.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/ViewReportTables.fxml"));
             stage.setTitle("MikopoApp");
             //stage.setResizable(false);
             stage.isFullScreen();
@@ -374,7 +366,7 @@ public class ViewReportController implements Initializable{
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CustomerRegistered.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/CustomerRegistered.fxml"));
             stage.setTitle("MikopoApp");
             //stage.setResizable(false);
             stage.isFullScreen();
@@ -452,7 +444,7 @@ public class ViewReportController implements Initializable{
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Loan_Registered.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/Loan_Registered.fxml"));
             stage.setTitle("MikopoApp");
             //stage.setResizable(false);
             stage.isFullScreen();
@@ -485,7 +477,7 @@ public class ViewReportController implements Initializable{
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("user_transactions.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/user_transactions.fxml"));
             stage.setTitle("MikopoApp");
             Scene repaymentScene = new Scene(fxmlLoader.load(),600,700);
             stage.setScene(repaymentScene);
@@ -510,7 +502,7 @@ public class ViewReportController implements Initializable{
             //setCid(Integer.parseInt(borrower.getText()));
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Customer_Form_Hati_Search.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/Customer_Form_Hati_Search.fxml"));
             stage.setTitle("MikopoApp");
             stage.setResizable(false);
             //stage.isFullScreen();

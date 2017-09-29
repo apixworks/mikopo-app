@@ -28,7 +28,7 @@
                     <Pane style="-fx-background-color: #ffffff;">
                         <children>
                             <Pane layoutX="120.0" layoutY="10.0" prefHeight="531.0" prefWidth="929.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
-                                <Label id="form_header_text" layoutX="29.0" layoutY="23.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@Cssfile.css" text="Loan Details" textFill="#554640" />
+                                <Label id="form_header_text" layoutX="29.0" layoutY="23.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@../Cssfile.css" text="Loan Details" textFill="#554640" />
                                 <Label layoutX="40.0" layoutY="47.0" text="BORROWER" />
                                 <JFXTextField fx:id="borrower" focusColor="#d9853b" layoutX="40.0" layoutY="64.0" prefHeight="25.0" prefWidth="171.0" promptText="Borrower Number" unFocusColor="#74afad" />
                                 <JFXTextField fx:id="amountTxtField" focusColor="#d9853b" layoutX="274.0" layoutY="64.0" prefHeight="25.0" prefWidth="179.0" unFocusColor="#74afad" />
@@ -38,7 +38,7 @@
                                 <Label layoutX="43.0" layoutY="181.0" text="DHAMANA" />
                                 <JFXTextField fx:id="perMonthTxtField" editable="false" focusColor="#d9853b" layoutX="275.0" layoutY="136.0" prefHeight="25.0" prefWidth="193.0" unFocusColor="#74afad" />
                                 <Label layoutX="277.0" layoutY="114.0" text="AMOUNT PER MONTH" />
-                                <Label id="form_header_text" layoutX="36.0" layoutY="267.0" stylesheets="@Cssfile.css" text="Dhamana Details" />
+                                <Label id="form_header_text" layoutX="36.0" layoutY="267.0" stylesheets="@../Cssfile.css" text="Dhamana Details" />
                                 <Label layoutX="47.0" layoutY="293.0" text="MEMBER ID" />
                                 <JFXTextField fx:id="memberId" focusColor="#d9853b" layoutX="43.0" layoutY="311.0" prefHeight="25.0" prefWidth="180.0" unFocusColor="#74afad" />
                                 <Label layoutX="281.0" layoutY="293.0" text="PROPERTY ID" />
@@ -134,7 +134,7 @@
                 <Pane style="-fx-background-color: #ffffff;">
                      <children>
                         <Pane layoutX="120.0" layoutY="10.0" prefHeight="531.0" prefWidth="978.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
-                            <Label id="form_header_text" layoutX="29.0" layoutY="22.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@Cssfile.css" text="Personal Information" textFill="#554640" />
+                            <Label id="form_header_text" layoutX="29.0" layoutY="22.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@../Cssfile.css" text="Personal Information" textFill="#554640" />
                             <Label layoutX="40.0" layoutY="46.0" text="NAME" />
                            <JFXTextField fx:id="fname" focusColor="#d9853b" layoutX="40.0" layoutY="62.0" promptText="First Name" unFocusColor="#74afad" />
                            <JFXTextField fx:id="mname" focusColor="#d9853b" layoutX="294.0" layoutY="62.0" prefHeight="25.0" prefWidth="205.0" promptText="Middle Name" unFocusColor="#74afad" />
@@ -153,12 +153,12 @@
                            <Label layoutX="565.0" layoutY="116.0" text="BORROWER PHOTO" />
                            <Button layoutX="565.0" layoutY="140.0" mnemonicParsing="false" onAction="#chooseImg" text="Choose Photo" />
                            <Text fx:id="photoBtnTxt" layoutX="666.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                           <Label id="form_header_text" layoutX="36.0" layoutY="266.0" stylesheets="@Cssfile.css" text="Bank Information" />
+                           <Label id="form_header_text" layoutX="36.0" layoutY="266.0" stylesheets="@../Cssfile.css" text="Bank Information" />
                            <Label layoutX="47.0" layoutY="292.0" text="BANK" />
                            <JFXTextField fx:id="bank" focusColor="#d9853b" layoutX="43.0" layoutY="309.0" prefHeight="25.0" prefWidth="180.0" unFocusColor="#74afad" />
                            <Label layoutX="295.0" layoutY="292.0" text="ACCOUNT NUMBER" />
                            <JFXTextField fx:id="account_no" focusColor="#d9853b" layoutX="296.0" layoutY="309.0" prefHeight="25.0" prefWidth="227.0" unFocusColor="#74afad" />
-                           <Label id="form_header_text" layoutX="37.0" layoutY="372.0" stylesheets="@Cssfile.css" text="Working Details" />
+                           <Label id="form_header_text" layoutX="37.0" layoutY="372.0" stylesheets="@../Cssfile.css" text="Working Details" />
                            <Label layoutX="50.0" layoutY="403.0" text="COMPANY NAME" />
                            <JFXTextField fx:id="company_name" focusColor="#d9853b" layoutX="45.0" layoutY="423.0" prefHeight="25.0" prefWidth="201.0" unFocusColor="#74afad" />
                            <Label layoutX="320.0" layoutY="403.0" text="COMPANY LOCATION" />

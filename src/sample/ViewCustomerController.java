@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sample.backend.DatabaseHandler;
+import sample.models.EditCustomer;
 
 import java.io.File;
 

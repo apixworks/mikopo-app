@@ -18,7 +18,7 @@
 <StackPane id="stackpanelogin" fx:id="stackpanelogin" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginController">
     <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
     <stylesheets>
-        <URL value="@Cssfile.css" />
+        <URL value="@../Cssfile.css" />
     </stylesheets>
 
     <VBox alignment="CENTER" fillWidth="false" style="-fx-background-color: #E3E3E3; -fx-background-radius: 10px;" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
@@ -32,7 +32,7 @@
         <GridPane alignment="center" hgap="10" style="-fx-background-radius: 23px;" vgap="10">
             <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
 
-            <Label id="logintext" stylesheets="@Cssfile.css" text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label id="logintext" stylesheets="@../Cssfile.css" text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 
             <JFXTextField fx:id="usernameTxtField" focusColor="#558c89" labelFloat="true" unFocusColor="#74afad" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 

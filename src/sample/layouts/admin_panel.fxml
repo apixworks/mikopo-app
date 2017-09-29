@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="customer_Stackpane" prefHeight="600.0" prefWidth="1100.0" stylesheets="@Cssfile.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdminController">
+<StackPane fx:id="customer_Stackpane" prefHeight="600.0" prefWidth="1100.0" stylesheets="@../Cssfile.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdminController">
     <children>
         <TabPane prefHeight="200.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -25,7 +25,7 @@
                         <Pane prefHeight="599.0" prefWidth="1100.0" style="-fx-background-color: #ffffff;">
                             <children>
                                 <Pane layoutX="39.0" layoutY="36.0" prefHeight="278.0" prefWidth="399.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
-                                    <Label id="form_header_text" layoutX="73.0" layoutY="22.0" prefHeight="25.0" prefWidth="142.0" stylesheets="@Cssfile.css" text="User Registration" textFill="#554640" />
+                                    <Label id="form_header_text" layoutX="73.0" layoutY="22.0" prefHeight="25.0" prefWidth="142.0" stylesheets="@../Cssfile.css" text="User Registration" textFill="#554640" />
                                     <JFXTextField fx:id="fname" focusColor="#d9853b" layoutX="40.0" layoutY="65.0" prefHeight="25.0" prefWidth="201.0" promptText="First Name" unFocusColor="#74afad" />
                                     <JFXTextField fx:id="lname" focusColor="#d9853b" layoutX="36.0" layoutY="104.0" prefHeight="25.0" prefWidth="205.0" promptText="Last Name" unFocusColor="#74afad" />
                                     <JFXTextField fx:id="uname" focusColor="#d9853b" layoutX="38.0" layoutY="143.0" prefHeight="25.0" prefWidth="201.0" promptText="Username" unFocusColor="#74afad" />
@@ -33,12 +33,12 @@
                                     <JFXButton fx:id="submitBtn" buttonType="RAISED" layoutX="119.0" layoutY="232.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="25.0" prefWidth="95.0" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="Submit" textFill="WHITE" />
                                 </Pane>
                                 <Pane layoutX="111.0" layoutY="372.0" prefHeight="188.0" prefWidth="270.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
-                                    <Label id="form_header_text" layoutX="73.0" layoutY="22.0" prefHeight="25.0" prefWidth="142.0" stylesheets="@Cssfile.css" text="Rate Value" textFill="#554640" />
+                                    <Label id="form_header_text" layoutX="73.0" layoutY="22.0" prefHeight="25.0" prefWidth="142.0" stylesheets="@../Cssfile.css" text="Rate Value" textFill="#554640" />
                                     <JFXTextField fx:id="rate" focusColor="#d9853b" layoutX="40.0" layoutY="65.0" prefHeight="25.0" prefWidth="201.0" promptText="interest rate" unFocusColor="#74afad" />
                                     <JFXButton fx:id="rateBtn" buttonType="RAISED" layoutX="89.0" layoutY="128.0" mnemonicParsing="false" onAction="#changeInterest" prefHeight="25.0" prefWidth="95.0" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="Change" textFill="WHITE" />
                                 </Pane>
                                 <Pane layoutX="541.0" layoutY="372.0" prefHeight="218.0" prefWidth="387.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
-                                    <Label id="form_header_text" layoutX="103.0" layoutY="22.0" prefHeight="25.0" prefWidth="142.0" stylesheets="@Cssfile.css" text="SMS Center" textFill="#554640" />
+                                    <Label id="form_header_text" layoutX="103.0" layoutY="22.0" prefHeight="25.0" prefWidth="142.0" stylesheets="@../Cssfile.css" text="SMS Center" textFill="#554640" />
                                     <JFXTextField fx:id="smsTxt" focusColor="#d9853b" layoutX="40.0" layoutY="55.0" prefHeight="95.0" prefWidth="312.0" promptText="Message to send.." unFocusColor="#74afad" />
                                     <JFXButton fx:id="smsBtn" buttonType="RAISED" layoutX="147.0" layoutY="168.0" mnemonicParsing="false" onAction="#sendSMS" prefHeight="25.0" prefWidth="95.0" ripplerFill="aliceblue" style="-fx-background-color: #558C89;" text="Send" textFill="WHITE" />
                                 </Pane>

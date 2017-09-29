@@ -18,6 +18,9 @@ import javafx.util.Callback;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
+import sample.models.Customer;
+import sample.models.Loan;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -122,7 +125,7 @@ public class ViewCustomersLoansController implements Initializable {
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("repayment_form.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/repayment_form.fxml"));
             stage.setTitle("MikopoApp");
             Scene repaymentScene = new Scene(fxmlLoader.load(),600,400);
             stage.setScene(repaymentScene);
@@ -139,7 +142,7 @@ public class ViewCustomersLoansController implements Initializable {
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edit_Customer.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/edit_Customer.fxml"));
             stage.setTitle("MikopoApp");
             Scene editCustomerScene = new Scene(fxmlLoader.load(),1100,600);
             stage.setScene(editCustomerScene);
@@ -161,7 +164,7 @@ public class ViewCustomersLoansController implements Initializable {
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edit_loan.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/edit_loan.fxml"));
             stage.setTitle("MikopoApp");
             Scene editCustomerScene = new Scene(fxmlLoader.load(),1100,600);
             stage.setScene(editCustomerScene);
@@ -181,7 +184,7 @@ public class ViewCustomersLoansController implements Initializable {
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view_Customer.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/view_Customer.fxml"));
             stage.setTitle("MikopoApp");
             Scene viewCustomerScene = new Scene(fxmlLoader.load(),500,650);
             stage.setScene(viewCustomerScene);

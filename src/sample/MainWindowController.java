@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,7 +40,7 @@ public class MainWindowController implements Initializable {
             try {
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("change_password.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/change_password.fxml"));
                 stage.setTitle("MikopoApp");
                 Scene changePasswordScene = new Scene(fxmlLoader.load(),475,315);
                 stage.setScene(changePasswordScene);
@@ -58,7 +59,7 @@ public class MainWindowController implements Initializable {
                     e.printStackTrace();
                 }
                 Stage stage = (Stage) profBtn.getScene().getWindow();
-                Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("layouts/login.fxml"));
                 stage.setTitle("MikopoApp");
                 stage.setMaximized(false);
                 Scene loginScene = new Scene(root,450,350);
@@ -81,7 +82,7 @@ public class MainWindowController implements Initializable {
     public  void RegCustomerClick(){
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), ev -> {
             try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("register_customer.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/register_customer.fxml"));
                 borderP.setCenter(fxmlLoader.load());
                 RegisterCustomerController registerCustomerController = fxmlLoader.<RegisterCustomerController>getController();
                 registerCustomerController.getUserDetails(userObject);
@@ -96,7 +97,7 @@ public class MainWindowController implements Initializable {
     public  void viewCustomerClick(){
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),ev ->{
             try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view_customers_loans.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/view_customers_loans.fxml"));
                 borderP.setCenter(fxmlLoader.load());
                 ViewCustomersLoansController viewCustomersLoansController = fxmlLoader.<ViewCustomersLoansController>getController();
                 viewCustomersLoansController.getUserDetails(userObject);
@@ -111,7 +112,7 @@ public class MainWindowController implements Initializable {
     public  void viewRepayments(){
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),ev ->{
             try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view_repayments.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/view_repayments.fxml"));
                 borderP.setCenter(fxmlLoader.load());
                 ViewRepaymentsController viewRepaymentsController = fxmlLoader.<ViewRepaymentsController>getController();
                 viewRepaymentsController.getUserDetails(userObject);
@@ -126,7 +127,7 @@ public class MainWindowController implements Initializable {
     public void viewReport(){
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),ev ->{
             try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view_report.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/view_report.fxml"));
                 borderP.setCenter(fxmlLoader.load());
             }catch (IOException e){
                 e.printStackTrace();
@@ -139,7 +140,7 @@ public class MainWindowController implements Initializable {
     public void viewAdmin(){
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100),ev ->{
             try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("admin_panel.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/admin_panel.fxml"));
                 borderP.setCenter(fxmlLoader.load());
                 AdminController adminController = fxmlLoader.<AdminController>getController();
                 adminController.getUserDetails(userObject);
@@ -160,7 +161,7 @@ public class MainWindowController implements Initializable {
                 btnAdmin.setVisible(false);
             }
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view_customers_loans.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/view_customers_loans.fxml"));
             borderP.setCenter(fxmlLoader.load());
             ViewCustomersLoansController viewCustomersLoansController = fxmlLoader.<ViewCustomersLoansController>getController();
             viewCustomersLoansController.getUserDetails(userObject);

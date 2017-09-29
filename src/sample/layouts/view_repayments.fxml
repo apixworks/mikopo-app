@@ -28,7 +28,7 @@
                         <JFXButton buttonType="RAISED" ripplerFill="aliceblue" mnemonicParsing="false" onAction="#refreshDue" style="-fx-background-color: #554640;">
                             <graphic>
                                 <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                    <Image url="@icons/refreshy.png" />
+                                    <Image url="@../icons/refreshy.png" />
                                 </ImageView>
                             </graphic>
                         </JFXButton>

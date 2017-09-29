@@ -11,7 +11,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
-<StackPane fx:id="customer_Stack" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" stylesheets="@Cssfile.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoanReleaseController">
+<StackPane fx:id="customer_Stack" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" stylesheets="@../Cssfile.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CustomerRegisteredController">
     <children>
         <VBox prefHeight="-Infinity">
             <HBox alignment="CENTER" prefHeight="50.0" spacing="5" style="-fx-background-color: #74AFAD; -fx-font-size: 18px">
@@ -31,23 +31,23 @@
             </VBox>
             <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                 <tabs>
-                    <Tab fx:id="AmountStatistics" text="Loan Released-Month ">
+                    <Tab fx:id="CustomerStatistics" text="Customer Registered per Month">
                         <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                 <children>
-                                    <BarChart fx:id="borrowerChart" layoutX="14.0" layoutY="70.0" prefHeight="400.0" prefWidth="992.0">
+                                    <BarChart layoutX="30.0" layoutY="40.0" prefHeight="463.0" prefWidth="804.0">
                                         <xAxis>
-                                            <CategoryAxis fx:id="category_Axis" side="BOTTOM" />
+                                            <CategoryAxis side="BOTTOM" />
                                         </xAxis>
                                         <yAxis>
-                                            <NumberAxis fx:id="Number_Axis" side="LEFT" />
+                                            <NumberAxis side="LEFT" />
                                         </yAxis>
                                     </BarChart>
                                 </children></AnchorPane>
                         </content>
                     </Tab>
-                    </tabs>
-                </TabPane>
-            </VBox>
-        </children>
-    </StackPane>
+                </tabs>
+            </TabPane>
+        </VBox>
+    </children>
+</StackPane>

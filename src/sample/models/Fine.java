@@ -1,14 +1,14 @@
-package sample;
+package sample.models;
 
 /**
  * Created by Apix on 15/07/2017.
  */
 public class Fine {
-    int id;
-    String month;
-    int year;
-    double amount;
-    double perMonth;
+    public int id;
+    public String month;
+    public int year;
+    public double amount;
+    public double perMonth;
 
     public Fine(int id,String month, int year, Double amount, double perMonth) {
         this.id = id;

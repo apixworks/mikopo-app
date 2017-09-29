@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sample.*;
+import sample.models.*;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -241,7 +243,7 @@ public class DatabaseHandler {
 
     public boolean loanPaymentFine(int loan_id,LocalDate date,double amount,String month,int year){
         String paymentSql = "INSERT INTO PAYMENTS(loan_id,date,amount,month,year) VALUES(?,?,?,?,?)";
-        boolean success = false;
+        boolean success;
 
         try{
             PreparedStatement ps = createConn().prepareStatement(paymentSql);
@@ -998,6 +1000,33 @@ public class DatabaseHandler {
         return transactions;
     }
 
+    public ObservableList<Transaction> getUserFineTransactions(int id){
+        ObservableList<Transaction> transactions = FXCollections.observableArrayList();
+        String sql = "SELECT customers.id,fine_payments.loan_id,customers.f_name,customers.l_name ,fine_payments.amount,fine_payments.date " +
+                "FROM customers,loans,fine_payments WHERE customers.id=loans.borrower_id AND loans.loan_id=fine_payments.loan_id AND fine_payments.loan_id="+id;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                String fullname=rs.getString("customers.f_name")+"  "+rs.getString("customers.l_name");
+                transactions.add(new Transaction("MJ/C/"+rs.getString("customers.id"),"MJ/L/"+rs.getString("fine_payments.loan_id")
+                        ,fullname,rs.getDouble("fine_payments.amount"),rs.getString("fine_payments.date")));
+            }
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return transactions;
+    }
+
     public BorrowerIDAndName getBorrowerNameAndId(int id){
         String sql = "SELECT * FROM CUSTOMERS WHERE ID="+id;
         BorrowerIDAndName borrowerIDAndName = null;
@@ -1238,16 +1267,16 @@ public class DatabaseHandler {
     public void fineHandler(){
 
         String state = "";
-            int fine_id = 0;
-            int loan_id = 0;
-            double amount = 0;
-            double perMonth = 0;
-            double paidAmount = 0;
+            int fine_id;
+            int loan_id;
+            double amount;
+            double perMonth;
+            double paidAmount;
             Date lastDue;
             String month;
             int year;
             String tolerance;
-            String monthEnd = null;
+            String monthEnd;
             String controllerSql = "SELECT * FROM CONTROLLER";
             String fineSql = "SELECT * FROM FINES";
             String loanSql = "SELECT * FROM LOANS";
@@ -1270,9 +1299,6 @@ public class DatabaseHandler {
                     PreparedStatement pb = createConn().prepareStatement(fineSql);
                     ResultSet rb = pb.executeQuery();
 
-                    PreparedStatement pf = createConn().prepareStatement(loanSql);
-                    ResultSet rf = pf.executeQuery();
-
                     PreparedStatement pd = createConn().prepareStatement(loanSql);
                     ResultSet rd = pd.executeQuery();
 
@@ -1286,19 +1312,31 @@ public class DatabaseHandler {
                             year = rb.getInt("year");
                             tolerance = rb.getString("tolerance");
 
+                            PreparedStatement pf = createConn().prepareStatement(loanSql);
+                            ResultSet rf = pf.executeQuery();
+
                             if(tolerance.equals("no")){
+                                System.out.println(amount);
                                 while(rf.next()){
                                     if(rf.getInt("loan_id")==loan_id && rf.getString("status").equals("active")){
-
                                         String paymentsSql = "SELECT * FROM PAYMENTS WHERE LOAN_ID="+loan_id+" AND MONTH='"+month+"' AND YEAR="+year;
                                         PreparedStatement ph = createConn().prepareStatement(paymentsSql);
                                         ResultSet rh = ph.executeQuery();
 
+                                        paidAmount = 0;
+
                                         while(rh.next()){
+                                            System.out.println(rh.getDouble("amount"));
                                             paidAmount = paidAmount + rh.getDouble("amount");
                                         }
 
                                         if(amount>0){
+                                            System.out.println(rf.getDouble("amount_per_month"));
+                                            System.out.println(paidAmount);
+                                            System.out.println(rf.getDouble("amount_per_month")-paidAmount);
+                                            System.out.println(((rf.getDouble("amount_per_month")-paidAmount)  + amount));
+                                            System.out.println(( ((rf.getDouble("amount_per_month")-paidAmount)  + amount)*0.15));
+                                            System.out.println((((rf.getDouble("amount_per_month")-paidAmount)  + amount)*0.15) + amount);
                                             amount = ( ((rf.getDouble("amount_per_month")-paidAmount)  + amount)*0.15) + amount;
                                         }
                                     }
@@ -1306,7 +1344,9 @@ public class DatabaseHandler {
                                 //amount = amount + amount*0.15;
 
                                 if(amount>0){
+                                    amount = (double)Math.round(amount);
                                     String fineUpdateSql = "UPDATE FINES SET AMOUNT="+amount+" WHERE FINE_ID=" + fine_id;
+                                    System.out.println("this");
                                     PreparedStatement pc = createConn().prepareStatement(fineUpdateSql);
                                     pc.execute();
                                 }
@@ -1322,8 +1362,8 @@ public class DatabaseHandler {
                         // Adding a fine
                             lastDue = rd.getDate("due");
                             System.out.println(lastDue);
-                            System.out.println(LocalDate.now().minusMonths(2).withDayOfMonth(1).minusDays(1));
-                            if(lastDue.equals(java.sql.Date.valueOf(LocalDate.now().minusMonths(1).withDayOfMonth(1).minusDays(1))) && rd.getString("status").equals("active") && rd.getString("tolerance").equals("no")){
+                            System.out.println(LocalDate.now().minusMonths(0).withDayOfMonth(1).minusDays(1));
+                            if(lastDue.equals(java.sql.Date.valueOf(LocalDate.now().minusMonths(0).withDayOfMonth(1).minusDays(1))) && rd.getString("status").equals("active") && rd.getString("tolerance").equals("no")){
                                 loan_id = rd.getInt("loan_id");
                                 perMonth = rd.getDouble("amount_per_month");
                                 //perMonth = perMonth + perMonth*0.15;

@@ -9,12 +9,14 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sample.Checker;
+import sample.Logger;
 import sample.backend.DatabaseHandler;
+import sample.models.Fine;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 /**

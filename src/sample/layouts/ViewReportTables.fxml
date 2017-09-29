@@ -17,7 +17,7 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.CategoryAxis?>
-<StackPane fx:id="customer_Stack" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" stylesheets="@Cssfile.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewReportTable_Controller">
+<StackPane fx:id="customer_Stack" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" stylesheets="@../Cssfile.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ViewReportTable_Controller">
     <children>
         <VBox prefHeight="-Infinity">
             <HBox alignment="CENTER" prefHeight="50.0" spacing="5" style="-fx-background-color: #74AFAD; -fx-font-size: 18px">

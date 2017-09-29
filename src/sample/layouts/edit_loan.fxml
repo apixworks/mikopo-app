@@ -22,7 +22,7 @@
                 <Font size="23.0" />
             </font></Text>
         <Pane layoutX="120.0" layoutY="40.0" prefHeight="531.0" prefWidth="929.0" style="-fx-background-color: #F5F5F5; -fx-background-radius: 15px;">
-            <Label id="form_header_text" layoutX="29.0" layoutY="25.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@Cssfile.css" text="Loan Details" textFill="#554640" />
+            <Label id="form_header_text" layoutX="29.0" layoutY="25.0" prefHeight="17.0" prefWidth="166.0" stylesheets="@../Cssfile.css" text="Loan Details" textFill="#554640" />
             <Label layoutX="40.0" layoutY="49.0" text="BORROWER" />
             <TextField fx:id="borrower" layoutX="40.0" layoutY="66.0" prefHeight="25.0" prefWidth="171.0" promptText="Borrower Number" />
             <TextField fx:id="amountTxtField" layoutX="274.0" layoutY="66.0" prefHeight="25.0" prefWidth="179.0" />
@@ -31,7 +31,7 @@
             <DatePicker fx:id="loanDate" layoutX="40.0" layoutY="136.0" promptText="DD/MM/YYYY" />
             <TextField fx:id="perMonthTxtField" editable="false" layoutX="275.0" layoutY="138.0" prefHeight="25.0" prefWidth="193.0" />
             <Label layoutX="277.0" layoutY="116.0" text="AMOUNT PER MONTH" />
-            <Label id="form_header_text" layoutX="36.0" layoutY="221.0" stylesheets="@Cssfile.css" text="Dhamana Details" />
+            <Label id="form_header_text" layoutX="36.0" layoutY="221.0" stylesheets="@../Cssfile.css" text="Dhamana Details" />
             <Label layoutX="47.0" layoutY="247.0" text="MEMBER ID" />
             <TextField fx:id="memberId" layoutX="43.0" layoutY="265.0" prefHeight="25.0" prefWidth="180.0" />
             <Label layoutX="281.0" layoutY="247.0" text="PROPERTY ID" />

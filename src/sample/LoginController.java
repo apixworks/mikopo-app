@@ -42,7 +42,7 @@ public class LoginController {
                             userObject = db.getUserDetails(db.getId());
                             if(userObject.get("status").equals("active")){
                                 Stage stage = (Stage) actionBtn.getScene().getWindow();
-                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main_window.fxml"));
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/main_window.fxml"));
                                 Scene MainScene = new Scene(fxmlLoader.load(),1100,800);
                                 stage.setTitle("MikopoApp");
                                 stage.setScene(MainScene);
