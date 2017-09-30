@@ -161,11 +161,10 @@ public class MainWindowController implements Initializable {
                 btnAdmin.setVisible(false);
             }
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/view_customers_loans.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/view_repayments.fxml"));
             borderP.setCenter(fxmlLoader.load());
-            ViewCustomersLoansController viewCustomersLoansController = fxmlLoader.<ViewCustomersLoansController>getController();
-            viewCustomersLoansController.getUserDetails(userObject);
-
+            ViewRepaymentsController viewRepaymentsController = fxmlLoader.<ViewRepaymentsController>getController();
+            viewRepaymentsController.getUserDetails(userObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }catch (IOException e){

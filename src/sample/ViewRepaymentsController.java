@@ -1,7 +1,10 @@
 package sample;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
@@ -148,7 +152,35 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
 
         DatabaseHandler db = new DatabaseHandler();
         one_month_table.setItems(null);
-        one_month_table.setItems(db.loadOneMonthLateLoans());
+
+        Task<ObservableList<Loan>> loadDataTask = new Task<ObservableList<Loan>>() {
+            @Override
+            protected ObservableList<Loan> call() throws Exception {
+                Thread.sleep(3000);
+                // load data and populate list ...
+                return db.loadOneMonthLateLoans() ;
+            }
+        };
+        loadDataTask.setOnSucceeded(e -> {
+            if (loadDataTask.getValue().size()==0)
+                one_month_table.setItems(null);
+            else
+                one_month_table.setItems(loadDataTask.getValue());
+        });
+        loadDataTask.setOnFailed(e -> one_month_table.setItems(null));
+
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        progressIndicator.setMaxWidth(50);
+        progressIndicator.setMaxHeight(50);
+        progressIndicator.setStyle("-fx-progress-color: #558C89;");
+        one_month_table.setPlaceholder(progressIndicator);
+
+        Thread loadDataThread = new Thread(loadDataTask);
+        loadDataThread.start();
+
+//        DatabaseHandler db = new DatabaseHandler();
+//        one_month_table.setItems(null);
+//        one_month_table.setItems(db.loadOneMonthLateLoans());
     }
 
     public void initializeTwoMonthLate(){
@@ -173,7 +205,35 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
 
         DatabaseHandler db = new DatabaseHandler();
         two_month_table.setItems(null);
-        two_month_table.setItems(db.loadTwoMonthLateLoans());
+
+        Task<ObservableList<Loan>> loadDataTask = new Task<ObservableList<Loan>>() {
+            @Override
+            protected ObservableList<Loan> call() throws Exception {
+                Thread.sleep(5000);
+                // load data and populate list ...
+                return db.loadTwoMonthLateLoans() ;
+            }
+        };
+        loadDataTask.setOnSucceeded(e -> {
+            if (loadDataTask.getValue().size()==0)
+                two_month_table.setItems(null);
+            else
+                two_month_table.setItems(loadDataTask.getValue());
+        });
+        loadDataTask.setOnFailed(e -> two_month_table.setItems(null));
+
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        progressIndicator.setMaxWidth(50);
+        progressIndicator.setMaxHeight(50);
+        progressIndicator.setStyle("-fx-progress-color: #558C89;");
+        two_month_table.setPlaceholder(progressIndicator);
+
+        Thread loadDataThread = new Thread(loadDataTask);
+        loadDataThread.start();
+
+//        DatabaseHandler db = new DatabaseHandler();
+//        two_month_table.setItems(null);
+//        two_month_table.setItems(db.loadTwoMonthLateLoans());
     }
 
     public void initializePenaltyLate(){
@@ -198,7 +258,35 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
 
         DatabaseHandler db = new DatabaseHandler();
         penalty_table.setItems(null);
-        penalty_table.setItems(db.loadPenaltyLateLoans());
+
+        Task<ObservableList<Loan>> loadDataTask = new Task<ObservableList<Loan>>() {
+            @Override
+            protected ObservableList<Loan> call() throws Exception {
+                Thread.sleep(7000);
+                // load data and populate list ...
+                return db.loadPenaltyLateLoans() ;
+            }
+        };
+        loadDataTask.setOnSucceeded(e -> {
+            if (loadDataTask.getValue().size()==0)
+                penalty_table.setItems(null);
+            else
+                penalty_table.setItems(loadDataTask.getValue());
+        });
+        loadDataTask.setOnFailed(e -> penalty_table.setItems(null));
+
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        progressIndicator.setMaxWidth(50);
+        progressIndicator.setMaxHeight(50);
+        progressIndicator.setStyle("-fx-progress-color: #558C89;");
+        penalty_table.setPlaceholder(progressIndicator);
+
+        Thread loadDataThread = new Thread(loadDataTask);
+        loadDataThread.start();
+
+//        DatabaseHandler db = new DatabaseHandler();
+//        penalty_table.setItems(null);
+//        penalty_table.setItems(db.loadPenaltyLateLoans());
     }
 
     public void initializeDue(){
@@ -223,7 +311,34 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
 
         DatabaseHandler db = new DatabaseHandler();
         due_table.setItems(null);
-        due_table.setItems(db.loadDueLoans());
+
+        Task<ObservableList<Loan>> loadDataTask = new Task<ObservableList<Loan>>() {
+            @Override
+            protected ObservableList<Loan> call() throws Exception {
+                // load data and populate list ...
+                return db.loadDueLoans() ;
+            }
+        };
+        loadDataTask.setOnSucceeded(e -> {
+            if (loadDataTask.getValue().size()==0)
+                due_table.setItems(null);
+            else
+                due_table.setItems(loadDataTask.getValue());
+        });
+        loadDataTask.setOnFailed(e -> due_table.setItems(null) );
+
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        progressIndicator.setMaxWidth(50);
+        progressIndicator.setMaxHeight(50);
+        progressIndicator.setStyle("-fx-progress-color: #558C89;");
+        due_table.setPlaceholder(progressIndicator);
+
+        Thread loadDataThread = new Thread(loadDataTask);
+        loadDataThread.start();
+
+//        DatabaseHandler db = new DatabaseHandler();
+//        due_table.setItems(null);
+//        due_table.setItems(db.loadDueLoans());
     }
 
     public void repaymentForm(String loanId,String name,String amount,String month,String perMonth){
@@ -359,6 +474,8 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                         if (!isEmpty()) {
                             if(!item.equals("0.0"))
                                 this.setStyle("-fx-text-fill: red;");
+                            else
+                                this.setStyle("-fx-text-fill: black");
                             setText(item);
                         }
                     }
@@ -524,6 +641,8 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                         if (!isEmpty()) {
                             if(!item.equals("0.0"))
                                 this.setStyle("-fx-text-fill: red;");
+                            else
+                                this.setStyle("-fx-text-fill: black");
                             setText(item);
                         }
                     }
@@ -689,6 +808,8 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                         if (!isEmpty()) {
                             if(!item.equals("0.0"))
                                 this.setStyle("-fx-text-fill: red;");
+                            else
+                                this.setStyle("-fx-text-fill: black");
                             setText(item);
                         }
                     }
@@ -854,6 +975,8 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                         if (!isEmpty()) {
                             if(!item.equals("0.0"))
                                 this.setStyle("-fx-text-fill: red;");
+                            else
+                                this.setStyle("-fx-text-fill: black");
                             setText(item);
                         }
                     }

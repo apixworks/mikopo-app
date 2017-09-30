@@ -1,7 +1,10 @@
 package sample;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sample.backend.DatabaseHandler;
@@ -68,8 +72,8 @@ public class ViewCustomersLoansController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initializeViewCustomers();
         initializeViewLoans();
+        initializeViewCustomers();
     }
 
     public void initializeViewCustomers(){
@@ -88,7 +92,29 @@ public class ViewCustomersLoansController implements Initializable {
 
         DatabaseHandler db = new DatabaseHandler();
         customer_table.setItems(null);
-        customer_table.setItems(db.loadCustomers());
+
+        Task<ObservableList<Customer>> loadDataTask = new Task<ObservableList<Customer>>() {
+            @Override
+            protected ObservableList<Customer> call() throws Exception {
+                // load data and populate list ...
+                return db.loadCustomers() ;
+            }
+        };
+        loadDataTask.setOnSucceeded(e -> customer_table.setItems(loadDataTask.getValue()));
+        loadDataTask.setOnFailed(e -> { /* handle errors... */ });
+
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        progressIndicator.setMaxWidth(50);
+        progressIndicator.setMaxHeight(50);
+        progressIndicator.setStyle("-fx-progress-color: #558C89;");
+        customer_table.setPlaceholder(progressIndicator);
+
+        Thread loadDataThread = new Thread(loadDataTask);
+        loadDataThread.start();
+
+//        DatabaseHandler db = new DatabaseHandler();
+//        customer_table.setItems(null);
+//        customer_table.setItems(db.loadCustomers());
     }
 
     public void initializeViewLoans(){
@@ -113,7 +139,30 @@ public class ViewCustomersLoansController implements Initializable {
 
         DatabaseHandler db = new DatabaseHandler();
         loan_table.setItems(null);
-        loan_table.setItems(db.loadLoans());
+
+        Task<ObservableList<Loan>> loadDataTask = new Task<ObservableList<Loan>>() {
+            @Override
+            protected ObservableList<Loan> call() throws Exception {
+                Thread.sleep(1000);
+                // load data and populate list ...
+                return db.loadLoans() ;
+            }
+        };
+        loadDataTask.setOnSucceeded(e -> loan_table.setItems(loadDataTask.getValue()));
+        loadDataTask.setOnFailed(e -> { /* handle errors... */ });
+
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        progressIndicator.setMaxWidth(50);
+        progressIndicator.setMaxHeight(50);
+        progressIndicator.setStyle("-fx-progress-color: #558C89;");
+        loan_table.setPlaceholder(progressIndicator);
+
+        Thread loadDataThread = new Thread(loadDataTask);
+        loadDataThread.start();
+
+//        DatabaseHandler db = new DatabaseHandler();
+//        loan_table.setItems(null);
+//        loan_table.setItems(db.loadLoans());
     }
 
     public void repaymentForm(String loanId,String name,String amount,String month,String perMonth){
@@ -242,8 +291,6 @@ public class ViewCustomersLoansController implements Initializable {
                     @Override
                     public TableCell<Loan, String> call(TableColumn<Loan, String> param) {
                         final TableCell<Loan,String> cell = new TableCell<Loan,String>(){
-                            final Button payBtn = new Button("Pay");
-                            final Button editBtn = new Button("Edit");
                             @Override
                             protected void updateItem(String item, boolean empty) {
                                 super.updateItem(item, empty);
@@ -251,6 +298,8 @@ public class ViewCustomersLoansController implements Initializable {
                                     setGraphic(null);
                                     setText(null);
                                 }else{
+                                    final Button payBtn = new Button("Pay");
+                                    final Button editBtn = new Button("Edit");
                                     Loan loan = getTableView().getItems().get(getIndex());
                                     if(loan.getStatus().equals("done")){
                                         payBtn.setVisible(false);
@@ -319,7 +368,7 @@ public class ViewCustomersLoansController implements Initializable {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
                             this.setStyle("-fx-alignment: center-left");
-                            setText(item);
+                        setText(item);
                         }
                     }
                 };
@@ -353,7 +402,9 @@ public class ViewCustomersLoansController implements Initializable {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
                             if(!item.equals("0.0"))
-                            this.setStyle("-fx-text-fill: red;");
+                                this.setStyle("-fx-text-fill: red;");
+                            else
+                                this.setStyle("-fx-text-fill: black");
                             setText(item);
                         }
                     }

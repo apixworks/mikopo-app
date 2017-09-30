@@ -31,8 +31,6 @@ public class Main extends Application {
             db.stateChanger();
         }
 
-        System.out.println(LocalDate.now().minusMonths(1).withDayOfMonth(1).minusDays(1));
-
         try {
             if(CheckInternetConnection.check()==0){
                 // SMTP info
