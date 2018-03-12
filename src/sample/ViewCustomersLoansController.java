@@ -184,6 +184,8 @@ public class ViewCustomersLoansController implements Initializable {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

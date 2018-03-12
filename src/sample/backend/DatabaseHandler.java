@@ -18,7 +18,7 @@ import java.util.List;
 public class DatabaseHandler {
 
     private static Connection conn;
-    private static String url = "jdbc:mysql://localhost:3306/mikopo";
+    private static String url = "jdbc:mysql://localhost:3306/mikopo_new";
     private static String user = "root";
     private static String password = "";
     int id;
@@ -26,6 +26,7 @@ public class DatabaseHandler {
     public static Connection createConn() {
         try{
             Class.forName("com.mysql.jdbc.Driver");
+
             conn = DriverManager.getConnection(url,user,password);
         }catch (Exception e){
             e.printStackTrace();
@@ -1719,4 +1720,18 @@ public class DatabaseHandler {
 //            }
 //        }
 //    }
+
+    public boolean deleteFine(int fine_id){
+        String del_query = "delete from fines where fine_id="+fine_id;
+        boolean success = false;
+
+        try{
+            PreparedStatement ps = createConn().prepareStatement(del_query);
+            ps.execute();
+            success = true;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return success;
+    }
 }

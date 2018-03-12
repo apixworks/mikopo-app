@@ -7,12 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8f72ead-4e69-48f8-9e39-c5bdfe38e94d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/MyApplication.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/MyPreloader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/Main.java" afterPath="$PROJECT_DIR$/src/sample/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/MainWindowController.java" afterPath="$PROJECT_DIR$/src/sample/MainWindowController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/RepaymentFormController.java" afterPath="$PROJECT_DIR$/src/sample/RepaymentFormController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ViewCustomersLoansController.java" afterPath="$PROJECT_DIR$/src/sample/ViewCustomersLoansController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ViewRepaymentsController.java" afterPath="$PROJECT_DIR$/src/sample/ViewRepaymentsController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/backend/DatabaseHandler.java" afterPath="$PROJECT_DIR$/src/sample/backend/DatabaseHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/layouts/repayment_form.fxml" afterPath="$PROJECT_DIR$/src/sample/layouts/repayment_form.fxml" />
     </list>
     <ignored path="MikopoApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,82 +45,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45174825">
-              <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainWindowController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/MainWindowController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="154" column="13" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewCustomersLoansController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/ViewCustomersLoansController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="108" column="67" selection-start-line="108" selection-start-column="67" selection-end-line="108" selection-end-column="67" />
-              <folding>
-                <element signature="method#repaymentForm#0;class#ViewCustomersLoansController#0" expanded="false" />
-                <element signature="method#editCustomerForm#0;class#ViewCustomersLoansController#0" expanded="false" />
-                <element signature="method#editLoanForm#0;class#ViewCustomersLoansController#0" expanded="false" />
-                <element signature="method#viewCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
-                <element signature="method#searchLoan#0;class#ViewCustomersLoansController#0" expanded="false" />
-                <element signature="method#searchCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
-                <element signature="method#setUpCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewRepaymentsController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/ViewRepaymentsController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="332" column="67" selection-start-line="332" selection-start-column="67" selection-end-line="332" selection-end-column="67" />
-              <folding>
-                <element signature="method#repaymentForm#0;class#ViewRepaymentsController#0" expanded="false" />
-                <element signature="method#setUpDue#0;class#ViewRepaymentsController#0" expanded="false" />
-                <element signature="method#setUpOneMonthLate#0;class#ViewRepaymentsController#0" expanded="false" />
-                <element signature="method#setUpTwoMonthLate#0;class#ViewRepaymentsController#0" expanded="false" />
-                <element signature="method#setUpPenaltyLate#0;class#ViewRepaymentsController#0" expanded="false" />
-                <element signature="method#searchLoan#0;class#ViewRepaymentsController#0" expanded="false" />
-                <element signature="method#handle#0;class#ViewRepaymentsController#0" expanded="false" />
-                <element signature="method#editSms#0;class#ViewRepaymentsController#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DatabaseHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/backend/DatabaseHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="1291" column="29" selection-start-line="1291" selection-start-column="29" selection-end-line="1291" selection-end-column="29" />
+              <caret line="1734" column="23" selection-start-line="1734" selection-start-column="23" selection-end-line="1734" selection-end-column="23" />
               <folding>
-                <element signature="method#login#0;class#DatabaseHandler#0" expanded="false" />
-                <element signature="method#getUserDetails#0;class#DatabaseHandler#0" expanded="false" />
-                <element signature="method#registerCustomer#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#registerLoan#0;class#DatabaseHandler#0" expanded="false" />
-                <element signature="method#loanPayment#0;class#DatabaseHandler#0" expanded="false" />
-                <element signature="method#updateLoanTable#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#loanPaymentFine#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#updateLoanTableFine#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#loadCustomers#0;class#DatabaseHandler#0" expanded="false" />
+                <element signature="method#loadLoans#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#loadDueLoans#0;class#DatabaseHandler#0" expanded="false" />
-                <element signature="method#loadTwoMonthLateLoans#0;class#DatabaseHandler#0" expanded="false" />
-                <element signature="method#loadPenaltyLateLoans#0;class#DatabaseHandler#0" expanded="false" />
-                <element signature="method#searchLoan#0;class#DatabaseHandler#0" expanded="false" />
+                <element signature="method#loadOneMonthLateLoans#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#searchCustomers#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#updateProfPhoto#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#updateLoanFile#0;class#DatabaseHandler#0" expanded="false" />
@@ -140,97 +80,215 @@
                 <element signature="method#deleteUser#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#getInterest#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#setInterest#0;class#DatabaseHandler#0" expanded="false" />
-                <element signature="method#getFines#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#getPhoneNumbers#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#payFine#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#reduceFine#0;class#DatabaseHandler#0" expanded="false" />
                 <element signature="method#updateFinetolerance#0;class#DatabaseHandler#0" expanded="false" />
-                <marker date="1506812242199" expanded="true" signature="943:994" placeholder="SELECT * FRO... USERS" />
-                <marker date="1506812242199" expanded="true" signature="1945:1975" placeholder="SELECT * FRO... USERS" />
-                <marker date="1506812242199" expanded="true" signature="3319:3563" placeholder="INSERT INTO CUSTOMERS... " />
-                <marker date="1506812242199" expanded="true" signature="3600:3623" placeholder="SELECT * FRO... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="5341:5581" placeholder="INSERT INTO LOANS... " />
-                <marker date="1506812242199" expanded="true" signature="5614:5633" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="7118:7188" placeholder="INSERT INTO PAYMENTS... " />
-                <marker date="1506812242199" expanded="true" signature="7827:7875" placeholder="SELECT AMOUN... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="8371:8494" placeholder="UPDATE LOANS... " />
-                <marker date="1506812242199" expanded="true" signature="8845:8915" placeholder="INSERT INTO PAYMENTS... " />
-                <marker date="1506812242199" expanded="true" signature="9583:9627" placeholder="SELECT AMOUN... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="9962:10068" placeholder="UPDATE LOANS... " />
-                <marker date="1506812242199" expanded="true" signature="10456:10479" placeholder="SELECT * FRO... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="11425:11444" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="12300:12333" placeholder="SELECT * FRO... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="12686:12720" placeholder="SELECT * FRO... FINES" />
-                <marker date="1506812242199" expanded="true" signature="15091:15132" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="15984:16017" placeholder="SELECT * FRO... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="16370:16404" placeholder="SELECT * FRO... FINES" />
-                <marker date="1506812242199" expanded="true" signature="18914:19005" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="19394:19413" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="19930:19963" placeholder="SELECT * FRO... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="20316:20350" placeholder="SELECT * FRO... FINES" />
-                <marker date="1506812242199" expanded="true" signature="23141:23236" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="23625:23644" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="24161:24194" placeholder="SELECT * FRO... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="24547:24581" placeholder="SELECT * FRO... FINES" />
-                <marker date="1506812242199" expanded="true" signature="27373:27468" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="27857:27876" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="28393:28426" placeholder="SELECT * FRO... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="28778:28812" placeholder="SELECT * FRO... FINES" />
-                <marker date="1506812242199" expanded="true" signature="31367:31422" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="32278:32311" placeholder="SELECT * FRO... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="32665:32699" placeholder="SELECT * FRO... FINES" />
-                <marker date="1506812242199" expanded="true" signature="35022:35070" placeholder="SELECT * FRO... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="35108:35186" placeholder="SELECT * FRO... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="36238:36295" placeholder="UPDATE CUSTO... " />
-                <marker date="1506812242199" expanded="true" signature="36748:36804" placeholder="UPDATE LOANS... " />
-                <marker date="1506812242199" expanded="true" signature="37249:37282" placeholder="SELECT * FRO... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="37766:37824" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="38063:38119" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="39192:39259" placeholder="SELECT DISTI... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="39299:39344" placeholder="UPDATE LOANS... " />
-                <marker date="1506812242199" expanded="true" signature="40279:40525" placeholder="SELECT custo... customers" />
-                <marker date="1506812242199" expanded="true" signature="41498:41774" placeholder="SELECT custo... customers" />
-                <marker date="1506812242199" expanded="true" signature="42661:42694" placeholder="SELECT * FRO... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="43583:43880" placeholder="UPDATE CUSTO... " />
-                <marker date="1506812242199" expanded="true" signature="44399:44591" placeholder="SELECT borro... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="45810:46207" placeholder="UPDATE LOANS... " />
-                <marker date="1506812242199" expanded="true" signature="46723:46761" placeholder="SELECT SMS F... MESSAGES" />
-                <marker date="1506812242199" expanded="true" signature="47339:47386" placeholder="UPDATE MESSA... " />
-                <marker date="1506812242199" expanded="true" signature="48064:48083" placeholder="SELECT * FRO... USERS" />
-                <marker date="1506812242199" expanded="true" signature="48123:48162" placeholder="SELECT * FRO... USERS" />
-                <marker date="1506812242199" expanded="true" signature="48899:48980" placeholder="INSERT INTO USERS... " />
-                <marker date="1506812242199" expanded="true" signature="49013:49032" placeholder="SELECT * FRO... USERS" />
-                <marker date="1506812242199" expanded="true" signature="50288:50334" placeholder="UPDATE USERS... " />
-                <marker date="1506812242199" expanded="true" signature="51076:51100" placeholder="SELECT * FRO... CONTROLLER" />
-                <marker date="1506812242199" expanded="true" signature="51133:51152" placeholder="SELECT * FRO... FINES" />
-                <marker date="1506812242199" expanded="true" signature="51185:51204" placeholder="SELECT * FRO... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="51240:51313" placeholder="INSERT INTO FINES... " />
-                <marker date="1506812242199" expanded="true" signature="53005:53085" placeholder="SELECT * FRO... PAYMENTS" />
-                <marker date="1506812242199" expanded="true" signature="54157:54206" placeholder="UPDATE FINES... " />
-                <marker date="1506812242199" expanded="true" signature="55671:55721" placeholder="UPDATE LOANS... " />
-                <marker date="1506812242199" expanded="true" signature="56595:56634" placeholder="UPDATE CONTR... " />
-                <marker date="1506812242199" expanded="true" signature="57160:57197" placeholder="UPDATE CONTR... " />
-                <marker date="1506812242199" expanded="true" signature="57640:57690" placeholder="UPDATE USERS... " />
-                <marker date="1506812242199" expanded="true" signature="58229:58256" placeholder="DELETE FROM " />
-                <marker date="1506812242199" expanded="true" signature="58791:58813" placeholder="SELECT * FRO... INTEREST" />
-                <marker date="1506812242199" expanded="true" signature="59405:59441" placeholder="UPDATE INTER... " />
-                <marker date="1506812242199" expanded="true" signature="60205:60239" placeholder="SELECT * FRO... FINES" />
-                <marker date="1506812242199" expanded="true" signature="60577:60626" placeholder="SELECT AMOUN... LOANS" />
-                <marker date="1506812242199" expanded="true" signature="60850:60930" placeholder="SELECT * FRO... PAYMENTS" />
-                <marker date="1506812242199" expanded="true" signature="61877:61904" placeholder="SELECT PHONE... CUSTOMERS" />
-                <marker date="1506812242199" expanded="true" signature="62572:62649" placeholder="INSERT INTO FINE_PAYMENTS... " />
-                <marker date="1506812242199" expanded="true" signature="63398:63432" placeholder="SELECT * FRO... FINES" />
-                <marker date="1506812242199" expanded="true" signature="63791:63845" placeholder="UPDATE FINES... " />
-                <marker date="1506812242199" expanded="true" signature="64064:64103" placeholder="SELECT AMOUN... FINES" />
-                <marker date="1506812242199" expanded="true" signature="64370:64410" placeholder="UPDATE FINES... " />
-                <marker date="1506812242199" expanded="true" signature="65027:65084" placeholder="UPDATE FINES... " />
-                <marker date="1506812242199" expanded="true" signature="65679:65740" placeholder="UPDATE LOANS... " />
+                <marker date="1520810196204" expanded="true" signature="948:999" placeholder="SELECT * FRO... USERS" />
+                <marker date="1520810196204" expanded="true" signature="1950:1980" placeholder="SELECT * FRO... USERS" />
+                <marker date="1520810196204" expanded="true" signature="3324:3568" placeholder="INSERT INTO CUSTOMERS... " />
+                <marker date="1520810196204" expanded="true" signature="3605:3628" placeholder="SELECT * FRO... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="5346:5586" placeholder="INSERT INTO LOANS... " />
+                <marker date="1520810196204" expanded="true" signature="5619:5638" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="7123:7193" placeholder="INSERT INTO PAYMENTS... " />
+                <marker date="1520810196204" expanded="true" signature="7832:7880" placeholder="SELECT AMOUN... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="8376:8499" placeholder="UPDATE LOANS... " />
+                <marker date="1520810196204" expanded="true" signature="8850:8920" placeholder="INSERT INTO PAYMENTS... " />
+                <marker date="1520810196204" expanded="true" signature="9588:9632" placeholder="SELECT AMOUN... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="9967:10073" placeholder="UPDATE LOANS... " />
+                <marker date="1520810196204" expanded="true" signature="10461:10484" placeholder="SELECT * FRO... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="11430:11449" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="12305:12338" placeholder="SELECT * FRO... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="12691:12725" placeholder="SELECT * FRO... FINES" />
+                <marker date="1520810196204" expanded="true" signature="15096:15137" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="15989:16022" placeholder="SELECT * FRO... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="16375:16409" placeholder="SELECT * FRO... FINES" />
+                <marker date="1520810196204" expanded="true" signature="18919:19010" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="19399:19418" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="19935:19968" placeholder="SELECT * FRO... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="20321:20355" placeholder="SELECT * FRO... FINES" />
+                <marker date="1520810196204" expanded="true" signature="23146:23241" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="23630:23649" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="24166:24199" placeholder="SELECT * FRO... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="24552:24586" placeholder="SELECT * FRO... FINES" />
+                <marker date="1520810196204" expanded="true" signature="27378:27473" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="27862:27881" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="28398:28431" placeholder="SELECT * FRO... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="28783:28817" placeholder="SELECT * FRO... FINES" />
+                <marker date="1520810196204" expanded="true" signature="31372:31427" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="32283:32316" placeholder="SELECT * FRO... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="32670:32704" placeholder="SELECT * FRO... FINES" />
+                <marker date="1520810196204" expanded="true" signature="35027:35075" placeholder="SELECT * FRO... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="35113:35191" placeholder="SELECT * FRO... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="36243:36300" placeholder="UPDATE CUSTO... " />
+                <marker date="1520810196204" expanded="true" signature="36753:36809" placeholder="UPDATE LOANS... " />
+                <marker date="1520810196204" expanded="true" signature="37254:37287" placeholder="SELECT * FRO... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="37771:37829" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="38068:38124" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="39197:39264" placeholder="SELECT DISTI... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="39304:39349" placeholder="UPDATE LOANS... " />
+                <marker date="1520810196204" expanded="true" signature="40284:40530" placeholder="SELECT custo... customers" />
+                <marker date="1520810196204" expanded="true" signature="41503:41779" placeholder="SELECT custo... customers" />
+                <marker date="1520810196204" expanded="true" signature="42666:42699" placeholder="SELECT * FRO... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="43588:43885" placeholder="UPDATE CUSTO... " />
+                <marker date="1520810196204" expanded="true" signature="44404:44596" placeholder="SELECT borro... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="45815:46212" placeholder="UPDATE LOANS... " />
+                <marker date="1520810196204" expanded="true" signature="46728:46766" placeholder="SELECT SMS F... MESSAGES" />
+                <marker date="1520810196204" expanded="true" signature="47344:47391" placeholder="UPDATE MESSA... " />
+                <marker date="1520810196204" expanded="true" signature="48069:48088" placeholder="SELECT * FRO... USERS" />
+                <marker date="1520810196204" expanded="true" signature="48128:48167" placeholder="SELECT * FRO... USERS" />
+                <marker date="1520810196204" expanded="true" signature="48904:48985" placeholder="INSERT INTO USERS... " />
+                <marker date="1520810196204" expanded="true" signature="49018:49037" placeholder="SELECT * FRO... USERS" />
+                <marker date="1520810196204" expanded="true" signature="50293:50339" placeholder="UPDATE USERS... " />
+                <marker date="1520810196204" expanded="true" signature="51081:51105" placeholder="SELECT * FRO... CONTROLLER" />
+                <marker date="1520810196204" expanded="true" signature="51138:51157" placeholder="SELECT * FRO... FINES" />
+                <marker date="1520810196204" expanded="true" signature="51190:51209" placeholder="SELECT * FRO... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="51245:51318" placeholder="INSERT INTO FINES... " />
+                <marker date="1520810196204" expanded="true" signature="53010:53090" placeholder="SELECT * FRO... PAYMENTS" />
+                <marker date="1520810196204" expanded="true" signature="54162:54211" placeholder="UPDATE FINES... " />
+                <marker date="1520810196204" expanded="true" signature="55676:55726" placeholder="UPDATE LOANS... " />
+                <marker date="1520810196204" expanded="true" signature="56600:56639" placeholder="UPDATE CONTR... " />
+                <marker date="1520810196204" expanded="true" signature="57165:57202" placeholder="UPDATE CONTR... " />
+                <marker date="1520810196204" expanded="true" signature="57645:57695" placeholder="UPDATE USERS... " />
+                <marker date="1520810196204" expanded="true" signature="58234:58261" placeholder="DELETE FROM " />
+                <marker date="1520810196204" expanded="true" signature="58796:58818" placeholder="SELECT * FRO... INTEREST" />
+                <marker date="1520810196204" expanded="true" signature="59410:59446" placeholder="UPDATE INTER... " />
+                <marker date="1520810196204" expanded="true" signature="60210:60244" placeholder="SELECT * FRO... FINES" />
+                <marker date="1520810196204" expanded="true" signature="60582:60631" placeholder="SELECT AMOUN... LOANS" />
+                <marker date="1520810196204" expanded="true" signature="60855:60935" placeholder="SELECT * FRO... PAYMENTS" />
+                <marker date="1520810196204" expanded="true" signature="61882:61909" placeholder="SELECT PHONE... CUSTOMERS" />
+                <marker date="1520810196204" expanded="true" signature="62577:62654" placeholder="INSERT INTO FINE_PAYMENTS... " />
+                <marker date="1520810196204" expanded="true" signature="63403:63437" placeholder="SELECT * FRO... FINES" />
+                <marker date="1520810196204" expanded="true" signature="63796:63850" placeholder="UPDATE FINES... " />
+                <marker date="1520810196204" expanded="true" signature="64069:64108" placeholder="SELECT AMOUN... FINES" />
+                <marker date="1520810196204" expanded="true" signature="64375:64415" placeholder="UPDATE FINES... " />
+                <marker date="1520810196204" expanded="true" signature="65032:65089" placeholder="UPDATE FINES... " />
+                <marker date="1520810196204" expanded="true" signature="65684:65745" placeholder="UPDATE LOANS... " />
+                <marker date="1520810196204" expanded="true" signature="66198:66230" placeholder="delete from " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ViewReportController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/ViewReportController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="426" column="0" selection-start-line="426" selection-start-column="0" selection-end-line="426" selection-end-column="0" />
+              <folding>
+                <marker date="1505908664581" expanded="true" signature="4335:4519" placeholder="select count... " />
+                <marker date="1505908664581" expanded="true" signature="5848:6062" placeholder="select count... " />
+                <marker date="1505908664581" expanded="true" signature="8473:8702" placeholder="select custo... customers" />
+                <marker date="1505908664581" expanded="true" signature="12798:13024" placeholder="select count... " />
+                <marker date="1505908664581" expanded="true" signature="16081:16380" placeholder="select count... " />
+                <marker date="1505908664581" expanded="true" signature="21111:21319" placeholder="select sum(a... " />
+                <marker date="1505908664581" expanded="true" signature="22735:23019" placeholder="select sum(a... " />
+                <marker date="1505908664581" expanded="true" signature="24782:24941" placeholder="select sum(a... " />
+                <marker date="1505908664581" expanded="true" signature="26480:26698" placeholder="select sum(a... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RepaymentFormController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/sample/RepaymentFormController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.75253254">
+              <caret line="122" column="46" selection-start-line="122" selection-start-column="46" selection-end-line="122" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Fine.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/models/Fine.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EditCustomerController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/EditCustomerController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="155" column="32" selection-start-line="151" selection-start-column="12" selection-end-line="155" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="85" selection-start-line="17" selection-start-column="85" selection-end-line="17" selection-end-column="85" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyApplication.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/MyApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="95" column="9" selection-start-line="95" selection-start-column="9" selection-end-line="95" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyPreloader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/MyPreloader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewCustomersLoansController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/ViewCustomersLoansController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="187" column="12" selection-start-line="187" selection-start-column="12" selection-end-line="187" selection-end-column="32" />
+              <folding>
+                <element signature="method#initializeViewLoans#0;class#ViewCustomersLoansController#0" expanded="false" />
+                <element signature="method#editCustomerForm#0;class#ViewCustomersLoansController#0" expanded="false" />
+                <element signature="method#viewCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
+                <element signature="method#searchCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
+                <element signature="method#setUpLoan#0;class#ViewCustomersLoansController#0" expanded="false" />
+                <element signature="method#setUpCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewRepaymentsController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/ViewRepaymentsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="364" column="9" selection-start-line="364" selection-start-column="9" selection-end-line="364" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -250,11 +308,15 @@
         <option value="$PROJECT_DIR$/src/sample/LoginController.java" />
         <option value="$PROJECT_DIR$/src/sample/AdminController.java" />
         <option value="$PROJECT_DIR$/src/sample/ViewReportController.java" />
-        <option value="$PROJECT_DIR$/src/sample/ViewCustomersLoansController.java" />
-        <option value="$PROJECT_DIR$/src/sample/ViewRepaymentsController.java" />
-        <option value="$PROJECT_DIR$/src/sample/Main.java" />
-        <option value="$PROJECT_DIR$/src/sample/backend/DatabaseHandler.java" />
         <option value="$PROJECT_DIR$/src/sample/MainWindowController.java" />
+        <option value="$PROJECT_DIR$/src/sample/layouts/repayment_form.fxml" />
+        <option value="$PROJECT_DIR$/src/sample/ViewRepaymentsController.java" />
+        <option value="$PROJECT_DIR$/src/sample/ViewCustomersLoansController.java" />
+        <option value="$PROJECT_DIR$/src/sample/Main.java" />
+        <option value="$PROJECT_DIR$/src/sample/MyPreloader.java" />
+        <option value="$PROJECT_DIR$/src/sample/MyApplication.java" />
+        <option value="$PROJECT_DIR$/src/sample/backend/DatabaseHandler.java" />
+        <option value="$PROJECT_DIR$/src/sample/RepaymentFormController.java" />
       </list>
     </option>
   </component>
@@ -264,10 +326,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="876" />
+    <option name="x" value="-7" />
+    <option name="y" value="2" />
+    <option name="width" value="1612" />
+    <option name="height" value="865" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -294,8 +356,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -345,38 +405,21 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sample" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="backend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MikopoApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MikopoApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -850,7 +893,39 @@
       <workItem from="1506325700717" duration="138000" />
       <workItem from="1506680977505" duration="18215000" />
       <workItem from="1506784518141" duration="3724000" />
-      <workItem from="1506790692849" duration="16273000" />
+      <workItem from="1506790692849" duration="16365000" />
+      <workItem from="1506870273871" duration="595000" />
+      <workItem from="1506945096257" duration="4038000" />
+      <workItem from="1507555302375" duration="594000" />
+      <workItem from="1508149473048" duration="1634000" />
+      <workItem from="1509288779903" duration="3484000" />
+      <workItem from="1509447767390" duration="2202000" />
+      <workItem from="1509725178317" duration="608000" />
+      <workItem from="1510178154816" duration="663000" />
+      <workItem from="1510181569227" duration="16984000" />
+      <workItem from="1510380145300" duration="7716000" />
+      <workItem from="1510521279790" duration="1623000" />
+      <workItem from="1510857202878" duration="4281000" />
+      <workItem from="1511179882784" duration="617000" />
+      <workItem from="1511604407235" duration="280000" />
+      <workItem from="1511698149182" duration="4635000" />
+      <workItem from="1511731334091" duration="164000" />
+      <workItem from="1512102865692" duration="1124000" />
+      <workItem from="1512520655750" duration="1289000" />
+      <workItem from="1513178345396" duration="1187000" />
+      <workItem from="1513467769651" duration="1549000" />
+      <workItem from="1513545983762" duration="3282000" />
+      <workItem from="1519142833756" duration="636000" />
+      <workItem from="1519963578300" duration="643000" />
+      <workItem from="1519994196094" duration="620000" />
+      <workItem from="1520154015897" duration="126000" />
+      <workItem from="1520229946888" duration="39000" />
+      <workItem from="1520257129514" duration="73000" />
+      <workItem from="1520280733985" duration="353000" />
+      <workItem from="1520361652344" duration="236000" />
+      <workItem from="1520430785511" duration="2053000" />
+      <workItem from="1520525271938" duration="2685000" />
+      <workItem from="1520798939480" duration="12168000" />
     </task>
     <task id="LOCAL-00001" summary="Eighth Commit">
       <created>1506688898750</created>
@@ -858,27 +933,33 @@
       <option name="project" value="LOCAL" />
       <updated>1506688898750</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Ninth Commit">
+      <created>1506813155509</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1506813155509</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44773000" />
+    <option name="totallyTimeSpent" value="123046000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-7" y="2" width="1612" height="865" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329235" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.017759563" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19280206" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18363403" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969153" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -900,11 +981,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Eighth Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Eighth Commit" />
+    <MESSAGE value="Ninth Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ninth Commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -913,11 +995,133 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/sample/backend/DatabaseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1291" column="29" selection-start-line="1291" selection-start-column="29" selection-end-line="1291" selection-end-column="29" />
+          <folding>
+            <element signature="method#registerLoan#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loanPaymentFine#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#updateLoanTableFine#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loadCustomers#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loadLoans#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loadDueLoans#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loadOneMonthLateLoans#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#searchCustomers#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#updateProfPhoto#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#updateLoanFile#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#viewCustomer#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#checkIfLoanDone#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#getUserTransactions#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#getUserFineTransactions#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#getBorrowerNameAndId#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#editCustomerDetails#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#viewLoan#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#editLoanDetails#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#viewSms#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#editSms#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#getUsers#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#addUser#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#updateUserStatus#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#fineHandler#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#stateChanger#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#updatePassword#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#deleteUser#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#getInterest#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#setInterest#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#getPhoneNumbers#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#payFine#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#reduceFine#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#updateFinetolerance#0;class#DatabaseHandler#0" expanded="false" />
+            <marker date="1520810196204" expanded="true" signature="948:999" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="1950:1980" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="3324:3568" placeholder="INSERT INTO CUSTOMERS... " />
+            <marker date="1520810196204" expanded="true" signature="3605:3628" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="5346:5586" placeholder="INSERT INTO LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="5619:5638" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="7123:7193" placeholder="INSERT INTO PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="7832:7880" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="8376:8499" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="8850:8920" placeholder="INSERT INTO PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="9588:9632" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="9967:10073" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="10461:10484" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="11430:11449" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="12305:12338" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="12691:12725" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="15096:15137" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="15989:16022" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="16375:16409" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="18919:19010" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="19399:19418" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="19935:19968" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="20321:20355" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="23146:23241" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="23630:23649" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="24166:24199" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="24552:24586" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="27378:27473" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="27862:27881" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="28398:28431" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="28783:28817" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="31372:31427" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="32283:32316" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="32670:32704" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="35027:35075" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="35113:35191" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="36243:36300" placeholder="UPDATE CUSTO... " />
+            <marker date="1520810196204" expanded="true" signature="36753:36809" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="37254:37287" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="37771:37829" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="38068:38124" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="39197:39264" placeholder="SELECT DISTI... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="39304:39349" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="40284:40530" placeholder="SELECT custo... customers" />
+            <marker date="1520810196204" expanded="true" signature="41503:41779" placeholder="SELECT custo... customers" />
+            <marker date="1520810196204" expanded="true" signature="42666:42699" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="43588:43885" placeholder="UPDATE CUSTO... " />
+            <marker date="1520810196204" expanded="true" signature="44404:44596" placeholder="SELECT borro... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="45815:46212" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="46728:46766" placeholder="SELECT SMS F... MESSAGES" />
+            <marker date="1520810196204" expanded="true" signature="47344:47391" placeholder="UPDATE MESSA... " />
+            <marker date="1520810196204" expanded="true" signature="48069:48088" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="48128:48167" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="48904:48985" placeholder="INSERT INTO USERS... " />
+            <marker date="1520810196204" expanded="true" signature="49018:49037" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="50293:50339" placeholder="UPDATE USERS... " />
+            <marker date="1520810196204" expanded="true" signature="51081:51105" placeholder="SELECT * FRO... CONTROLLER" />
+            <marker date="1520810196204" expanded="true" signature="51138:51157" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="51190:51209" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="51245:51318" placeholder="INSERT INTO FINES... " />
+            <marker date="1520810196204" expanded="true" signature="53010:53090" placeholder="SELECT * FRO... PAYMENTS" />
+            <marker date="1520810196204" expanded="true" signature="54162:54211" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="55676:55726" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="56600:56639" placeholder="UPDATE CONTR... " />
+            <marker date="1520810196204" expanded="true" signature="57165:57202" placeholder="UPDATE CONTR... " />
+            <marker date="1520810196204" expanded="true" signature="57645:57695" placeholder="UPDATE USERS... " />
+            <marker date="1520810196204" expanded="true" signature="58234:58261" placeholder="DELETE FROM " />
+            <marker date="1520810196204" expanded="true" signature="58796:58818" placeholder="SELECT * FRO... INTEREST" />
+            <marker date="1520810196204" expanded="true" signature="59410:59446" placeholder="UPDATE INTER... " />
+            <marker date="1520810196204" expanded="true" signature="60210:60244" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="60582:60631" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="60855:60935" placeholder="SELECT * FRO... PAYMENTS" />
+            <marker date="1520810196204" expanded="true" signature="61882:61909" placeholder="SELECT PHONE... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="62577:62654" placeholder="INSERT INTO FINE_PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="63403:63437" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="63796:63850" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="64069:64108" placeholder="SELECT AMOUN... FINES" />
+            <marker date="1520810196204" expanded="true" signature="64375:64415" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="65032:65089" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="65684:65745" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="66198:66230" placeholder="delete from " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -925,7 +1129,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="166" column="64" selection-start-line="166" selection-start-column="64" selection-end-line="166" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -934,12 +1137,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#repaymentForm#0;class#ViewCustomersLoansController#0" expanded="false" />
+            <element signature="method#initializeViewLoans#0;class#ViewCustomersLoansController#0" expanded="false" />
             <element signature="method#editCustomerForm#0;class#ViewCustomersLoansController#0" expanded="false" />
-            <element signature="method#editLoanForm#0;class#ViewCustomersLoansController#0" expanded="false" />
             <element signature="method#viewCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
-            <element signature="method#searchLoan#0;class#ViewCustomersLoansController#0" expanded="false" />
             <element signature="method#searchCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
+            <element signature="method#setUpLoan#0;class#ViewCustomersLoansController#0" expanded="false" />
             <element signature="method#setUpCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
           </folding>
         </state>
@@ -950,19 +1152,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
           <folding>
-            <element signature="method#login#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#getUserDetails#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#registerCustomer#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#registerLoan#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#loanPayment#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#updateLoanTable#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#loanPaymentFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateLoanTableFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#loadCustomers#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loadLoans#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#loadDueLoans#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#loadTwoMonthLateLoans#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#loadPenaltyLateLoans#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#searchLoan#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loadOneMonthLateLoans#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#searchCustomers#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateProfPhoto#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateLoanFile#0;class#DatabaseHandler#0" expanded="false" />
@@ -985,91 +1181,91 @@
             <element signature="method#deleteUser#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#getInterest#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#setInterest#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#getFines#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#getPhoneNumbers#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#payFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#reduceFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateFinetolerance#0;class#DatabaseHandler#0" expanded="false" />
-            <marker date="1506812242199" expanded="true" signature="943:994" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="1945:1975" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="3319:3563" placeholder="INSERT INTO CUSTOMERS... " />
-            <marker date="1506812242199" expanded="true" signature="3600:3623" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="5341:5581" placeholder="INSERT INTO LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="5614:5633" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="7118:7188" placeholder="INSERT INTO PAYMENTS... " />
-            <marker date="1506812242199" expanded="true" signature="7827:7875" placeholder="SELECT AMOUN... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="8371:8494" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="8845:8915" placeholder="INSERT INTO PAYMENTS... " />
-            <marker date="1506812242199" expanded="true" signature="9583:9627" placeholder="SELECT AMOUN... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="9962:10068" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="10456:10479" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="11425:11444" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="12300:12333" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="12686:12720" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="15091:15132" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="15984:16017" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="16370:16404" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="18914:19005" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="19394:19413" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="19930:19963" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="20316:20350" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="23141:23236" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="23625:23644" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="24161:24194" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="24547:24581" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="27373:27468" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="27857:27876" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="28393:28426" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="28778:28812" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="31367:31422" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="32278:32311" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="32665:32699" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="35022:35070" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="35108:35186" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="36238:36295" placeholder="UPDATE CUSTO... " />
-            <marker date="1506812242199" expanded="true" signature="36748:36804" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="37249:37282" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="37766:37824" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="38063:38119" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="39192:39259" placeholder="SELECT DISTI... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="39299:39344" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="40279:40525" placeholder="SELECT custo... customers" />
-            <marker date="1506812242199" expanded="true" signature="41498:41774" placeholder="SELECT custo... customers" />
-            <marker date="1506812242199" expanded="true" signature="42661:42694" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="43583:43880" placeholder="UPDATE CUSTO... " />
-            <marker date="1506812242199" expanded="true" signature="44399:44591" placeholder="SELECT borro... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="45810:46207" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="46723:46761" placeholder="SELECT SMS F... MESSAGES" />
-            <marker date="1506812242199" expanded="true" signature="47339:47386" placeholder="UPDATE MESSA... " />
-            <marker date="1506812242199" expanded="true" signature="48064:48083" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="48123:48162" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="48899:48980" placeholder="INSERT INTO USERS... " />
-            <marker date="1506812242199" expanded="true" signature="49013:49032" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="50288:50334" placeholder="UPDATE USERS... " />
-            <marker date="1506812242199" expanded="true" signature="51076:51100" placeholder="SELECT * FRO... CONTROLLER" />
-            <marker date="1506812242199" expanded="true" signature="51133:51152" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="51185:51204" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="51240:51313" placeholder="INSERT INTO FINES... " />
-            <marker date="1506812242199" expanded="true" signature="53005:53085" placeholder="SELECT * FRO... PAYMENTS" />
-            <marker date="1506812242199" expanded="true" signature="54157:54206" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="55671:55721" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="56595:56634" placeholder="UPDATE CONTR... " />
-            <marker date="1506812242199" expanded="true" signature="57160:57197" placeholder="UPDATE CONTR... " />
-            <marker date="1506812242199" expanded="true" signature="57640:57690" placeholder="UPDATE USERS... " />
-            <marker date="1506812242199" expanded="true" signature="58229:58256" placeholder="DELETE FROM " />
-            <marker date="1506812242199" expanded="true" signature="58791:58813" placeholder="SELECT * FRO... INTEREST" />
-            <marker date="1506812242199" expanded="true" signature="59405:59441" placeholder="UPDATE INTER... " />
-            <marker date="1506812242199" expanded="true" signature="60205:60239" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="60577:60626" placeholder="SELECT AMOUN... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="60850:60930" placeholder="SELECT * FRO... PAYMENTS" />
-            <marker date="1506812242199" expanded="true" signature="61877:61904" placeholder="SELECT PHONE... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="62572:62649" placeholder="INSERT INTO FINE_PAYMENTS... " />
-            <marker date="1506812242199" expanded="true" signature="63398:63432" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="63791:63845" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="64064:64103" placeholder="SELECT AMOUN... FINES" />
-            <marker date="1506812242199" expanded="true" signature="64370:64410" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="65027:65084" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="65679:65740" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="948:999" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="1950:1980" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="3324:3568" placeholder="INSERT INTO CUSTOMERS... " />
+            <marker date="1520810196204" expanded="true" signature="3605:3628" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="5346:5586" placeholder="INSERT INTO LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="5619:5638" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="7123:7193" placeholder="INSERT INTO PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="7832:7880" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="8376:8499" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="8850:8920" placeholder="INSERT INTO PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="9588:9632" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="9967:10073" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="10461:10484" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="11430:11449" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="12305:12338" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="12691:12725" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="15096:15137" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="15989:16022" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="16375:16409" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="18919:19010" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="19399:19418" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="19935:19968" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="20321:20355" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="23146:23241" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="23630:23649" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="24166:24199" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="24552:24586" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="27378:27473" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="27862:27881" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="28398:28431" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="28783:28817" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="31372:31427" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="32283:32316" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="32670:32704" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="35027:35075" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="35113:35191" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="36243:36300" placeholder="UPDATE CUSTO... " />
+            <marker date="1520810196204" expanded="true" signature="36753:36809" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="37254:37287" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="37771:37829" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="38068:38124" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="39197:39264" placeholder="SELECT DISTI... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="39304:39349" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="40284:40530" placeholder="SELECT custo... customers" />
+            <marker date="1520810196204" expanded="true" signature="41503:41779" placeholder="SELECT custo... customers" />
+            <marker date="1520810196204" expanded="true" signature="42666:42699" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="43588:43885" placeholder="UPDATE CUSTO... " />
+            <marker date="1520810196204" expanded="true" signature="44404:44596" placeholder="SELECT borro... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="45815:46212" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="46728:46766" placeholder="SELECT SMS F... MESSAGES" />
+            <marker date="1520810196204" expanded="true" signature="47344:47391" placeholder="UPDATE MESSA... " />
+            <marker date="1520810196204" expanded="true" signature="48069:48088" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="48128:48167" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="48904:48985" placeholder="INSERT INTO USERS... " />
+            <marker date="1520810196204" expanded="true" signature="49018:49037" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="50293:50339" placeholder="UPDATE USERS... " />
+            <marker date="1520810196204" expanded="true" signature="51081:51105" placeholder="SELECT * FRO... CONTROLLER" />
+            <marker date="1520810196204" expanded="true" signature="51138:51157" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="51190:51209" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="51245:51318" placeholder="INSERT INTO FINES... " />
+            <marker date="1520810196204" expanded="true" signature="53010:53090" placeholder="SELECT * FRO... PAYMENTS" />
+            <marker date="1520810196204" expanded="true" signature="54162:54211" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="55676:55726" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="56600:56639" placeholder="UPDATE CONTR... " />
+            <marker date="1520810196204" expanded="true" signature="57165:57202" placeholder="UPDATE CONTR... " />
+            <marker date="1520810196204" expanded="true" signature="57645:57695" placeholder="UPDATE USERS... " />
+            <marker date="1520810196204" expanded="true" signature="58234:58261" placeholder="DELETE FROM " />
+            <marker date="1520810196204" expanded="true" signature="58796:58818" placeholder="SELECT * FRO... INTEREST" />
+            <marker date="1520810196204" expanded="true" signature="59410:59446" placeholder="UPDATE INTER... " />
+            <marker date="1520810196204" expanded="true" signature="60210:60244" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="60582:60631" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="60855:60935" placeholder="SELECT * FRO... PAYMENTS" />
+            <marker date="1520810196204" expanded="true" signature="61882:61909" placeholder="SELECT PHONE... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="62577:62654" placeholder="INSERT INTO FINE_PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="63403:63437" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="63796:63850" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="64069:64108" placeholder="SELECT AMOUN... FINES" />
+            <marker date="1520810196204" expanded="true" signature="64375:64415" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="65032:65089" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="65684:65745" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="66198:66230" placeholder="delete from " />
           </folding>
         </state>
       </provider>
@@ -1078,7 +1274,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1087,19 +1282,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="1291" column="29" selection-start-line="1291" selection-start-column="29" selection-end-line="1291" selection-end-column="29" />
           <folding>
-            <element signature="method#login#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#getUserDetails#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#registerCustomer#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#registerLoan#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#loanPayment#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#updateLoanTable#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#loanPaymentFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateLoanTableFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#loadCustomers#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loadLoans#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#loadDueLoans#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#loadTwoMonthLateLoans#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#loadPenaltyLateLoans#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#searchLoan#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loadOneMonthLateLoans#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#searchCustomers#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateProfPhoto#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateLoanFile#0;class#DatabaseHandler#0" expanded="false" />
@@ -1122,91 +1311,91 @@
             <element signature="method#deleteUser#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#getInterest#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#setInterest#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#getFines#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#getPhoneNumbers#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#payFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#reduceFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateFinetolerance#0;class#DatabaseHandler#0" expanded="false" />
-            <marker date="1506812242199" expanded="true" signature="943:994" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="1945:1975" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="3319:3563" placeholder="INSERT INTO CUSTOMERS... " />
-            <marker date="1506812242199" expanded="true" signature="3600:3623" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="5341:5581" placeholder="INSERT INTO LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="5614:5633" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="7118:7188" placeholder="INSERT INTO PAYMENTS... " />
-            <marker date="1506812242199" expanded="true" signature="7827:7875" placeholder="SELECT AMOUN... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="8371:8494" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="8845:8915" placeholder="INSERT INTO PAYMENTS... " />
-            <marker date="1506812242199" expanded="true" signature="9583:9627" placeholder="SELECT AMOUN... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="9962:10068" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="10456:10479" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="11425:11444" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="12300:12333" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="12686:12720" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="15091:15132" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="15984:16017" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="16370:16404" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="18914:19005" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="19394:19413" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="19930:19963" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="20316:20350" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="23141:23236" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="23625:23644" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="24161:24194" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="24547:24581" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="27373:27468" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="27857:27876" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="28393:28426" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="28778:28812" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="31367:31422" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="32278:32311" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="32665:32699" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="35022:35070" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="35108:35186" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="36238:36295" placeholder="UPDATE CUSTO... " />
-            <marker date="1506812242199" expanded="true" signature="36748:36804" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="37249:37282" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="37766:37824" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="38063:38119" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="39192:39259" placeholder="SELECT DISTI... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="39299:39344" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="40279:40525" placeholder="SELECT custo... customers" />
-            <marker date="1506812242199" expanded="true" signature="41498:41774" placeholder="SELECT custo... customers" />
-            <marker date="1506812242199" expanded="true" signature="42661:42694" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="43583:43880" placeholder="UPDATE CUSTO... " />
-            <marker date="1506812242199" expanded="true" signature="44399:44591" placeholder="SELECT borro... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="45810:46207" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="46723:46761" placeholder="SELECT SMS F... MESSAGES" />
-            <marker date="1506812242199" expanded="true" signature="47339:47386" placeholder="UPDATE MESSA... " />
-            <marker date="1506812242199" expanded="true" signature="48064:48083" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="48123:48162" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="48899:48980" placeholder="INSERT INTO USERS... " />
-            <marker date="1506812242199" expanded="true" signature="49013:49032" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="50288:50334" placeholder="UPDATE USERS... " />
-            <marker date="1506812242199" expanded="true" signature="51076:51100" placeholder="SELECT * FRO... CONTROLLER" />
-            <marker date="1506812242199" expanded="true" signature="51133:51152" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="51185:51204" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="51240:51313" placeholder="INSERT INTO FINES... " />
-            <marker date="1506812242199" expanded="true" signature="53005:53085" placeholder="SELECT * FRO... PAYMENTS" />
-            <marker date="1506812242199" expanded="true" signature="54157:54206" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="55671:55721" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="56595:56634" placeholder="UPDATE CONTR... " />
-            <marker date="1506812242199" expanded="true" signature="57160:57197" placeholder="UPDATE CONTR... " />
-            <marker date="1506812242199" expanded="true" signature="57640:57690" placeholder="UPDATE USERS... " />
-            <marker date="1506812242199" expanded="true" signature="58229:58256" placeholder="DELETE FROM " />
-            <marker date="1506812242199" expanded="true" signature="58791:58813" placeholder="SELECT * FRO... INTEREST" />
-            <marker date="1506812242199" expanded="true" signature="59405:59441" placeholder="UPDATE INTER... " />
-            <marker date="1506812242199" expanded="true" signature="60205:60239" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="60577:60626" placeholder="SELECT AMOUN... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="60850:60930" placeholder="SELECT * FRO... PAYMENTS" />
-            <marker date="1506812242199" expanded="true" signature="61877:61904" placeholder="SELECT PHONE... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="62572:62649" placeholder="INSERT INTO FINE_PAYMENTS... " />
-            <marker date="1506812242199" expanded="true" signature="63398:63432" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="63791:63845" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="64064:64103" placeholder="SELECT AMOUN... FINES" />
-            <marker date="1506812242199" expanded="true" signature="64370:64410" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="65027:65084" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="65679:65740" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="948:999" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="1950:1980" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="3324:3568" placeholder="INSERT INTO CUSTOMERS... " />
+            <marker date="1520810196204" expanded="true" signature="3605:3628" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="5346:5586" placeholder="INSERT INTO LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="5619:5638" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="7123:7193" placeholder="INSERT INTO PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="7832:7880" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="8376:8499" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="8850:8920" placeholder="INSERT INTO PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="9588:9632" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="9967:10073" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="10461:10484" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="11430:11449" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="12305:12338" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="12691:12725" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="15096:15137" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="15989:16022" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="16375:16409" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="18919:19010" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="19399:19418" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="19935:19968" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="20321:20355" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="23146:23241" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="23630:23649" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="24166:24199" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="24552:24586" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="27378:27473" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="27862:27881" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="28398:28431" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="28783:28817" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="31372:31427" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="32283:32316" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="32670:32704" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="35027:35075" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="35113:35191" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="36243:36300" placeholder="UPDATE CUSTO... " />
+            <marker date="1520810196204" expanded="true" signature="36753:36809" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="37254:37287" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="37771:37829" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="38068:38124" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="39197:39264" placeholder="SELECT DISTI... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="39304:39349" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="40284:40530" placeholder="SELECT custo... customers" />
+            <marker date="1520810196204" expanded="true" signature="41503:41779" placeholder="SELECT custo... customers" />
+            <marker date="1520810196204" expanded="true" signature="42666:42699" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="43588:43885" placeholder="UPDATE CUSTO... " />
+            <marker date="1520810196204" expanded="true" signature="44404:44596" placeholder="SELECT borro... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="45815:46212" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="46728:46766" placeholder="SELECT SMS F... MESSAGES" />
+            <marker date="1520810196204" expanded="true" signature="47344:47391" placeholder="UPDATE MESSA... " />
+            <marker date="1520810196204" expanded="true" signature="48069:48088" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="48128:48167" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="48904:48985" placeholder="INSERT INTO USERS... " />
+            <marker date="1520810196204" expanded="true" signature="49018:49037" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="50293:50339" placeholder="UPDATE USERS... " />
+            <marker date="1520810196204" expanded="true" signature="51081:51105" placeholder="SELECT * FRO... CONTROLLER" />
+            <marker date="1520810196204" expanded="true" signature="51138:51157" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="51190:51209" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="51245:51318" placeholder="INSERT INTO FINES... " />
+            <marker date="1520810196204" expanded="true" signature="53010:53090" placeholder="SELECT * FRO... PAYMENTS" />
+            <marker date="1520810196204" expanded="true" signature="54162:54211" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="55676:55726" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="56600:56639" placeholder="UPDATE CONTR... " />
+            <marker date="1520810196204" expanded="true" signature="57165:57202" placeholder="UPDATE CONTR... " />
+            <marker date="1520810196204" expanded="true" signature="57645:57695" placeholder="UPDATE USERS... " />
+            <marker date="1520810196204" expanded="true" signature="58234:58261" placeholder="DELETE FROM " />
+            <marker date="1520810196204" expanded="true" signature="58796:58818" placeholder="SELECT * FRO... INTEREST" />
+            <marker date="1520810196204" expanded="true" signature="59410:59446" placeholder="UPDATE INTER... " />
+            <marker date="1520810196204" expanded="true" signature="60210:60244" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="60582:60631" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="60855:60935" placeholder="SELECT * FRO... PAYMENTS" />
+            <marker date="1520810196204" expanded="true" signature="61882:61909" placeholder="SELECT PHONE... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="62577:62654" placeholder="INSERT INTO FINE_PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="63403:63437" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="63796:63850" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="64069:64108" placeholder="SELECT AMOUN... FINES" />
+            <marker date="1520810196204" expanded="true" signature="64375:64415" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="65032:65089" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="65684:65745" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="66198:66230" placeholder="delete from " />
           </folding>
         </state>
       </provider>
@@ -1215,7 +1404,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1223,7 +1411,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="46" column="60" selection-start-line="46" selection-start-column="60" selection-end-line="46" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1232,19 +1419,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#login#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#getUserDetails#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#registerCustomer#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#registerLoan#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#loanPayment#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#updateLoanTable#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#loanPaymentFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateLoanTableFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#loadCustomers#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loadLoans#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#loadDueLoans#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#loadTwoMonthLateLoans#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#loadPenaltyLateLoans#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#searchLoan#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loadOneMonthLateLoans#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#searchCustomers#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateProfPhoto#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateLoanFile#0;class#DatabaseHandler#0" expanded="false" />
@@ -1267,91 +1448,91 @@
             <element signature="method#deleteUser#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#getInterest#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#setInterest#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#getFines#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#getPhoneNumbers#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#payFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#reduceFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateFinetolerance#0;class#DatabaseHandler#0" expanded="false" />
-            <marker date="1506812242199" expanded="true" signature="943:994" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="1945:1975" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="3319:3563" placeholder="INSERT INTO CUSTOMERS... " />
-            <marker date="1506812242199" expanded="true" signature="3600:3623" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="5341:5581" placeholder="INSERT INTO LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="5614:5633" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="7118:7188" placeholder="INSERT INTO PAYMENTS... " />
-            <marker date="1506812242199" expanded="true" signature="7827:7875" placeholder="SELECT AMOUN... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="8371:8494" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="8845:8915" placeholder="INSERT INTO PAYMENTS... " />
-            <marker date="1506812242199" expanded="true" signature="9583:9627" placeholder="SELECT AMOUN... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="9962:10068" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="10456:10479" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="11425:11444" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="12300:12333" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="12686:12720" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="15091:15132" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="15984:16017" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="16370:16404" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="18914:19005" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="19394:19413" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="19930:19963" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="20316:20350" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="23141:23236" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="23625:23644" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="24161:24194" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="24547:24581" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="27373:27468" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="27857:27876" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="28393:28426" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="28778:28812" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="31367:31422" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="32278:32311" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="32665:32699" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="35022:35070" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="35108:35186" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="36238:36295" placeholder="UPDATE CUSTO... " />
-            <marker date="1506812242199" expanded="true" signature="36748:36804" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="37249:37282" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="37766:37824" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="38063:38119" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="39192:39259" placeholder="SELECT DISTI... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="39299:39344" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="40279:40525" placeholder="SELECT custo... customers" />
-            <marker date="1506812242199" expanded="true" signature="41498:41774" placeholder="SELECT custo... customers" />
-            <marker date="1506812242199" expanded="true" signature="42661:42694" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="43583:43880" placeholder="UPDATE CUSTO... " />
-            <marker date="1506812242199" expanded="true" signature="44399:44591" placeholder="SELECT borro... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="45810:46207" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="46723:46761" placeholder="SELECT SMS F... MESSAGES" />
-            <marker date="1506812242199" expanded="true" signature="47339:47386" placeholder="UPDATE MESSA... " />
-            <marker date="1506812242199" expanded="true" signature="48064:48083" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="48123:48162" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="48899:48980" placeholder="INSERT INTO USERS... " />
-            <marker date="1506812242199" expanded="true" signature="49013:49032" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="50288:50334" placeholder="UPDATE USERS... " />
-            <marker date="1506812242199" expanded="true" signature="51076:51100" placeholder="SELECT * FRO... CONTROLLER" />
-            <marker date="1506812242199" expanded="true" signature="51133:51152" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="51185:51204" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="51240:51313" placeholder="INSERT INTO FINES... " />
-            <marker date="1506812242199" expanded="true" signature="53005:53085" placeholder="SELECT * FRO... PAYMENTS" />
-            <marker date="1506812242199" expanded="true" signature="54157:54206" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="55671:55721" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="56595:56634" placeholder="UPDATE CONTR... " />
-            <marker date="1506812242199" expanded="true" signature="57160:57197" placeholder="UPDATE CONTR... " />
-            <marker date="1506812242199" expanded="true" signature="57640:57690" placeholder="UPDATE USERS... " />
-            <marker date="1506812242199" expanded="true" signature="58229:58256" placeholder="DELETE FROM " />
-            <marker date="1506812242199" expanded="true" signature="58791:58813" placeholder="SELECT * FRO... INTEREST" />
-            <marker date="1506812242199" expanded="true" signature="59405:59441" placeholder="UPDATE INTER... " />
-            <marker date="1506812242199" expanded="true" signature="60205:60239" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="60577:60626" placeholder="SELECT AMOUN... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="60850:60930" placeholder="SELECT * FRO... PAYMENTS" />
-            <marker date="1506812242199" expanded="true" signature="61877:61904" placeholder="SELECT PHONE... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="62572:62649" placeholder="INSERT INTO FINE_PAYMENTS... " />
-            <marker date="1506812242199" expanded="true" signature="63398:63432" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="63791:63845" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="64064:64103" placeholder="SELECT AMOUN... FINES" />
-            <marker date="1506812242199" expanded="true" signature="64370:64410" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="65027:65084" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="65679:65740" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="948:999" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="1950:1980" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="3324:3568" placeholder="INSERT INTO CUSTOMERS... " />
+            <marker date="1520810196204" expanded="true" signature="3605:3628" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="5346:5586" placeholder="INSERT INTO LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="5619:5638" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="7123:7193" placeholder="INSERT INTO PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="7832:7880" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="8376:8499" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="8850:8920" placeholder="INSERT INTO PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="9588:9632" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="9967:10073" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="10461:10484" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="11430:11449" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="12305:12338" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="12691:12725" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="15096:15137" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="15989:16022" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="16375:16409" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="18919:19010" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="19399:19418" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="19935:19968" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="20321:20355" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="23146:23241" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="23630:23649" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="24166:24199" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="24552:24586" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="27378:27473" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="27862:27881" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="28398:28431" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="28783:28817" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="31372:31427" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="32283:32316" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="32670:32704" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="35027:35075" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="35113:35191" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="36243:36300" placeholder="UPDATE CUSTO... " />
+            <marker date="1520810196204" expanded="true" signature="36753:36809" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="37254:37287" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="37771:37829" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="38068:38124" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="39197:39264" placeholder="SELECT DISTI... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="39304:39349" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="40284:40530" placeholder="SELECT custo... customers" />
+            <marker date="1520810196204" expanded="true" signature="41503:41779" placeholder="SELECT custo... customers" />
+            <marker date="1520810196204" expanded="true" signature="42666:42699" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="43588:43885" placeholder="UPDATE CUSTO... " />
+            <marker date="1520810196204" expanded="true" signature="44404:44596" placeholder="SELECT borro... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="45815:46212" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="46728:46766" placeholder="SELECT SMS F... MESSAGES" />
+            <marker date="1520810196204" expanded="true" signature="47344:47391" placeholder="UPDATE MESSA... " />
+            <marker date="1520810196204" expanded="true" signature="48069:48088" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="48128:48167" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="48904:48985" placeholder="INSERT INTO USERS... " />
+            <marker date="1520810196204" expanded="true" signature="49018:49037" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="50293:50339" placeholder="UPDATE USERS... " />
+            <marker date="1520810196204" expanded="true" signature="51081:51105" placeholder="SELECT * FRO... CONTROLLER" />
+            <marker date="1520810196204" expanded="true" signature="51138:51157" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="51190:51209" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="51245:51318" placeholder="INSERT INTO FINES... " />
+            <marker date="1520810196204" expanded="true" signature="53010:53090" placeholder="SELECT * FRO... PAYMENTS" />
+            <marker date="1520810196204" expanded="true" signature="54162:54211" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="55676:55726" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="56600:56639" placeholder="UPDATE CONTR... " />
+            <marker date="1520810196204" expanded="true" signature="57165:57202" placeholder="UPDATE CONTR... " />
+            <marker date="1520810196204" expanded="true" signature="57645:57695" placeholder="UPDATE USERS... " />
+            <marker date="1520810196204" expanded="true" signature="58234:58261" placeholder="DELETE FROM " />
+            <marker date="1520810196204" expanded="true" signature="58796:58818" placeholder="SELECT * FRO... INTEREST" />
+            <marker date="1520810196204" expanded="true" signature="59410:59446" placeholder="UPDATE INTER... " />
+            <marker date="1520810196204" expanded="true" signature="60210:60244" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="60582:60631" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="60855:60935" placeholder="SELECT * FRO... PAYMENTS" />
+            <marker date="1520810196204" expanded="true" signature="61882:61909" placeholder="SELECT PHONE... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="62577:62654" placeholder="INSERT INTO FINE_PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="63403:63437" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="63796:63850" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="64069:64108" placeholder="SELECT AMOUN... FINES" />
+            <marker date="1520810196204" expanded="true" signature="64375:64415" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="65032:65089" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="65684:65745" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="66198:66230" placeholder="delete from " />
           </folding>
         </state>
       </provider>
@@ -1360,7 +1541,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1368,7 +1548,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1376,7 +1555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1384,20 +1562,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/AdminController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="247" column="82" selection-start-line="247" selection-start-column="75" selection-end-line="247" selection-end-column="82" />
-          <folding>
-            <marker date="1505908345178" expanded="true" signature="3307:3449" placeholder="select sum(a... " />
-            <marker date="1505908345178" expanded="true" signature="4920:5165" placeholder="select sum(a... " />
-            <marker date="1505908345178" expanded="true" signature="7124:7290" placeholder="select sum(a... " />
-            <marker date="1505908345178" expanded="true" signature="10364:10600" placeholder="select sum(a... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1412,7 +1576,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17321688">
           <caret line="18" column="10" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1430,49 +1593,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/EditCustomerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="54" column="40" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Loan_Registered_Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3216885">
-          <caret line="13" column="26" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/LoanReleaseController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3216885">
-          <caret line="13" column="26" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/RegisterCustomerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.049490537">
-          <caret line="2" column="43" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/RepaymentFormController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="45" column="10" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/UserTransactionController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.123726346">
           <caret line="5" column="26" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1480,14 +1604,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.123726346">
           <caret line="5" column="30" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/ViewCustomerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22270742">
-          <caret line="16" column="19" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1498,36 +1614,163 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/EditLoanController.java">
+    <entry file="file://$PROJECT_DIR$/src/sample/icons/account-admin.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/icons/cash-multiple.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/layouts/register_customer.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="278" column="31" selection-start-line="278" selection-start-column="29" selection-end-line="278" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="-9.890909">
+          <caret line="49" column="91" selection-start-line="49" selection-start-column="86" selection-end-line="49" selection-end-column="91" />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.032934133">
-          <caret line="46" column="60" selection-start-line="46" selection-start-column="60" selection-end-line="46" selection-end-column="60" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="26" selection-start-line="19" selection-start-column="4" selection-end-line="25" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/ViewReportController.java">
+    <entry file="file://$PROJECT_DIR$/src/sample/Cssfile.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="10.194056">
-          <caret line="446" column="82" selection-start-line="446" selection-start-column="75" selection-end-line="446" selection-end-column="82" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/layouts/login.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/models/Loan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/models/Customer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/layouts/view_customers_loans.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="115" selection-start-line="29" selection-start-column="92" selection-end-line="29" selection-end-column="115" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/EditLoanController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="177" column="0" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/MainWindowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="172" column="5" selection-start-line="172" selection-start-column="5" selection-end-line="172" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/LoanReleaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/RepaymentCollected.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Loan_Registered_Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/AdminController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="109" column="13" selection-start-line="104" selection-start-column="12" selection-end-line="109" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="method#Search_Month#0;class#AdminController#0" expanded="false" />
+            <element signature="method#InitiLoanReleaseSearch#0;class#AdminController#0" expanded="false" />
+            <element signature="e#6216#6217#0" expanded="false" />
+            <element signature="e#6250#6251#0" expanded="false" />
+            <element signature="method#PrintDetailsLoans#0;class#AdminController#0" expanded="false" />
+            <element signature="method#InitiRepayment_Collected#0;class#AdminController#0" expanded="false" />
+            <element signature="method#PrintDetailsRepayment#0;class#AdminController#0" expanded="false" />
+            <element signature="method#Report_In_Table#0;class#AdminController#0" expanded="false" />
+            <element signature="e#9812#9813#0" expanded="false" />
+            <element signature="e#9845#9846#0" expanded="false" />
+            <element signature="method#SearchRepayment_Month#0;class#AdminController#0" expanded="false" />
+            <element signature="method#Searchrepayment_refresh#0;class#AdminController#0" expanded="false" />
+            <element signature="method#InitiRepayment_Collected#1;class#AdminController#0" expanded="false" />
+            <element signature="method#ViewReport_of_loanRelease_Summary#0;class#AdminController#0" expanded="false" />
+            <element signature="method#initialize#0;class#AdminController#0" expanded="false" />
+            <element signature="method#registerUser#0;class#AdminController#0" expanded="false" />
+            <element signature="method#initializeViewUsers#0;class#AdminController#0" expanded="false" />
+            <element signature="method#setUpUserTable#0;class#AdminController#0" expanded="false" />
+            <element signature="method#changeInterest#0;class#AdminController#0" expanded="false" />
+            <element signature="method#sendSMS#0;class#AdminController#0" expanded="false" />
+            <marker date="1505908345178" expanded="true" signature="3307:3449" placeholder="select sum(a... " />
+            <marker date="1505908345178" expanded="true" signature="4920:5165" placeholder="select sum(a... " />
+            <marker date="1505908345178" expanded="true" signature="7124:7290" placeholder="select sum(a... " />
+            <marker date="1505908345178" expanded="true" signature="10364:10600" placeholder="select sum(a... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/RegisterCustomerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="472" column="39" selection-start-line="472" selection-start-column="39" selection-end-line="472" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="method#checkAmount#0;class#RegisterCustomerController#0" expanded="false" />
+            <element signature="method#setDhamanaField#0;class#RegisterCustomerController#0" expanded="false" />
+            <element signature="method#chooseLoanFiles#0;class#RegisterCustomerController#0" expanded="false" />
+            <element signature="method#chooseImg#0;class#RegisterCustomerController#0" expanded="false" />
+            <element signature="e#25876#25877#0" expanded="false" />
+            <element signature="e#25915#25916#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/layouts/main_window.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41153845">
-          <caret line="60" column="230" selection-start-line="60" selection-start-column="223" selection-end-line="60" selection-end-column="230" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="136" selection-start-line="32" selection-start-column="104" selection-end-line="32" selection-end-column="136" />
           <folding />
         </state>
       </provider>
@@ -1535,57 +1778,130 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/ViewCustomersLoansController.java">
+    <entry file="file://$PROJECT_DIR$/src/sample/ViewReportController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="67" selection-start-line="108" selection-start-column="67" selection-end-line="108" selection-end-column="67" />
+          <caret line="426" column="0" selection-start-line="426" selection-start-column="0" selection-end-line="426" selection-end-column="0" />
           <folding>
-            <element signature="method#repaymentForm#0;class#ViewCustomersLoansController#0" expanded="false" />
-            <element signature="method#editCustomerForm#0;class#ViewCustomersLoansController#0" expanded="false" />
-            <element signature="method#editLoanForm#0;class#ViewCustomersLoansController#0" expanded="false" />
-            <element signature="method#viewCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
-            <element signature="method#searchLoan#0;class#ViewCustomersLoansController#0" expanded="false" />
-            <element signature="method#searchCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
-            <element signature="method#setUpCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
+            <marker date="1505908664581" expanded="true" signature="4335:4519" placeholder="select count... " />
+            <marker date="1505908664581" expanded="true" signature="5848:6062" placeholder="select count... " />
+            <marker date="1505908664581" expanded="true" signature="8473:8702" placeholder="select custo... customers" />
+            <marker date="1505908664581" expanded="true" signature="12798:13024" placeholder="select count... " />
+            <marker date="1505908664581" expanded="true" signature="16081:16380" placeholder="select count... " />
+            <marker date="1505908664581" expanded="true" signature="21111:21319" placeholder="select sum(a... " />
+            <marker date="1505908664581" expanded="true" signature="22735:23019" placeholder="select sum(a... " />
+            <marker date="1505908664581" expanded="true" signature="24782:24941" placeholder="select sum(a... " />
+            <marker date="1505908664581" expanded="true" signature="26480:26698" placeholder="select sum(a... " />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/ViewCustomerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21857142">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/CheckInternetConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/layouts/repayment_form.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.9454546">
+          <caret line="99" column="38" selection-start-line="99" selection-start-column="38" selection-end-line="99" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/ViewRepaymentsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="332" column="67" selection-start-line="332" selection-start-column="67" selection-end-line="332" selection-end-column="67" />
+          <caret line="364" column="9" selection-start-line="364" selection-start-column="9" selection-end-line="364" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/ViewCustomersLoansController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="187" column="12" selection-start-line="187" selection-start-column="12" selection-end-line="187" selection-end-column="32" />
           <folding>
-            <element signature="method#repaymentForm#0;class#ViewRepaymentsController#0" expanded="false" />
-            <element signature="method#setUpDue#0;class#ViewRepaymentsController#0" expanded="false" />
-            <element signature="method#setUpOneMonthLate#0;class#ViewRepaymentsController#0" expanded="false" />
-            <element signature="method#setUpTwoMonthLate#0;class#ViewRepaymentsController#0" expanded="false" />
-            <element signature="method#setUpPenaltyLate#0;class#ViewRepaymentsController#0" expanded="false" />
-            <element signature="method#searchLoan#0;class#ViewRepaymentsController#0" expanded="false" />
-            <element signature="method#handle#0;class#ViewRepaymentsController#0" expanded="false" />
-            <element signature="method#editSms#0;class#ViewRepaymentsController#0" expanded="false" />
+            <element signature="method#initializeViewLoans#0;class#ViewCustomersLoansController#0" expanded="false" />
+            <element signature="method#editCustomerForm#0;class#ViewCustomersLoansController#0" expanded="false" />
+            <element signature="method#viewCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
+            <element signature="method#searchCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
+            <element signature="method#setUpLoan#0;class#ViewCustomersLoansController#0" expanded="false" />
+            <element signature="method#setUpCustomer#0;class#ViewCustomersLoansController#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/EditCustomerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="155" column="32" selection-start-line="151" selection-start-column="12" selection-end-line="155" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/MyPreloader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="85" selection-start-line="17" selection-start-column="85" selection-end-line="17" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/MyApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="95" column="9" selection-start-line="95" selection-start-column="9" selection-end-line="95" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/models/Fine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/backend/DatabaseHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="1291" column="29" selection-start-line="1291" selection-start-column="29" selection-end-line="1291" selection-end-column="29" />
+          <caret line="1734" column="23" selection-start-line="1734" selection-start-column="23" selection-end-line="1734" selection-end-column="23" />
           <folding>
-            <element signature="method#login#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#getUserDetails#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#registerCustomer#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#registerLoan#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#loanPayment#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#updateLoanTable#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#loanPaymentFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateLoanTableFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#loadCustomers#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loadLoans#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#loadDueLoans#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#loadTwoMonthLateLoans#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#loadPenaltyLateLoans#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#searchLoan#0;class#DatabaseHandler#0" expanded="false" />
+            <element signature="method#loadOneMonthLateLoans#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#searchCustomers#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateProfPhoto#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateLoanFile#0;class#DatabaseHandler#0" expanded="false" />
@@ -1608,110 +1924,178 @@
             <element signature="method#deleteUser#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#getInterest#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#setInterest#0;class#DatabaseHandler#0" expanded="false" />
-            <element signature="method#getFines#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#getPhoneNumbers#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#payFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#reduceFine#0;class#DatabaseHandler#0" expanded="false" />
             <element signature="method#updateFinetolerance#0;class#DatabaseHandler#0" expanded="false" />
-            <marker date="1506812242199" expanded="true" signature="943:994" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="1945:1975" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="3319:3563" placeholder="INSERT INTO CUSTOMERS... " />
-            <marker date="1506812242199" expanded="true" signature="3600:3623" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="5341:5581" placeholder="INSERT INTO LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="5614:5633" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="7118:7188" placeholder="INSERT INTO PAYMENTS... " />
-            <marker date="1506812242199" expanded="true" signature="7827:7875" placeholder="SELECT AMOUN... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="8371:8494" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="8845:8915" placeholder="INSERT INTO PAYMENTS... " />
-            <marker date="1506812242199" expanded="true" signature="9583:9627" placeholder="SELECT AMOUN... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="9962:10068" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="10456:10479" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="11425:11444" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="12300:12333" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="12686:12720" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="15091:15132" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="15984:16017" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="16370:16404" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="18914:19005" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="19394:19413" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="19930:19963" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="20316:20350" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="23141:23236" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="23625:23644" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="24161:24194" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="24547:24581" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="27373:27468" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="27857:27876" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="28393:28426" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="28778:28812" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="31367:31422" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="32278:32311" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="32665:32699" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="35022:35070" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="35108:35186" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="36238:36295" placeholder="UPDATE CUSTO... " />
-            <marker date="1506812242199" expanded="true" signature="36748:36804" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="37249:37282" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="37766:37824" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="38063:38119" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="39192:39259" placeholder="SELECT DISTI... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="39299:39344" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="40279:40525" placeholder="SELECT custo... customers" />
-            <marker date="1506812242199" expanded="true" signature="41498:41774" placeholder="SELECT custo... customers" />
-            <marker date="1506812242199" expanded="true" signature="42661:42694" placeholder="SELECT * FRO... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="43583:43880" placeholder="UPDATE CUSTO... " />
-            <marker date="1506812242199" expanded="true" signature="44399:44591" placeholder="SELECT borro... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="45810:46207" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="46723:46761" placeholder="SELECT SMS F... MESSAGES" />
-            <marker date="1506812242199" expanded="true" signature="47339:47386" placeholder="UPDATE MESSA... " />
-            <marker date="1506812242199" expanded="true" signature="48064:48083" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="48123:48162" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="48899:48980" placeholder="INSERT INTO USERS... " />
-            <marker date="1506812242199" expanded="true" signature="49013:49032" placeholder="SELECT * FRO... USERS" />
-            <marker date="1506812242199" expanded="true" signature="50288:50334" placeholder="UPDATE USERS... " />
-            <marker date="1506812242199" expanded="true" signature="51076:51100" placeholder="SELECT * FRO... CONTROLLER" />
-            <marker date="1506812242199" expanded="true" signature="51133:51152" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="51185:51204" placeholder="SELECT * FRO... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="51240:51313" placeholder="INSERT INTO FINES... " />
-            <marker date="1506812242199" expanded="true" signature="53005:53085" placeholder="SELECT * FRO... PAYMENTS" />
-            <marker date="1506812242199" expanded="true" signature="54157:54206" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="55671:55721" placeholder="UPDATE LOANS... " />
-            <marker date="1506812242199" expanded="true" signature="56595:56634" placeholder="UPDATE CONTR... " />
-            <marker date="1506812242199" expanded="true" signature="57160:57197" placeholder="UPDATE CONTR... " />
-            <marker date="1506812242199" expanded="true" signature="57640:57690" placeholder="UPDATE USERS... " />
-            <marker date="1506812242199" expanded="true" signature="58229:58256" placeholder="DELETE FROM " />
-            <marker date="1506812242199" expanded="true" signature="58791:58813" placeholder="SELECT * FRO... INTEREST" />
-            <marker date="1506812242199" expanded="true" signature="59405:59441" placeholder="UPDATE INTER... " />
-            <marker date="1506812242199" expanded="true" signature="60205:60239" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="60577:60626" placeholder="SELECT AMOUN... LOANS" />
-            <marker date="1506812242199" expanded="true" signature="60850:60930" placeholder="SELECT * FRO... PAYMENTS" />
-            <marker date="1506812242199" expanded="true" signature="61877:61904" placeholder="SELECT PHONE... CUSTOMERS" />
-            <marker date="1506812242199" expanded="true" signature="62572:62649" placeholder="INSERT INTO FINE_PAYMENTS... " />
-            <marker date="1506812242199" expanded="true" signature="63398:63432" placeholder="SELECT * FRO... FINES" />
-            <marker date="1506812242199" expanded="true" signature="63791:63845" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="64064:64103" placeholder="SELECT AMOUN... FINES" />
-            <marker date="1506812242199" expanded="true" signature="64370:64410" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="65027:65084" placeholder="UPDATE FINES... " />
-            <marker date="1506812242199" expanded="true" signature="65679:65740" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="948:999" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="1950:1980" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="3324:3568" placeholder="INSERT INTO CUSTOMERS... " />
+            <marker date="1520810196204" expanded="true" signature="3605:3628" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="5346:5586" placeholder="INSERT INTO LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="5619:5638" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="7123:7193" placeholder="INSERT INTO PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="7832:7880" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="8376:8499" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="8850:8920" placeholder="INSERT INTO PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="9588:9632" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="9967:10073" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="10461:10484" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="11430:11449" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="12305:12338" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="12691:12725" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="15096:15137" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="15989:16022" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="16375:16409" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="18919:19010" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="19399:19418" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="19935:19968" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="20321:20355" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="23146:23241" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="23630:23649" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="24166:24199" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="24552:24586" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="27378:27473" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="27862:27881" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="28398:28431" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="28783:28817" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="31372:31427" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="32283:32316" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="32670:32704" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="35027:35075" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="35113:35191" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="36243:36300" placeholder="UPDATE CUSTO... " />
+            <marker date="1520810196204" expanded="true" signature="36753:36809" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="37254:37287" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="37771:37829" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="38068:38124" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="39197:39264" placeholder="SELECT DISTI... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="39304:39349" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="40284:40530" placeholder="SELECT custo... customers" />
+            <marker date="1520810196204" expanded="true" signature="41503:41779" placeholder="SELECT custo... customers" />
+            <marker date="1520810196204" expanded="true" signature="42666:42699" placeholder="SELECT * FRO... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="43588:43885" placeholder="UPDATE CUSTO... " />
+            <marker date="1520810196204" expanded="true" signature="44404:44596" placeholder="SELECT borro... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="45815:46212" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="46728:46766" placeholder="SELECT SMS F... MESSAGES" />
+            <marker date="1520810196204" expanded="true" signature="47344:47391" placeholder="UPDATE MESSA... " />
+            <marker date="1520810196204" expanded="true" signature="48069:48088" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="48128:48167" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="48904:48985" placeholder="INSERT INTO USERS... " />
+            <marker date="1520810196204" expanded="true" signature="49018:49037" placeholder="SELECT * FRO... USERS" />
+            <marker date="1520810196204" expanded="true" signature="50293:50339" placeholder="UPDATE USERS... " />
+            <marker date="1520810196204" expanded="true" signature="51081:51105" placeholder="SELECT * FRO... CONTROLLER" />
+            <marker date="1520810196204" expanded="true" signature="51138:51157" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="51190:51209" placeholder="SELECT * FRO... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="51245:51318" placeholder="INSERT INTO FINES... " />
+            <marker date="1520810196204" expanded="true" signature="53010:53090" placeholder="SELECT * FRO... PAYMENTS" />
+            <marker date="1520810196204" expanded="true" signature="54162:54211" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="55676:55726" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="56600:56639" placeholder="UPDATE CONTR... " />
+            <marker date="1520810196204" expanded="true" signature="57165:57202" placeholder="UPDATE CONTR... " />
+            <marker date="1520810196204" expanded="true" signature="57645:57695" placeholder="UPDATE USERS... " />
+            <marker date="1520810196204" expanded="true" signature="58234:58261" placeholder="DELETE FROM " />
+            <marker date="1520810196204" expanded="true" signature="58796:58818" placeholder="SELECT * FRO... INTEREST" />
+            <marker date="1520810196204" expanded="true" signature="59410:59446" placeholder="UPDATE INTER... " />
+            <marker date="1520810196204" expanded="true" signature="60210:60244" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="60582:60631" placeholder="SELECT AMOUN... LOANS" />
+            <marker date="1520810196204" expanded="true" signature="60855:60935" placeholder="SELECT * FRO... PAYMENTS" />
+            <marker date="1520810196204" expanded="true" signature="61882:61909" placeholder="SELECT PHONE... CUSTOMERS" />
+            <marker date="1520810196204" expanded="true" signature="62577:62654" placeholder="INSERT INTO FINE_PAYMENTS... " />
+            <marker date="1520810196204" expanded="true" signature="63403:63437" placeholder="SELECT * FRO... FINES" />
+            <marker date="1520810196204" expanded="true" signature="63796:63850" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="64069:64108" placeholder="SELECT AMOUN... FINES" />
+            <marker date="1520810196204" expanded="true" signature="64375:64415" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="65032:65089" placeholder="UPDATE FINES... " />
+            <marker date="1520810196204" expanded="true" signature="65684:65745" placeholder="UPDATE LOANS... " />
+            <marker date="1520810196204" expanded="true" signature="66198:66230" placeholder="delete from " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/MainWindowController.java">
+    <entry file="file://$PROJECT_DIR$/src/sample/RepaymentFormController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="154" column="13" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="13" />
+        <state vertical-scroll-proportion="-0.75253254">
+          <caret line="122" column="46" selection-start-line="122" selection-start-column="46" selection-end-line="122" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45174825">
-          <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>MikopoApp:jar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>MikopoApp</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

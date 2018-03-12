@@ -17,6 +17,7 @@ import sample.models.Fine;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -38,6 +39,7 @@ public class RepaymentFormController implements Initializable {
     @FXML public TextField fine_amount;
     @FXML public TextField total_amount;
     @FXML public Button fineSubmitBtn;
+    @FXML public Button delBtn;
 
     JSONObject userObject;
     ObservableList<Fine> fines;
@@ -69,7 +71,7 @@ public class RepaymentFormController implements Initializable {
 
         fine_month.valueProperty().addListener((observable1, oldValue1, newValue1) -> {
             for (Fine fine : fines){
-                if(fine_month.getValue().toString().split("/")[0].equals(fine.month)){
+                if(fine_month.getValue().toString().split("/")[0].equals(fine.month) && fine_month.getValue().toString().split("/")[1].equals(String.valueOf(fine.year))){
                     fine_r = fine;
                     required_amount.setText(String.format("%,.0f", fine.perMonth));
                     fine_amount.setText(String.format("%,.0f", fine.amount));
@@ -94,6 +96,50 @@ public class RepaymentFormController implements Initializable {
             year.setValue("2018");
         }
 
+    }
+
+    public void deleteFine(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete this fine?");
+        Optional<ButtonType> result =alert.showAndWait();
+        if(result.get() == ButtonType.OK){
+            for (Fine fine : fines){
+                if(fine_month.getValue().toString().split("/")[0].equals(fine.month) && fine_month.getValue().toString().split("/")[1].equals(String.valueOf(fine.year))){
+                    fines.remove(fine);
+                    DatabaseHandler db = new DatabaseHandler();
+                    if(db.deleteFine(fine.id)){
+                        Alert i_alert = new Alert(Alert.AlertType.INFORMATION);
+                        i_alert.setTitle("Information Dialog");
+                        i_alert.setHeaderText(null);
+                        i_alert.setContentText("Fine deleted!");
+                        i_alert.showAndWait();
+                    }else{
+                        Alert i_alert = new Alert(Alert.AlertType.WARNING);
+                        i_alert.setTitle("Information Dialog");
+                        i_alert.setHeaderText(null);
+                        i_alert.setContentText("Fine not deleted!");
+                        i_alert.showAndWait();
+                    }
+                    ObservableList<String> options = FXCollections.observableArrayList();
+                    for (Fine fine_n : fines){
+                        options.add(fine_n.month+"/"+fine_n.year);
+                    }
+                    if(options.size()!=0){
+                        fine_month.setItems(options);
+                        fine_month.setValue(options.get(0));
+                    }else{
+                        fine_month.setItems(null);
+                        fine_month.setValue(null);
+                        required_amount.setText("");
+                        fine_amount.setText("");
+                        total_amount.setText("");
+                        fineSubmitBtn.setDisable(true);
+                    }
+                }
+            }
+        }
     }
 
     public void getLoanDetails(String loanId, String name, String perMont,int largest_amount,String due){
@@ -248,8 +294,13 @@ public class RepaymentFormController implements Initializable {
 
     }
 
-    public void getUserDetails(JSONObject jsonObject){
+    public void getUserDetails(JSONObject jsonObject) throws JSONException {
         userObject = jsonObject;
+        if(userObject.getString("role").equals("main admin") || userObject.getString("role").equals("admin")){
+            delBtn.setDisable(false);
+        }else{
+            delBtn.setDisable(true);
+        }
     }
 
 
