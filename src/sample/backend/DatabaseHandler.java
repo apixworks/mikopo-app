@@ -18,12 +18,15 @@ import java.util.List;
 public class DatabaseHandler {
 
     private static Connection conn;
-    private static String url = "jdbc:mysql://localhost:3306/mikopo_new";
+    private static String url = "jdbc:mysql://localhost:3306/mikopo_app";
     private static String user = "root";
     private static String password = "";
+//    private static String url = "jdbc:mysql://egospeltz.org:3306/egospelt_mikopo";
+//    private static String user = "egospelt_mikopo";
+//    private static String password = "mikopo123";
     int id;
 
-    public static Connection createConn() {
+    public static Connection createConn(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -35,12 +38,13 @@ public class DatabaseHandler {
     }
 
     public boolean login(String username,String passwd){
-        String userSql = "SELECT * FROM USERS WHERE USERNAME=? AND PASSWORD=?";
+        conn = createConn();
+        String userSql = "SELECT * FROM users WHERE username=? AND password=?";
         boolean success = false;
         try {
-            //Statement st = createConn().createStatement();
+            //Statement st = conn.createStatement();
             //ResultSet rs = st.executeQuery(userSql);
-            PreparedStatement ps = createConn().prepareStatement(userSql);
+            PreparedStatement ps = conn.prepareStatement(userSql);
             ps.setString(1,username);
             ps.setString(2,passwd);
             ResultSet rs = ps.executeQuery();
@@ -70,11 +74,12 @@ public class DatabaseHandler {
     }
 
     public JSONObject getUserDetails(int id) throws SQLException {
-        String userDetailsSql = "SELECT * FROM USERS WHERE ID=?";
+        conn = createConn();
+        String userDetailsSql = "SELECT * FROM users WHERE id=?";
         JSONObject jsonObject = new JSONObject();
 
         try {
-            PreparedStatement ps = createConn().prepareStatement(userDetailsSql);
+            PreparedStatement ps = conn.prepareStatement(userDetailsSql);
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
             if(rs.first()){
@@ -99,15 +104,16 @@ public class DatabaseHandler {
     public Result registerCustomer(String fname, String lname, String mname, String gender, LocalDate dob, String phone, String email,
                                    String postal, String prof_photo, String bank, String account_no, String company_name,
                                    String company_phone, String company_location, String checksum,LocalDate reg_date){
-        String regCustomerSql = "INSERT INTO CUSTOMERS (f_name,l_name,m_name,gender,dob,phone,email,postal," +
+        conn = createConn();
+        String regCustomerSql = "INSERT INTO customers (f_name,l_name,m_name,gender,dob,phone,email,postal," +
                 "prof_photo,bank,account_no,company_name,company_phone,company_location,checksum,reg_date)"
                 +"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        String lastCustomerSql = "SELECT * FROM CUSTOMERS";
+        String lastCustomerSql = "SELECT * FROM customers";
 
         Result result = new Result();
         result.setSuccess(false);
         try{
-            PreparedStatement ps = createConn().prepareStatement(regCustomerSql);
+            PreparedStatement ps = conn.prepareStatement(regCustomerSql);
             ps.setString(1,fname);
             ps.setString(2,lname);
             ps.setString(3,mname);
@@ -128,7 +134,7 @@ public class DatabaseHandler {
             ps.execute();
             result.setSuccess(true);
 
-            PreparedStatement pb = createConn().prepareStatement(lastCustomerSql);
+            PreparedStatement pb = conn.prepareStatement(lastCustomerSql);
             ResultSet rs = pb.executeQuery();
             while (rs.next()){
                 if(rs.isLast()){
@@ -150,15 +156,16 @@ public class DatabaseHandler {
 
     public Result registerLoan(int borrower,double amount,int duration,String date,double perMonth,double totalPayment,String due,String dhamanaType,int memberId,
                                 String propertyId,String propertyName,String desc,Double interest){
-        String regLoanSql = "INSERT INTO LOANS(borrower_id,amount_borrowed,duration,date_of_loan,amount_per_month,total_payment,dhamana_type," +
+        conn = createConn();
+        String regLoanSql = "INSERT INTO loans(borrower_id,amount_borrowed,duration,date_of_loan,amount_per_month,total_payment,dhamana_type," +
                 "member_id,property_id,property_name,description,due,interest,tolerance) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        String lastLoanSql = "SELECT * FROM LOANS";
+        String lastLoanSql = "SELECT * FROM loans";
 
         Result result = new Result();
         result.setSuccess(false);
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(regLoanSql);
+            PreparedStatement ps = conn.prepareStatement(regLoanSql);
             ps.setInt(1,borrower);
             ps.setDouble(2,amount);
             ps.setInt(3,duration);
@@ -177,7 +184,7 @@ public class DatabaseHandler {
             ps.execute();
             result.setSuccess(true);
 
-            PreparedStatement pb = createConn().prepareStatement(lastLoanSql);
+            PreparedStatement pb = conn.prepareStatement(lastLoanSql);
             ResultSet rs = pb.executeQuery();
             while (rs.next()){
                 if(rs.isLast()){
@@ -198,11 +205,12 @@ public class DatabaseHandler {
     }
 
     public boolean loanPayment(int loan_id,LocalDate date,double amount,String month,int year){
-        String paymentSql = "INSERT INTO PAYMENTS(loan_id,date,amount,month,year) VALUES(?,?,?,?,?)";
+        conn = createConn();
+        String paymentSql = "INSERT INTO payments(loan_id,date,amount,month,year) VALUES(?,?,?,?,?)";
         boolean success = false;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(paymentSql);
+            PreparedStatement ps = conn.prepareStatement(paymentSql);
             ps.setInt(1,loan_id);
             ps.setDate(2,java.sql.Date.valueOf(date));
             ps.setDouble(3,amount);
@@ -219,10 +227,11 @@ public class DatabaseHandler {
     }
 
     public void updateLoanTable(int loan_id,LocalDate date,double amount){
-        String readAmountPaid = "SELECT AMOUNT_PAID,DUE FROM LOANS WHERE LOAN_ID="+loan_id;
+        conn = createConn();
+        String readAmountPaid = "SELECT amount_paid,due FROM loans WHERE loan_id="+loan_id;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(readAmountPaid);
+            PreparedStatement ps = conn.prepareStatement(readAmountPaid);
             ResultSet rs = ps.executeQuery();
 
             if(rs.first()){
@@ -231,9 +240,10 @@ public class DatabaseHandler {
                 String newDue = dateSql.toLocalDate().plusMonths(2).withDayOfMonth(1).minusDays(1).toString();
 
                 amountRead = amountRead + amount;
-                String updateLoan = "UPDATE LOANS SET last_payment="+amount+",lastpay_date='"+date+"',amount_paid="+amountRead+",due='"+newDue+"' WHERE LOAN_ID="+loan_id;
+                String updateLoan = "UPDATE loans SET last_payment="+amount+",lastpay_date='"+date+"',amount_paid="+amountRead+"," +
+                        "due='"+newDue+"' WHERE loan_id="+loan_id;
 
-                PreparedStatement pb = createConn().prepareStatement(updateLoan);
+                PreparedStatement pb = conn.prepareStatement(updateLoan);
                 pb.execute();
             }
         }catch (SQLException e){
@@ -243,11 +253,12 @@ public class DatabaseHandler {
     }
 
     public boolean loanPaymentFine(int loan_id,LocalDate date,double amount,String month,int year){
-        String paymentSql = "INSERT INTO PAYMENTS(loan_id,date,amount,month,year) VALUES(?,?,?,?,?)";
+        conn = createConn();
+        String paymentSql = "INSERT INTO payments(loan_id,date,amount,month,year) VALUES(?,?,?,?,?)";
         boolean success;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(paymentSql);
+            PreparedStatement ps = conn.prepareStatement(paymentSql);
             ps.setInt(1,loan_id);
             ps.setDate(2,java.sql.Date.valueOf(date));
             ps.setDouble(3,amount);
@@ -265,19 +276,21 @@ public class DatabaseHandler {
     }
 
     public void updateLoanTableFine(int loan_id,LocalDate date,double amount){
-        String readAmountPaid = "SELECT AMOUNT_PAID FROM LOANS WHERE LOAN_ID="+loan_id;
+        conn = createConn();
+        String readAmountPaid = "SELECT amount_paid FROM loans WHERE loan_id="+loan_id;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(readAmountPaid);
+            PreparedStatement ps = conn.prepareStatement(readAmountPaid);
             ResultSet rs = ps.executeQuery();
 
             if(rs.first()){
                 Double amountRead = rs.getDouble("amount_paid");
 
                 amountRead = amountRead + amount;
-                String updateLoan = "UPDATE LOANS SET last_payment="+amount+",lastpay_date='"+date+"',amount_paid="+amountRead+" WHERE LOAN_ID="+loan_id;
+                String updateLoan = "UPDATE loans SET last_payment="+amount+",lastpay_date='"+date+"',amount_paid="+amountRead+" " +
+                        "WHERE loan_id="+loan_id;
 
-                PreparedStatement pb = createConn().prepareStatement(updateLoan);
+                PreparedStatement pb = conn.prepareStatement(updateLoan);
                 pb.execute();
             }
         }catch (SQLException e){
@@ -287,11 +300,12 @@ public class DatabaseHandler {
     }
 
     public ObservableList<Customer> loadCustomers(){
+        conn = createConn();
         ObservableList<Customer> customers = FXCollections.observableArrayList();
-        String customersSql = "SELECT * FROM CUSTOMERS";
+        String customersSql = "SELECT * FROM customers";
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(customersSql);
+            PreparedStatement ps = conn.prepareStatement(customersSql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 customers.add(new Customer("MJ/C/"+rs.getInt("id"),rs.getString("f_name")+" "+rs.getString("l_name"),
@@ -311,8 +325,9 @@ public class DatabaseHandler {
     }
 
     public ObservableList<Loan> loadLoans(){
+        conn = createConn();
         ObservableList<Loan> loans = FXCollections.observableArrayList();
-        String loansSql = "SELECT * FROM LOANS";
+        String loansSql = "SELECT * FROM loans";
         int borrower_id;
         int loan_id;
         String borrower_name="";
@@ -327,7 +342,7 @@ public class DatabaseHandler {
         String amount_remString;
 
         try {
-            PreparedStatement ps = createConn().prepareStatement(loansSql);
+            PreparedStatement ps = conn.prepareStatement(loansSql);
             ResultSet rs = ps.executeQuery();
 
             String getBorrowerSql;
@@ -341,8 +356,8 @@ public class DatabaseHandler {
             while(rs.next()){
                 borrower_id = rs.getInt("borrower_id");
                 loan_id = rs.getInt("loan_id");
-                getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
-                pb = createConn().prepareStatement(getBorrowerSql);
+                getBorrowerSql = "SELECT * FROM customers WHERE id="+borrower_id;
+                pb = conn.prepareStatement(getBorrowerSql);
                 rb = pb.executeQuery();
                 if (rb.first()){
                     borrower_name = rb.getString("f_name")+" "+rb.getString("l_name");
@@ -350,8 +365,8 @@ public class DatabaseHandler {
 
                 }
 
-                getFineSql = "SELECT * FROM FINES WHERE LOAN_ID="+loan_id;
-                pk = createConn().prepareStatement(getFineSql);
+                getFineSql = "SELECT * FROM fines WHERE loan_id="+loan_id;
+                pk = conn.prepareStatement(getFineSql);
                 rk = pk.executeQuery();
                 borrower_fine = 0.0;
                 while(rk.next()){
@@ -382,8 +397,10 @@ public class DatabaseHandler {
                     amount_remString = String.format("%,.0f", amount_rem);
 
                 loans.add(new Loan("MJ/L/"+loan_id,borrower_name,rs.getString("date_of_loan"),rs.getDouble("interest"),
-                        String.format("%,.0f", rs.getDouble("amount_borrowed")) ,rs.getInt("duration"),String.format("%,.0f", rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
-                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,rs.getString("status"),borrower_phone,fine_String));
+                        String.format("%,.0f", rs.getDouble("amount_borrowed")) ,rs.getInt("duration"),String.format("%,.0f",
+                        rs.getDouble("total_payment")),String.format("%,.0f", rs.getDouble("amount_per_month")),
+                        rs.getString("due"),rs.getString("lastpay_date"),amount_paidString,last_payString,amount_remString,
+                        rs.getString("status"),borrower_phone,fine_String));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -398,8 +415,9 @@ public class DatabaseHandler {
     }
 
     public ObservableList<Loan> loadDueLoans(){
+        conn = createConn();
         ObservableList<Loan> loans = FXCollections.observableArrayList();
-        String loansSql = "SELECT * FROM LOANS WHERE STATUS='active'";
+        String loansSql = "SELECT * FROM loans WHERE status='active'";
         int borrower_id;
         int loan_id;
         String borrower_name="";
@@ -414,7 +432,7 @@ public class DatabaseHandler {
         String amount_remString;
 
         try {
-            PreparedStatement ps = createConn().prepareStatement(loansSql);
+            PreparedStatement ps = conn.prepareStatement(loansSql);
             ResultSet rs = ps.executeQuery();
 
             String getBorrowerSql;
@@ -428,8 +446,8 @@ public class DatabaseHandler {
             while(rs.next()){
                 borrower_id = rs.getInt("borrower_id");
                 loan_id = rs.getInt("loan_id");
-                getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
-                pb = createConn().prepareStatement(getBorrowerSql);
+                getBorrowerSql = "SELECT * FROM customers WHERE id="+borrower_id;
+                pb = conn.prepareStatement(getBorrowerSql);
                 rb = pb.executeQuery();
                 if (rb.first()){
                     borrower_name = rb.getString("f_name")+" "+rb.getString("l_name");
@@ -437,8 +455,8 @@ public class DatabaseHandler {
 
                 }
 
-                getFineSql = "SELECT * FROM FINES WHERE LOAN_ID="+loan_id;
-                pk = createConn().prepareStatement(getFineSql);
+                getFineSql = "SELECT * FROM fines WHERE loan_id="+loan_id;
+                pk = conn.prepareStatement(getFineSql);
                 rk = pk.executeQuery();
                 borrower_fine = 0.0;
                 while(rk.next()){
@@ -485,6 +503,7 @@ public class DatabaseHandler {
     }
 
     public ObservableList<Loan> loadOneMonthLateLoans(){
+        conn = createConn();
         ObservableList<Loan> oneLateloans = FXCollections.observableArrayList();
 //        String todayDate = "'"+LocalDate.now().toString()+"'";
 //        String compareDate = "'"+LocalDate.now().minusMonths(1).withDayOfMonth(1).minusDays(1).toString()+"'";
@@ -502,11 +521,11 @@ public class DatabaseHandler {
         double borrower_fine = 0;
         String fine_String="0.0";
 
-        String loanSql = "SELECT * FROM LOANS";
+        String loanSql = "SELECT * FROM loans";
         int counter;
 
         try {
-            PreparedStatement ps = createConn().prepareStatement(loanSql);
+            PreparedStatement ps = conn.prepareStatement(loanSql);
             ResultSet rs = ps.executeQuery();
 
             String getBorrowerSql;
@@ -520,8 +539,8 @@ public class DatabaseHandler {
             while(rs.next()){
                 borrower_id = rs.getInt("borrower_id");
                 loan_id = rs.getInt("loan_id");
-                getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
-                pb = createConn().prepareStatement(getBorrowerSql);
+                getBorrowerSql = "SELECT * FROM customers WHERE id="+borrower_id;
+                pb = conn.prepareStatement(getBorrowerSql);
                 rb = pb.executeQuery();
                 if (rb.first()){
                     borrower_name = rb.getString("f_name")+" "+rb.getString("l_name");
@@ -529,8 +548,8 @@ public class DatabaseHandler {
                 }
 
 
-                getFineSql = "SELECT * FROM FINES WHERE LOAN_ID="+loan_id;
-                pk = createConn().prepareStatement(getFineSql);
+                getFineSql = "SELECT * FROM fines WHERE loan_id="+loan_id;
+                pk = conn.prepareStatement(getFineSql);
                 rk = pk.executeQuery();
                 borrower_fine = 0.0;
                 counter = 0;
@@ -581,6 +600,7 @@ public class DatabaseHandler {
     }
 
     public ObservableList<Loan> loadTwoMonthLateLoans(){
+        conn = createConn();
         ObservableList<Loan> twoLateloans = FXCollections.observableArrayList();
 //        String lastmonthDate = "'"+LocalDate.now().minusMonths(0).withDayOfMonth(1).minusDays(1).toString()+"'";
 //        String compareDate = "'"+LocalDate.now().minusMonths(2).withDayOfMonth(1).minusDays(1).toString()+"'";
@@ -598,11 +618,11 @@ public class DatabaseHandler {
         double borrower_fine = 0;
         String fine_String="0.0";
 
-        String loanSql = "SELECT * FROM LOANS";
+        String loanSql = "SELECT * FROM loans";
         int counter;
 
         try {
-            PreparedStatement ps = createConn().prepareStatement(loanSql);
+            PreparedStatement ps = conn.prepareStatement(loanSql);
             ResultSet rs = ps.executeQuery();
 
             String getBorrowerSql;
@@ -616,8 +636,8 @@ public class DatabaseHandler {
             while(rs.next()){
                 borrower_id = rs.getInt("borrower_id");
                 loan_id = rs.getInt("loan_id");
-                getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
-                pb = createConn().prepareStatement(getBorrowerSql);
+                getBorrowerSql = "SELECT * FROM customers WHERE id="+borrower_id;
+                pb = conn.prepareStatement(getBorrowerSql);
                 rb = pb.executeQuery();
                 if (rb.first()){
                     borrower_name = rb.getString("f_name")+" "+rb.getString("l_name");
@@ -625,8 +645,8 @@ public class DatabaseHandler {
                 }
 
 
-                getFineSql = "SELECT * FROM FINES WHERE LOAN_ID="+loan_id;
-                pk = createConn().prepareStatement(getFineSql);
+                getFineSql = "SELECT * FROM fines WHERE loan_id="+loan_id;
+                pk = conn.prepareStatement(getFineSql);
                 rk = pk.executeQuery();
                 borrower_fine = 0.0;
                 counter = 0;
@@ -677,6 +697,7 @@ public class DatabaseHandler {
     }
 
     public ObservableList<Loan> loadPenaltyLateLoans(){
+        conn = createConn();
         ObservableList<Loan> penaltyloans = FXCollections.observableArrayList();
 //        String lastmonthDate = "'"+LocalDate.now().minusMonths(1).withDayOfMonth(1).minusDays(1).toString()+"'";
 //        String compareDate = "'"+LocalDate.now().minusMonths(120).withDayOfMonth(1).minusDays(1).toString()+"'";
@@ -694,11 +715,11 @@ public class DatabaseHandler {
         double borrower_fine = 0;
         String fine_String="0.0";
 
-        String loanSql = "SELECT * FROM LOANS";
+        String loanSql = "SELECT * FROM loans";
         int counter;
 
         try {
-            PreparedStatement ps = createConn().prepareStatement(loanSql);
+            PreparedStatement ps = conn.prepareStatement(loanSql);
             ResultSet rs = ps.executeQuery();
 
             String getBorrowerSql;
@@ -712,16 +733,16 @@ public class DatabaseHandler {
             while(rs.next()){
                 borrower_id = rs.getInt("borrower_id");
                 loan_id = rs.getInt("loan_id");
-                getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
-                pb = createConn().prepareStatement(getBorrowerSql);
+                getBorrowerSql = "SELECT * FROM customers WHERE id="+borrower_id;
+                pb = conn.prepareStatement(getBorrowerSql);
                 rb = pb.executeQuery();
                 if (rb.first()){
                     borrower_name = rb.getString("f_name")+" "+rb.getString("l_name");
                     borrower_phone = rb.getString("phone");
                 }
 
-                getFineSql = "SELECT * FROM FINES WHERE LOAN_ID="+loan_id;
-                pk = createConn().prepareStatement(getFineSql);
+                getFineSql = "SELECT * FROM fines WHERE loan_id="+loan_id;
+                pk = conn.prepareStatement(getFineSql);
                 rk = pk.executeQuery();
                 borrower_fine = 0.0;
                 counter = 0;
@@ -773,8 +794,9 @@ public class DatabaseHandler {
     }
 
     public ObservableList<Loan> searchLoan(int loany_id){
+        conn = createConn();
         ObservableList<Loan> loans = FXCollections.observableArrayList();
-        String loansSql = "SELECT * FROM LOANS WHERE LOAN_ID LIKE '%"+loany_id+"%'";
+        String loansSql = "SELECT * FROM loans WHERE loan_id LIKE '%"+loany_id+"%'";
         int borrower_id;
         int loan_id;
         String borrower_name="";
@@ -789,7 +811,7 @@ public class DatabaseHandler {
         String fine_String="0.0";
 
         try {
-            PreparedStatement ps = createConn().prepareStatement(loansSql);
+            PreparedStatement ps = conn.prepareStatement(loansSql);
             ResultSet rs = ps.executeQuery();
 
             String getBorrowerSql;
@@ -803,8 +825,8 @@ public class DatabaseHandler {
             while(rs.next()){
                 borrower_id = rs.getInt("borrower_id");
                 loan_id = rs.getInt("loan_id");
-                getBorrowerSql = "SELECT * FROM CUSTOMERS WHERE ID="+borrower_id;
-                pb = createConn().prepareStatement(getBorrowerSql);
+                getBorrowerSql = "SELECT * FROM customers WHERE id="+borrower_id;
+                pb = conn.prepareStatement(getBorrowerSql);
                 rb = pb.executeQuery();
                 if (rb.first()){
                     borrower_name = rb.getString("f_name")+" "+rb.getString("l_name");
@@ -813,8 +835,8 @@ public class DatabaseHandler {
                 }
 
 
-                getFineSql = "SELECT * FROM FINES WHERE LOAN_ID="+loan_id;
-                pk = createConn().prepareStatement(getFineSql);
+                getFineSql = "SELECT * FROM fines WHERE loan_id="+loan_id;
+                pk = conn.prepareStatement(getFineSql);
                 rk = pk.executeQuery();
                 borrower_fine = 0.0;
                 while(rk.next()){
@@ -860,16 +882,17 @@ public class DatabaseHandler {
     }
 
     public ObservableList<Customer> searchCustomers(String id){
+        conn = createConn();
         ObservableList<Customer> customers = FXCollections.observableArrayList();
-        String customersIdSql = "SELECT * FROM CUSTOMERS WHERE ID LIKE '%"+id+"%'";
-        String customersNameSql = "SELECT * FROM CUSTOMERS WHERE F_NAME LIKE '%"+id+"%' OR L_NAME LIKE '%"+id+"%'";
+        String customersIdSql = "SELECT * FROM customers WHERE id LIKE '%"+id+"%'";
+        String customersNameSql = "SELECT * FROM customers WHERE f_name LIKE '%"+id+"%' OR l_name LIKE '%"+id+"%'";
         PreparedStatement ps;
 
         try{
             if(Checker.isStringInt(id)){
-                ps = createConn().prepareStatement(customersIdSql);
+                ps = conn.prepareStatement(customersIdSql);
             }else {
-                ps= createConn().prepareStatement(customersNameSql);
+                ps= conn.prepareStatement(customersNameSql);
             }
 
             ResultSet rs = ps.executeQuery();
@@ -891,10 +914,11 @@ public class DatabaseHandler {
     }
 
     public void updateProfPhoto(String photoName,int id){
-        String profPhotoSql = "UPDATE CUSTOMERS SET prof_photo='"+photoName+"' WHERE ID="+id;
+        conn = createConn();
+        String profPhotoSql = "UPDATE customers SET prof_photo='"+photoName+"' WHERE id="+id;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(profPhotoSql);
+            PreparedStatement ps = conn.prepareStatement(profPhotoSql);
             ps.execute();
         }catch (SQLException e){
             e.printStackTrace();
@@ -908,10 +932,11 @@ public class DatabaseHandler {
     }
 
      public void updateLoanFile(String FileName,int id){
-        String loanFileSql = "UPDATE LOANS SET loan_file='"+FileName+"' WHERE Loan_id="+id;
+         conn = createConn();
+         String loanFileSql = "UPDATE loans SET loan_file='"+FileName+"' WHERE Loan_id="+id;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(loanFileSql);
+            PreparedStatement ps = conn.prepareStatement(loanFileSql);
             ps.execute();
         }catch (SQLException e){
             e.printStackTrace();
@@ -925,7 +950,8 @@ public class DatabaseHandler {
     }
 
     public EditCustomer viewCustomer(int id){
-        String editCustomerSql = "SELECT * FROM CUSTOMERS WHERE ID="+id;
+        conn = createConn();
+        String editCustomerSql = "SELECT * FROM customers WHERE id="+id;
         EditCustomer customer = null;
 
         String getActiveLoansSql;
@@ -939,18 +965,18 @@ public class DatabaseHandler {
         int num_done_loans = 0;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(editCustomerSql);
+            PreparedStatement ps = conn.prepareStatement(editCustomerSql);
             ResultSet rs = ps.executeQuery();
             if (rs.first()){
-                getActiveLoansSql = "SELECT * FROM LOANS WHERE status='active' AND borrower_id="+id;
-                pb = createConn().prepareStatement(getActiveLoansSql);
+                getActiveLoansSql = "SELECT * FROM loans WHERE status='active' AND borrower_id="+id;
+                pb = conn.prepareStatement(getActiveLoansSql);
                 rb = pb.executeQuery();
                 while (rb.next()){
                     num_loans++;
                 }
 
-                getDoneLoansSql = "SELECT * FROM LOANS WHERE status='done' AND borrower_id="+id;
-                pc = createConn().prepareStatement(getDoneLoansSql);
+                getDoneLoansSql = "SELECT * FROM loans WHERE status='done' AND borrower_id="+id;
+                pc = conn.prepareStatement(getDoneLoansSql);
                 rk = pc.executeQuery();
                 while (rk.next()){
                     num_done_loans++;
@@ -974,17 +1000,18 @@ public class DatabaseHandler {
     }
 
     public void checkIfLoanDone(int id){
-        String checkLoanSql = "SELECT DISTINCT TOTAL_PAYMENT,AMOUNT_PAID FROM LOANS WHERE LOAN_ID="+id;
-        String updateStatusSql = "UPDATE LOANS SET status='done' WHERE LOAN_ID="+id;
+        conn = createConn();
+        String checkLoanSql = "SELECT DISTINCT total_payment,amount_paid FROM loans WHERE loan_id="+id;
+        String updateStatusSql = "UPDATE loans SET status='done' WHERE loan_id="+id;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(checkLoanSql);
+            PreparedStatement ps = conn.prepareStatement(checkLoanSql);
             ResultSet rs = ps.executeQuery();
             if(rs.first()){
                 Double total_payment = rs.getDouble("total_payment");
                 Double amount_paid = rs.getDouble("amount_paid");
                 if(amount_paid >= total_payment){
-                    PreparedStatement pb = createConn().prepareStatement(updateStatusSql);
+                    PreparedStatement pb = conn.prepareStatement(updateStatusSql);
                     pb.execute();
                 }
             }
@@ -1000,12 +1027,13 @@ public class DatabaseHandler {
     }
 
     public ObservableList<Transaction> getUserTransactions(int id){
+        conn = createConn();
         ObservableList<Transaction> transactions = FXCollections.observableArrayList();
         String sql = "SELECT customers.id,payments.loan_id,customers.f_name,customers.l_name ,payments.amount,payments.date " +
                 "FROM customers,loans,payments WHERE customers.id=loans.borrower_id AND loans.loan_id=payments.loan_id AND payments.loan_id="+id;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
@@ -1027,12 +1055,13 @@ public class DatabaseHandler {
     }
 
     public ObservableList<Transaction> getUserFineTransactions(int id){
+        conn = createConn();
         ObservableList<Transaction> transactions = FXCollections.observableArrayList();
         String sql = "SELECT customers.id,fine_payments.loan_id,customers.f_name,customers.l_name ,fine_payments.amount,fine_payments.date " +
                 "FROM customers,loans,fine_payments WHERE customers.id=loans.borrower_id AND loans.loan_id=fine_payments.loan_id AND fine_payments.loan_id="+id;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
@@ -1054,11 +1083,12 @@ public class DatabaseHandler {
     }
 
     public BorrowerIDAndName getBorrowerNameAndId(int id){
-        String sql = "SELECT * FROM CUSTOMERS WHERE ID="+id;
+        conn = createConn();
+        String sql = "SELECT * FROM customers WHERE id="+id;
         BorrowerIDAndName borrowerIDAndName = null;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs =ps.executeQuery();
 
             if(rs.first()){
@@ -1078,13 +1108,14 @@ public class DatabaseHandler {
 
     public boolean editCustomerDetails(int id,String phone,String email,String postal,String bank,String account,String company_name,
                                     String company_loc,String company_phone,String checknumber){
-        String sql = "UPDATE CUSTOMERS SET phone='"+phone+"',email='"+email+"',postal='"+postal+"',bank='"+bank+"'," +
+        conn = createConn();
+        String sql = "UPDATE customers SET phone='"+phone+"',email='"+email+"',postal='"+postal+"',bank='"+bank+"'," +
                 "account_no='"+account+"',company_name='"+company_name+"',company_phone='"+company_phone+"',company_location='"+company_loc+"'," +
-                "checksum='"+checknumber+"' WHERE ID="+id;
+                "checksum='"+checknumber+"' WHERE id="+id;
         boolean success;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.execute();
             success=true;
         }catch (SQLException e){
@@ -1101,16 +1132,18 @@ public class DatabaseHandler {
     }
 
     public EditLoan viewLoan(int id){
+        conn = createConn();
         String sql = "SELECT borrower_id,amount_borrowed,duration,date_of_loan,amount_per_month,member_id,property_id," +
-                "property_name,description,total_payment,tolerance FROM LOANS WHERE LOAN_ID="+id;
+                "property_name,description,total_payment,tolerance FROM loans WHERE loan_id="+id;
         EditLoan editLoan = null;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if(rs.first()){
-                editLoan = new EditLoan(rs.getInt("borrower_id"),rs.getDouble("amount_borrowed"),rs.getInt("duration"),rs.getDate("date_of_loan").toLocalDate(),
-                        rs.getDouble("amount_per_month"),rs.getDouble("total_payment"),rs.getInt("member_id"),rs.getString("property_id"),rs.getString("property_name"),
+                editLoan = new EditLoan(rs.getInt("borrower_id"),rs.getDouble("amount_borrowed"),rs.getInt("duration"),
+                        rs.getDate("date_of_loan").toLocalDate(),rs.getDouble("amount_per_month"),rs.getDouble("total_payment"),
+                        rs.getInt("member_id"),rs.getString("property_id"),rs.getString("property_name"),
                         rs.getString("description"),rs.getString("tolerance"));
             }
         }catch (SQLException e){
@@ -1129,15 +1162,18 @@ public class DatabaseHandler {
     public boolean editLoanDetails(int id,int borrower_id,double loan_amount,int duration,LocalDate date_loan,double perMonth,
             double total_payment,int mdhamini_id,String property_id,String property_name,String desc,String tolerance){
 
+        conn = createConn();
+
         Date loan_date = java.sql.Date.valueOf(date_loan);
 
-        String sql = "UPDATE LOANS SET borrower_id='"+borrower_id+"',amount_borrowed='"+loan_amount+"',duration='"+duration+"',date_of_loan='"+loan_date+"'," +
-                "amount_per_month='"+perMonth+"',total_payment='"+total_payment+"',member_id='"+mdhamini_id+"',property_id='"+property_id+"',property_name='"+property_name+"',description='"+desc+"',tolerance='"+tolerance+"' " +
-                "WHERE LOAN_ID="+id;
+        String sql = "UPDATE loans SET borrower_id='"+borrower_id+"',amount_borrowed='"+loan_amount+"',duration='"+duration+"'," +
+                "date_of_loan='"+loan_date+"'," +"amount_per_month='"+perMonth+"',total_payment='"+total_payment+"',member_id='"+
+                mdhamini_id+"',property_id='"+property_id+"',property_name='"+property_name+"',description='"+desc+"',tolerance='"+
+                tolerance+"' " + "WHERE loan_id="+id;
         boolean success;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.execute();
             success=true;
         }catch (SQLException e){
@@ -1154,11 +1190,12 @@ public class DatabaseHandler {
     }
 
     public String viewSms(int id){
-        String sql = "SELECT SMS FROM MESSAGES WHERE SMS_ID="+id;
+        conn = createConn();
+        String sql = "SELECT sms FROM messages WHERE sms_id="+id;
         String sms = null;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if(rs.first()){
                 sms = rs.getString("sms");
@@ -1176,11 +1213,12 @@ public class DatabaseHandler {
     }
 
     public boolean editSms(int id,String sms){
-        String sql = "UPDATE MESSAGES SET sms='"+sms+"' WHERE SMS_ID="+id;
+        conn = createConn();
+        String sql = "UPDATE messages SET sms='"+sms+"' WHERE sms_id="+id;
         boolean success;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.execute();
             success=true;
         }catch (SQLException e){
@@ -1197,20 +1235,22 @@ public class DatabaseHandler {
     }
 
     public ObservableList<User> getUsers(String level){
+        conn = createConn();
         ObservableList<User> users = FXCollections.observableArrayList();
         String usersSql;
 
         if(level.equals("main admin"))
-            usersSql = "SELECT * FROM USERS";
+            usersSql = "SELECT * FROM users";
         else
-            usersSql = "SELECT * FROM USERS WHERE role='worker' ";
+            usersSql = "SELECT * FROM users WHERE role='worker' ";
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(usersSql);
+            PreparedStatement ps = conn.prepareStatement(usersSql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
-                users.add(new User("MJ/U/"+rs.getInt("id"),rs.getString("fname")+" "+rs.getString("lname"),rs.getString("status"),rs.getString("role")));
+                users.add(new User("MJ/U/"+rs.getInt("id"),rs.getString("fname")+" "+rs.getString("lname"),
+                        rs.getString("status"),rs.getString("role")));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -1225,14 +1265,15 @@ public class DatabaseHandler {
     }
 
     public Result addUser(String fname,String lname,String uname,String password,String role,String status){
-        String userSql = "INSERT INTO USERS (fname,lname,username,password,role,status) VALUES(?,?,?,?,?,?)";
-        String lastUserSql = "SELECT * FROM USERS";
+        conn = createConn();
+        String userSql = "INSERT INTO users (fname,lname,username,password,role,status) VALUES(?,?,?,?,?,?)";
+        String lastUserSql = "SELECT * FROM users";
 
         Result result = new Result();
         result.setSuccess(false);
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(userSql);
+            PreparedStatement ps = conn.prepareStatement(userSql);
             ps.setString(1,fname);
             ps.setString(2,lname);
             ps.setString(3,uname);
@@ -1243,7 +1284,7 @@ public class DatabaseHandler {
             ps.execute();
             result.setSuccess(true);
 
-            PreparedStatement pb = createConn().prepareStatement(lastUserSql);
+            PreparedStatement pb = conn.prepareStatement(lastUserSql);
             ResultSet rs = pb.executeQuery();
 
             while (rs.next()){
@@ -1266,6 +1307,7 @@ public class DatabaseHandler {
     }
 
     public void updateUserStatus(String action,int id){
+        conn = createConn();
         String status;
         if (action.equals("activate")){
             status = "active";
@@ -1273,10 +1315,10 @@ public class DatabaseHandler {
             status = "deactive";
         }
 
-        String statusSql = "UPDATE USERS SET status='"+status+"' WHERE ID="+id;
+        String statusSql = "UPDATE users SET status='"+status+"' WHERE id="+id;
 
         try {
-            PreparedStatement ps = createConn().prepareStatement(statusSql);
+            PreparedStatement ps = conn.prepareStatement(statusSql);
             ps.execute();
         }catch (SQLException e){
             e.printStackTrace();
@@ -1291,7 +1333,7 @@ public class DatabaseHandler {
     }
 
     public void fineHandler(){
-
+        conn = createConn();
         String state = "";
             int fine_id;
             int loan_id;
@@ -1303,13 +1345,13 @@ public class DatabaseHandler {
             int year;
             String tolerance;
             String monthEnd;
-            String controllerSql = "SELECT * FROM CONTROLLER";
-            String fineSql = "SELECT * FROM FINES";
-            String loanSql = "SELECT * FROM LOANS";
-            String addFineSql = "INSERT INTO FINES (month,year,amount,loan_id,tolerance) VALUES(?,?,?,?,?)";
+            String controllerSql = "SELECT * FROM controller";
+            String fineSql = "SELECT * FROM fines";
+            String loanSql = "SELECT * FROM loans";
+            String addFineSql = "INSERT INTO fines (month,year,amount,loan_id,tolerance) VALUES(?,?,?,?,?)";
 
             try {
-                PreparedStatement ps = createConn().prepareStatement(controllerSql);
+                PreparedStatement ps = conn.prepareStatement(controllerSql);
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
@@ -1320,12 +1362,11 @@ public class DatabaseHandler {
 
 
                 if (state.equals("not yet")) {
-                    System.out.println("1");
 
-                    PreparedStatement pb = createConn().prepareStatement(fineSql);
+                    PreparedStatement pb = conn.prepareStatement(fineSql);
                     ResultSet rb = pb.executeQuery();
 
-                    PreparedStatement pd = createConn().prepareStatement(loanSql);
+                    PreparedStatement pd = conn.prepareStatement(loanSql);
                     ResultSet rd = pd.executeQuery();
 
                     while (rb.next()) {
@@ -1338,15 +1379,16 @@ public class DatabaseHandler {
                             year = rb.getInt("year");
                             tolerance = rb.getString("tolerance");
 
-                            PreparedStatement pf = createConn().prepareStatement(loanSql);
+                            PreparedStatement pf = conn.prepareStatement(loanSql);
                             ResultSet rf = pf.executeQuery();
 
                             if(tolerance.equals("no")){
                                 System.out.println(amount);
                                 while(rf.next()){
                                     if(rf.getInt("loan_id")==loan_id && rf.getString("status").equals("active")){
-                                        String paymentsSql = "SELECT * FROM PAYMENTS WHERE LOAN_ID="+loan_id+" AND MONTH='"+month+"' AND YEAR="+year;
-                                        PreparedStatement ph = createConn().prepareStatement(paymentsSql);
+                                        String paymentsSql = "SELECT * FROM payments WHERE loan_id="+loan_id+" AND " +
+                                                "payments.month='"+month+"' AND payments.year="+year;
+                                        PreparedStatement ph = conn.prepareStatement(paymentsSql);
                                         ResultSet rh = ph.executeQuery();
 
                                         paidAmount = 0;
@@ -1365,25 +1407,21 @@ public class DatabaseHandler {
 
                                 if(amount>0){
                                     amount = (double)Math.round(amount);
-                                    String fineUpdateSql = "UPDATE FINES SET AMOUNT="+amount+" WHERE FINE_ID=" + fine_id;
-                                    System.out.println("this");
-                                    PreparedStatement pc = createConn().prepareStatement(fineUpdateSql);
+                                    String fineUpdateSql = "UPDATE fines SET amount="+amount+" WHERE fine_id=" + fine_id;
+                                    PreparedStatement pc = conn.prepareStatement(fineUpdateSql);
                                     pc.execute();
                                 }
                             }
-
-                        System.out.println("2");
                     }
 
                     while(rd.next()){
-
-                        System.out.println("3");
 
                         // Adding a fine
                             lastDue = rd.getDate("due");
                             System.out.println(lastDue);
                             System.out.println(LocalDate.now().minusMonths(0).withDayOfMonth(1).minusDays(1));
-                            if(lastDue.equals(java.sql.Date.valueOf(LocalDate.now().minusMonths(0).withDayOfMonth(1).minusDays(1))) && rd.getString("status").equals("active") && rd.getString("tolerance").equals("no")){
+                            if(lastDue.equals(java.sql.Date.valueOf(LocalDate.now().minusMonths(0).withDayOfMonth(1).minusDays(1)))
+                                    && rd.getString("status").equals("active") && rd.getString("tolerance").equals("no")){
                                 loan_id = rd.getInt("loan_id");
                                 perMonth = rd.getDouble("amount_per_month");
                                 //perMonth = perMonth + perMonth*0.15;
@@ -1391,11 +1429,11 @@ public class DatabaseHandler {
                                 perMonth = (double)Math.round(perMonth);
                                 monthEnd = lastDue.toLocalDate().plusMonths(2).withDayOfMonth(1).minusDays(1).toString();
 
-                                String updateLoanSql = "UPDATE LOANS SET DUE='"+monthEnd+"' WHERE LOAN_ID="+loan_id;
-                                PreparedStatement ph = createConn().prepareStatement(updateLoanSql);
+                                String updateLoanSql = "UPDATE loans SET due='"+monthEnd+"' WHERE loan_id="+loan_id;
+                                PreparedStatement ph = conn.prepareStatement(updateLoanSql);
                                 ph.execute();
 
-                                PreparedStatement pk = createConn().prepareStatement(addFineSql);
+                                PreparedStatement pk = conn.prepareStatement(addFineSql);
                                 pk.setString(1,lastDue.toLocalDate().getMonth().name());
                                 pk.setInt(2,lastDue.toLocalDate().getYear());
                                 pk.setDouble(3,perMonth);
@@ -1403,20 +1441,14 @@ public class DatabaseHandler {
                                 pk.setString(5,"no");
                                 pk.execute();
 
-                                System.out.println("4");
-
                             }
-
-                        System.out.println("5");
 
                     }
 
                     state = "done";
-                    String stateSql = "UPDATE CONTROLLER SET STATE='"+state+"'";
-                    PreparedStatement pz = createConn().prepareStatement(stateSql);
+                    String stateSql = "UPDATE controller SET state='"+state+"'";
+                    PreparedStatement pz = conn.prepareStatement(stateSql);
                     pz.execute();
-
-                    System.out.println("6");
 
 
                 }
@@ -1434,9 +1466,10 @@ public class DatabaseHandler {
     }
 
     public void stateChanger(){
-        String stateSql ="UPDATE CONTROLLER SET STATE='not yet'";
+        conn = createConn();
+        String stateSql ="UPDATE controller SET state='not yet'";
         try{
-            PreparedStatement ps = createConn().prepareStatement(stateSql);
+            PreparedStatement ps = conn.prepareStatement(stateSql);
             ps.execute();
         }catch (SQLException e){
             e.printStackTrace();
@@ -1450,10 +1483,11 @@ public class DatabaseHandler {
     }
 
     public boolean updatePassword(String password,int id){
-        String passSql = "UPDATE USERS SET PASSWORD='"+password+"' WHERE ID="+id;
+        conn = createConn();
+        String passSql = "UPDATE users SET password='"+password+"' WHERE id="+id;
         boolean success = false;
         try{
-            PreparedStatement ps = createConn().prepareStatement(passSql);
+            PreparedStatement ps = conn.prepareStatement(passSql);
             ps.execute();
             success = true;
         }catch (SQLException e){
@@ -1470,12 +1504,13 @@ public class DatabaseHandler {
     }
 
     public boolean deleteUser(int id){
-        String userSql = "DELETE FROM USERS WHERE ID="+id;
+        conn = createConn();
+        String userSql = "DELETE FROM users WHERE id="+id;
 
         boolean success = false;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(userSql);
+            PreparedStatement ps = conn.prepareStatement(userSql);
             ps.execute();
             success = true;
         }catch (SQLException e){
@@ -1492,11 +1527,12 @@ public class DatabaseHandler {
     }
 
     public double getInterest(){
-        String rateSql = "SELECT * FROM INTEREST";
+        conn = createConn();
+        String rateSql = "SELECT * FROM interest";
         double rate = 0;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(rateSql);
+            PreparedStatement ps = conn.prepareStatement(rateSql);
             ResultSet rs = ps.executeQuery();
 
             if(rs.first()){
@@ -1515,11 +1551,12 @@ public class DatabaseHandler {
     }
 
     public boolean setInterest(double rate){
-        String rateSql = "UPDATE INTEREST SET INTEREST_VALUE ="+rate;
+        conn = createConn();
+        String rateSql = "UPDATE interest SET interest_value ="+rate;
         boolean success = false;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(rateSql);
+            PreparedStatement ps = conn.prepareStatement(rateSql);
             ps.execute();
             success = true;
         }catch (SQLException e){
@@ -1536,16 +1573,18 @@ public class DatabaseHandler {
     }
 
     public ObservableList<Fine> getFines(int id){
+        conn = createConn();
         ObservableList<Fine> fines = FXCollections.observableArrayList();
         double perMonth = 0;
         int loan_id;
         String month;
         int year;
         double paidAmount=0;
+        double fineAmount = 0;
 
         try{
-            String fineSql = "SELECT * FROM FINES WHERE LOAN_ID="+id;
-            PreparedStatement ps = createConn().prepareStatement(fineSql);
+            String fineSql = "SELECT * FROM fines WHERE loan_id="+id;
+            PreparedStatement ps = conn.prepareStatement(fineSql);
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()){
@@ -1553,14 +1592,17 @@ public class DatabaseHandler {
                 month = rs.getString("month");
                 year = rs.getInt("year");
 
-                String finePerMonthSql = "SELECT AMOUNT_PER_MONTH FROM LOANS WHERE LOAN_ID="+loan_id;
-                PreparedStatement pk = createConn().prepareStatement(finePerMonthSql);
+                fineAmount = fineAmount + rs.getDouble("amount");
+
+                String finePerMonthSql = "SELECT amount_per_month FROM loans WHERE loan_id="+loan_id;
+                PreparedStatement pk = conn.prepareStatement(finePerMonthSql);
                 ResultSet rk = pk.executeQuery();
 
                 if(rk.first()){
 
-                    String paymentsSql = "SELECT * FROM PAYMENTS WHERE LOAN_ID="+loan_id+" AND MONTH='"+month+"' AND YEAR="+year;
-                    PreparedStatement ph = createConn().prepareStatement(paymentsSql);
+                    String paymentsSql = "SELECT * FROM payments WHERE loan_id="+loan_id+" AND payments.month='"+month+"'" +
+                            " AND payments.year="+year;
+                    PreparedStatement ph = conn.prepareStatement(paymentsSql);
                     ResultSet rh = ph.executeQuery();
 
                     paidAmount = 0;
@@ -1571,7 +1613,7 @@ public class DatabaseHandler {
 
                     perMonth = rk.getDouble("amount_per_month")-paidAmount;
                 }
-                if(perMonth>0){
+                if(fineAmount>0){
                     fines.add(new Fine(rs.getInt("fine_id"),rs.getString("month"),rs.getInt("year"),rs.getDouble("amount"),perMonth));
                 }
             }
@@ -1588,10 +1630,11 @@ public class DatabaseHandler {
     }
 
     public List<String> getPhoneNumbers(){
-        String phoneSql = "SELECT PHONE FROM CUSTOMERS";
+        conn = createConn();
+        String phoneSql = "SELECT phone FROM customers";
         List<String> phoneNums = new ArrayList();
         try{
-            PreparedStatement ps = createConn().prepareStatement(phoneSql);
+            PreparedStatement ps = conn.prepareStatement(phoneSql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 phoneNums.add(rs.getString("phone"));
@@ -1609,11 +1652,12 @@ public class DatabaseHandler {
     }
 
     public boolean payFine(int loan_id,LocalDate date,double amount,String month,int year){
-        String paySql = "INSERT INTO FINE_PAYMENTS (loan_id,date,amount,month,year) VALUES (?,?,?,?,?)";
+        conn = createConn();
+        String paySql = "INSERT INTO fine_payments (loan_id,date,amount,month,year) VALUES (?,?,?,?,?)";
         boolean success = false;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(paySql);
+            PreparedStatement ps = conn.prepareStatement(paySql);
             ps.setInt(1,loan_id);
             ps.setDate(2,java.sql.Date.valueOf(date));
             ps.setDouble(3,amount);
@@ -1638,11 +1682,12 @@ public class DatabaseHandler {
     }
 
     public boolean reduceFine(int fine_id,double amount){
-        String fineSql = "SELECT * FROM FINES WHERE FINE_ID="+fine_id;
+        conn = createConn();
+        String fineSql = "SELECT * FROM fines WHERE fine_id="+fine_id;
         boolean success = false;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(fineSql);
+            PreparedStatement ps = conn.prepareStatement(fineSql);
             ResultSet rs = ps.executeQuery();
 
             if(rs.first()){
@@ -1650,20 +1695,20 @@ public class DatabaseHandler {
 
                 fine_amount = fine_amount - amount;
 
-                String reduceSql = "UPDATE FINES SET AMOUNT="+fine_amount+" WHERE FINE_ID="+fine_id;
-                PreparedStatement pk = createConn().prepareStatement(reduceSql);
+                String reduceSql = "UPDATE fines SET amount="+fine_amount+" WHERE fine_id="+fine_id;
+                PreparedStatement pk = conn.prepareStatement(reduceSql);
                 pk.execute();
 
                 System.out.println(rs.getDouble("amount"));
 
-                String checkSql = "SELECT AMOUNT FROM FINES WHERE FINE_ID="+fine_id;
-                PreparedStatement pd = createConn().prepareStatement(checkSql);
+                String checkSql = "SELECT amount FROM fines WHERE fine_id="+fine_id;
+                PreparedStatement pd = conn.prepareStatement(checkSql);
                 ResultSet rd = pd.executeQuery();
 
                 if(rd.first()){
                     if (rd.getDouble("amount")<1){
-                        String zeroSql = "UPDATE FINES SET AMOUNT=0 WHERE FINE_ID="+fine_id;
-                        PreparedStatement ph = createConn().prepareStatement(zeroSql);
+                        String zeroSql = "UPDATE fines SET amount=0 WHERE fine_id="+fine_id;
+                        PreparedStatement ph = conn.prepareStatement(zeroSql);
                         ph.execute();
                     }
                 }
@@ -1684,11 +1729,12 @@ public class DatabaseHandler {
     }
 
     public boolean updateFinetolerance(int loan_id,String tolerance){
-        String toleranceSql = "UPDATE FINES SET TOLERANCE='"+tolerance+"' WHERE LOAN_ID="+loan_id;
+        conn = createConn();
+        String toleranceSql = "UPDATE fines SET tolerance='"+tolerance+"' WHERE loan_id="+loan_id;
         boolean success = false;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(toleranceSql);
+            PreparedStatement ps = conn.prepareStatement(toleranceSql);
             ps.execute();
             success = true;
 
@@ -1708,7 +1754,7 @@ public class DatabaseHandler {
 //    public void monthInitialIncrementer(int loan_id){
 //        try{
 //            String updateLoanSql = "UPDATE LOANS SET MONTHS_LATE = MONTHS_LATE + 1 WHERE LOAN_ID="+loan_id;
-//            PreparedStatement ph = createConn().prepareStatement(updateLoanSql);
+//            PreparedStatement ph = conn.prepareStatement(updateLoanSql);
 //            ph.execute();
 //        }catch(SQLException e){
 //            e.printStackTrace();
@@ -1722,16 +1768,129 @@ public class DatabaseHandler {
 //    }
 
     public boolean deleteFine(int fine_id){
+        conn = createConn();
         String del_query = "delete from fines where fine_id="+fine_id;
         boolean success = false;
 
         try{
-            PreparedStatement ps = createConn().prepareStatement(del_query);
+            PreparedStatement ps = conn.prepareStatement(del_query);
             ps.execute();
             success = true;
         }catch (SQLException e){
             e.printStackTrace();
         }
         return success;
+    }
+
+    public boolean editFine(int fine_id,double fine_amount){
+        conn = createConn();
+        String edit_query = "update fines set amount="+fine_amount+" where fine_id="+fine_id;
+        boolean success = false;
+
+        try{
+            PreparedStatement ps = conn.prepareStatement(edit_query);
+            ps.execute();
+            success = true;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return success;
+    }
+
+    public boolean fineChecker(int id){
+        conn = createConn();
+        double fineAmount=0;
+        boolean fineExists = false;
+
+        try{
+            String fineSql = "SELECT * FROM fines WHERE loan_id="+id;
+            PreparedStatement ps = conn.prepareStatement(fineSql);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                fineAmount = fineAmount + rs.getDouble("amount");
+
+                if(fineAmount>0){
+                    fineExists = true;
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return fineExists;
+    }
+
+    public String getMonthAmount(int loan_id,String month,int year){
+        conn = createConn();
+        double perMonth = 0;
+        double paidAmount=0;
+
+        try{
+
+                String finePerMonthSql = "SELECT amount_per_month FROM loans WHERE loan_id="+loan_id;
+                PreparedStatement pk = conn.prepareStatement(finePerMonthSql);
+                ResultSet rk = pk.executeQuery();
+
+                if(rk.first()){
+
+                    String paymentsSql = "SELECT * FROM payments WHERE loan_id="+loan_id+" AND payments.month='"+month+"' " +
+                            "AND payments.year="+year;
+                    PreparedStatement ph = conn.prepareStatement(paymentsSql);
+                    ResultSet rh = ph.executeQuery();
+
+                    paidAmount = 0;
+
+                    while(rh.next()){
+                        paidAmount = paidAmount + rh.getDouble("amount");
+                    }
+
+                    perMonth = rk.getDouble("amount_per_month")-paidAmount;
+                }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        String perMonth_string;
+        if (perMonth==0)
+            perMonth_string = String.format("%,.1f",perMonth);
+        else
+            perMonth_string = String.format("%,.0f", perMonth);
+
+        return perMonth_string;
+    }
+
+    public String getLastPayMonth(int loan_id){
+        conn = createConn();
+        String sql = "SELECT * FROM payments WHERE loan_id="+loan_id;
+        String month = "";
+        try{
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.last()){
+                month = rs.getString("month")+rs.getInt("year");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return month;
     }
 }

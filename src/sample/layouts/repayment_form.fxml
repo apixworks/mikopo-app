@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RepaymentFormController">
+<StackPane prefHeight="480.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RepaymentFormController">
     <children>
         <TabPane prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -47,7 +47,7 @@
 
                             <HBox alignment="CENTER_LEFT" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                 <ChoiceBox fx:id="month" />
-                                <ChoiceBox fx:id="year" />
+                                <!--<ChoiceBox fx:id="year" />-->
                             </HBox>
 
                         <Label text="Amount:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
@@ -75,7 +75,7 @@
                 </Tab>
                 <Tab text="Fine Repayment">
                     <content>
-                        <GridPane alignment="CENTER" hgap="10" vgap="10">
+                        <GridPane alignment="CENTER" hgap="10" prefHeight="340.0" prefWidth="729.0" vgap="10">
                             <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
 
                             <Text fill="#574e4e" text="Fine Repayment Form" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
@@ -97,10 +97,11 @@
                             <DatePicker fx:id="fine_date" focusTraversable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
                             <Label text="Month:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <HBox prefHeight="16.0" prefWidth="300.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
                         <children>
       
                                   <ChoiceBox fx:id="fine_month" />
+                           <Button mnemonicParsing="false" onAction="#editFine" text="Edit Fine" />
                            <Button fx:id="delBtn" mnemonicParsing="false" onAction="#deleteFine" text="Delete Fine" />
                         </children>
                      </HBox>

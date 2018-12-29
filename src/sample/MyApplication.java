@@ -49,10 +49,7 @@ public class MyApplication extends Application {
 
                 // attachments
                 String[] attachFiles = new String[1];
-                //attachFiles[0] = "E:\\MJsyslog.txt";
                 attachFiles[0] = "C:\\mikopo\\MJsyslog.txt";
-                //attachFiles[1] = "e:/Test/Music.mp3";
-                //attachFiles[2] = "e:/Test/Video.mp4";
 
                 try {
                     EmailAttachmentSender.sendEmailWithAttachments(host, port, mailFrom, password, mailTo,

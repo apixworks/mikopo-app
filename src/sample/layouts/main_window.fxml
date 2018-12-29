@@ -119,7 +119,7 @@
 
    <bottom>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="700.0" style="-fx-border-color: #74AFAD; -fx-border-width: 2px;" BorderPane.alignment="CENTER">
-          <Text text="Copyright 2017 © MikopoApp" />
+          <Text text="Copyright 2018 © MikopoApp" />
       </HBox>
    </bottom>
 

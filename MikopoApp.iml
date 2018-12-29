@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Documents/jv/mysql-connector-java-5.1.21.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/sample/external/gson-2.2.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,18 +19,18 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/java-json.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/sample/external/java-json.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/java-json.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/sample/external/java-json.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/gson-2.2.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/sample/external/java-mail-1.4.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -39,7 +39,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/jfoenix.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/sample/external/jfoenix.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -48,7 +48,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/org.apache.commons.io.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/sample/external/mysql-connector-java-5.1.21.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -57,7 +57,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/java-mail-1.4.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/sample/external/org.apache.commons.io.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

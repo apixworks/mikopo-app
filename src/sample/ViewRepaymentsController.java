@@ -115,6 +115,9 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
     @FXML public TextField searchLoanTxt;
 
     JSONObject userObject;
+    FXMLLoader fxmlLoader;
+
+    ObservableList<Loan> due_loans = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -309,6 +312,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
 
         setUpDue();
 
+        due_loans = FXCollections.observableArrayList();
         DatabaseHandler db = new DatabaseHandler();
         due_table.setItems(null);
 
@@ -316,7 +320,8 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
             @Override
             protected ObservableList<Loan> call() throws Exception {
                 // load data and populate list ...
-                return db.loadDueLoans() ;
+                due_loans = db.loadDueLoans();
+                return due_loans;
             }
         };
         loadDataTask.setOnSucceeded(e -> {
@@ -341,7 +346,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
 //        due_table.setItems(db.loadDueLoans());
     }
 
-    public void repaymentForm(String loanId,String name,String amount,String month,String perMonth){
+    public void repaymentForm(String loanId,String name,String amount,String month,String perMonth,String status,String release_date,int duration){
         String[] amont = amount.split(",");
         String amounter = "";
         for(int i=0;i<amont.length;i++){
@@ -352,10 +357,10 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
             stage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/repayment_form.fxml"));
             stage.setTitle("MikopoApp");
-            Scene repaymentScene = new Scene(fxmlLoader.load(),600,400);
+            Scene repaymentScene = new Scene(fxmlLoader.load(),700,480);
             stage.setScene(repaymentScene);
             RepaymentFormController repaymentFormController = fxmlLoader.<RepaymentFormController>getController();
-            repaymentFormController.getLoanDetails(loanId,name,perMonth,Integer.parseInt(amounter),month);
+            repaymentFormController.getLoanDetails(loanId,name,perMonth,Integer.parseInt(amounter),month,release_date,duration,status,fxmlLoader);
             repaymentFormController.getUserDetails(userObject);
             stage.show();
         } catch (IOException e) {
@@ -367,6 +372,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
     }
 
     public void setUpDue(){
+        DatabaseHandler db = new DatabaseHandler();
         Callback<TableColumn<Loan,String>, TableCell<Loan,String>> cellFactory =
                 new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
                     @Override
@@ -385,7 +391,9 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                                         public void handle(ActionEvent event) {
                                             Loan loan = getTableView().getItems().get(getIndex());
                                             // System.out.println(loan.getL_borrower_phone());
-                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(), LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month());
+                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),
+                                                    LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month(),
+                                                    loan.getStatus(),loan.getL_date(),loan.getDuration());
                                         }
                                     });
                                     HBox hBox = new HBox();
@@ -433,15 +441,26 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
                             this.setAlignment(Pos.CENTER);
-                            if(item.equals("done")) {
+//                            if(item.equals("done")) {
+//                                this.setStyle("-fx-background-color: #D9853B;-fx-border-color: #FFFFFF;" +
+//                                        "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight: normal");
+//                            }
+//                            else {
+//                                this.setStyle("-fx-background-color:  #74AFAD;-fx-border-color: #EEEEEE;" +
+//                                        "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight:normal;");
+//                            }
+//                            setText(item);
+                            Loan loan = getTableView().getItems().get(getIndex());
+                            if(item.equals("done")&&!db.fineChecker(Integer.parseInt(loan.getL_no().substring(5)))) {
                                 this.setStyle("-fx-background-color: #D9853B;-fx-border-color: #FFFFFF;" +
                                         "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight: normal");
+                                setText("done");
                             }
                             else {
                                 this.setStyle("-fx-background-color:  #74AFAD;-fx-border-color: #EEEEEE;" +
                                         "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight:normal;");
+                                setText("active");
                             }
-                            setText(item);
                         }
                     }
                 };
@@ -508,6 +527,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
     }
 
     public void setUpOneMonthLate(){
+        DatabaseHandler db = new DatabaseHandler();
         Callback<TableColumn<Loan,String>, TableCell<Loan,String>> cellFactory =
                 new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
                     @Override
@@ -552,7 +572,9 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                                         public void handle(ActionEvent event) {
                                             Loan loan = getTableView().getItems().get(getIndex());
                                             // System.out.println(loan.getL_borrower_phone());
-                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month());
+                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),
+                                                    LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month(),
+                                                    loan.getStatus(),loan.getL_date(),loan.getDuration());
                                         }
                                     });
                                     HBox hBox = new HBox();
@@ -617,15 +639,17 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
                             this.setAlignment(Pos.CENTER);
-                            if(item.equals("done")) {
+                            Loan loan = getTableView().getItems().get(getIndex());
+                            if(item.equals("done")&&!db.fineChecker(Integer.parseInt(loan.getL_no().substring(5)))) {
                                 this.setStyle("-fx-background-color: #D9853B;-fx-border-color: #FFFFFF;" +
                                         "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight: normal");
+                                setText("done");
                             }
                             else {
                                 this.setStyle("-fx-background-color:  #74AFAD;-fx-border-color: #EEEEEE;" +
                                         "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight:normal;");
+                                setText("active");
                             }
-                            setText(item);
                         }
                     }
                 };
@@ -675,6 +699,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
     }
 
     public void setUpTwoMonthLate(){
+        DatabaseHandler db = new DatabaseHandler();
         Callback<TableColumn<Loan,String>, TableCell<Loan,String>> cellFactory =
                 new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
                     @Override
@@ -719,7 +744,9 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                                         public void handle(ActionEvent event) {
                                             Loan loan = getTableView().getItems().get(getIndex());
                                             // System.out.println(loan.getL_borrower_phone());
-                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month());
+                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),
+                                                    LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month(),
+                                                    loan.getStatus(),loan.getL_date(),loan.getDuration());
                                         }
                                     });
                                     HBox hBox = new HBox();
@@ -767,15 +794,17 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
                             this.setAlignment(Pos.CENTER);
-                            if(item.equals("done")) {
+                            Loan loan = getTableView().getItems().get(getIndex());
+                            if(item.equals("done")&&!db.fineChecker(Integer.parseInt(loan.getL_no().substring(5)))) {
                                 this.setStyle("-fx-background-color: #D9853B;-fx-border-color: #FFFFFF;" +
                                         "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight: normal");
+                                setText("done");
                             }
                             else {
                                 this.setStyle("-fx-background-color:  #74AFAD;-fx-border-color: #EEEEEE;" +
                                         "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight:normal;");
+                                setText("active");
                             }
-                            setText(item);
                         }
                     }
                 };
@@ -842,6 +871,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
     }
 
     public void setUpPenaltyLate(){
+        DatabaseHandler db = new DatabaseHandler();
         Callback<TableColumn<Loan,String>, TableCell<Loan,String>> cellFactory =
                 new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
                     @Override
@@ -886,7 +916,9 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                                         public void handle(ActionEvent event) {
                                             Loan loan = getTableView().getItems().get(getIndex());
                                             // System.out.println(loan.getL_borrower_phone());
-                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month());
+                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),
+                                                    LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month(),
+                                                    loan.getStatus(),loan.getL_date(),loan.getDuration());
                                         }
                                     });
                                     HBox hBox = new HBox();
@@ -934,15 +966,17 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
                             this.setAlignment(Pos.CENTER);
-                            if(item.equals("done")) {
+                            Loan loan = getTableView().getItems().get(getIndex());
+                            if(item.equals("done")&&!db.fineChecker(Integer.parseInt(loan.getL_no().substring(5)))) {
                                 this.setStyle("-fx-background-color: #D9853B;-fx-border-color: #FFFFFF;" +
                                         "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight: normal");
+                                setText("done");
                             }
                             else {
                                 this.setStyle("-fx-background-color:  #74AFAD;-fx-border-color: #EEEEEE;" +
                                         "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight:normal;");
+                                setText("active");
                             }
-                            setText(item);
                         }
                     }
                 };
@@ -1008,28 +1042,29 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
         });
     }
 
-    public void getUserDetails(JSONObject jsonObject){
+    public void getUserDetails(JSONObject jsonObject, FXMLLoader fxmlLoader){
         userObject = jsonObject;
+        this.fxmlLoader = fxmlLoader;
     }
 
     public void searchLoan(){
-        ObservableList<Loan> loans = FXCollections.observableArrayList();
-        DatabaseHandler db = new DatabaseHandler();
+        ObservableList<Loan> temp_loans = FXCollections.observableArrayList();
         if(Checker.isStringInt(searchLoanTxt.getText())){
-            int loan_id = Integer.parseInt(searchLoanTxt.getText());
-            setUpDue();
-            due_table.setItems(null);
-            due_table.setItems(db.searchLoan(loan_id));
-        }else{
-            for(Loan loan : db.loadLoans()){
-                if(loan.getL_borrower().toLowerCase().contains(searchLoanTxt.getText())){
-                    loans.add(loan);
+            for(Loan loan : due_loans){
+                if(loan.getL_no().split("/")[2].contains(searchLoanTxt.getText())){
+                    temp_loans.add(loan);
                 }
             }
-            setUpDue();
-            due_table.setItems(null);
-            due_table.setItems(loans);
+        }else{
+            for(Loan loan : due_loans){
+                if(loan.getL_borrower().toLowerCase().contains(searchLoanTxt.getText())){
+                    temp_loans.add(loan);
+                }
+            }
         }
+        setUpDue();
+        due_table.setItems(null);
+        due_table.setItems(temp_loans);
     }
 
     public void refreshDue(){

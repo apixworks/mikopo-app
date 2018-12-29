@@ -69,6 +69,10 @@ public class ViewCustomersLoansController implements Initializable {
     @FXML public TableColumn<Loan,String> l_action;
 
     JSONObject userObject;
+    FXMLLoader fxmlLoader;
+
+    ObservableList<Loan> loans = FXCollections.observableArrayList();
+    ObservableList<Customer> customers = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -90,6 +94,7 @@ public class ViewCustomersLoansController implements Initializable {
 
         setUpCustomer();
 
+        customers = FXCollections.observableArrayList();
         DatabaseHandler db = new DatabaseHandler();
         customer_table.setItems(null);
 
@@ -97,7 +102,8 @@ public class ViewCustomersLoansController implements Initializable {
             @Override
             protected ObservableList<Customer> call() throws Exception {
                 // load data and populate list ...
-                return db.loadCustomers() ;
+                customers = db.loadCustomers();
+                return customers;
             }
         };
         loadDataTask.setOnSucceeded(e -> customer_table.setItems(loadDataTask.getValue()));
@@ -137,6 +143,7 @@ public class ViewCustomersLoansController implements Initializable {
 
         setUpLoan();
 
+        loans = FXCollections.observableArrayList();
         DatabaseHandler db = new DatabaseHandler();
         loan_table.setItems(null);
 
@@ -145,7 +152,8 @@ public class ViewCustomersLoansController implements Initializable {
             protected ObservableList<Loan> call() throws Exception {
                 Thread.sleep(1000);
                 // load data and populate list ...
-                return db.loadLoans() ;
+                loans = db.loadLoans();
+                return loans;
             }
         };
         loadDataTask.setOnSucceeded(e -> loan_table.setItems(loadDataTask.getValue()));
@@ -165,21 +173,24 @@ public class ViewCustomersLoansController implements Initializable {
 //        loan_table.setItems(db.loadLoans());
     }
 
-    public void repaymentForm(String loanId,String name,String amount,String month,String perMonth){
+    public void repaymentForm(String loanId,String name,String amount,String month,String perMonth,String status,String release_date,int duration){
         String[] amont = amount.split(",");
         String amounter = "";
         for(int i=0;i<amont.length;i++){
             amounter = amounter + amont[i];
+        }
+        if(amounter.equals("0.0")){
+            amounter = "0";
         }
         try {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/repayment_form.fxml"));
             stage.setTitle("MikopoApp");
-            Scene repaymentScene = new Scene(fxmlLoader.load(),600,400);
+            Scene repaymentScene = new Scene(fxmlLoader.load(),700,480);
             stage.setScene(repaymentScene);
             RepaymentFormController repaymentFormController = fxmlLoader.<RepaymentFormController>getController();
-            repaymentFormController.getLoanDetails(loanId,name,perMonth,Integer.parseInt(amounter),month);
+            repaymentFormController.getLoanDetails(loanId,name,perMonth,Integer.parseInt(amounter),month,release_date,duration,status,fxmlLoader);
             repaymentFormController.getUserDetails(userObject);
             stage.show();
         } catch (IOException e) {
@@ -251,32 +262,43 @@ public class ViewCustomersLoansController implements Initializable {
     }
 
     public void searchLoan(){
-        ObservableList<Loan> loans = FXCollections.observableArrayList();
-        DatabaseHandler db = new DatabaseHandler();
+        ObservableList<Loan> temp_loans = FXCollections.observableArrayList();
         if(Checker.isStringInt(searchLoanTxt.getText())){
-            int loan_id = Integer.parseInt(searchLoanTxt.getText());
-            setUpLoan();
-            loan_table.setItems(null);
-            loan_table.setItems(db.searchLoan(loan_id));
-        }else{
-            for(Loan loan : db.loadLoans()){
-                if(loan.getL_borrower().toLowerCase().contains(searchLoanTxt.getText())){
-                    loans.add(loan);
+            for(Loan loan : loans){
+                if(loan.getL_no().split("/")[2].contains(searchLoanTxt.getText())){
+                    temp_loans.add(loan);
                 }
             }
-            setUpLoan();
-            loan_table.setItems(null);
-            loan_table.setItems(loans);
+        }else{
+            for(Loan loan : loans){
+                if(loan.getL_borrower().toLowerCase().contains(searchLoanTxt.getText())){
+                    temp_loans.add(loan);
+                }
+            }
         }
-
+        setUpLoan();
+        loan_table.setItems(null);
+        loan_table.setItems(temp_loans);
     }
 
     public void searchCustomer(){
-        //int customer_id = Integer.parseInt(searchCustomerTxt.getText());
+        ObservableList<Customer> temp_customers = FXCollections.observableArrayList();
+        if(Checker.isStringInt(searchCustomerTxt.getText())){
+            for(Customer customer : customers){
+                if(customer.getC_no().split("/")[2].contains(searchCustomerTxt.getText())){
+                    temp_customers.add(customer);
+                }
+            }
+        }else{
+            for(Customer customer : customers){
+                if(customer.getName().toLowerCase().contains(searchCustomerTxt.getText())){
+                    temp_customers.add(customer);
+                }
+            }
+        }
         setUpCustomer();
-        DatabaseHandler db = new DatabaseHandler();
         customer_table.setItems(null);
-        customer_table.setItems(db.searchCustomers(searchCustomerTxt.getText()));
+        customer_table.setItems(temp_customers);
     }
 
     public void refreshLoans(){
@@ -288,6 +310,7 @@ public class ViewCustomersLoansController implements Initializable {
     }
 
     public void setUpLoan(){
+        DatabaseHandler db = new DatabaseHandler();
         Callback<TableColumn<Loan,String>, TableCell<Loan,String>> cellFactory =
                 new Callback<TableColumn<Loan, String>, TableCell<Loan, String>>() {
                     @Override
@@ -303,13 +326,15 @@ public class ViewCustomersLoansController implements Initializable {
                                     final Button payBtn = new Button("Pay");
                                     final Button editBtn = new Button("Edit");
                                     Loan loan = getTableView().getItems().get(getIndex());
-                                    if(loan.getStatus().equals("done")){
+                                    if(loan.getStatus().equals("done")&&!db.fineChecker(Integer.parseInt(loan.getL_no().substring(5)))){
                                         payBtn.setVisible(false);
                                     }
                                     payBtn.setOnAction(new EventHandler<ActionEvent>() {
                                         @Override
                                         public void handle(ActionEvent event) {
-                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),LocalDate.parse(loan.getDue()).getMonth().toString(),loan.getPer_month());
+                                            repaymentForm(loan.getL_no(),loan.getL_borrower(),loan.getAmount_rem(),
+                                                    LocalDate.parse(loan.getDue()).getMonth().toString()+"/"+ LocalDate.parse(loan.getDue()).getYear()
+                                                    ,loan.getPer_month(), loan.getStatus(),loan.getL_date(),loan.getDuration());
                                         }
                                     });
                                     editBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -345,15 +370,18 @@ public class ViewCustomersLoansController implements Initializable {
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
-                            if(item.equals("done")) {
+                            Loan loan = getTableView().getItems().get(getIndex());
+                            if(item.equals("done")&&!db.fineChecker(Integer.parseInt(loan.getL_no().substring(5)))) {
                                 this.setStyle("-fx-background-color: #D9853B;-fx-border-color: #FFFFFF;" +
                                         "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight: normal");
+                                setText("done");
                             }
                             else {
                                 this.setStyle("-fx-background-color:  #74AFAD;-fx-border-color: #EEEEEE;" +
                                         "-fx-border-width: 1px;-fx-text-fill: #FFFFFF;-fx-font-size: 12px;-fx-font-weight:normal;");
+                                setText("active");
                             }
-                            setText(item);
+//                            setText(item);
                         }
                     }
                 };
@@ -555,7 +583,8 @@ public class ViewCustomersLoansController implements Initializable {
         });
     }
 
-    public void getUserDetails(JSONObject jsonObject){
+    public void getUserDetails(JSONObject jsonObject,FXMLLoader fxmlLoader){
         userObject = jsonObject;
+        this.fxmlLoader = fxmlLoader;
     }
 }

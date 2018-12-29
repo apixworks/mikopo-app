@@ -100,7 +100,7 @@ public class MainWindowController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/view_customers_loans.fxml"));
                 borderP.setCenter(fxmlLoader.load());
                 ViewCustomersLoansController viewCustomersLoansController = fxmlLoader.<ViewCustomersLoansController>getController();
-                viewCustomersLoansController.getUserDetails(userObject);
+                viewCustomersLoansController.getUserDetails(userObject,fxmlLoader);
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -115,7 +115,7 @@ public class MainWindowController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/view_repayments.fxml"));
                 borderP.setCenter(fxmlLoader.load());
                 ViewRepaymentsController viewRepaymentsController = fxmlLoader.<ViewRepaymentsController>getController();
-                viewRepaymentsController.getUserDetails(userObject);
+                viewRepaymentsController.getUserDetails(userObject,fxmlLoader);
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -164,7 +164,7 @@ public class MainWindowController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layouts/view_repayments.fxml"));
             borderP.setCenter(fxmlLoader.load());
             ViewRepaymentsController viewRepaymentsController = fxmlLoader.<ViewRepaymentsController>getController();
-            viewRepaymentsController.getUserDetails(userObject);
+            viewRepaymentsController.getUserDetails(userObject,fxmlLoader);
         } catch (JSONException e) {
             e.printStackTrace();
         }catch (IOException e){
