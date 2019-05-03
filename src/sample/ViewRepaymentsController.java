@@ -212,7 +212,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
         Task<ObservableList<Loan>> loadDataTask = new Task<ObservableList<Loan>>() {
             @Override
             protected ObservableList<Loan> call() throws Exception {
-                Thread.sleep(5000);
+                Thread.sleep(7000);
                 // load data and populate list ...
                 return db.loadTwoMonthLateLoans() ;
             }
@@ -265,7 +265,7 @@ public class ViewRepaymentsController implements Initializable,EventHandler<Acti
         Task<ObservableList<Loan>> loadDataTask = new Task<ObservableList<Loan>>() {
             @Override
             protected ObservableList<Loan> call() throws Exception {
-                Thread.sleep(7000);
+                Thread.sleep(12000);
                 // load data and populate list ...
                 return db.loadPenaltyLateLoans() ;
             }
